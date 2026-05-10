@@ -234,7 +234,7 @@ function LandingPage() {
           </p>
           <Link
             to="/intake"
-            className="hover-lift relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground shadow-soft"
+            className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground shadow-soft transition-opacity hover:opacity-90"
           >
             Start intake
             <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
