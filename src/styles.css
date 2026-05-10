@@ -8,12 +8,17 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-display: "Instrument Serif", "Times New Roman", serif;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
+  /* Radius scale — only three sizes used across the app */
+  --radius-sm: 0.5rem;     /* 8px  — inputs, chips */
+  --radius-md: 0.75rem;    /* 12px — small cards */
+  --radius-lg: 1rem;       /* 16px — primary cards */
+  --radius-xl: 1rem;       /* alias → lg */
+  --radius-2xl: 1.25rem;   /* 20px — hero surfaces */
+  --radius-3xl: 1.25rem;   /* alias → 2xl */
+
+  /* Motion */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -198,8 +203,15 @@
 
 @utility bg-radial-fade {
   background: radial-gradient(
-    ellipse 80% 60% at 50% 0%,
-    color-mix(in oklab, var(--primary) 10%, transparent),
+    ellipse 70% 50% at 50% 0%,
+    color-mix(in oklab, var(--primary) 5%, transparent),
     transparent 70%
   );
+}
+
+@utility hover-lift {
+  transition: transform 200ms var(--ease-out-quint), box-shadow 200ms var(--ease-out-quint);
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
 }

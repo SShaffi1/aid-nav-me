@@ -26,14 +26,14 @@ export const Route = createFileRoute("/")({
 const features = [
   {
     title: "AI intake guidance",
-    body: "A calm, structured conversation that helps you describe what you're experiencing — without jumping to conclusions.",
+    body: "A calm, structured conversation that helps you describe what you're experiencing, without jumping to conclusions.",
     icon: (
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     ),
   },
   {
     title: "Structured visit summaries",
-    body: "Your concerns, timeline, and history — organized into a clear document you can share or print.",
+    body: "Your concerns, timeline, and history, organized into a clear document you can share or print.",
     icon: (
       <>
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -101,45 +101,45 @@ function LandingPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted-foreground shadow-soft"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            Pre-appointment assistant · Not a diagnostic tool
+            Pre-appointment assistant. Not a diagnostic tool.
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05 }}
-            className="font-display mt-6 text-balance text-5xl leading-[1.02] text-foreground md:text-7xl"
+            transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display mt-6 text-balance text-5xl leading-[1.05] text-foreground md:text-6xl"
           >
-            Navigate healthcare<br />
-            <span className="italic text-primary">with confidence.</span>
+            Walk into your appointment<br />
+            <span className="italic text-primary">already prepared.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="text-balance mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg"
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="text-balance mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground"
           >
-            AEDNAV helps you organize symptoms, prepare for appointments, and communicate
-            more clearly — before seeing a healthcare provider.
+            AEDNAV helps you organize symptoms, prepare questions, and communicate
+            clearly with your healthcare provider.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="mt-9 flex flex-wrap items-center justify-center gap-3"
           >
             <Link
               to="/intake"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft transition-all hover:shadow-elevated"
+              className="group hover-lift inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft"
             >
               Start intake
-              <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </Link>
@@ -166,7 +166,7 @@ function LandingPage() {
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
           {features.map((f) => (
             <div key={f.title} className="bg-surface p-7">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary-soft text-primary">
+              <div className="grid h-10 w-10 place-items-center rounded-md bg-primary-soft text-primary">
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   {f.icon}
                 </svg>
@@ -204,21 +204,14 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonial */}
+      {/* Trust strip */}
       <section className="mx-auto mt-32 max-w-4xl px-6">
-        <div className="rounded-3xl border border-border bg-surface p-10 shadow-soft md:p-14">
-          <svg className="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M9 7H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2v3H5v2h6v-9H7V9h2zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2v3h-2v2h6v-9h-4V9h2z"/></svg>
-          <p className="font-display mt-5 text-2xl leading-snug text-foreground md:text-3xl">
-            I always forget half of what I wanted to say at the doctor.
-            AEDNAV handed me a one-page summary and I actually felt heard.
+        <div className="rounded-2xl border border-border bg-surface p-10 shadow-soft md:p-12">
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">Why it matters</p>
+          <p className="font-display mt-3 text-2xl leading-snug text-foreground md:text-3xl">
+            The average primary care visit lasts about 18 minutes. AEDNAV helps you spend
+            that time on what matters, not on remembering details.
           </p>
-          <div className="mt-7 flex items-center gap-3">
-            <div className="grid h-9 w-9 place-items-center rounded-full bg-primary-soft text-xs font-semibold text-primary">MR</div>
-            <div className="text-sm">
-              <p className="font-medium text-foreground">Maya R.</p>
-              <p className="text-muted-foreground">Early access user</p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -244,17 +237,16 @@ function LandingPage() {
 
       {/* CTA */}
       <section className="mx-auto mt-32 max-w-4xl px-6">
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary to-[oklch(0.32_0.14_258)] px-8 py-14 text-center shadow-elevated md:px-16">
-          <div className="bg-grid pointer-events-none absolute inset-0 opacity-[0.07]" />
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-primary px-8 py-14 text-center shadow-soft md:px-16">
           <h2 className="font-display relative text-4xl text-primary-foreground md:text-5xl">
             Ready for your next visit?
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-sm text-primary-foreground/80">
-            Take three minutes now. Save thirty in the waiting room.
+            Three minutes now. A clearer conversation later.
           </p>
           <Link
             to="/intake"
-            className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground shadow-soft transition-transform hover:scale-[1.02]"
+            className="hover-lift relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground shadow-soft"
           >
             Start intake
             <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>

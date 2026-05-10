@@ -11,7 +11,7 @@ export function DashboardPreview() {
       {/* glow */}
       <div className="absolute -inset-x-20 -top-10 -bottom-10 -z-10 bg-radial-fade" />
 
-      <div className="relative rounded-2xl border border-border bg-surface shadow-elevated">
+      <div className="relative rounded-2xl border border-border bg-surface shadow-soft">
         {/* window chrome */}
         <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.05_30)]" />
@@ -76,7 +76,7 @@ export function DashboardPreview() {
         delay={0.6}
       >
         <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-lg bg-success/15 grid place-items-center">
+          <div className="h-8 w-8 rounded-md bg-success/15 grid place-items-center">
             <svg className="h-4 w-4 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
           </div>
           <div>
@@ -91,7 +91,7 @@ export function DashboardPreview() {
         delay={0.8}
       >
         <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-lg bg-primary-soft grid place-items-center">
+          <div className="h-8 w-8 rounded-md bg-primary-soft grid place-items-center">
             <svg className="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           </div>
           <div>
@@ -161,7 +161,7 @@ function FloatingCard({
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`glass-panel rounded-xl px-4 py-3 shadow-elevated ${className}`}
+      className={`rounded-md border border-border bg-surface px-4 py-3 shadow-soft ${className}`}
     >
       {children}
     </motion.div>
