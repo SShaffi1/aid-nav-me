@@ -212,21 +212,13 @@ function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="mx-auto mt-32 max-w-3xl px-6">
+      <section id="faq" className="mx-auto mt-32 max-w-3xl px-6 scroll-mt-24">
         <h2 className="font-display text-center text-4xl leading-tight text-foreground md:text-5xl">
           Frequently asked
         </h2>
         <div className="mt-12 divide-y divide-border border-y border-border">
-          {faqs.map((f) => (
-            <details key={f.q} className="group py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left">
-                <span className="text-base font-medium text-foreground">{f.q}</span>
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-transform group-open:rotate-45">
-                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M12 5v14M5 12h14"/></svg>
-                </span>
-              </summary>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{f.a}</p>
-            </details>
+          {faqs.map((f, i) => (
+            <FaqItem key={f.q} question={f.q} answer={f.a} defaultOpen={i === -1} />
           ))}
         </div>
       </section>
