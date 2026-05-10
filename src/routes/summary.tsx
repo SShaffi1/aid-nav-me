@@ -30,19 +30,20 @@ const MOCK: IntakeAnswers = {
 function SummaryPage() {
   const [answers, setAnswers] = useState<IntakeAnswers>(MOCK);
   const [copied, setCopied] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState<IntakeAnswers>(MOCK);
 
   useEffect(() => {
     try {
       const stored = sessionStorage.getItem("aednav.answers");
       if (stored) {
         const parsed = JSON.parse(stored) as IntakeAnswers;
-        // fall back to mock for any missing field
         const merged = { ...MOCK, ...initialAnswers, ...parsed };
-        // strip empty
         for (const k of Object.keys(merged) as (keyof IntakeAnswers)[]) {
           if (!merged[k]) merged[k] = MOCK[k];
         }
         setAnswers(merged);
+        setDraft(merged);
       }
     } catch {}
   }, []);
@@ -64,12 +65,26 @@ function SummaryPage() {
     window.print();
   }
 
-  function share() {
-    if (navigator.share) {
-      navigator.share({ title: "AEDNAV — Visit Summary", text: summaryText }).catch(() => {});
-    } else {
-      copy();
-    }
+  function startEdit() {
+    setDraft(answers);
+    setEditing(true);
+  }
+
+  function cancelEdit() {
+    setDraft(answers);
+    setEditing(false);
+  }
+
+  function saveEdit() {
+    setAnswers(draft);
+    try {
+      sessionStorage.setItem("aednav.answers", JSON.stringify(draft));
+    } catch {}
+    setEditing(false);
+  }
+
+  function updateField(field: keyof IntakeAnswers, value: string) {
+    setDraft((d) => ({ ...d, [field]: value }));
   }
 
   return (
@@ -82,7 +97,7 @@ function SummaryPage() {
           </Link>
           <div className="flex items-center gap-2">
             {!editing ? (
-              <button onClick={() => setEditing(true)} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-elevated">
+              <button onClick={startEdit} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-elevated">
                 <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg>
                 Edit summary
               </button>
