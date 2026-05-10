@@ -36,7 +36,7 @@ export function SiteHeader() {
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-primary to-[oklch(0.55_0.18_258)] shadow-soft ${className}`}>
+    <div className={`relative grid h-7 w-7 place-items-center rounded-md bg-primary ${className}`}>
       <svg viewBox="0 0 24 24" className="h-4 w-4 text-primary-foreground" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 3 L12 21 M3 12 L21 12" />
       </svg>
