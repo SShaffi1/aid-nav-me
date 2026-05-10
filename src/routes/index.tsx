@@ -101,45 +101,45 @@ function LandingPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted-foreground shadow-soft"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            Pre-appointment assistant · Not a diagnostic tool
+            Pre-appointment assistant. Not a diagnostic tool.
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05 }}
-            className="font-display mt-6 text-balance text-5xl leading-[1.02] text-foreground md:text-7xl"
+            transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display mt-6 text-balance text-5xl leading-[1.05] text-foreground md:text-6xl"
           >
-            Navigate healthcare<br />
-            <span className="italic text-primary">with confidence.</span>
+            Walk into your appointment<br />
+            <span className="italic text-primary">already prepared.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="text-balance mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg"
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="text-balance mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground"
           >
-            AEDNAV helps you organize symptoms, prepare for appointments, and communicate
-            more clearly — before seeing a healthcare provider.
+            AEDNAV helps you organize symptoms, prepare questions, and communicate
+            clearly with your healthcare provider.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="mt-9 flex flex-wrap items-center justify-center gap-3"
           >
             <Link
               to="/intake"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft transition-all hover:shadow-elevated"
+              className="group hover-lift inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft"
             >
               Start intake
-              <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </Link>
