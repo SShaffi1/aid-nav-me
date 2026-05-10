@@ -185,7 +185,7 @@ function IntakePage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold text-foreground">
-                    This may need urgent care — {emergency.toLowerCase()}.
+                    This may need urgent care: {emergency.toLowerCase()}.
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                     AEDNAV cannot help in an emergency. Please call your local emergency number now,
@@ -259,7 +259,7 @@ function IntakePage() {
             </button>
           </div>
           <p className="mt-2 text-center text-[11px] text-muted-foreground">
-            Press Enter to send · Shift+Enter for a new line
+            Press Enter to send. Shift+Enter for a new line.
           </p>
         </div>
       </div>
@@ -277,7 +277,7 @@ function MessageBubble({ message }: { message: Message }) {
       className={`flex items-end gap-2.5 ${isAi ? "" : "flex-row-reverse"}`}
     >
       {isAi && (
-        <div className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-[oklch(0.55_0.18_258)] shadow-soft">
+        <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary">
           <svg className="h-3.5 w-3.5 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18"/></svg>
         </div>
       )}
@@ -301,7 +301,7 @@ function TypingIndicator() {
       animate={{ opacity: 1, y: 0 }}
       className="flex items-end gap-2.5"
     >
-      <div className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-[oklch(0.55_0.18_258)] shadow-soft">
+      <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary">
         <svg className="h-3.5 w-3.5 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18"/></svg>
       </div>
       <div className="rounded-2xl rounded-bl-md border border-border bg-surface-elevated px-4 py-3">
