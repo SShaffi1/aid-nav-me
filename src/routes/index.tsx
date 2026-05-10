@@ -152,7 +152,7 @@ function LandingPage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="mx-auto mt-32 max-w-6xl px-6">
+      <section id="features" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-wider text-primary">What it does</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
@@ -175,7 +175,7 @@ function LandingPage() {
       </section>
 
       {/* How it works */}
-      <section id="how" className="mx-auto mt-32 max-w-6xl px-6">
+      <section id="how" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-wider text-primary">How it works</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
@@ -243,6 +243,45 @@ function LandingPage() {
       </section>
 
       <SiteFooter />
+    </div>
+  );
+}
+
+function FaqItem({ question, answer, defaultOpen = false }: { question: string; answer: string; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="py-2">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex w-full cursor-pointer items-center justify-between gap-6 py-3 text-left"
+      >
+        <span className="text-base font-medium text-foreground">{question}</span>
+        <span
+          className={`grid h-7 w-7 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-transform duration-300 ${
+            open ? "rotate-45" : ""
+          }`}
+        >
+          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="pb-4 pr-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
