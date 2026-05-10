@@ -1,7 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { DashboardPreview } from "@/components/DashboardPreview";
+
+function smoothScrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -95,48 +101,37 @@ function LandingPage() {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden pt-20 md:pt-28">
-        <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]" />
-        <div className="relative mx-auto max-w-5xl px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted-foreground shadow-soft"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            Pre-appointment assistant. Not a diagnostic tool.
-          </motion.div>
-
+      <section className="relative pt-20 md:pt-28">
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display mt-6 text-balance text-5xl leading-[1.05] text-foreground md:text-6xl"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-balance text-5xl leading-[1.05] text-foreground md:text-6xl"
           >
             Walk into your appointment<br />
-            <span className="italic text-primary">already prepared.</span>
+            <span className="text-primary">already prepared.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="text-balance mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground"
           >
             AEDNAV helps you organize symptoms, prepare questions, and communicate
-            clearly with your healthcare provider.
+            clearly with your healthcare provider. It is not a diagnostic tool.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="mt-9 flex flex-wrap items-center justify-center gap-3"
           >
             <Link
               to="/intake"
-              className="group hover-lift inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               Start intake
               <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -145,6 +140,7 @@ function LandingPage() {
             </Link>
             <a
               href="#how"
+              onClick={(e) => { e.preventDefault(); smoothScrollTo("how"); }}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-elevated"
             >
               Learn more
