@@ -63,43 +63,13 @@ export function DashboardPreview() {
               </p>
               <p className="mt-2 text-sm font-medium text-foreground">Family doctor</p>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                Non-urgent. Schedule within the week.
+                Non-urgent. Consider a routine visit with your provider.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* floating cards */}
-      <FloatingCard
-        className="absolute -left-6 top-32 hidden md:block"
-        delay={0.6}
-      >
-        <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-md bg-success/15 grid place-items-center">
-            <svg className="h-4 w-4 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          </div>
-          <div>
-            <p className="text-[11px] text-muted-foreground">Intake progress</p>
-            <p className="text-sm font-semibold text-foreground">4 of 7 questions</p>
-          </div>
-        </div>
-      </FloatingCard>
-
-      <FloatingCard
-        className="absolute -right-6 bottom-24 hidden md:block"
-        delay={0.8}
-      >
-        <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-md bg-primary-soft grid place-items-center">
-            <svg className="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-          </div>
-          <div>
-            <p className="text-[11px] text-muted-foreground">Ready in</p>
-            <p className="text-sm font-semibold text-foreground">~2 minutes</p>
-          </div>
-        </div>
-      </FloatingCard>
     </motion.div>
   );
 }
