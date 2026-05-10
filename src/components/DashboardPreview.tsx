@@ -117,23 +117,3 @@ function SummaryRow({ label, value, muted }: { label: string; value: string; mut
   );
 }
 
-function FloatingCard({
-  className = "",
-  children,
-  delay = 0,
-}: {
-  className?: string;
-  children: React.ReactNode;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`rounded-md border border-border bg-surface px-4 py-3 shadow-soft ${className}`}
-    >
-      {children}
-    </motion.div>
-  );
-}
