@@ -26,14 +26,14 @@ export const Route = createFileRoute("/")({
 const features = [
   {
     title: "AI intake guidance",
-    body: "A calm, structured conversation that helps you describe what you're experiencing — without jumping to conclusions.",
+    body: "A calm, structured conversation that helps you describe what you're experiencing, without jumping to conclusions.",
     icon: (
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     ),
   },
   {
     title: "Structured visit summaries",
-    body: "Your concerns, timeline, and history — organized into a clear document you can share or print.",
+    body: "Your concerns, timeline, and history, organized into a clear document you can share or print.",
     icon: (
       <>
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -166,7 +166,7 @@ function LandingPage() {
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
           {features.map((f) => (
             <div key={f.title} className="bg-surface p-7">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary-soft text-primary">
+              <div className="grid h-10 w-10 place-items-center rounded-md bg-primary-soft text-primary">
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   {f.icon}
                 </svg>
