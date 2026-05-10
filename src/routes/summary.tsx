@@ -128,7 +128,7 @@ function SummaryPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-3xl border border-border bg-surface shadow-elevated print:rounded-none print:border-0 print:shadow-none"
+          className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none"
         >
           {/* Header */}
           <div className="flex items-start justify-between gap-6 border-b border-border px-8 py-7 md:px-12 md:py-9">
