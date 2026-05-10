@@ -137,32 +137,42 @@ function SummaryPage() {
               <h1 className="font-display mt-2 text-3xl text-foreground md:text-4xl">Visit summary</h1>
               <p className="mt-2 text-sm text-muted-foreground">Generated {generatedAt}</p>
             </div>
-            <Logo className="h-10 w-10" />
+            <Logo className="h-6 w-auto print:h-5" />
           </div>
 
           {/* Body */}
           <div className="space-y-10 px-8 py-9 md:px-12 md:py-12">
             <Section title="Main concern">
-              <p className="text-[15px] leading-relaxed text-foreground">{answers.concern}</p>
+              <Editable
+                editing={editing}
+                value={editing ? draft.concern : answers.concern}
+                onChange={(v) => updateField("concern", v)}
+                multiline
+              />
             </Section>
 
             <Section title="Symptom timeline">
               <div className="space-y-3">
-                <Field label="Duration" value={answers.duration} />
-                <Field label="Severity" value={answers.severity} />
-                <Field label="Pattern & triggers" value={answers.pattern} />
+                <Field label="Duration" value={editing ? draft.duration : answers.duration} editing={editing} onChange={(v) => updateField("duration", v)} />
+                <Field label="Severity" value={editing ? draft.severity : answers.severity} editing={editing} onChange={(v) => updateField("severity", v)} />
+                <Field label="Pattern & triggers" value={editing ? draft.pattern : answers.pattern} editing={editing} onChange={(v) => updateField("pattern", v)} />
               </div>
             </Section>
 
             <Section title="Medications & allergies">
               <div className="space-y-3">
-                <Field label="Current medications" value={answers.medications} />
-                <Field label="Known allergies" value={answers.allergies} />
+                <Field label="Current medications" value={editing ? draft.medications : answers.medications} editing={editing} onChange={(v) => updateField("medications", v)} />
+                <Field label="Known allergies" value={editing ? draft.allergies : answers.allergies} editing={editing} onChange={(v) => updateField("allergies", v)} />
               </div>
             </Section>
 
             <Section title="Relevant history">
-              <p className="text-[15px] leading-relaxed text-foreground">{answers.history}</p>
+              <Editable
+                editing={editing}
+                value={editing ? draft.history : answers.history}
+                onChange={(v) => updateField("history", v)}
+                multiline
+              />
             </Section>
 
             <Section title="Questions to ask your provider">
@@ -208,8 +218,9 @@ function SummaryPage() {
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-foreground">Family doctor (non-urgent)</p>
                     <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      Based on what you described, a routine visit with your primary care provider is
-                      a reasonable starting point. Schedule within the next several days.
+                      Based on what you described, a routine visit with your primary care provider
+                      is a reasonable starting point. Consider booking when you're able, and contact
+                      a clinician sooner if symptoms change or worsen.
                     </p>
                   </div>
                 </div>
@@ -220,14 +231,19 @@ function SummaryPage() {
                   <CareOption label="Emergency room" />
                 </div>
                 <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">
-                  This is informational guidance — not a medical recommendation. If symptoms worsen
-                  rapidly, become severe, or you feel unsafe, seek immediate care.
+                  Informational guidance only, not a medical recommendation. If symptoms worsen,
+                  become severe, or you feel unsafe, seek care right away.
                 </p>
               </div>
             </Section>
 
             <Section title="What you hope to walk away with">
-              <p className="text-[15px] leading-relaxed text-foreground">{answers.goal}</p>
+              <Editable
+                editing={editing}
+                value={editing ? draft.goal : answers.goal}
+                onChange={(v) => updateField("goal", v)}
+                multiline
+              />
             </Section>
           </div>
 
