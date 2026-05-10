@@ -1,5 +1,4 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import { motion } from "framer-motion";
 import logoUrl from "@/assets/aednav-logo.svg";
 
 function smoothScrollTo(id: string) {
@@ -78,5 +77,4 @@ export function SiteFooter() {
     </footer>
   );
 }
-{/* keep motion import in case other files import it via this module */}
-export const _m = motion;
+
