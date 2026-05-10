@@ -1,7 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { DashboardPreview } from "@/components/DashboardPreview";
+
+function smoothScrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -95,48 +101,37 @@ function LandingPage() {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden pt-20 md:pt-28">
-        <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]" />
-        <div className="relative mx-auto max-w-5xl px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted-foreground shadow-soft"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            Pre-appointment assistant. Not a diagnostic tool.
-          </motion.div>
-
+      <section className="relative pt-20 md:pt-28">
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display mt-6 text-balance text-5xl leading-[1.05] text-foreground md:text-6xl"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-balance text-5xl leading-[1.05] text-foreground md:text-6xl"
           >
             Walk into your appointment<br />
-            <span className="italic text-primary">already prepared.</span>
+            <span className="text-primary">already prepared.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="text-balance mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground"
           >
             AEDNAV helps you organize symptoms, prepare questions, and communicate
-            clearly with your healthcare provider.
+            clearly with your healthcare provider. It is not a diagnostic tool.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="mt-9 flex flex-wrap items-center justify-center gap-3"
           >
             <Link
               to="/intake"
-              className="group hover-lift inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-soft"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               Start intake
               <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -145,6 +140,7 @@ function LandingPage() {
             </Link>
             <a
               href="#how"
+              onClick={(e) => { e.preventDefault(); smoothScrollTo("how"); }}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-elevated"
             >
               Learn more
@@ -156,7 +152,7 @@ function LandingPage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="mx-auto mt-32 max-w-6xl px-6">
+      <section id="features" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-wider text-primary">What it does</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
@@ -179,7 +175,7 @@ function LandingPage() {
       </section>
 
       {/* How it works */}
-      <section id="how" className="mx-auto mt-32 max-w-6xl px-6">
+      <section id="how" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-wider text-primary">How it works</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
@@ -216,21 +212,13 @@ function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="mx-auto mt-32 max-w-3xl px-6">
+      <section id="faq" className="mx-auto mt-32 max-w-3xl px-6 scroll-mt-24">
         <h2 className="font-display text-center text-4xl leading-tight text-foreground md:text-5xl">
           Frequently asked
         </h2>
         <div className="mt-12 divide-y divide-border border-y border-border">
-          {faqs.map((f) => (
-            <details key={f.q} className="group py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left">
-                <span className="text-base font-medium text-foreground">{f.q}</span>
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-transform group-open:rotate-45">
-                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M12 5v14M5 12h14"/></svg>
-                </span>
-              </summary>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{f.a}</p>
-            </details>
+          {faqs.map((f, i) => (
+            <FaqItem key={f.q} question={f.q} answer={f.a} defaultOpen={i === -1} />
           ))}
         </div>
       </section>
@@ -246,7 +234,7 @@ function LandingPage() {
           </p>
           <Link
             to="/intake"
-            className="hover-lift relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground shadow-soft"
+            className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground shadow-soft transition-opacity hover:opacity-90"
           >
             Start intake
             <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -255,6 +243,45 @@ function LandingPage() {
       </section>
 
       <SiteFooter />
+    </div>
+  );
+}
+
+function FaqItem({ question, answer, defaultOpen = false }: { question: string; answer: string; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="py-2">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex w-full cursor-pointer items-center justify-between gap-6 py-3 text-left"
+      >
+        <span className="text-base font-medium text-foreground">{question}</span>
+        <span
+          className={`grid h-7 w-7 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition-transform duration-300 ${
+            open ? "rotate-45" : ""
+          }`}
+        >
+          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="pb-4 pr-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

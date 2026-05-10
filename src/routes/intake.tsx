@@ -141,9 +141,8 @@ function IntakePage() {
       {/* Top bar */}
       <header className="border-b border-border bg-surface/80 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
-          <Link to="/" className="flex items-center gap-2">
-            <Logo />
-            <span className="text-sm font-semibold text-foreground">AEDNAV</span>
+          <Link to="/" aria-label="AEDNAV home" className="flex items-center">
+            <Logo className="h-5 w-auto" />
           </Link>
           <div className="hidden items-center gap-3 sm:flex">
             <span className="text-xs text-muted-foreground">
@@ -185,16 +184,15 @@ function IntakePage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold text-foreground">
-                    This may need urgent care: {emergency.toLowerCase()}.
+                    This may need urgent attention: {emergency.toLowerCase()}.
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    AEDNAV cannot help in an emergency. Please call your local emergency number now,
-                    or go to the nearest emergency department.
+                    AEDNAV is not designed for emergencies. Please contact emergency services or
+                    go to your nearest emergency department right away.
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    <a href="tel:911" className="rounded-md bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground">Call 911 (US)</a>
-                    <a href="tel:112" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Call 112 (EU)</a>
-                    <a href="https://988lifeline.org" target="_blank" rel="noreferrer" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">988 Lifeline</a>
+                    <a href="tel:911" className="rounded-md bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground">Call 911</a>
+                    <a href="tel:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Call or text 988</a>
                   </div>
                 </div>
                 <button
@@ -260,6 +258,10 @@ function IntakePage() {
           </div>
           <p className="mt-2 text-center text-[11px] text-muted-foreground">
             Press Enter to send. Shift+Enter for a new line.
+          </p>
+          <p className="mt-2 text-center text-[11px] leading-relaxed text-muted-foreground/80">
+            Demo privacy note: Your responses are stored only in this browser session and are not
+            sent to a medical provider.
           </p>
         </div>
       </div>

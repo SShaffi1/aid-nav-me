@@ -1,47 +1,60 @@
-import { Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { Link, useRouter } from "@tanstack/react-router";
+import logoUrl from "@/assets/aednav-logo.svg";
+
+function smoothScrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export function SiteHeader() {
+  const router = useRouter();
+
+  function handleAnchor(e: React.MouseEvent, id: string) {
+    e.preventDefault();
+    if (router.state.location.pathname !== "/") {
+      router.navigate({ to: "/" }).then(() => {
+        // wait for route to mount
+        requestAnimationFrame(() => requestAnimationFrame(() => smoothScrollTo(id)));
+      });
+    } else {
+      smoothScrollTo(id);
+      history.replaceState(null, "", `#${id}`);
+    }
+  }
+
+  const navLinkClass =
+    "transition-colors hover:text-foreground";
+
   return (
-    <motion.header
-      initial={{ y: -16, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="sticky top-0 z-50"
-    >
-      <div className="mx-auto max-w-6xl px-6 pt-4">
-        <div className="glass-panel flex items-center justify-between rounded-full px-5 py-2.5">
-          <Link to="/" className="flex items-center gap-2">
-            <Logo />
-            <span className="text-[15px] font-semibold tracking-tight text-foreground">
-              AEDNAV
-            </span>
-          </Link>
-          <nav className="hidden items-center gap-7 text-[13px] text-muted-foreground md:flex">
-            <a href="/#how" className="transition-colors hover:text-foreground">How it works</a>
-            <a href="/#features" className="transition-colors hover:text-foreground">Features</a>
-            <a href="/#faq" className="transition-colors hover:text-foreground">FAQ</a>
-          </nav>
-          <Link
-            to="/intake"
-            className="rounded-full bg-foreground px-4 py-1.5 text-[13px] font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Start intake
-          </Link>
-        </div>
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
+        <Link to="/" aria-label="AEDNAV home" className="flex items-center">
+          <Wordmark className="h-5 w-auto" />
+        </Link>
+        <nav className="hidden items-center gap-7 text-[13px] text-muted-foreground md:flex">
+          <a href="/#how" onClick={(e) => handleAnchor(e, "how")} className={navLinkClass}>How it works</a>
+          <a href="/#features" onClick={(e) => handleAnchor(e, "features")} className={navLinkClass}>Features</a>
+          <a href="/#faq" onClick={(e) => handleAnchor(e, "faq")} className={navLinkClass}>FAQ</a>
+        </nav>
+        <Link
+          to="/intake"
+          className="rounded-full bg-foreground px-4 py-1.5 text-[13px] font-medium text-background transition-opacity hover:opacity-90"
+        >
+          Start intake
+        </Link>
       </div>
-    </motion.header>
+    </header>
   );
 }
 
-export function Logo({ className = "" }: { className?: string }) {
-  return (
-    <div className={`relative grid h-7 w-7 place-items-center rounded-md bg-primary ${className}`}>
-      <svg viewBox="0 0 24 24" className="h-4 w-4 text-primary-foreground" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3 L12 21 M3 12 L21 12" />
-      </svg>
-    </div>
-  );
+/** Wordmark — uses the supplied AEDNAV logo SVG */
+export function Wordmark({ className = "h-5 w-auto" }: { className?: string }) {
+  return <img src={logoUrl} alt="AEDNAV" className={className} draggable={false} />;
+}
+
+/** Backward-compatible Logo export. Now renders the wordmark. */
+export function Logo({ className = "h-5 w-auto" }: { className?: string }) {
+  return <Wordmark className={className} />;
 }
 
 export function SiteFooter() {
@@ -49,15 +62,11 @@ export function SiteFooter() {
     <footer className="mt-32 border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-          <div className="flex items-center gap-2">
-            <Logo />
-            <span className="text-sm font-semibold text-foreground">AEDNAV</span>
-          </div>
+          <Wordmark className="h-5 w-auto" />
           <p className="max-w-md text-xs leading-relaxed text-muted-foreground">
             <span className="font-medium text-foreground">Medical disclaimer.</span> AEDNAV is not a
             diagnostic tool and does not replace consultation with a licensed healthcare
-            professional. In case of a medical emergency, call your local emergency number
-            immediately.
+            professional. In a medical emergency, call 911.
           </p>
         </div>
         <div className="mt-8 flex items-center justify-between text-xs text-muted-foreground">
@@ -68,3 +77,4 @@ export function SiteFooter() {
     </footer>
   );
 }
+

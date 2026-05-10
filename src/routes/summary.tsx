@@ -30,19 +30,20 @@ const MOCK: IntakeAnswers = {
 function SummaryPage() {
   const [answers, setAnswers] = useState<IntakeAnswers>(MOCK);
   const [copied, setCopied] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState<IntakeAnswers>(MOCK);
 
   useEffect(() => {
     try {
       const stored = sessionStorage.getItem("aednav.answers");
       if (stored) {
         const parsed = JSON.parse(stored) as IntakeAnswers;
-        // fall back to mock for any missing field
         const merged = { ...MOCK, ...initialAnswers, ...parsed };
-        // strip empty
         for (const k of Object.keys(merged) as (keyof IntakeAnswers)[]) {
           if (!merged[k]) merged[k] = MOCK[k];
         }
         setAnswers(merged);
+        setDraft(merged);
       }
     } catch {}
   }, []);
@@ -64,12 +65,26 @@ function SummaryPage() {
     window.print();
   }
 
-  function share() {
-    if (navigator.share) {
-      navigator.share({ title: "AEDNAV — Visit Summary", text: summaryText }).catch(() => {});
-    } else {
-      copy();
-    }
+  function startEdit() {
+    setDraft(answers);
+    setEditing(true);
+  }
+
+  function cancelEdit() {
+    setDraft(answers);
+    setEditing(false);
+  }
+
+  function saveEdit() {
+    setAnswers(draft);
+    try {
+      sessionStorage.setItem("aednav.answers", JSON.stringify(draft));
+    } catch {}
+    setEditing(false);
+  }
+
+  function updateField(field: keyof IntakeAnswers, value: string) {
+    setDraft((d) => ({ ...d, [field]: value }));
   }
 
   return (
@@ -77,22 +92,32 @@ function SummaryPage() {
       {/* Top bar */}
       <header className="border-b border-border bg-surface print:hidden">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-3">
-          <Link to="/" className="flex items-center gap-2">
-            <Logo />
-            <span className="text-sm font-semibold text-foreground">AEDNAV</span>
+          <Link to="/" aria-label="AEDNAV home" className="flex items-center">
+            <Logo className="h-5 w-auto" />
           </Link>
           <div className="flex items-center gap-2">
-            <button onClick={copy} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-elevated">
+            {!editing ? (
+              <button onClick={startEdit} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-elevated">
+                <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                Edit summary
+              </button>
+            ) : (
+              <>
+                <button onClick={cancelEdit} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-elevated">
+                  Cancel
+                </button>
+                <button onClick={saveEdit} className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90">
+                  Save changes
+                </button>
+              </>
+            )}
+            <button onClick={copy} disabled={editing} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-elevated disabled:opacity-40">
               <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               {copied ? "Copied" : "Copy"}
             </button>
-            <button onClick={share} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-elevated">
-              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
-              Share
-            </button>
-            <button onClick={downloadPdf} className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90">
-              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Download PDF
+            <button onClick={downloadPdf} disabled={editing} className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90 disabled:opacity-40">
+              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print / Save as PDF
             </button>
           </div>
         </div>
@@ -103,7 +128,7 @@ function SummaryPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-3xl border border-border bg-surface shadow-elevated print:rounded-none print:border-0 print:shadow-none"
+          className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none"
         >
           {/* Header */}
           <div className="flex items-start justify-between gap-6 border-b border-border px-8 py-7 md:px-12 md:py-9">
@@ -112,32 +137,42 @@ function SummaryPage() {
               <h1 className="font-display mt-2 text-3xl text-foreground md:text-4xl">Visit summary</h1>
               <p className="mt-2 text-sm text-muted-foreground">Generated {generatedAt}</p>
             </div>
-            <Logo className="h-10 w-10" />
+            <Logo className="h-6 w-auto print:h-5" />
           </div>
 
           {/* Body */}
           <div className="space-y-10 px-8 py-9 md:px-12 md:py-12">
             <Section title="Main concern">
-              <p className="text-[15px] leading-relaxed text-foreground">{answers.concern}</p>
+              <Editable
+                editing={editing}
+                value={editing ? draft.concern : answers.concern}
+                onChange={(v) => updateField("concern", v)}
+                multiline
+              />
             </Section>
 
             <Section title="Symptom timeline">
               <div className="space-y-3">
-                <Field label="Duration" value={answers.duration} />
-                <Field label="Severity" value={answers.severity} />
-                <Field label="Pattern & triggers" value={answers.pattern} />
+                <Field label="Duration" value={editing ? draft.duration : answers.duration} editing={editing} onChange={(v) => updateField("duration", v)} />
+                <Field label="Severity" value={editing ? draft.severity : answers.severity} editing={editing} onChange={(v) => updateField("severity", v)} />
+                <Field label="Pattern & triggers" value={editing ? draft.pattern : answers.pattern} editing={editing} onChange={(v) => updateField("pattern", v)} />
               </div>
             </Section>
 
             <Section title="Medications & allergies">
               <div className="space-y-3">
-                <Field label="Current medications" value={answers.medications} />
-                <Field label="Known allergies" value={answers.allergies} />
+                <Field label="Current medications" value={editing ? draft.medications : answers.medications} editing={editing} onChange={(v) => updateField("medications", v)} />
+                <Field label="Known allergies" value={editing ? draft.allergies : answers.allergies} editing={editing} onChange={(v) => updateField("allergies", v)} />
               </div>
             </Section>
 
             <Section title="Relevant history">
-              <p className="text-[15px] leading-relaxed text-foreground">{answers.history}</p>
+              <Editable
+                editing={editing}
+                value={editing ? draft.history : answers.history}
+                onChange={(v) => updateField("history", v)}
+                multiline
+              />
             </Section>
 
             <Section title="Questions to ask your provider">
@@ -183,8 +218,9 @@ function SummaryPage() {
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-foreground">Family doctor (non-urgent)</p>
                     <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      Based on what you described, a routine visit with your primary care provider is
-                      a reasonable starting point. Schedule within the next several days.
+                      Based on what you described, a routine visit with your primary care provider
+                      is a reasonable starting point. Consider booking when you're able, and contact
+                      a clinician sooner if symptoms change or worsen.
                     </p>
                   </div>
                 </div>
@@ -195,14 +231,19 @@ function SummaryPage() {
                   <CareOption label="Emergency room" />
                 </div>
                 <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">
-                  This is informational guidance — not a medical recommendation. If symptoms worsen
-                  rapidly, become severe, or you feel unsafe, seek immediate care.
+                  Informational guidance only, not a medical recommendation. If symptoms worsen,
+                  become severe, or you feel unsafe, seek care right away.
                 </p>
               </div>
             </Section>
 
             <Section title="What you hope to walk away with">
-              <p className="text-[15px] leading-relaxed text-foreground">{answers.goal}</p>
+              <Editable
+                editing={editing}
+                value={editing ? draft.goal : answers.goal}
+                onChange={(v) => updateField("goal", v)}
+                multiline
+              />
             </Section>
           </div>
 
@@ -236,12 +277,63 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function Field({ label, value }: { label: string; value: string }) {
+function Field({
+  label,
+  value,
+  editing,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  editing?: boolean;
+  onChange?: (v: string) => void;
+}) {
   return (
-    <div className="grid gap-1 sm:grid-cols-[180px_1fr]">
-      <span className="text-sm text-muted-foreground">{label}</span>
-      <span className="text-[15px] leading-relaxed text-foreground">{value}</span>
+    <div className="grid gap-1 sm:grid-cols-[180px_1fr] sm:items-start">
+      <span className="pt-1.5 text-sm text-muted-foreground">{label}</span>
+      {editing ? (
+        <input
+          value={value}
+          onChange={(e) => onChange?.(e.target.value)}
+          className="w-full rounded-md border border-border bg-background px-3 py-1.5 text-[15px] leading-relaxed text-foreground focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15"
+        />
+      ) : (
+        <span className="text-[15px] leading-relaxed text-foreground">{value}</span>
+      )}
     </div>
+  );
+}
+
+function Editable({
+  editing,
+  value,
+  onChange,
+  multiline,
+}: {
+  editing: boolean;
+  value: string;
+  onChange: (v: string) => void;
+  multiline?: boolean;
+}) {
+  if (!editing) {
+    return <p className="text-[15px] leading-relaxed text-foreground">{value}</p>;
+  }
+  if (multiline) {
+    return (
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        rows={3}
+        className="w-full resize-y rounded-md border border-border bg-background px-3 py-2 text-[15px] leading-relaxed text-foreground focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15"
+      />
+    );
+  }
+  return (
+    <input
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full rounded-md border border-border bg-background px-3 py-1.5 text-[15px] leading-relaxed text-foreground focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15"
+    />
   );
 }
 

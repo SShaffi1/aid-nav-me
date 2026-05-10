@@ -63,43 +63,13 @@ export function DashboardPreview() {
               </p>
               <p className="mt-2 text-sm font-medium text-foreground">Family doctor</p>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                Non-urgent. Schedule within the week.
+                Non-urgent. Consider a routine visit with your provider.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* floating cards */}
-      <FloatingCard
-        className="absolute -left-6 top-32 hidden md:block"
-        delay={0.6}
-      >
-        <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-md bg-success/15 grid place-items-center">
-            <svg className="h-4 w-4 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          </div>
-          <div>
-            <p className="text-[11px] text-muted-foreground">Intake progress</p>
-            <p className="text-sm font-semibold text-foreground">4 of 7 questions</p>
-          </div>
-        </div>
-      </FloatingCard>
-
-      <FloatingCard
-        className="absolute -right-6 bottom-24 hidden md:block"
-        delay={0.8}
-      >
-        <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-md bg-primary-soft grid place-items-center">
-            <svg className="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-          </div>
-          <div>
-            <p className="text-[11px] text-muted-foreground">Ready in</p>
-            <p className="text-sm font-semibold text-foreground">~2 minutes</p>
-          </div>
-        </div>
-      </FloatingCard>
     </motion.div>
   );
 }
@@ -140,30 +110,10 @@ function SummaryRow({ label, value, muted }: { label: string; value: string; mut
   return (
     <div className="flex items-center justify-between text-[13px]">
       <span className="text-muted-foreground">{label}</span>
-      <span className={muted ? "text-muted-foreground/60 italic" : "font-medium text-foreground"}>
+      <span className={muted ? "text-muted-foreground/60" : "font-medium text-foreground"}>
         {value}
       </span>
     </div>
   );
 }
 
-function FloatingCard({
-  className = "",
-  children,
-  delay = 0,
-}: {
-  className?: string;
-  children: React.ReactNode;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`rounded-md border border-border bg-surface px-4 py-3 shadow-soft ${className}`}
-    >
-      {children}
-    </motion.div>
-  );
-}
