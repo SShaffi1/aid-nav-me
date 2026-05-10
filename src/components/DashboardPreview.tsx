@@ -110,7 +110,7 @@ function SummaryRow({ label, value, muted }: { label: string; value: string; mut
   return (
     <div className="flex items-center justify-between text-[13px]">
       <span className="text-muted-foreground">{label}</span>
-      <span className={muted ? "text-muted-foreground/60 italic" : "font-medium text-foreground"}>
+      <span className={muted ? "text-muted-foreground/60" : "font-medium text-foreground"}>
         {value}
       </span>
     </div>
