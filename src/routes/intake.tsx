@@ -118,7 +118,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           </p>
         </motion.div>
       </main>
-    </div>
+    </motion.div>
   );
 }
 
