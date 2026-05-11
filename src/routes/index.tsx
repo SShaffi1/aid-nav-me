@@ -160,8 +160,15 @@ function LandingPage() {
           </h2>
         </div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
-          {features.map((f) => (
-            <div key={f.title} className="bg-surface p-7">
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              className="bg-surface p-7 transition-colors duration-200 hover:bg-surface-elevated"
+            >
               <div className="grid h-10 w-10 place-items-center rounded-md bg-primary-soft text-primary">
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   {f.icon}
@@ -169,7 +176,7 @@ function LandingPage() {
               </div>
               <h3 className="mt-5 text-base font-semibold text-foreground">{f.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
