@@ -75,7 +75,7 @@ export function SiteFooter() {
     <footer className="mt-32 border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-          <Wordmark className="h-5 w-auto" />
+          <Wordmark />
           <p className="max-w-md text-xs leading-relaxed text-muted-foreground">
             <span className="font-medium text-foreground">Medical disclaimer.</span> AEDNAV is not a
             diagnostic tool and does not replace consultation with a licensed healthcare
