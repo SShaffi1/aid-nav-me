@@ -1,5 +1,4 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import logoUrl from "@/assets/aednav-logo.svg";
 
 function smoothScrollTo(id: string) {
   const el = document.getElementById(id);
