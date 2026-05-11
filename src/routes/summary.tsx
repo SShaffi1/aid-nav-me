@@ -323,16 +323,72 @@ function Editable({
   );
 }
 
-function CareOption({ label, active }: { label: string; active?: boolean }) {
+const CARE_OPTIONS: { setting: CareSetting; description: string }[] = [
+  { setting: "Family Doctor", description: "Non-urgent or ongoing concerns" },
+  { setting: "Walk-in Clinic", description: "Minor issues, no family doctor available soon" },
+  { setting: "Urgent Care", description: "Time-sensitive, not life-threatening" },
+  { setting: "Emergency Room", description: "Severe, sudden, or red-flag symptoms" },
+];
+
+function CareOptionsBlock({
+  recommendation,
+}: {
+  recommendation: { setting: CareSetting; reason: string; isEmergency: boolean };
+}) {
   return (
-    <div
-      className={`rounded-lg border px-3 py-2 text-center transition-colors ${
-        active
-          ? "border-primary/40 bg-primary text-primary-foreground"
-          : "border-border bg-surface text-muted-foreground"
-      }`}
-    >
-      {label}
+    <div className="space-y-4">
+      <div
+        className={`rounded-2xl border p-4 ${
+          recommendation.isEmergency
+            ? "border-destructive/40 bg-destructive/5"
+            : "border-border bg-surface-elevated"
+        }`}
+      >
+        <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+          Why this option?
+        </p>
+        <p className="mt-1.5 text-sm font-semibold text-foreground">
+          Based on your answers, this may be a care option to consider: {recommendation.setting}.
+        </p>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+          {recommendation.reason}
+        </p>
+      </div>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {CARE_OPTIONS.map((opt) => {
+          const active = opt.setting === recommendation.setting;
+          return (
+            <div
+              key={opt.setting}
+              className={`rounded-lg border px-3.5 py-3 text-left transition-colors ${
+                active
+                  ? recommendation.isEmergency
+                    ? "border-destructive/50 bg-destructive/10"
+                    : "border-foreground/30 bg-surface"
+                  : "border-border bg-surface"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-medium text-foreground">{opt.setting}</span>
+                {active && (
+                  <span
+                    className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
+                      recommendation.isEmergency
+                        ? "bg-destructive text-destructive-foreground"
+                        : "bg-foreground text-background"
+                    }`}
+                  >
+                    Highlighted
+                  </span>
+                )}
+              </div>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                {opt.description}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
