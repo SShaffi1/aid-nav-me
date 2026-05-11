@@ -17,7 +17,7 @@ export function DashboardPreview() {
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.05_30)]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.88_0.07_85)]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.08_150)]" />
-          <span className="ml-3 text-[11px] text-muted-foreground">aednav.app / intake</span>
+          <span className="ml-3 text-[11px] text-muted-foreground">AEDNAV / Intake</span>
         </div>
 
         <div className="grid gap-0 md:grid-cols-[1fr_320px]">
