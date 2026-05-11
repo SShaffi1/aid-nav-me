@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/SiteChrome";
-import { initialAnswers, type IntakeAnswers } from "@/lib/intake";
+import { initialAnswers, recommendCare, type CareSetting, type IntakeAnswers } from "@/lib/intake";
 
 export const Route = createFileRoute("/summary")({
   head: () => ({
