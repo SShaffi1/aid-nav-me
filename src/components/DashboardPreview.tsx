@@ -17,7 +17,7 @@ export function DashboardPreview() {
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.05_30)]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.88_0.07_85)]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.08_150)]" />
-          <span className="ml-3 text-[11px] text-muted-foreground">aednav.app / intake</span>
+          <span className="ml-3 text-[11px] text-muted-foreground">AEDNAV / Intake</span>
         </div>
 
         <div className="grid gap-0 md:grid-cols-[1fr_320px]">
@@ -59,11 +59,11 @@ export function DashboardPreview() {
 
             <div className="mt-6 rounded-xl border border-border bg-surface p-4">
               <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-                Suggested setting
+                Care option to consider
               </p>
               <p className="mt-2 text-sm font-medium text-foreground">Family doctor</p>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                Non-urgent. Consider a routine visit with your provider.
+                Informational guidance only. AEDNAV cannot determine the right care setting for you.
               </p>
             </div>
           </div>

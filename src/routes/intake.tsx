@@ -28,18 +28,110 @@ export const Route = createFileRoute("/intake")({
   component: IntakePage,
 });
 
+type Phase = "intro" | "chat" | "review";
+
 type Message =
-  | { id: string; role: "ai"; text: string; typing?: boolean }
+  | { id: string; role: "ai"; text: string }
   | { id: string; role: "user"; text: string };
 
 function IntakePage() {
-  const navigate = useNavigate();
+  const [phase, setPhase] = useState<Phase>("intro");
+
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      <AnimatePresence mode="wait">
+        {phase === "intro" && (
+          <IntroScreen key="intro" onStart={() => setPhase("chat")} />
+        )}
+        {phase === "chat" && (
+          <ChatScreen key="chat" onComplete={() => setPhase("review")} />
+        )}
+        {phase === "review" && <ReviewScreen key="review" />}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ---------------- Intro screen ---------------- */
+
+function IntroScreen({ onStart }: { onStart: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex min-h-screen flex-col"
+    >
+      <header className="border-b border-border bg-surface/80 backdrop-blur">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
+          <Link to="/" aria-label="AEDNAV home" className="flex items-center">
+            <Logo className="h-6 md:h-7" />
+          </Link>
+          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
+            Exit
+          </Link>
+        </div>
+      </header>
+
+      <main className="flex flex-1 items-center justify-center px-5 py-10">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
+        >
+          <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
+            Before you start
+          </p>
+          <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">
+            A few things to know
+          </h1>
+
+          <ul className="mt-7 space-y-5">
+            {[
+              "AEDNAV helps organize your concerns before a healthcare visit.",
+              "AEDNAV does not diagnose, treat, or replace a healthcare professional.",
+              "If this is urgent or you may be in danger, call 911.",
+            ].map((t, i) => (
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, x: -6 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.07 }}
+                className="flex gap-3 text-[15px] leading-relaxed text-foreground"
+              >
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                {t}
+              </motion.li>
+            ))}
+          </ul>
+
+          <button
+            onClick={onStart}
+            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.99]"
+          >
+            I understand — start intake
+          </button>
+          <p className="mt-3 text-center text-[11px] text-muted-foreground">
+            Takes about 3 minutes. Your responses stay in this browser session.
+          </p>
+        </motion.div>
+      </main>
+    </motion.div>
+  );
+}
+
+/* ---------------- Chat screen ---------------- */
+
+function ChatScreen({ onComplete }: { onComplete: () => void }) {
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
   const [stepIndex, setStepIndex] = useState(0);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [aiThinking, setAiThinking] = useState(false);
   const [emergency, setEmergency] = useState<string | null>(null);
+  const [emergencyAcknowledged, setEmergencyAcknowledged] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -63,10 +155,11 @@ function IntakePage() {
   const currentStep = intakeSteps[stepIndex];
   const progress = Math.round((stepIndex / intakeSteps.length) * 100);
   const isLast = stepIndex >= intakeSteps.length;
+  const blocked = !!emergency && !emergencyAcknowledged;
 
   function submit(value?: string) {
     const text = (value ?? input).trim();
-    if (!text || aiThinking || isLast) return;
+    if (!text || aiThinking || isLast || blocked) return;
 
     const emergencyReason = detectEmergency(text);
 
@@ -74,13 +167,15 @@ function IntakePage() {
     setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", text }]);
     setInput("");
 
-    // store answer
+    // store answer (always — preserves the user's words even in emergencies)
     const field = currentStep.field;
     const updated = { ...answers, [field]: text };
     setAnswers(updated);
 
     if (emergencyReason) {
+      // Show banner; require explicit acknowledgement before continuing.
       setEmergency(emergencyReason);
+      setEmergencyAcknowledged(false);
       setAiThinking(true);
       setTimeout(() => {
         setAiThinking(false);
@@ -90,14 +185,17 @@ function IntakePage() {
             id: `ai-em-${Date.now()}`,
             role: "ai",
             text:
-              "Some of what you described may need urgent attention. Please consider reaching out to emergency services or going to the nearest emergency room. I'll wait while you make sure you're safe.",
+              "Some of what you described may need urgent attention. Please consider reaching out to emergency services. I'll stay here. When you're ready, you can acknowledge the warning above and continue.",
           },
         ]);
       }, 600);
       return;
     }
 
-    const next = stepIndex + 1;
+    advance(updated, stepIndex + 1);
+  }
+
+  function advance(updated: IntakeAnswers, next: number) {
     setStepIndex(next);
 
     if (next < intakeSteps.length) {
@@ -108,9 +206,8 @@ function IntakePage() {
           ...m,
           { id: `ai-${next}`, role: "ai", text: intakeSteps[next].prompt(updated) },
         ]);
-      }, 850 + Math.random() * 400);
+      }, 800 + Math.random() * 350);
     } else {
-      // finished
       setAiThinking(true);
       setTimeout(() => {
         setAiThinking(false);
@@ -120,13 +217,18 @@ function IntakePage() {
             id: "ai-final",
             role: "ai",
             text:
-              "Thank you. I've organized everything into a visit summary you can review, share, or bring to your appointment.",
+              "Thank you. Let's review your answers before I organize everything into a visit summary.",
           },
         ]);
         sessionStorage.setItem("aednav.answers", JSON.stringify(updated));
-        setTimeout(() => navigate({ to: "/summary" }), 1400);
-      }, 900);
+        setTimeout(() => onComplete(), 1100);
+      }, 800);
     }
+  }
+
+  function acknowledgeAndContinue() {
+    setEmergencyAcknowledged(true);
+    advance(answers, stepIndex + 1);
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -137,30 +239,36 @@ function IntakePage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex min-h-screen flex-col"
+    >
       {/* Top bar */}
       <header className="border-b border-border bg-surface/80 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
-          <Link to="/" aria-label="AEDNAV home" className="flex items-center">
-            <Logo className="h-5 w-auto" />
-          </Link>
-          <div className="hidden items-center gap-3 sm:flex">
+        <div className="mx-auto max-w-3xl px-5 py-2.5">
+          <div className="flex items-center justify-between gap-3">
+            <Link to="/" aria-label="AEDNAV home" className="flex items-center">
+              <Logo className="h-6 md:h-7" />
+            </Link>
             <span className="text-xs text-muted-foreground">
               {Math.min(stepIndex, intakeSteps.length)} of {intakeSteps.length}
             </span>
-            <div className="h-1.5 w-32 overflow-hidden rounded-full bg-secondary">
-              <motion.div
-                className="h-full rounded-full bg-primary"
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              />
-            </div>
+            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
+              Exit
+            </Link>
           </div>
-          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-            Exit
-          </Link>
+          {/* Progress bar — visible on all sizes */}
+          <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
+            <motion.div
+              className="h-full rounded-full bg-primary"
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            />
+          </div>
         </div>
-        {/* Disclaimer banner */}
         <div className="border-t border-border bg-warning/10">
           <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px] text-warning-foreground">
             AEDNAV does not provide medical diagnoses or emergency medical services.
@@ -172,13 +280,16 @@ function IntakePage() {
       <AnimatePresence>
         {emergency && (
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
+            role="alert"
+            aria-live="assertive"
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             className="border-b border-destructive/30 bg-destructive/10"
           >
             <div className="mx-auto max-w-3xl px-5 py-4">
-              <div className="flex items-start gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                 <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-destructive text-destructive-foreground">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
                 </div>
@@ -194,15 +305,16 @@ function IntakePage() {
                     <a href="tel:911" className="rounded-md bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground">Call 911</a>
                     <a href="tel:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Call 988</a>
                     <a href="sms:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Text 988</a>
+                    {!emergencyAcknowledged && (
+                      <button
+                        onClick={acknowledgeAndContinue}
+                        className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-elevated"
+                      >
+                        I'm safe — continue intake
+                      </button>
+                    )}
                   </div>
                 </div>
-                <button
-                  onClick={() => setEmergency(null)}
-                  className="text-xs text-muted-foreground hover:text-foreground"
-                  aria-label="Dismiss"
-                >
-                  Dismiss
-                </button>
               </div>
             </div>
           </motion.div>
@@ -211,7 +323,7 @@ function IntakePage() {
 
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-3xl space-y-5 px-5 py-10">
+        <div className="mx-auto max-w-3xl space-y-5 px-5 py-8 md:py-10">
           <AnimatePresence initial={false}>
             {messages.map((m) => (
               <MessageBubble key={m.id} message={m} />
@@ -223,50 +335,52 @@ function IntakePage() {
 
       {/* Composer */}
       <div className="border-t border-border bg-surface/90 backdrop-blur">
-        <div className="mx-auto max-w-3xl px-5 py-4">
-          {!isLast && currentStep?.suggestions && messages.length > 0 && !aiThinking && (
+        <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4">
+          {!isLast && currentStep?.suggestions && messages.length > 0 && !aiThinking && !blocked && (
             <div className="mb-3 flex flex-wrap gap-2">
               {currentStep.suggestions.map((s) => (
                 <button
                   key={s}
                   onClick={() => submit(s)}
-                  className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-foreground transition-colors hover:bg-surface-elevated"
+                  className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-foreground transition-all duration-150 hover:bg-surface-elevated active:scale-[0.98]"
                 >
                   {s}
                 </button>
               ))}
             </div>
           )}
-          <div className="flex items-end gap-2 rounded-2xl border border-border bg-surface p-2 shadow-soft focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15 transition-all">
+          <div className="flex items-end gap-2 rounded-2xl border border-border bg-surface p-2 shadow-soft transition-all duration-200 focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15">
             <textarea
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKeyDown}
               rows={1}
-              disabled={isLast}
-              placeholder={isLast ? "Generating your summary..." : currentStep?.placeholder ?? "Type a message..."}
-              className="max-h-40 min-h-[2.25rem] flex-1 resize-none bg-transparent px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none disabled:opacity-50"
+              disabled={isLast || blocked}
+              placeholder={
+                blocked
+                  ? "Please acknowledge the warning above to continue"
+                  : isLast
+                  ? "Generating your summary..."
+                  : currentStep?.placeholder ?? "Type a message..."
+              }
+              className="max-h-40 min-h-[2.5rem] flex-1 resize-none bg-transparent px-3 py-2 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus:outline-none disabled:opacity-50"
             />
             <button
               onClick={() => submit()}
-              disabled={!input.trim() || aiThinking || isLast}
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground transition-opacity disabled:opacity-30"
+              disabled={!input.trim() || aiThinking || isLast || blocked}
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground transition-all duration-150 hover:opacity-90 active:scale-95 disabled:opacity-30"
               aria-label="Send"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
             </button>
           </div>
-          <p className="mt-2 text-center text-[11px] text-muted-foreground">
-            Press Enter to send. Shift+Enter for a new line.
-          </p>
           <p className="mt-2 text-center text-[11px] leading-relaxed text-muted-foreground/80">
-            Demo privacy note: Your responses are stored only in this browser session and are not
-            sent to a medical provider.
+            Responses stay in this browser session. Press Enter to send.
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -287,8 +401,8 @@ function MessageBubble({ message }: { message: Message }) {
       <div
         className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[14.5px] leading-relaxed ${
           isAi
-            ? "bg-surface-elevated text-foreground border border-border rounded-bl-md"
-            : "bg-primary text-primary-foreground rounded-br-md"
+            ? "rounded-bl-md border border-border bg-surface-elevated text-foreground"
+            : "rounded-br-md bg-primary text-primary-foreground"
         }`}
       >
         {message.text}
@@ -302,7 +416,9 @@ function TypingIndicator() {
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }}
       className="flex items-end gap-2.5"
+      aria-label="AEDNAV is typing"
     >
       <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary">
         <svg className="h-3.5 w-3.5 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18"/></svg>
@@ -319,6 +435,156 @@ function TypingIndicator() {
           ))}
         </div>
       </div>
+    </motion.div>
+  );
+}
+
+/* ---------------- Review screen ---------------- */
+
+const FIELD_LABELS: { field: keyof IntakeAnswers; label: string }[] = [
+  { field: "concern", label: "Main concern" },
+  { field: "duration", label: "Duration" },
+  { field: "severity", label: "Severity" },
+  { field: "pattern", label: "Pattern & triggers" },
+  { field: "medications", label: "Current medications" },
+  { field: "allergies", label: "Known allergies" },
+  { field: "history", label: "Relevant history" },
+  { field: "goal", label: "Appointment goal" },
+];
+
+function ReviewScreen() {
+  const navigate = useNavigate();
+  const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
+  const [editing, setEditing] = useState<keyof IntakeAnswers | null>(null);
+  const [draft, setDraft] = useState("");
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("aednav.answers");
+      if (stored) setAnswers(JSON.parse(stored));
+    } catch {}
+  }, []);
+
+  function startEdit(f: keyof IntakeAnswers) {
+    setDraft(answers[f]);
+    setEditing(f);
+  }
+  function saveEdit() {
+    if (!editing) return;
+    const updated = { ...answers, [editing]: draft };
+    setAnswers(updated);
+    sessionStorage.setItem("aednav.answers", JSON.stringify(updated));
+    setEditing(null);
+  }
+  function generate() {
+    sessionStorage.setItem("aednav.answers", JSON.stringify(answers));
+    navigate({ to: "/summary" });
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex min-h-screen flex-col"
+    >
+      <header className="border-b border-border bg-surface/80 backdrop-blur">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
+          <Link to="/" aria-label="AEDNAV home" className="flex items-center">
+            <Logo className="h-6 md:h-7" />
+          </Link>
+          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
+            Exit
+          </Link>
+        </div>
+      </header>
+
+      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 md:py-10">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
+            Review your answers
+          </p>
+          <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">
+            Does this look right?
+          </h1>
+          <p className="mt-3 text-sm text-muted-foreground">
+            You can edit anything before AEDNAV organizes it into a visit summary.
+          </p>
+        </motion.div>
+
+        <div className="mt-8 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
+          {FIELD_LABELS.map((row, i) => (
+            <motion.div
+              key={row.field}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.05 + i * 0.04 }}
+              className="grid gap-2 px-5 py-4 sm:grid-cols-[180px_1fr_auto] sm:items-start"
+            >
+              <span className="pt-1 text-[13px] text-muted-foreground">{row.label}</span>
+              {editing === row.field ? (
+                <textarea
+                  value={draft}
+                  onChange={(e) => setDraft(e.target.value)}
+                  rows={2}
+                  className="w-full resize-y rounded-md border border-border bg-background px-3 py-2 text-[14.5px] leading-relaxed text-foreground focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15"
+                />
+              ) : (
+                <p className="text-[14.5px] leading-relaxed text-foreground">
+                  {answers[row.field] || <span className="italic text-muted-foreground">Not provided</span>}
+                </p>
+              )}
+              <div className="flex gap-2 sm:justify-end">
+                {editing === row.field ? (
+                  <>
+                    <button
+                      onClick={() => setEditing(null)}
+                      className="rounded-md border border-border bg-surface px-2.5 py-1 text-xs text-foreground hover:bg-surface-elevated"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={saveEdit}
+                      className="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground hover:opacity-90"
+                    >
+                      Save
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => startEdit(row.field)}
+                    className="rounded-md border border-border bg-surface px-2.5 py-1 text-xs text-foreground hover:bg-surface-elevated"
+                  >
+                    Edit
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-surface-elevated"
+          >
+            Cancel
+          </Link>
+          <button
+            onClick={generate}
+            disabled={!!editing}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-150 hover:opacity-90 active:scale-[0.99] disabled:opacity-40"
+          >
+            Generate visit summary
+            <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </main>
     </motion.div>
   );
 }
