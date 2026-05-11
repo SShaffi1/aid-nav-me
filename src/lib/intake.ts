@@ -108,3 +108,107 @@ export function detectEmergency(text: string): string | null {
   }
   return null;
 }
+
+// ---- Care setting recommendation (rule-based, non-diagnostic) ----
+
+export type CareSetting =
+  | "Family Doctor"
+  | "Walk-in Clinic"
+  | "Urgent Care"
+  | "Emergency Room";
+
+export type CareRecommendation = {
+  setting: CareSetting;
+  reason: string;
+  isEmergency: boolean;
+};
+
+const RED_FLAGS = [
+  "chest pain", "chest pressure",
+  "difficulty breathing", "can't breathe", "cant breathe", "trouble breathing", "shortness of breath severe",
+  "stroke", "face drooping", "slurred speech", "numb on one side",
+  "sudden weakness",
+  "suicid", "kill myself", "end my life", "self harm", "hurt myself",
+  "severe bleeding", "bleeding heavily", "won't stop bleeding",
+  "loss of consciousness", "passed out", "unconscious", "fainted",
+  "severe allergic reaction", "anaphylaxis", "throat closing", "swelling tongue",
+  "worst headache",
+];
+
+const URGENT = [
+  "worsening pain", "getting worse", "rapidly worse", "worse quickly",
+  "high fever", "fever of 103", "fever 104",
+  "infection", "infected",
+  "injury", "injured", "fall", "sprain", "broken",
+  "dehydrat",
+  "vomiting repeatedly", "can't keep", "cant keep", "persistent vomit",
+  "moderate breathing", "wheezing",
+];
+
+const WALKIN = [
+  "rash", "sore throat", "cough", "cold ", "flu",
+  "minor pain", "small cut",
+  "prescription refill", "refill",
+  "ear ache", "earache", "pink eye",
+];
+
+const FAMILY = [
+  "recurring", "ongoing", "chronic", "fatigue", "tired",
+  "follow-up", "follow up", "medication question",
+  "general", "checkup", "check up", "headaches",
+];
+
+function joined(a: IntakeAnswers): string {
+  return Object.values(a).join(" ").toLowerCase();
+}
+
+function hitList(text: string, list: string[]): string | null {
+  for (const k of list) if (text.includes(k)) return k;
+  return null;
+}
+
+export function recommendCare(a: IntakeAnswers): CareRecommendation {
+  const text = joined(a);
+
+  const red = hitList(text, RED_FLAGS);
+  if (red) {
+    return {
+      setting: "Emergency Room",
+      reason: `You mentioned something that can be a red-flag symptom (e.g. "${red}"). When in doubt about severe, sudden, or worsening symptoms, emergency care is the safest place to be evaluated.`,
+      isEmergency: true,
+    };
+  }
+
+  const urgent = hitList(text, URGENT);
+  if (urgent) {
+    return {
+      setting: "Urgent Care",
+      reason: `Your description includes signs that often need same-day attention (e.g. "${urgent}"), but do not necessarily require an emergency department.`,
+      isEmergency: false,
+    };
+  }
+
+  const walkin = hitList(text, WALKIN);
+  if (walkin) {
+    return {
+      setting: "Walk-in Clinic",
+      reason: `What you described (e.g. "${walkin}") is often handled by a walk-in clinic, especially if you can't see your family doctor soon.`,
+      isEmergency: false,
+    };
+  }
+
+  const fam = hitList(text, FAMILY);
+  if (fam) {
+    return {
+      setting: "Family Doctor",
+      reason: `Your concerns sound non-urgent and may benefit from continuity of care with a family doctor who knows your history.`,
+      isEmergency: false,
+    };
+  }
+
+  return {
+    setting: "Family Doctor",
+    reason: `No clear urgency signals were detected in your answers. A non-urgent visit with a family doctor is a reasonable starting point. Reconsider if symptoms change or worsen.`,
+    isEmergency: false,
+  };
+}

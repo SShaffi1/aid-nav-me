@@ -205,8 +205,8 @@ function LandingPage() {
         <div className="rounded-2xl border border-border bg-surface p-10 shadow-soft md:p-12">
           <p className="text-xs font-medium uppercase tracking-wider text-primary">Why it matters</p>
           <p className="font-display mt-3 text-2xl leading-snug text-foreground md:text-3xl">
-            The average primary care visit lasts about 18 minutes. AEDNAV helps you spend
-            that time on what matters, not on remembering details.
+            Appointments can feel short. AEDNAV helps you arrive with your concerns organized,
+            so you can use your time more clearly.
           </p>
         </div>
       </section>

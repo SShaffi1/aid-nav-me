@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/SiteChrome";
-import { initialAnswers, type IntakeAnswers } from "@/lib/intake";
+import { initialAnswers, recommendCare, type CareSetting, type IntakeAnswers } from "@/lib/intake";
 
 export const Route = createFileRoute("/summary")({
   head: () => ({
@@ -209,32 +209,18 @@ function SummaryPage() {
               </ul>
             </Section>
 
-            <Section title="Suggested care setting">
-              <div className="rounded-2xl border border-border bg-surface-elevated p-5">
-                <div className="flex items-start gap-3">
-                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary-soft text-primary">
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5z"/></svg>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-semibold text-foreground">Family doctor (non-urgent)</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      Based on what you described, a routine visit with your primary care provider
-                      is a reasonable starting point. Consider booking when you're able, and contact
-                      a clinician sooner if symptoms change or worsen.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-5 grid gap-2 text-xs sm:grid-cols-4">
-                  <CareOption label="Family doctor" active />
-                  <CareOption label="Walk-in clinic" />
-                  <CareOption label="Urgent care" />
-                  <CareOption label="Emergency room" />
-                </div>
-                <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">
-                  Informational guidance only, not a medical recommendation. If symptoms worsen,
-                  become severe, or you feel unsafe, seek care right away.
-                </p>
-              </div>
+            <Section title="Care option to consider">
+              <p className="-mt-1 mb-4 text-xs leading-relaxed text-muted-foreground">
+                This is informational guidance only. AEDNAV cannot diagnose conditions or
+                determine the right care setting for you.
+              </p>
+              <CareOptionsBlock recommendation={recommendCare(answers)} />
+              <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">
+                For non-urgent concerns, many people start by contacting a family doctor,
+                walk-in clinic, or primary care provider. AEDNAV cannot determine the right
+                care setting for you. If symptoms are severe, sudden, worsening, or
+                concerning, seek urgent care or emergency support.
+              </p>
             </Section>
 
             <Section title="What you hope to walk away with">
@@ -337,16 +323,72 @@ function Editable({
   );
 }
 
-function CareOption({ label, active }: { label: string; active?: boolean }) {
+const CARE_OPTIONS: { setting: CareSetting; description: string }[] = [
+  { setting: "Family Doctor", description: "Non-urgent or ongoing concerns" },
+  { setting: "Walk-in Clinic", description: "Minor issues, no family doctor available soon" },
+  { setting: "Urgent Care", description: "Time-sensitive, not life-threatening" },
+  { setting: "Emergency Room", description: "Severe, sudden, or red-flag symptoms" },
+];
+
+function CareOptionsBlock({
+  recommendation,
+}: {
+  recommendation: { setting: CareSetting; reason: string; isEmergency: boolean };
+}) {
   return (
-    <div
-      className={`rounded-lg border px-3 py-2 text-center transition-colors ${
-        active
-          ? "border-primary/40 bg-primary text-primary-foreground"
-          : "border-border bg-surface text-muted-foreground"
-      }`}
-    >
-      {label}
+    <div className="space-y-4">
+      <div
+        className={`rounded-2xl border p-4 ${
+          recommendation.isEmergency
+            ? "border-destructive/40 bg-destructive/5"
+            : "border-border bg-surface-elevated"
+        }`}
+      >
+        <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+          Why this option?
+        </p>
+        <p className="mt-1.5 text-sm font-semibold text-foreground">
+          Based on your answers, this may be a care option to consider: {recommendation.setting}.
+        </p>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+          {recommendation.reason}
+        </p>
+      </div>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {CARE_OPTIONS.map((opt) => {
+          const active = opt.setting === recommendation.setting;
+          return (
+            <div
+              key={opt.setting}
+              className={`rounded-lg border px-3.5 py-3 text-left transition-colors ${
+                active
+                  ? recommendation.isEmergency
+                    ? "border-destructive/50 bg-destructive/10"
+                    : "border-foreground/30 bg-surface"
+                  : "border-border bg-surface"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-medium text-foreground">{opt.setting}</span>
+                {active && (
+                  <span
+                    className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
+                      recommendation.isEmergency
+                        ? "bg-destructive text-destructive-foreground"
+                        : "bg-foreground text-background"
+                    }`}
+                  >
+                    Highlighted
+                  </span>
+                )}
+              </div>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                {opt.description}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
