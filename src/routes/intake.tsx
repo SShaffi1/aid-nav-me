@@ -192,7 +192,8 @@ function IntakePage() {
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     <a href="tel:911" className="rounded-md bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground">Call 911</a>
-                    <a href="tel:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Call or text 988</a>
+                    <a href="tel:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Call 988</a>
+                    <a href="sms:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Text 988</a>
                   </div>
                 </div>
                 <button
