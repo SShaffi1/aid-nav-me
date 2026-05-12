@@ -12,17 +12,17 @@ function smoothScrollTo(id: string) {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AEDNAV — Navigate healthcare with confidence" },
+      { title: "AEDNAV — Prepare for care in any language" },
       {
         name: "description",
         content:
-          "AEDNAV helps you organize symptoms, prepare for appointments, and communicate clearly before seeing a healthcare provider. Not a diagnostic tool.",
+          "AEDNAV helps patients organize health concerns in their own language and generate a clear English visit summary for healthcare providers. Not a diagnostic tool.",
       },
-      { property: "og:title", content: "AEDNAV — Navigate healthcare with confidence" },
+      { property: "og:title", content: "AEDNAV — Prepare for care in any language" },
       {
         property: "og:description",
         content:
-          "AI-powered pre-appointment assistant. Organize symptoms and prepare for your visit.",
+          "Multilingual pre-appointment intake. Get a patient summary in your language and a doctor-ready English summary.",
       },
     ],
   }),
@@ -31,49 +31,48 @@ export const Route = createFileRoute("/")({
 
 const features = [
   {
-    title: "AI intake guidance",
-    body: "A calm, structured conversation that helps you describe what you're experiencing, without jumping to conclusions.",
-    icon: (
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-    ),
+    title: "Multilingual intake",
+    body: "Describe what you're experiencing in English, French, Spanish, Mandarin, Punjabi, or Arabic — without translating in your head.",
+    icon: <><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></>,
   },
   {
-    title: "Structured visit summaries",
-    body: "Your concerns, timeline, and history, organized into a clear document you can share or print.",
-    icon: (
-      <>
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <path d="M14 2v6h6M9 13h6M9 17h4" />
-      </>
-    ),
+    title: "Dual-language visit summary",
+    body: "Receive two synced summaries: one in your language to read, and one in English to share with your provider.",
+    icon: <><rect x="3" y="4" width="8" height="16" rx="1.5" /><rect x="13" y="4" width="8" height="16" rx="1.5" /></>,
+  },
+  {
+    title: "Doctor-ready English summary",
+    body: "Concerns, timeline, medications, allergies, and questions — organized in clinical-style English you can show your provider.",
+    icon: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 13h6M9 17h4" /></>,
   },
   {
     title: "Appointment preparation",
-    body: "Know what questions to ask. Walk in feeling prepared, not overwhelmed.",
-    icon: (
-      <>
-        <rect x="3" y="4" width="18" height="18" rx="2" />
-        <path d="M16 2v4M8 2v4M3 10h18" />
-      </>
-    ),
-  },
-  {
-    title: "Healthcare navigation",
-    body: "Get clarity on whether to book a family doctor, walk-in clinic, urgent care, or seek emergency help.",
-    icon: (
-      <>
-        <circle cx="12" cy="12" r="10" />
-        <path d="m16 12-4-4-4 4M12 16V8" />
-      </>
-    ),
+    body: "Walk in knowing what you want to ask, what to mention first, and what to bring along.",
+    icon: <><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></>,
   },
 ];
 
 const steps = [
-  { n: "01", title: "Describe your concerns", body: "Share what you're experiencing in your own words. No forms, no jargon." },
-  { n: "02", title: "Answer guided questions", body: "AEDNAV asks structured follow-ups about timing, severity, and history." },
-  { n: "03", title: "Receive a summary", body: "A clear, printable document organizing everything for your provider." },
-  { n: "04", title: "Walk in prepared", body: "Arrive at your appointment with clarity, questions, and confidence." },
+  { n: "01", title: "Choose your language",       body: "Pick the language you're most comfortable describing your health in." },
+  { n: "02", title: "Describe your concern",      body: "Share what's been on your mind in your own words. No forms, no jargon." },
+  { n: "03", title: "Answer guided questions",    body: "Short follow-ups about timing, severity, medications, allergies, and history." },
+  { n: "04", title: "Review your answers",        body: "See everything in one place and edit anything before generating the summary." },
+  { n: "05", title: "Get both summaries",         body: "A patient summary in your language and an English summary for your provider." },
+];
+
+const audiences = [
+  { title: "Newcomers to Canada",        body: "Prepare for an appointment in your strongest language and bring an English summary." },
+  { title: "Families supporting relatives", body: "Help a parent, grandparent, or partner organize what to bring to a visit." },
+  { title: "Students preparing for appointments", body: "Get clear on what to say before a campus or community clinic visit." },
+  { title: "Patients more comfortable in another language", body: "Skip the live translation pressure — describe symptoms calmly first." },
+  { title: "Anyone who forgets what to say in the room", body: "Walk in with a written summary, not a blank mind." },
+];
+
+const safetyPoints = [
+  "AEDNAV does not diagnose or treat conditions.",
+  "AEDNAV does not replace healthcare professionals.",
+  "AEDNAV does not replace professional medical interpreters.",
+  "AEDNAV helps you organize information before care.",
 ];
 
 const faqs = [
@@ -82,16 +81,16 @@ const faqs = [
     a: "No. AEDNAV does not diagnose conditions or recommend treatments. It helps you organize what you're experiencing so you can communicate clearly with a licensed healthcare provider.",
   },
   {
+    q: "Are the translations clinical-grade?",
+    a: "No. AEDNAV provides demo translations to support communication and preparation. It is not a substitute for a professional medical interpreter.",
+  },
+  {
     q: "Will my information be shared?",
-    a: "Your intake stays in your session. You decide whether to download, copy, or share your visit summary with a provider.",
+    a: "Your intake stays in your browser session. You decide whether to copy, print, or share your visit summary with a provider.",
   },
   {
     q: "What if I'm experiencing an emergency?",
     a: "AEDNAV is not for emergencies. If you have chest pain, difficulty breathing, stroke symptoms, or thoughts of self-harm, contact local emergency services immediately.",
-  },
-  {
-    q: "Does it replace seeing a doctor?",
-    a: "Not at all. AEDNAV is a preparation tool. It helps the time you spend with your provider go further.",
   },
 ];
 
@@ -109,8 +108,8 @@ function LandingPage() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-balance text-5xl leading-[1.05] text-foreground md:text-6xl"
           >
-            Walk into your appointment<br />
-            <span className="text-primary">already prepared.</span>
+            Prepare for care<br />
+            <span className="text-primary">in any language.</span>
           </motion.h1>
 
           <motion.p
@@ -119,8 +118,8 @@ function LandingPage() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="text-balance mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground"
           >
-            AEDNAV helps you organize symptoms, prepare questions, and communicate
-            clearly with your healthcare provider. It is not a diagnostic tool.
+            AEDNAV helps patients organize health concerns in their own language and
+            generate a clear English visit summary for healthcare providers.
           </motion.p>
 
           <motion.div
@@ -143,9 +142,14 @@ function LandingPage() {
               onClick={(e) => { e.preventDefault(); smoothScrollTo("how"); }}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-elevated"
             >
-              Learn more
+              See how it works
             </a>
           </motion.div>
+
+          <p className="mt-6 text-xs text-muted-foreground">
+            Built for patients and families who may feel more comfortable explaining health
+            concerns in a language other than English.
+          </p>
         </div>
 
         <DashboardPreview />
@@ -156,7 +160,7 @@ function LandingPage() {
         <div className="max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-wider text-primary">What it does</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
-            Built around the moments<br />before your appointment.
+            From your language<br />to a doctor-ready summary.
           </h2>
         </div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
@@ -186,10 +190,10 @@ function LandingPage() {
         <div className="max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-wider text-primary">How it works</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
-            Four steps. About three minutes.
+            Five steps. About three minutes.
           </h2>
         </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {steps.map((s, i) => (
             <motion.div
               key={s.n}
@@ -207,14 +211,120 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Trust strip */}
+      {/* Dual-language summary preview */}
+      <section id="dual" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
+        <div className="max-w-2xl">
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">Dual-language visit summary</p>
+          <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
+            One conversation.<br />Two summaries.
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Read your visit summary in your language. Show the English version to your healthcare
+            provider. Both are generated from the same intake.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {/* Patient (Arabic sample) */}
+          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8" dir="rtl">
+            <div className="flex items-center justify-between" dir="ltr">
+              <p className="text-[11px] font-medium uppercase tracking-wider text-primary">Patient summary</p>
+              <span className="text-[11px] text-muted-foreground">العربية</span>
+            </div>
+            <h3 className="font-display mt-2 text-xl text-foreground" dir="ltr">In your selected language</h3>
+
+            <div className="mt-6 space-y-4 text-[14.5px] leading-relaxed text-foreground">
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">الشكوى الرئيسية</p>
+                <p className="mt-1">صداع متكرر منذ 3 أيام، يزداد بعد الظهر.</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">المدة والشدة</p>
+                <p className="mt-1">حوالي 3 أيام · شدة 6 من 10 في أسوأ حالاتها.</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">أسئلة لطرحها على الطبيب</p>
+                <ul className="mt-1.5 space-y-1.5">
+                  <li>ما الذي قد يسبب هذا الصداع؟</li>
+                  <li>هل توجد فحوصات يمكن أن تساعد؟</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Provider (English) */}
+          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8">
+            <div className="flex items-center justify-between">
+              <p className="text-[11px] font-medium uppercase tracking-wider text-primary">Provider summary</p>
+              <span className="text-[11px] text-muted-foreground">English</span>
+            </div>
+            <h3 className="font-display mt-2 text-xl text-foreground">Doctor-ready English</h3>
+
+            <div className="mt-6 space-y-4 text-[14.5px] leading-relaxed text-foreground">
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Main concern</p>
+                <p className="mt-1">Recurring headaches for 3 days, worse in the afternoon.</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Timeline & severity</p>
+                <p className="mt-1">Duration ~3 days · 6/10 at worst (self-reported).</p>
+              </div>
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Patient questions</p>
+                <ul className="mt-1.5 space-y-1.5">
+                  <li>What might be causing the headaches?</li>
+                  <li>Are there tests that would help clarify this?</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p className="mt-5 text-center text-xs text-muted-foreground">
+          For preparation and communication support only. Not a diagnosis.
+        </p>
+      </section>
+
+      {/* Who it helps */}
+      <section id="who" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
+        <div className="max-w-2xl">
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">Who AEDNAV helps</p>
+          <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
+            Built for the people<br />who do the explaining.
+          </h2>
+        </div>
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {audiences.map((a, i) => (
+            <motion.div
+              key={a.title}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="rounded-2xl border border-border bg-surface p-6"
+            >
+              <h3 className="text-base font-semibold text-foreground">{a.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Safety / trust */}
       <section className="mx-auto mt-32 max-w-4xl px-6">
         <div className="rounded-2xl border border-border bg-surface p-10 shadow-soft md:p-12">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">Why it matters</p>
-          <p className="font-display mt-3 text-2xl leading-snug text-foreground md:text-3xl">
-            Appointments can feel short. AEDNAV helps you arrive with your concerns organized,
-            so you can use your time more clearly.
-          </p>
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">Safety</p>
+          <h2 className="font-display mt-3 text-2xl leading-snug text-foreground md:text-3xl">
+            Built for preparation, not diagnosis.
+          </h2>
+          <ul className="mt-7 space-y-4">
+            {safetyPoints.map((p, i) => (
+              <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-foreground">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                {p}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -224,8 +334,8 @@ function LandingPage() {
           Frequently asked
         </h2>
         <div className="mt-12 divide-y divide-border border-y border-border">
-          {faqs.map((f, i) => (
-            <FaqItem key={f.q} question={f.q} answer={f.a} defaultOpen={i === -1} />
+          {faqs.map((f) => (
+            <FaqItem key={f.q} question={f.q} answer={f.a} />
           ))}
         </div>
       </section>
@@ -237,7 +347,7 @@ function LandingPage() {
             Ready for your next visit?
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-sm text-primary-foreground/80">
-            Three minutes now. A clearer conversation later.
+            Three minutes in your language. A clearer conversation in English.
           </p>
           <Link
             to="/intake"
@@ -254,8 +364,8 @@ function LandingPage() {
   );
 }
 
-function FaqItem({ question, answer, defaultOpen = false }: { question: string; answer: string; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
+function FaqItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
   return (
     <div className="py-2">
       <button
