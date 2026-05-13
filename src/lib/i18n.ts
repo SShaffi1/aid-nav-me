@@ -16,6 +16,7 @@ export const LANGUAGES: LangConfig[] = [
   { code: "es", label: "Spanish",  native: "Español",   direction: "ltr" },
   { code: "zh", label: "Mandarin", native: "中文",       direction: "ltr" },
   { code: "pa", label: "Punjabi",  native: "ਪੰਜਾਬੀ",     direction: "ltr" },
+  { code: "ur", label: "Urdu",     native: "اردو",      direction: "rtl" },
   { code: "ar", label: "Arabic",   native: "العربية",   direction: "rtl" },
 ];
 
