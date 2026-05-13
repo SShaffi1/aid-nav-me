@@ -39,18 +39,21 @@ type Message =
   | { id: string; role: "user"; text: string };
 
 function IntakePage() {
-  const [phase, setPhase] = useState<Phase>("language");
+  const [phase, setPhase] = useState<Phase>("intro");
   const [lang, setLang] = useState<LangCode>("en");
 
-  // Restore previous selection if present so refreshes feel stable.
+  // If a language was already selected via the homepage gate, go straight to intro.
   useEffect(() => {
     const stored = getStoredLang();
-    if (stored) setLang(stored);
+    setLang(stored);
+    const picked = sessionStorage.getItem("aednav.langPicked");
+    setPhase(picked ? "intro" : "language");
   }, []);
 
   function chooseLang(code: LangCode) {
     setLang(code);
     sessionStorage.setItem(STORAGE_LANG, code);
+    sessionStorage.setItem("aednav.langPicked", "1");
     setPhase("intro");
   }
 
