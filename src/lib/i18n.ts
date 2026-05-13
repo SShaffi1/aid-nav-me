@@ -1,7 +1,7 @@
 // Mock multilingual content for AEDNAV MVP.
 // NOTE: Demo translations only — not professional medical translation.
 
-export type LangCode = "en" | "fr" | "es" | "zh" | "pa" | "ar";
+export type LangCode = "en" | "fr" | "es" | "zh" | "pa" | "ur" | "ar";
 
 export type LangConfig = {
   code: LangCode;
@@ -16,6 +16,7 @@ export const LANGUAGES: LangConfig[] = [
   { code: "es", label: "Spanish",  native: "Español",   direction: "ltr" },
   { code: "zh", label: "Mandarin", native: "中文",       direction: "ltr" },
   { code: "pa", label: "Punjabi",  native: "ਪੰਜਾਬੀ",     direction: "ltr" },
+  { code: "ur", label: "Urdu",     native: "اردو",      direction: "rtl" },
   { code: "ar", label: "Arabic",   native: "العربية",   direction: "rtl" },
 ];
 
@@ -764,8 +765,119 @@ const AR: IntakePromptSet = {
   },
 };
 
+const UR: IntakePromptSet = {
+  intro: {
+    eyebrow: "شروع کرنے سے پہلے",
+    title: "چند اہم باتیں",
+    bullets: [
+      "AEDNAV آپ کو صحت کی ملاقات سے پہلے اپنی پریشانیوں کو منظم کرنے میں مدد کرتا ہے۔",
+      "AEDNAV تشخیص نہیں کرتا اور صحت کے پیشہ ور افراد کا متبادل نہیں ہے۔",
+      "AEDNAV ایمرجنسی کے لیے نہیں ہے۔ اگر یہ ضروری ہو تو 911 پر کال کریں۔",
+    ],
+    cta: "میں سمجھ گیا — شروع کریں",
+    note: "تقریباً 3 منٹ۔ آپ کے جوابات صرف اس سیشن میں محفوظ ہیں۔",
+  },
+  prompts: {
+    concern: "السلام علیکم — میں AEDNAV ہوں۔ میں آپ کی ملاقات سے پہلے آپ کی صورتحال کو منظم کرنے میں مدد کروں گا۔ شروع میں — آپ کو کیا پریشانی ہے؟",
+    duration: "شکریہ۔ یہ کب سے ہو رہا ہے؟",
+    severity: "1 سے 10 کے پیمانے پر، بدترین حالت میں شدت کیا تھی؟",
+    pattern: "کیا کوئی چیز اسے بہتر یا بدتر بناتی ہے؟ کوئی پیٹرن — وقت، سرگرمی، کھانا، نیند؟",
+    medications: "کیا آپ فی الحال کوئی دوائیں، سپلیمنٹس یا علاج لے رہے ہیں؟",
+    allergies: "کوئی معروف الرجی — دوائیں، کھانے یا ماحولیاتی؟",
+    history: "آپ کی طبی تاریخ میں کوئی متعلقہ بات — ماضی کی بیماریاں، سرجری، خاندانی تاریخ؟",
+    goal: "آخری سوال — آپ اس ملاقات سے کیا حاصل کرنا چاہتے ہیں؟",
+  },
+  placeholders: {
+    concern: "مثال: 3 دن سے سر درد ہے...",
+    duration: "مثال: تقریباً 3 دن",
+    severity: "مثال: تقریباً 6",
+    pattern: "مثال: دوپہر میں بدتر، آرام سے بہتر",
+    medications: "مثال: ضرورت پر آئبوپروفن",
+    allergies: "مثال: پینسلین، مونگ پھلی",
+    history: "مثال: خاندان میں مائگرین کی تاریخ",
+    goal: "مثال: وجہ سمجھنا اور منصوبہ",
+  },
+  suggestions: {
+    concern: [],
+    duration: ["چند گھنٹے", "1–3 دن", "تقریباً ایک ہفتہ", "کئی ہفتے", "مہینے", "مجھے یقین نہیں", "چھوڑ دیں"],
+    severity: ["1–3 (ہلکا)", "4–6 (درمیانہ)", "7–8 (شدید)", "9–10 (بہت شدید)", "مجھے یقین نہیں", "چھوڑ دیں"],
+    pattern: ["کوئی واضح پیٹرن نہیں", "مجھے یقین نہیں", "چھوڑ دیں"],
+    medications: ["کوئی نہیں", "صرف OTC", "نسخہ شدہ دوا", "چھوڑ دیں"],
+    allergies: ["کوئی معلوم نہیں", "لاگو نہیں", "چھوڑ دیں"],
+    history: ["کوئی متعلقہ نہیں", "لاگو نہیں", "چھوڑ دیں"],
+    goal: ["واضح منصوبہ", "بہتر سمجھ", "مجھے یقین نہیں", "چھوڑ دیں"],
+  },
+  composer: {
+    placeholderFallback: "پیغام لکھیں...",
+    sendAria: "بھیجیں",
+    privacyNote: "جوابات اس سیشن میں رہتے ہیں۔ بھیجنے کے لیے Enter دبائیں۔",
+    blocked: "جاری رکھنے کے لیے اوپر کی انتباہ کو تسلیم کریں",
+    generating: "آپ کا خلاصہ تیار کیا جا رہا ہے...",
+  },
+  thankYou: "شکریہ۔ خلاصہ تیار کرنے سے پہلے آپ کے جوابات کا جائزہ لیتے ہیں۔",
+  emergencyBanner: {
+    title: "اس کو فوری توجہ کی ضرورت ہو سکتی ہے۔",
+    body: "AEDNAV ایمرجنسی کے لیے نہیں بنایا گیا۔ براہ کرم ایمرجنسی خدمات سے رابطہ کریں یا قریبی ایمرجنسی روم میں جائیں۔",
+    safe: "میں محفوظ ہوں — جاری رکھیں",
+    disclaimer: "AEDNAV ایمرجنسی کے لیے نہیں ہے۔ اگر یہ ضروری ہو تو 911 پر کال کریں۔",
+  },
+  review: {
+    eyebrow: "اپنے جوابات کا جائزہ لیں",
+    title: "کیا یہ صحیح لگتا ہے؟",
+    body: "خلاصہ تیار ہونے سے پہلے آپ کوئی بھی چیز تبدیل کر سکتے ہیں۔",
+    cancel: "منسوخ کریں",
+    generate: "ملاقات کا خلاصہ تیار کریں",
+    edit: "ترمیم",
+    save: "محفوظ کریں",
+    cancelEdit: "منسوخ کریں",
+    notProvided: "فراہم نہیں کیا گیا",
+  },
+  fieldLabels: {
+    concern: "بنیادی شکایت",
+    duration: "مدت",
+    severity: "شدت",
+    pattern: "پیٹرن اور محرکات",
+    medications: "موجودہ دوائیں",
+    allergies: "معروف الرجیاں",
+    history: "متعلقہ تاریخ",
+    goal: "ملاقات کا مقصد",
+  },
+  patientSummary: {
+    eyebrow: "مریض کا خلاصہ",
+    title: "آپ کا ملاقات کا خلاصہ",
+    generated: "تیار کیا گیا",
+    sections: {
+      keyDetails: "اہم تفصیلات",
+      mainConcern: "بنیادی شکایت",
+      timeline: "علامات کا سلسلہ",
+      meds: "دوائیں اور الرجیاں",
+      history: "متعلقہ تاریخ",
+      questions: "ڈاکٹر سے پوچھنے کے سوالات",
+      careOption: "غور کرنے کے لیے دیکھ بھال کا اختیار",
+      goal: "آپ کیا حاصل کرنا چاہتے ہیں",
+    },
+    keyDetailLabels: {
+      concern: "شکایت",
+      duration: "شروع",
+      severity: "شدت",
+      pattern: "پیٹرن",
+      medications: "دوائیں",
+      allergies: "الرجیاں",
+    },
+    questions: (c) => [
+      `میرے ${c} کی کیا وجہ ہو سکتی ہے؟`,
+      "کیا کوئی ٹیسٹ اس کو واضح کرنے میں مدد کر سکتے ہیں؟",
+      "اس دوران میں گھر میں کیا کر سکتا ہوں؟",
+      "مجھے کب فالو اپ کرنا چاہیے، اور کن علامات پر فکر کرنی چاہیے؟",
+    ],
+    disclaimer:
+      "یہ خلاصہ صرف تیاری اور رابطے کی مدد کے لیے ہے۔ اس میں غلطیاں ہو سکتی ہیں اور یہ پیشہ ورانہ طبی ترجمانی، طبی مشورے، تشخیص یا علاج کا متبادل نہیں ہے۔",
+    careInfoOnly: "صرف معلوماتی رہنمائی۔ AEDNAV آپ کے لیے صحیح دیکھ بھال کی ترتیب کا تعین نہیں کر سکتا۔",
+  },
+};
+
 export const TRANSLATIONS: Record<LangCode, IntakePromptSet> = {
-  en: EN, fr: FR, es: ES, zh: ZH, pa: PA, ar: AR,
+  en: EN, fr: FR, es: ES, zh: ZH, pa: PA, ur: UR, ar: AR,
 };
 
 export function t(lang: LangCode): IntakePromptSet {
