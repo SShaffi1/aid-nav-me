@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { DashboardPreview } from "@/components/DashboardPreview";
+import { LanguageGate, useLang } from "@/components/LanguageGate";
+import { ui } from "@/lib/ui-i18n";
+import { getLangConfig } from "@/lib/i18n";
 
 function smoothScrollTo(id: string) {
   const el = document.getElementById(id);
