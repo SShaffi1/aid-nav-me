@@ -98,21 +98,32 @@ const faqs = [
 ];
 
 function LandingPage() {
+  const lang = useLang();
+  const tr = ui(lang);
+  const dir = getLangConfig(lang).direction;
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" dir={dir}>
+      <LanguageGate />
       <SiteHeader />
 
       {/* Hero */}
       <section className="relative pt-20 md:pt-28">
         <div className="relative mx-auto max-w-3xl px-6 text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="text-xs font-medium uppercase tracking-wider text-primary"
+          >
+            {tr.hero.eyebrow}
+          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-balance text-5xl leading-[1.05] text-foreground md:text-6xl"
+            transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-balance mt-4 text-5xl leading-[1.05] text-foreground md:text-6xl"
           >
-            Prepare for care<br />
-            <span className="text-primary">in any language.</span>
+            {tr.hero.title1}<br />
+            <span className="text-primary">{tr.hero.title2}</span>
           </motion.h1>
 
           <motion.p
@@ -121,8 +132,7 @@ function LandingPage() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="text-balance mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground"
           >
-            AEDNAV helps patients organize health concerns in their own language and
-            generate a clear English visit summary for healthcare providers.
+            {tr.hero.sub}
           </motion.p>
 
           <motion.div
@@ -135,7 +145,7 @@ function LandingPage() {
               to="/intake"
               className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Start intake
+              {tr.hero.primary}
               <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
@@ -145,13 +155,12 @@ function LandingPage() {
               onClick={(e) => { e.preventDefault(); smoothScrollTo("how"); }}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-elevated"
             >
-              See how it works
+              {tr.hero.secondary}
             </a>
           </motion.div>
 
           <p className="mt-6 text-xs text-muted-foreground">
-            Built for patients and families who may feel more comfortable explaining health
-            concerns in a language other than English.
+            {tr.hero.note}
           </p>
         </div>
 
