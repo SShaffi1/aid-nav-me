@@ -1,7 +1,7 @@
 // Mock multilingual content for AEDNAV MVP.
 // NOTE: Demo translations only — not professional medical translation.
 
-export type LangCode = "en" | "fr" | "es" | "zh" | "pa" | "ar";
+export type LangCode = "en" | "fr" | "es" | "zh" | "pa" | "ur" | "ar";
 
 export type LangConfig = {
   code: LangCode;
