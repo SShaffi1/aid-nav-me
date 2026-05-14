@@ -192,18 +192,7 @@ function SummaryPage() {
 
               {/* Cards */}
               <div className="mt-5 print:mt-0">
-                <div className={tab === "patient" ? "" : "hidden print:block"}>
-                  <PatientCard
-                    answers={editing ? draft : answers}
-                    editing={editing}
-                    onChange={updateField}
-                    tr={tr}
-                    dir={dir}
-                    generatedAt={generatedAt}
-                    lang={lang}
-                  />
-                </div>
-                <div className={tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"}>
+                {isEnglish ? (
                   <ProviderCard
                     answers={editing ? draft : answers}
                     editing={editing}
@@ -211,7 +200,30 @@ function SummaryPage() {
                     generatedAt={generatedAtEn}
                     recommendation={recommendation}
                   />
-                </div>
+                ) : (
+                  <>
+                    <div className={tab === "patient" ? "" : "hidden print:block"}>
+                      <PatientCard
+                        answers={editing ? draft : answers}
+                        editing={editing}
+                        onChange={updateField}
+                        tr={tr}
+                        dir={dir}
+                        generatedAt={generatedAt}
+                        lang={lang}
+                      />
+                    </div>
+                    <div className={tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"}>
+                      <ProviderCard
+                        answers={editing ? draft : answers}
+                        editing={editing}
+                        onChange={updateField}
+                        generatedAt={generatedAtEn}
+                        recommendation={recommendation}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
           )}
