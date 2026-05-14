@@ -38,6 +38,7 @@ function SummaryPage() {
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>("patient");
   const [copied, setCopied] = useState<string | null>(null);
+  const isEnglish = lang === "en";
 
   useEffect(() => {
     setLang(getStoredLang());
@@ -113,18 +114,31 @@ function SummaryPage() {
                 <ActionButton primary onClick={saveEdit}>Save changes</ActionButton>
               </>
             )}
-            <ActionButton disabled={editing} onClick={() => copyOne("patient")} icon="copy">
-              {copied === "patient" ? "Copied" : "Copy patient"}
-            </ActionButton>
-            <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
-              {copied === "provider" ? "Copied" : "Copy provider"}
-            </ActionButton>
-            <ActionButton disabled={editing} onClick={() => copyOne("both")} icon="copy">
-              {copied === "both" ? "Copied" : "Copy both"}
-            </ActionButton>
-            <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
-              Print / Save as PDF
-            </ActionButton>
+            {isEnglish ? (
+              <>
+                <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
+                  {copied === "provider" ? "Copied" : "Copy summary"}
+                </ActionButton>
+                <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
+                  Print / Save as PDF
+                </ActionButton>
+              </>
+            ) : (
+              <>
+                <ActionButton disabled={editing} onClick={() => copyOne("patient")} icon="copy">
+                  {copied === "patient" ? "Copied" : "Copy patient"}
+                </ActionButton>
+                <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
+                  {copied === "provider" ? "Copied" : "Copy provider"}
+                </ActionButton>
+                <ActionButton disabled={editing} onClick={() => copyOne("both")} icon="copy">
+                  {copied === "both" ? "Copied" : "Copy both"}
+                </ActionButton>
+                <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
+                  Print / Save as PDF
+                </ActionButton>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -160,15 +174,17 @@ function SummaryPage() {
               initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Tabs (screen) */}
-              <div className="print:hidden flex w-full items-center gap-1 rounded-full border border-border bg-surface p-1 sm:w-fit">
-                <TabButton active={tab === "patient"} onClick={() => setTab("patient")}>
-                  Patient summary
-                </TabButton>
-                <TabButton active={tab === "provider"} onClick={() => setTab("provider")}>
-                  Provider summary
-                </TabButton>
-              </div>
+              {/* Tabs (hidden for English: single unified view) */}
+              {!isEnglish && (
+                <div className="print:hidden flex w-full items-center gap-1 rounded-full border border-border bg-surface p-1 sm:w-fit">
+                  <TabButton active={tab === "patient"} onClick={() => setTab("patient")}>
+                    Patient summary
+                  </TabButton>
+                  <TabButton active={tab === "provider"} onClick={() => setTab("provider")}>
+                    Provider summary
+                  </TabButton>
+                </div>
+              )}
 
               <p className="mt-3 text-xs leading-relaxed text-muted-foreground print:hidden">
                 {tr.patientSummary.disclaimer}
@@ -176,18 +192,7 @@ function SummaryPage() {
 
               {/* Cards */}
               <div className="mt-5 print:mt-0">
-                <div className={tab === "patient" ? "" : "hidden print:block"}>
-                  <PatientCard
-                    answers={editing ? draft : answers}
-                    editing={editing}
-                    onChange={updateField}
-                    tr={tr}
-                    dir={dir}
-                    generatedAt={generatedAt}
-                    lang={lang}
-                  />
-                </div>
-                <div className={tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"}>
+                {isEnglish ? (
                   <ProviderCard
                     answers={editing ? draft : answers}
                     editing={editing}
@@ -195,7 +200,30 @@ function SummaryPage() {
                     generatedAt={generatedAtEn}
                     recommendation={recommendation}
                   />
-                </div>
+                ) : (
+                  <>
+                    <div className={tab === "patient" ? "" : "hidden print:block"}>
+                      <PatientCard
+                        answers={editing ? draft : answers}
+                        editing={editing}
+                        onChange={updateField}
+                        tr={tr}
+                        dir={dir}
+                        generatedAt={generatedAt}
+                        lang={lang}
+                      />
+                    </div>
+                    <div className={tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"}>
+                      <ProviderCard
+                        answers={editing ? draft : answers}
+                        editing={editing}
+                        onChange={updateField}
+                        generatedAt={generatedAtEn}
+                        recommendation={recommendation}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
           )}
