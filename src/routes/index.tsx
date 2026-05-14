@@ -33,69 +33,11 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const features = [
-  {
-    title: "Multilingual intake",
-    body: "Describe what you're experiencing in English, French, Spanish, Mandarin, Punjabi, or Arabic — without translating in your head.",
-    icon: <><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></>,
-  },
-  {
-    title: "Dual-language visit summary",
-    body: "Receive two synced summaries: one in your language to read, and one in English to share with your provider.",
-    icon: <><rect x="3" y="4" width="8" height="16" rx="1.5" /><rect x="13" y="4" width="8" height="16" rx="1.5" /></>,
-  },
-  {
-    title: "Doctor-ready English summary",
-    body: "Concerns, timeline, medications, allergies, and questions — organized in clinical-style English you can show your provider.",
-    icon: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 13h6M9 17h4" /></>,
-  },
-  {
-    title: "Appointment preparation",
-    body: "Walk in knowing what you want to ask, what to mention first, and what to bring along.",
-    icon: <><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></>,
-  },
-];
-
-const steps = [
-  { n: "01", title: "Choose your language",       body: "Pick the language you're most comfortable describing your health in." },
-  { n: "02", title: "Describe your concern",      body: "Share what's been on your mind in your own words. No forms, no jargon." },
-  { n: "03", title: "Answer guided questions",    body: "Short follow-ups about timing, severity, medications, allergies, and history." },
-  { n: "04", title: "Review your answers",        body: "See everything in one place and edit anything before generating the summary." },
-  { n: "05", title: "Get both summaries",         body: "A patient summary in your language and an English summary for your provider." },
-];
-
-const audiences = [
-  { title: "Newcomers to Canada",        body: "Prepare for an appointment in your strongest language and bring an English summary." },
-  { title: "Families supporting relatives", body: "Help a parent, grandparent, or partner organize what to bring to a visit." },
-  { title: "Students preparing for appointments", body: "Get clear on what to say before a campus or community clinic visit." },
-  { title: "Patients more comfortable in another language", body: "Skip the live translation pressure — describe symptoms calmly first." },
-  { title: "Anyone who forgets what to say in the room", body: "Walk in with a written summary, not a blank mind." },
-];
-
-const safetyPoints = [
-  "AEDNAV does not diagnose or treat conditions.",
-  "AEDNAV does not replace healthcare professionals.",
-  "AEDNAV does not replace professional medical interpreters.",
-  "AEDNAV helps you organize information before care.",
-];
-
-const faqs = [
-  {
-    q: "Is AEDNAV a diagnostic tool?",
-    a: "No. AEDNAV does not diagnose conditions or recommend treatments. It helps you organize what you're experiencing so you can communicate clearly with a licensed healthcare provider.",
-  },
-  {
-    q: "Are the translations clinical-grade?",
-    a: "No. AEDNAV provides demo translations to support communication and preparation. It is not a substitute for a professional medical interpreter.",
-  },
-  {
-    q: "Will my information be shared?",
-    a: "Your intake stays in your browser session. You decide whether to copy, print, or share your visit summary with a provider.",
-  },
-  {
-    q: "What if I'm experiencing an emergency?",
-    a: "AEDNAV is not for emergencies. If you have chest pain, difficulty breathing, stroke symptoms, or thoughts of self-harm, contact local emergency services immediately.",
-  },
+const featureIcons = [
+  <><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></>,
+  <><rect x="3" y="4" width="8" height="16" rx="1.5" /><rect x="13" y="4" width="8" height="16" rx="1.5" /></>,
+  <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 13h6M9 17h4" /></>,
+  <><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></>,
 ];
 
 function LandingPage() {
