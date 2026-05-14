@@ -120,7 +120,7 @@ function LandingPage() {
           </h2>
         </div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
-          {features.map((f, i) => (
+          {lc.features.map((f, i) => (
             <motion.div
               key={f.title}
               initial={{ opacity: 0, y: 10 }}
@@ -131,7 +131,7 @@ function LandingPage() {
             >
               <div className="grid h-10 w-10 place-items-center rounded-md bg-primary-soft text-primary">
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  {f.icon}
+                  {featureIcons[i]}
                 </svg>
               </div>
               <h3 className="mt-5 text-base font-semibold text-foreground">{f.title}</h3>
@@ -150,7 +150,7 @@ function LandingPage() {
           </h2>
         </div>
         <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-5">
-          {steps.map((s, i) => (
+          {lc.steps.map((s, i) => (
             <motion.div
               key={s.n}
               initial={{ opacity: 0, y: 12 }}
@@ -250,7 +250,7 @@ function LandingPage() {
           </h2>
         </div>
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {audiences.map((a, i) => (
+          {lc.audiences.map((a, i) => (
             <motion.div
               key={a.title}
               initial={{ opacity: 0, y: 10 }}
@@ -274,7 +274,7 @@ function LandingPage() {
             Built for preparation, not diagnosis.
           </h2>
           <ul className="mt-7 space-y-4">
-            {safetyPoints.map((p, i) => (
+            {lc.safety.map((p, i) => (
               <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-foreground">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                 {p}
@@ -290,7 +290,7 @@ function LandingPage() {
           Frequently asked
         </h2>
         <div className="mt-12 divide-y divide-border border-y border-border">
-          {faqs.map((f) => (
+          {lc.faqs.map((f) => (
             <FaqItem key={f.q} question={f.q} answer={f.a} />
           ))}
         </div>
