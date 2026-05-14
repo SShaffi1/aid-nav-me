@@ -43,6 +43,7 @@ const featureIcons = [
 function LandingPage() {
   const lang = useLang();
   const tr = ui(lang);
+  const lc = landing(lang);
   const dir = getLangConfig(lang).direction;
   return (
     <div className="min-h-screen bg-background" dir={dir}>
