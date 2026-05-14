@@ -114,9 +114,9 @@ function LandingPage() {
       {/* Features */}
       <section id="features" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">What it does</p>
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.featuresEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
-            From your language<br />to a doctor-ready summary.
+            {tr.sectionTitles.featuresTitle}
           </h2>
         </div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
@@ -144,9 +144,9 @@ function LandingPage() {
       {/* How it works */}
       <section id="how" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">How it works</p>
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.howEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
-            Five steps. About three minutes.
+            {tr.sectionTitles.howTitle}
           </h2>
         </div>
         <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-5">
@@ -170,46 +170,44 @@ function LandingPage() {
       {/* Dual-language summary preview */}
       <section id="dual" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">Dual-language visit summary</p>
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.dualEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
-            One conversation.<br />Two summaries.
+            {tr.sectionTitles.dualTitle}
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            Read your visit summary in your language. Show the English version to your healthcare
-            provider. Both are generated from the same intake.
+            {lc.dual.sectionBody}
           </p>
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {/* Patient (Arabic sample) */}
-          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8" dir="rtl">
+          {/* Patient (selected language) */}
+          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8" dir={dir}>
             <div className="flex items-center justify-between" dir="ltr">
-              <p className="text-[11px] font-medium uppercase tracking-wider text-primary">Patient summary</p>
-              <span className="text-[11px] text-muted-foreground">العربية</span>
+              <p className="text-[11px] font-medium uppercase tracking-wider text-primary">{lc.dual.patientLabel}</p>
+              <span className="text-[11px] text-muted-foreground">{getLangConfig(lang).native}</span>
             </div>
-            <h3 className="font-display mt-2 text-xl text-foreground" dir="ltr">In your selected language</h3>
+            <h3 className="font-display mt-2 text-xl text-foreground">{lc.dual.patientTitle}</h3>
 
             <div className="mt-6 space-y-4 text-[14.5px] leading-relaxed text-foreground">
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">الشكوى الرئيسية</p>
-                <p className="mt-1">صداع متكرر منذ 3 أيام، يزداد بعد الظهر.</p>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{lc.dual.patientFields.concern}</p>
+                <p className="mt-1">{lc.dual.patientConcern}</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">المدة والشدة</p>
-                <p className="mt-1">حوالي 3 أيام · شدة 6 من 10 في أسوأ حالاتها.</p>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{lc.dual.patientFields.timeline}</p>
+                <p className="mt-1">{lc.dual.patientTimeline}</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">أسئلة لطرحها على الطبيب</p>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{lc.dual.patientFields.questions}</p>
                 <ul className="mt-1.5 space-y-1.5">
-                  <li>ما الذي قد يسبب هذا الصداع؟</li>
-                  <li>هل توجد فحوصات يمكن أن تساعد؟</li>
+                  {lc.dual.patientQuestions.map((q) => <li key={q}>{q}</li>)}
                 </ul>
               </div>
             </div>
           </div>
 
-          {/* Provider (English) */}
-          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8">
+          {/* Provider (always English) */}
+          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8" dir="ltr">
             <div className="flex items-center justify-between">
               <p className="text-[11px] font-medium uppercase tracking-wider text-primary">Provider summary</p>
               <span className="text-[11px] text-muted-foreground">English</span>
@@ -237,16 +235,16 @@ function LandingPage() {
         </div>
 
         <p className="mt-5 text-center text-xs text-muted-foreground">
-          For preparation and communication support only. Not a diagnosis.
+          {lc.dual.note}
         </p>
       </section>
 
       {/* Who it helps */}
       <section id="who" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">Who AEDNAV helps</p>
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.whoEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
-            Built for the people<br />who do the explaining.
+            {tr.sectionTitles.whoTitle}
           </h2>
         </div>
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -269,9 +267,9 @@ function LandingPage() {
       {/* Safety / trust */}
       <section className="mx-auto mt-32 max-w-4xl px-6">
         <div className="rounded-2xl border border-border bg-surface p-10 shadow-soft md:p-12">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">Safety</p>
+          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.safetyEyebrow}</p>
           <h2 className="font-display mt-3 text-2xl leading-snug text-foreground md:text-3xl">
-            Built for preparation, not diagnosis.
+            {tr.sectionTitles.safetyTitle}
           </h2>
           <ul className="mt-7 space-y-4">
             {lc.safety.map((p, i) => (
@@ -287,7 +285,7 @@ function LandingPage() {
       {/* FAQ */}
       <section id="faq" className="mx-auto mt-32 max-w-3xl px-6 scroll-mt-24">
         <h2 className="font-display text-center text-4xl leading-tight text-foreground md:text-5xl">
-          Frequently asked
+          {tr.sectionTitles.faq}
         </h2>
         <div className="mt-12 divide-y divide-border border-y border-border">
           {lc.faqs.map((f) => (
@@ -300,16 +298,16 @@ function LandingPage() {
       <section className="mx-auto mt-32 max-w-4xl px-6">
         <div className="relative overflow-hidden rounded-2xl border border-border bg-primary px-8 py-14 text-center shadow-soft md:px-16">
           <h2 className="font-display relative text-4xl text-primary-foreground md:text-5xl">
-            Ready for your next visit?
+            {tr.sectionTitles.ctaTitle}
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-sm text-primary-foreground/80">
-            Three minutes in your language. A clearer conversation in English.
+            {tr.sectionTitles.ctaBody}
           </p>
           <Link
             to="/intake"
             className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground shadow-soft transition-opacity hover:opacity-90"
           >
-            Start intake
+            {tr.sectionTitles.ctaButton}
             <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </Link>
         </div>
