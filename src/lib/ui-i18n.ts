@@ -268,8 +268,8 @@ const ZH: UIStrings = {
   },
   hero: {
     eyebrow: "就诊前准备",
-    title1: "清晰地准备",
-    title2: "您的就诊。",
+    title1: "为就诊",
+    title2: "做好准备。",
     sub: "AEDNAV 帮助患者在就医前整理健康问题,并为更习惯使用其他语言的家庭提供多语言支持。",
     primary: "开始",
     secondary: "了解如何使用",
