@@ -577,7 +577,7 @@ function ReviewScreen({ lang }: { lang: LangCode }) {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 md:py-10" dir={dir}>
+      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 md:py-10" dir="auto">
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
