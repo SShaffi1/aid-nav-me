@@ -428,7 +428,7 @@ function ChatScreen({
       </div>
 
       <div className="border-t border-border bg-surface/90 backdrop-blur">
-        <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4" dir={dir}>
+        <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4">
           {!isLast && suggestions.length > 0 && messages.length > 0 && !aiThinking && !blocked && (
             <div className="mb-3 flex flex-wrap gap-2">
               {suggestions.map((s) => (
