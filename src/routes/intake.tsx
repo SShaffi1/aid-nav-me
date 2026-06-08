@@ -11,13 +11,13 @@ import {
 export const Route = createFileRoute("/intake")({
   head: () => ({
     meta: [
-      { title: "Start intake — AEDNAV" },
+      { title: "Start intake | AEDNAV" },
       {
         name: "description",
         content:
           "A guided, multilingual intake to help you organize symptoms before your appointment.",
       },
-      { property: "og:title", content: "Start intake — AEDNAV" },
+      { property: "og:title", content: "Start intake | AEDNAV" },
       {
         property: "og:description",
         content: "Multilingual pre-appointment intake. Generates a doctor-ready English summary.",
@@ -397,7 +397,7 @@ function ChatScreen({
                   {lang !== "en" && (
                     <p className="mt-2 text-xs leading-relaxed text-muted-foreground" dir="ltr">
                       <span className="font-medium text-foreground">English:</span>{" "}
-                      This may need urgent attention. AEDNAV is not designed for emergencies — please contact emergency services or go to your nearest emergency department.
+                      This may need urgent attention. AEDNAV is not designed for emergencies, please contact emergency services or go to your nearest emergency department.
                     </p>
                   )}
                   <div className="mt-3 flex flex-wrap gap-2" dir="ltr">

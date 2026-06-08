@@ -16,13 +16,13 @@ function smoothScrollTo(id: string) {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AEDNAV — Prepare for care in any language" },
+      { title: "AEDNAV: Prepare for care in any language" },
       {
         name: "description",
         content:
           "AEDNAV helps patients organize health concerns in their own language and generate a clear English visit summary for healthcare providers. Not a diagnostic tool.",
       },
-      { property: "og:title", content: "AEDNAV — Prepare for care in any language" },
+      { property: "og:title", content: "AEDNAV: Prepare for care in any language" },
       {
         property: "og:description",
         content:

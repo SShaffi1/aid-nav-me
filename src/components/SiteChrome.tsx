@@ -130,7 +130,7 @@ export function LanguageSwitcher({ current }: { current: LangCode }) {
   );
 }
 
-/** Wordmark — uses the brand SVG, sized appropriately for header/footer. */
+/** Wordmark, uses the brand SVG, sized appropriately for header/footer. */
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <img

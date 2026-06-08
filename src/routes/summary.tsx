@@ -8,9 +8,9 @@ import { getStoredLang, getLangConfig, t as translate, type LangCode } from "@/l
 export const Route = createFileRoute("/summary")({
   head: () => ({
     meta: [
-      { title: "Visit summary — AEDNAV" },
+      { title: "Visit summary | AEDNAV" },
       { name: "description", content: "A patient summary in your language and a doctor-ready English summary." },
-      { property: "og:title", content: "Visit summary — AEDNAV" },
+      { property: "og:title", content: "Visit summary | AEDNAV" },
       { property: "og:description", content: "Dual-language pre-appointment visit summary." },
     ],
   }),
@@ -75,7 +75,7 @@ function SummaryPage() {
     const text =
       which === "patient" ? patientText :
       which === "provider" ? providerText :
-      `${patientText}\n\n— — —\n\n${providerText}`;
+      `${patientText}\n\n---\n\n${providerText}`;
     navigator.clipboard?.writeText(text).then(() => {
       setCopied(which);
       setTimeout(() => setCopied(null), 1800);
@@ -584,7 +584,7 @@ function shortConcern(c: string) {
 
 function formatPatientText(a: IntakeAnswers, date: string, tr: ReturnType<typeof translate>, lang: LangCode) {
   const L = tr.patientSummary;
-  return `AEDNAV — ${L.title}
+  return `AEDNAV: ${L.title}
 ${L.generated} ${date} · ${getLangConfig(lang).native}
 
 ${L.sections.keyDetails.toUpperCase()}
@@ -601,14 +601,14 @@ ${a.history}
 ${L.sections.goal.toUpperCase()}
 ${a.goal}
 
-— ${L.disclaimer}`;
+${L.disclaimer}`;
 }
 
 function formatProviderText(
   a: IntakeAnswers, date: string,
   rec: { setting: CareSetting; reason: string; isEmergency: boolean },
 ) {
-  return `AEDNAV — Provider Summary (English)
+  return `AEDNAV: Provider Summary (English)
 Generated ${date}
 
 MAIN CONCERN
@@ -630,7 +630,7 @@ PATIENT GOAL FOR VISIT
 ${a.goal}
 
 CARE OPTION TO CONSIDER (informational guidance only)
-${rec.setting} — ${rec.reason}
+${rec.setting}: ${rec.reason}
 
-— Prepared by AEDNAV. For preparation and communication support only. Not medical advice.`;
+Prepared by AEDNAV. For preparation and communication support only. Not medical advice.`;
 }
