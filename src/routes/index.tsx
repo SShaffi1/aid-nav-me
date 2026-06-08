@@ -16,7 +16,7 @@ function smoothScrollTo(id: string) {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AEDNAV — Prepare for care in any language" },
+      { title: "AEDNAV: Prepare for care in any language" },
       {
         name: "description",
         content:
