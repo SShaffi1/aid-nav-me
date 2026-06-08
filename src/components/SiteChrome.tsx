@@ -30,7 +30,7 @@ export function SiteHeader() {
   const navLinkClass = "transition-colors hover:text-foreground";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur" dir={dir}>
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-2.5 md:px-6 md:py-3">
         <Link to="/" aria-label="AEDNAV home" className="flex items-center" dir="ltr">
           <Wordmark />
