@@ -601,7 +601,7 @@ ${a.history}
 ${L.sections.goal.toUpperCase()}
 ${a.goal}
 
-— ${L.disclaimer}`;
+${L.disclaimer}`;
 }
 
 function formatProviderText(
