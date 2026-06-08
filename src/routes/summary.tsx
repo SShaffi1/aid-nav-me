@@ -608,7 +608,7 @@ function formatProviderText(
   a: IntakeAnswers, date: string,
   rec: { setting: CareSetting; reason: string; isEmergency: boolean },
 ) {
-  return `AEDNAV — Provider Summary (English)
+  return `AEDNAV: Provider Summary (English)
 Generated ${date}
 
 MAIN CONCERN
