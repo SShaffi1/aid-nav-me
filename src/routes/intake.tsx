@@ -243,7 +243,6 @@ function ChatScreen({
   lang, onComplete,
 }: { lang: LangCode; onComplete: () => void }) {
   const tr = useMemo(() => translate(lang), [lang]);
-  const dir = getLangConfig(lang).direction;
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
   const [stepIndex, setStepIndex] = useState(0);
   const [messages, setMessages] = useState<Message[]>([]);
