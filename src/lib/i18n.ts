@@ -1,5 +1,5 @@
 // Mock multilingual content for AEDNAV MVP.
-// NOTE: Demo translations only — not professional medical translation.
+// NOTE: Demo translations only, not professional medical translation.
 
 export type LangCode = "en" | "fr" | "es" | "zh" | "pa" | "ur" | "ar";
 
@@ -105,18 +105,18 @@ const EN: IntakePromptSet = {
       "AEDNAV does not diagnose, treat, or replace a healthcare professional.",
       "AEDNAV is not for emergencies. If this may be urgent, call 911 or seek immediate help.",
     ],
-    cta: "I understand — start intake",
+    cta: "I understand, start intake",
     note: "Takes about 3 minutes. Your responses stay in this browser session.",
   },
   prompts: {
-    concern: "Hi — I'm AEDNAV. I'll help you organize what you're experiencing before your appointment. To start, what's been on your mind?",
+    concern: "Hi, I'm AEDNAV. I'll help you organize what you're experiencing before your appointment. To start, what's been on your mind?",
     duration: "Thanks for sharing. How long has this been going on?",
-    severity: "On a scale of 1 to 10, how would you describe it at its worst — where 10 is the most intense you can imagine?",
-    pattern: "Does anything make it better or worse? Any patterns you've noticed — time of day, activity, food, sleep?",
+    severity: "On a scale of 1 to 10, how would you describe it at its worst, where 10 is the most intense you can imagine?",
+    pattern: "Does anything make it better or worse? Any patterns you've noticed, time of day, activity, food, sleep?",
     medications: "Are you currently taking any medications, supplements, or treatments for this or anything else?",
-    allergies: "Any known allergies — medications, foods, or environmental?",
-    history: "Anything in your medical history that feels relevant — past conditions, surgeries, or family history?",
-    goal: "Last one — what would make this appointment feel successful to you? What do you hope to walk away with?",
+    allergies: "Any known allergies, medications, foods, or environmental?",
+    history: "Anything in your medical history that feels relevant, past conditions, surgeries, or family history?",
+    goal: "Last one, what would make this appointment feel successful to you? What do you hope to walk away with?",
   },
   placeholders: {
     concern: "e.g. I've had headaches for 3 days...",
@@ -149,7 +149,7 @@ const EN: IntakePromptSet = {
   emergencyBanner: {
     title: "This may need urgent attention.",
     body: "AEDNAV is not designed for emergencies. Please contact emergency services or go to your nearest emergency department right away.",
-    safe: "I'm safe — continue intake",
+    safe: "I'm safe, continue intake",
     disclaimer: "AEDNAV is not for emergencies. If this may be urgent, call 911 or seek immediate help.",
   },
   review: {
@@ -199,7 +199,7 @@ const EN: IntakePromptSet = {
       `What might be causing my ${c}?`,
       "Are there tests or assessments that would help clarify this?",
       "What can I do at home in the meantime?",
-      "When should I follow up — and what warning signs would mean I should come back sooner?",
+      "When should I follow up, and what warning signs would mean I should come back sooner?",
     ],
     disclaimer:
       "This summary is for preparation and communication support only. It may contain errors and does not replace professional medical interpretation, medical advice, diagnosis, or treatment.",
@@ -217,18 +217,18 @@ const FR: IntakePromptSet = {
       "AEDNAV ne pose pas de diagnostic et ne remplace pas un professionnel de santé.",
       "AEDNAV n'est pas conçu pour les urgences. En cas d'urgence, appelez le 911.",
     ],
-    cta: "J'ai compris — commencer",
+    cta: "J'ai compris, commencer",
     note: "Environ 3 minutes. Vos réponses restent dans cette session.",
   },
   prompts: {
-    concern: "Bonjour — je suis AEDNAV. Je vais vous aider à organiser ce que vous ressentez avant votre rendez-vous. Pour commencer, qu'est-ce qui vous préoccupe ?",
+    concern: "Bonjour, je suis AEDNAV. Je vais vous aider à organiser ce que vous ressentez avant votre rendez-vous. Pour commencer, qu'est-ce qui vous préoccupe ?",
     duration: "Merci. Depuis combien de temps cela dure-t-il ?",
     severity: "Sur une échelle de 1 à 10, comment décririez-vous l'intensité au pire moment ?",
     pattern: "Y a-t-il des choses qui aggravent ou améliorent les symptômes ? Des moments de la journée, activités, alimentation, sommeil ?",
     medications: "Prenez-vous actuellement des médicaments, suppléments ou traitements ?",
-    allergies: "Avez-vous des allergies connues — médicaments, aliments, environnement ?",
-    history: "Y a-t-il des éléments médicaux pertinents — antécédents, chirurgies, histoire familiale ?",
-    goal: "Dernière question — qu'attendez-vous de ce rendez-vous ?",
+    allergies: "Avez-vous des allergies connues, médicaments, aliments, environnement ?",
+    history: "Y a-t-il des éléments médicaux pertinents, antécédents, chirurgies, histoire familiale ?",
+    goal: "Dernière question, qu'attendez-vous de ce rendez-vous ?",
   },
   placeholders: {
     concern: "ex. J'ai des maux de tête depuis 3 jours...",
@@ -261,7 +261,7 @@ const FR: IntakePromptSet = {
   emergencyBanner: {
     title: "Cela peut nécessiter une attention urgente.",
     body: "AEDNAV n'est pas conçu pour les urgences. Veuillez contacter les services d'urgence ou vous rendre immédiatement aux urgences.",
-    safe: "Je suis en sécurité — continuer",
+    safe: "Je suis en sécurité, continuer",
     disclaimer: "AEDNAV n'est pas conçu pour les urgences. En cas d'urgence, appelez le 911.",
   },
   review: {
@@ -329,18 +329,18 @@ const ES: IntakePromptSet = {
       "AEDNAV no diagnostica ni reemplaza a un profesional de salud.",
       "AEDNAV no es para emergencias. Si es urgente, llama al 911.",
     ],
-    cta: "Entiendo — comenzar",
+    cta: "Entiendo, comenzar",
     note: "Toma unos 3 minutos. Tus respuestas quedan en esta sesión del navegador.",
   },
   prompts: {
-    concern: "Hola — soy AEDNAV. Te ayudaré a organizar lo que sientes antes de tu cita. Para empezar, ¿qué te preocupa?",
+    concern: "Hola, soy AEDNAV. Te ayudaré a organizar lo que sientes antes de tu cita. Para empezar, ¿qué te preocupa?",
     duration: "Gracias por compartir. ¿Cuánto tiempo lleva ocurriendo esto?",
     severity: "En una escala del 1 al 10, ¿cómo describirías la intensidad en su peor momento?",
-    pattern: "¿Algo lo mejora o lo empeora? ¿Algún patrón — hora del día, actividad, comida, sueño?",
+    pattern: "¿Algo lo mejora o lo empeora? ¿Algún patrón, hora del día, actividad, comida, sueño?",
     medications: "¿Estás tomando medicamentos, suplementos o tratamientos actualmente?",
-    allergies: "¿Tienes alergias conocidas — medicamentos, alimentos o ambientales?",
-    history: "¿Algo relevante en tu historia médica — condiciones, cirugías, antecedentes familiares?",
-    goal: "Última — ¿qué te haría sentir que esta cita fue exitosa?",
+    allergies: "¿Tienes alergias conocidas, medicamentos, alimentos o ambientales?",
+    history: "¿Algo relevante en tu historia médica, condiciones, cirugías, antecedentes familiares?",
+    goal: "Última, ¿qué te haría sentir que esta cita fue exitosa?",
   },
   placeholders: {
     concern: "ej. Tengo dolores de cabeza desde hace 3 días...",
@@ -373,7 +373,7 @@ const ES: IntakePromptSet = {
   emergencyBanner: {
     title: "Esto podría necesitar atención urgente.",
     body: "AEDNAV no está diseñado para emergencias. Por favor contacta servicios de emergencia o ve al departamento de emergencias más cercano.",
-    safe: "Estoy a salvo — continuar",
+    safe: "Estoy a salvo, continuar",
     disclaimer: "AEDNAV no es para emergencias. Si es urgente, llama al 911.",
   },
   review: {
@@ -441,18 +441,18 @@ const ZH: IntakePromptSet = {
       "AEDNAV 不进行诊断,也不能替代医疗专业人员。",
       "AEDNAV 不适用于紧急情况。如有紧急情况,请拨打 911。",
     ],
-    cta: "我已了解 — 开始",
+    cta: "我已了解, 开始",
     note: "大约 3 分钟。您的回答仅保存在此浏览器会话中。",
   },
   prompts: {
-    concern: "您好 — 我是 AEDNAV。我会帮您在就诊前整理您的情况。请先告诉我:您最近有什么不适?",
+    concern: "您好, 我是 AEDNAV。我会帮您在就诊前整理您的情况。请先告诉我:您最近有什么不适?",
     duration: "谢谢。这种情况持续多久了?",
     severity: "1 到 10 分,最严重时您会打几分?(10 分最严重)",
-    pattern: "什么会让症状加重或减轻?有规律吗 — 时间、活动、饮食、睡眠?",
+    pattern: "什么会让症状加重或减轻?有规律吗, 时间、活动、饮食、睡眠?",
     medications: "您目前在服用任何药物、补充剂或治疗吗?",
-    allergies: "您有已知的过敏吗 — 药物、食物或环境?",
-    history: "您的病史中有相关的情况吗 — 既往疾病、手术、家族史?",
-    goal: "最后一个问题 — 您希望从这次就诊中获得什么?",
+    allergies: "您有已知的过敏吗, 药物、食物或环境?",
+    history: "您的病史中有相关的情况吗, 既往疾病、手术、家族史?",
+    goal: "最后一个问题, 您希望从这次就诊中获得什么?",
   },
   placeholders: {
     concern: "例如:头痛已经 3 天了...",
@@ -485,7 +485,7 @@ const ZH: IntakePromptSet = {
   emergencyBanner: {
     title: "这可能需要紧急关注。",
     body: "AEDNAV 不适用于紧急情况。请联系紧急服务或立即前往最近的急诊。",
-    safe: "我很安全 — 继续",
+    safe: "我很安全, 继续",
     disclaimer: "AEDNAV 不适用于紧急情况。如有紧急情况,请拨打 911。",
   },
   review: {
@@ -552,18 +552,18 @@ const PA: IntakePromptSet = {
       "AEDNAV ਜਾਂਚ ਨਹੀਂ ਕਰਦਾ ਅਤੇ ਡਾਕਟਰੀ ਮਾਹਰ ਦੀ ਥਾਂ ਨਹੀਂ ਲੈਂਦਾ।",
       "AEDNAV ਐਮਰਜੈਂਸੀ ਲਈ ਨਹੀਂ ਹੈ। ਜੇ ਜ਼ਰੂਰੀ ਹੈ, 911 ਤੇ ਕਾਲ ਕਰੋ।",
     ],
-    cta: "ਮੈਂ ਸਮਝ ਲਿਆ — ਸ਼ੁਰੂ ਕਰੋ",
+    cta: "ਮੈਂ ਸਮਝ ਲਿਆ, ਸ਼ੁਰੂ ਕਰੋ",
     note: "ਲਗਭਗ 3 ਮਿੰਟ। ਤੁਹਾਡੇ ਜਵਾਬ ਇਸੇ ਸੈਸ਼ਨ ਵਿੱਚ ਰਹਿੰਦੇ ਹਨ।",
   },
   prompts: {
-    concern: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ — ਮੈਂ AEDNAV ਹਾਂ। ਮੈਂ ਤੁਹਾਡੀ ਮੁਲਾਕਾਤ ਤੋਂ ਪਹਿਲਾਂ ਚੀਜ਼ਾਂ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਾਂਗਾ। ਸ਼ੁਰੂ ਕਰੀਏ — ਤੁਹਾਨੂੰ ਕੀ ਪਰੇਸ਼ਾਨੀ ਹੈ?",
+    concern: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ, ਮੈਂ AEDNAV ਹਾਂ। ਮੈਂ ਤੁਹਾਡੀ ਮੁਲਾਕਾਤ ਤੋਂ ਪਹਿਲਾਂ ਚੀਜ਼ਾਂ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਾਂਗਾ। ਸ਼ੁਰੂ ਕਰੀਏ, ਤੁਹਾਨੂੰ ਕੀ ਪਰੇਸ਼ਾਨੀ ਹੈ?",
     duration: "ਧੰਨਵਾਦ। ਇਹ ਕਿੰਨੇ ਸਮੇਂ ਤੋਂ ਹੋ ਰਿਹਾ ਹੈ?",
     severity: "1 ਤੋਂ 10 ਦੇ ਪੈਮਾਨੇ ਤੇ, ਸਭ ਤੋਂ ਵੱਧ ਤੀਬਰਤਾ ਕਿੰਨੀ ਸੀ?",
     pattern: "ਕੀ ਕੁਝ ਇਸਨੂੰ ਵਧਾਉਂਦਾ ਜਾਂ ਘਟਾਉਂਦਾ ਹੈ? ਕੋਈ ਸਮੇਂ, ਗਤੀਵਿਧੀ, ਖਾਣੇ, ਨੀਂਦ ਨਾਲ ਸਬੰਧ?",
     medications: "ਕੀ ਤੁਸੀਂ ਇਸ ਸਮੇਂ ਕੋਈ ਦਵਾਈਆਂ ਜਾਂ ਇਲਾਜ ਲੈ ਰਹੇ ਹੋ?",
-    allergies: "ਕੋਈ ਜਾਣੀ ਅਲਰਜੀ — ਦਵਾਈਆਂ, ਖਾਣਾ, ਜਾਂ ਵਾਤਾਵਰਣ?",
-    history: "ਤੁਹਾਡੀ ਡਾਕਟਰੀ ਇਤਿਹਾਸ ਵਿੱਚ ਕੋਈ ਸਬੰਧਿਤ ਗੱਲ — ਪਿਛਲੇ ਰੋਗ, ਸਰਜਰੀ, ਪਰਿਵਾਰਕ ਇਤਿਹਾਸ?",
-    goal: "ਆਖਰੀ ਸਵਾਲ — ਤੁਸੀਂ ਇਸ ਮੁਲਾਕਾਤ ਤੋਂ ਕੀ ਚਾਹੁੰਦੇ ਹੋ?",
+    allergies: "ਕੋਈ ਜਾਣੀ ਅਲਰਜੀ, ਦਵਾਈਆਂ, ਖਾਣਾ, ਜਾਂ ਵਾਤਾਵਰਣ?",
+    history: "ਤੁਹਾਡੀ ਡਾਕਟਰੀ ਇਤਿਹਾਸ ਵਿੱਚ ਕੋਈ ਸਬੰਧਿਤ ਗੱਲ, ਪਿਛਲੇ ਰੋਗ, ਸਰਜਰੀ, ਪਰਿਵਾਰਕ ਇਤਿਹਾਸ?",
+    goal: "ਆਖਰੀ ਸਵਾਲ, ਤੁਸੀਂ ਇਸ ਮੁਲਾਕਾਤ ਤੋਂ ਕੀ ਚਾਹੁੰਦੇ ਹੋ?",
   },
   placeholders: {
     concern: "ਜਿਵੇਂ: 3 ਦਿਨਾਂ ਤੋਂ ਸਿਰ ਦਰਦ ਹੈ...",
@@ -596,7 +596,7 @@ const PA: IntakePromptSet = {
   emergencyBanner: {
     title: "ਇਸ ਨੂੰ ਤੁਰੰਤ ਧਿਆਨ ਦੀ ਲੋੜ ਹੋ ਸਕਦੀ ਹੈ।",
     body: "AEDNAV ਐਮਰਜੈਂਸੀ ਲਈ ਨਹੀਂ ਬਣਾਇਆ ਗਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਐਮਰਜੈਂਸੀ ਸੇਵਾਵਾਂ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
-    safe: "ਮੈਂ ਠੀਕ ਹਾਂ — ਜਾਰੀ ਰੱਖੋ",
+    safe: "ਮੈਂ ਠੀਕ ਹਾਂ, ਜਾਰੀ ਰੱਖੋ",
     disclaimer: "AEDNAV ਐਮਰਜੈਂਸੀ ਲਈ ਨਹੀਂ ਹੈ। ਜੇ ਜ਼ਰੂਰੀ ਹੋਵੇ, 911 ਤੇ ਕਾਲ ਕਰੋ।",
   },
   review: {
@@ -663,18 +663,18 @@ const AR: IntakePromptSet = {
       "AEDNAV لا يُشخّص ولا يحل محل المختصين الصحيين.",
       "AEDNAV ليس للحالات الطارئة. إن كان الأمر عاجلاً، اتصل بـ 911.",
     ],
-    cta: "فهمت — ابدأ",
+    cta: "فهمت, ابدأ",
     note: "حوالي 3 دقائق. تبقى إجاباتك في هذه الجلسة فقط.",
   },
   prompts: {
-    concern: "مرحباً — أنا AEDNAV. سأساعدك على تنظيم ما تشعر به قبل موعدك. للبدء: ما الذي يقلقك؟",
+    concern: "مرحباً, أنا AEDNAV. سأساعدك على تنظيم ما تشعر به قبل موعدك. للبدء: ما الذي يقلقك؟",
     duration: "شكراً لمشاركتك. منذ متى وأنت تعاني من هذا؟",
     severity: "على مقياس من 1 إلى 10، كيف تصف الشدة في أسوأ حالاتها؟",
-    pattern: "هل هناك ما يخفف الأعراض أو يزيدها؟ أي نمط — وقت اليوم، النشاط، الطعام، النوم؟",
+    pattern: "هل هناك ما يخفف الأعراض أو يزيدها؟ أي نمط, وقت اليوم، النشاط، الطعام، النوم؟",
     medications: "هل تتناول حالياً أي أدوية أو مكملات أو علاجات؟",
-    allergies: "هل لديك حساسية معروفة — أدوية أو أطعمة أو بيئية؟",
-    history: "هل في تاريخك الطبي شيء مهم — أمراض سابقة، عمليات، تاريخ عائلي؟",
-    goal: "السؤال الأخير — ماذا تتمنى أن تحصل عليه من هذا الموعد؟",
+    allergies: "هل لديك حساسية معروفة, أدوية أو أطعمة أو بيئية؟",
+    history: "هل في تاريخك الطبي شيء مهم, أمراض سابقة، عمليات، تاريخ عائلي؟",
+    goal: "السؤال الأخير, ماذا تتمنى أن تحصل عليه من هذا الموعد؟",
   },
   placeholders: {
     concern: "مثال: أعاني من الصداع منذ 3 أيام...",
@@ -707,7 +707,7 @@ const AR: IntakePromptSet = {
   emergencyBanner: {
     title: "قد يحتاج هذا إلى اهتمام عاجل.",
     body: "AEDNAV غير مصمم للحالات الطارئة. يرجى الاتصال بخدمات الطوارئ أو الذهاب فوراً إلى أقرب قسم طوارئ.",
-    safe: "أنا بأمان — تابع",
+    safe: "أنا بأمان, تابع",
     disclaimer: "AEDNAV ليس للحالات الطارئة. إن كان الأمر عاجلاً، اتصل بـ 911.",
   },
   review: {
@@ -774,18 +774,18 @@ const UR: IntakePromptSet = {
       "AEDNAV تشخیص نہیں کرتا اور صحت کے پیشہ ور افراد کا متبادل نہیں ہے۔",
       "AEDNAV ایمرجنسی کے لیے نہیں ہے۔ اگر یہ ضروری ہو تو 911 پر کال کریں۔",
     ],
-    cta: "میں سمجھ گیا — شروع کریں",
+    cta: "میں سمجھ گیا, شروع کریں",
     note: "تقریباً 3 منٹ۔ آپ کے جوابات صرف اس سیشن میں محفوظ ہیں۔",
   },
   prompts: {
-    concern: "السلام علیکم — میں AEDNAV ہوں۔ میں آپ کی ملاقات سے پہلے آپ کی صورتحال کو منظم کرنے میں مدد کروں گا۔ شروع میں — آپ کو کیا پریشانی ہے؟",
+    concern: "السلام علیکم, میں AEDNAV ہوں۔ میں آپ کی ملاقات سے پہلے آپ کی صورتحال کو منظم کرنے میں مدد کروں گا۔ شروع میں, آپ کو کیا پریشانی ہے؟",
     duration: "شکریہ۔ یہ کب سے ہو رہا ہے؟",
     severity: "1 سے 10 کے پیمانے پر، بدترین حالت میں شدت کیا تھی؟",
-    pattern: "کیا کوئی چیز اسے بہتر یا بدتر بناتی ہے؟ کوئی پیٹرن — وقت، سرگرمی، کھانا، نیند؟",
+    pattern: "کیا کوئی چیز اسے بہتر یا بدتر بناتی ہے؟ کوئی پیٹرن, وقت، سرگرمی، کھانا، نیند؟",
     medications: "کیا آپ فی الحال کوئی دوائیں، سپلیمنٹس یا علاج لے رہے ہیں؟",
-    allergies: "کوئی معروف الرجی — دوائیں، کھانے یا ماحولیاتی؟",
-    history: "آپ کی طبی تاریخ میں کوئی متعلقہ بات — ماضی کی بیماریاں، سرجری، خاندانی تاریخ؟",
-    goal: "آخری سوال — آپ اس ملاقات سے کیا حاصل کرنا چاہتے ہیں؟",
+    allergies: "کوئی معروف الرجی, دوائیں، کھانے یا ماحولیاتی؟",
+    history: "آپ کی طبی تاریخ میں کوئی متعلقہ بات, ماضی کی بیماریاں، سرجری، خاندانی تاریخ؟",
+    goal: "آخری سوال, آپ اس ملاقات سے کیا حاصل کرنا چاہتے ہیں؟",
   },
   placeholders: {
     concern: "مثال: 3 دن سے سر درد ہے...",
@@ -818,7 +818,7 @@ const UR: IntakePromptSet = {
   emergencyBanner: {
     title: "اس کو فوری توجہ کی ضرورت ہو سکتی ہے۔",
     body: "AEDNAV ایمرجنسی کے لیے نہیں بنایا گیا۔ براہ کرم ایمرجنسی خدمات سے رابطہ کریں یا قریبی ایمرجنسی روم میں جائیں۔",
-    safe: "میں محفوظ ہوں — جاری رکھیں",
+    safe: "میں محفوظ ہوں, جاری رکھیں",
     disclaimer: "AEDNAV ایمرجنسی کے لیے نہیں ہے۔ اگر یہ ضروری ہو تو 911 پر کال کریں۔",
   },
   review: {

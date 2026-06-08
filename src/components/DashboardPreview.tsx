@@ -24,7 +24,7 @@ export function DashboardPreview() {
           {/* chat */}
           <div className="space-y-4 p-6 md:p-8">
             <ChatBubble role="ai">
-              Hi — I'm here to help you get ready for your appointment. What's been on your mind?
+              Hi, I'm here to help you get ready for your appointment. What's been on your mind?
             </ChatBubble>
             <ChatBubble role="user">
               I've had a dull headache for three days, mostly in the afternoon.

@@ -39,7 +39,7 @@ const EN: LandingContent = {
     { title: "Newcomers to Canada", body: "Prepare for an appointment in your strongest language and bring an English summary." },
     { title: "Families supporting relatives", body: "Help a parent, grandparent, or partner organize what to bring to a visit." },
     { title: "Students preparing for appointments", body: "Get clear on what to say before a campus or community clinic visit." },
-    { title: "Patients more comfortable in another language", body: "Skip the live translation pressure — describe symptoms calmly first." },
+    { title: "Patients more comfortable in another language", body: "Skip the live translation pressure, describe symptoms calmly first." },
     { title: "Anyone who forgets what to say in the room", body: "Walk in with a written summary, not a blank mind." },
   ],
   safety: [
@@ -55,9 +55,9 @@ const EN: LandingContent = {
     { q: "What if I'm experiencing an emergency?", a: "AEDNAV is not for emergencies. If you have chest pain, difficulty breathing, stroke symptoms, or thoughts of self-harm, contact local emergency services immediately." },
   ],
   features: [
-    { title: "Multilingual intake", body: "Describe what you're experiencing in your own language — no translating in your head." },
+    { title: "Multilingual intake", body: "Describe what you're experiencing in your own language, no translating in your head." },
     { title: "Dual-language visit summary", body: "Two synced summaries: one in your language, one in English to share with your provider." },
-    { title: "Doctor-ready English summary", body: "Concerns, timeline, medications, allergies, and questions — organized in clinical-style English." },
+    { title: "Doctor-ready English summary", body: "Concerns, timeline, medications, allergies, and questions, organized in clinical-style English." },
     { title: "Appointment preparation", body: "Walk in knowing what to ask, what to mention first, and what to bring along." },
   ],
   dual: {
@@ -91,7 +91,7 @@ const FR: LandingContent = {
     { title: "Nouveaux arrivants au Canada", body: "Préparez votre rendez-vous dans votre langue forte et apportez un résumé en anglais." },
     { title: "Familles qui aident leurs proches", body: "Aidez un parent, un grand-parent ou un conjoint à organiser ce qu'il faut apporter." },
     { title: "Étudiant·e·s avant un rendez-vous", body: "Soyez clair sur ce que vous voulez dire avant une visite à la clinique." },
-    { title: "Patient·e·s plus à l'aise dans une autre langue", body: "Évitez la pression de la traduction en direct — décrivez d'abord vos symptômes calmement." },
+    { title: "Patient·e·s plus à l'aise dans une autre langue", body: "Évitez la pression de la traduction en direct, décrivez d'abord vos symptômes calmement." },
     { title: "Toute personne qui oublie quoi dire", body: "Entrez avec un résumé écrit, pas l'esprit vide." },
   ],
   safety: [
@@ -107,9 +107,9 @@ const FR: LandingContent = {
     { q: "Et en cas d'urgence ?", a: "AEDNAV n'est pas conçu pour les urgences. En cas de douleur thoracique, difficulté à respirer, symptômes d'AVC ou pensées suicidaires, appelez immédiatement les services d'urgence." },
   ],
   features: [
-    { title: "Intake multilingue", body: "Décrivez ce que vous ressentez dans votre langue — sans traduire dans votre tête." },
+    { title: "Intake multilingue", body: "Décrivez ce que vous ressentez dans votre langue, sans traduire dans votre tête." },
     { title: "Résumé de visite bilingue", body: "Deux résumés synchronisés : un dans votre langue, un en anglais pour votre soignant." },
-    { title: "Résumé en anglais pour le médecin", body: "Préoccupations, chronologie, médicaments, allergies et questions — organisés en anglais clinique." },
+    { title: "Résumé en anglais pour le médecin", body: "Préoccupations, chronologie, médicaments, allergies et questions, organisés en anglais clinique." },
     { title: "Préparation au rendez-vous", body: "Entrez en sachant quoi demander, quoi mentionner en premier, quoi apporter." },
   ],
   dual: {
@@ -143,7 +143,7 @@ const ES: LandingContent = {
     { title: "Recién llegados a Canadá", body: "Prepara la cita en tu idioma fuerte y lleva un resumen en inglés." },
     { title: "Familias que apoyan a familiares", body: "Ayuda a un padre, abuelo/a o pareja a organizar lo que llevará a la visita." },
     { title: "Estudiantes antes de citas", body: "Aclara lo que quieres decir antes de una visita a la clínica." },
-    { title: "Pacientes más cómodos en otro idioma", body: "Evita la presión de traducir en vivo — describe los síntomas con calma primero." },
+    { title: "Pacientes más cómodos en otro idioma", body: "Evita la presión de traducir en vivo, describe los síntomas con calma primero." },
     { title: "Quien olvida qué decir en consulta", body: "Entra con un resumen escrito, no con la mente en blanco." },
   ],
   safety: [
@@ -159,9 +159,9 @@ const ES: LandingContent = {
     { q: "¿Y si tengo una emergencia?", a: "AEDNAV no es para emergencias. Ante dolor en el pecho, dificultad para respirar, síntomas de derrame o pensamientos de autolesión, contacta inmediatamente a servicios de emergencia." },
   ],
   features: [
-    { title: "Intake multilingüe", body: "Describe lo que sientes en tu idioma — sin traducir mentalmente." },
+    { title: "Intake multilingüe", body: "Describe lo que sientes en tu idioma, sin traducir mentalmente." },
     { title: "Resumen bilingüe de la visita", body: "Dos resúmenes sincronizados: uno en tu idioma, otro en inglés para tu médico." },
-    { title: "Resumen en inglés para el médico", body: "Inquietudes, cronología, medicamentos, alergias y preguntas — en inglés clínico." },
+    { title: "Resumen en inglés para el médico", body: "Inquietudes, cronología, medicamentos, alergias y preguntas, en inglés clínico." },
     { title: "Preparación para la cita", body: "Entra sabiendo qué preguntar, qué mencionar primero y qué llevar." },
   ],
   dual: {
@@ -195,7 +195,7 @@ const ZH: LandingContent = {
     { title: "加拿大新移民", body: "用您最熟练的语言准备就诊,并带上英文摘要。" },
     { title: "支持亲属的家庭", body: "帮父母、祖父母或伴侣整理就诊所需信息。" },
     { title: "就诊前的学生", body: "在校园或社区诊所就诊前,清楚地表达您的诉求。" },
-    { title: "更习惯用其他语言的患者", body: "避免现场翻译压力——先冷静描述症状。" },
+    { title: "更习惯用其他语言的患者", body: "避免现场翻译压力，先冷静描述症状。" },
     { title: "在诊室容易忘记要说什么的人", body: "带着书面摘要进入诊室,而不是空白的头脑。" },
   ],
   safety: [
@@ -211,9 +211,9 @@ const ZH: LandingContent = {
     { q: "如果是紧急情况怎么办?", a: "AEDNAV 不适用于紧急情况。如有胸痛、呼吸困难、中风症状或自伤念头,请立即联系本地急救服务。" },
   ],
   features: [
-    { title: "多语言信息收集", body: "用您的语言描述症状——无需在脑中翻译。" },
+    { title: "多语言信息收集", body: "用您的语言描述症状，无需在脑中翻译。" },
     { title: "双语就诊摘要", body: "两份同步摘要:一份您的语言,一份英文给医生。" },
-    { title: "可直接给医生的英文摘要", body: "症状、时间线、药物、过敏和问题——以临床英文整理。" },
+    { title: "可直接给医生的英文摘要", body: "症状、时间线、药物、过敏和问题，以临床英文整理。" },
     { title: "就诊准备", body: "知道要问什么、先讲什么、带什么进诊室。" },
   ],
   dual: {
@@ -247,7 +247,7 @@ const PA: LandingContent = {
     { title: "ਕੈਨੇਡਾ ਵਿੱਚ ਨਵੇਂ ਆਏ", body: "ਆਪਣੀ ਮਜ਼ਬੂਤ ਭਾਸ਼ਾ ਵਿੱਚ ਤਿਆਰੀ ਕਰੋ ਅਤੇ ਅੰਗਰੇਜ਼ੀ ਸਾਰ ਨਾਲ ਲੈ ਜਾਓ।" },
     { title: "ਪਰਿਵਾਰਕ ਮੈਂਬਰਾਂ ਦੀ ਮਦਦ ਕਰਨ ਵਾਲੇ", body: "ਮਾਪਿਆਂ, ਦਾਦਿਆਂ ਜਾਂ ਜੀਵਨ ਸਾਥੀ ਨੂੰ ਮੁਲਾਕਾਤ ਲਈ ਤਿਆਰ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰੋ।" },
     { title: "ਮੁਲਾਕਾਤ ਤੋਂ ਪਹਿਲਾਂ ਵਿਦਿਆਰਥੀ", body: "ਕਲੀਨਿਕ ਜਾਣ ਤੋਂ ਪਹਿਲਾਂ ਸਪਸ਼ਟ ਕਰੋ ਕਿ ਕੀ ਕਹਿਣਾ ਹੈ।" },
-    { title: "ਹੋਰ ਭਾਸ਼ਾ ਵਿੱਚ ਜ਼ਿਆਦਾ ਅਰਾਮਦਾਇਕ ਮਰੀਜ਼", body: "ਲਾਈਵ ਅਨੁਵਾਦ ਦੇ ਦਬਾਅ ਤੋਂ ਬਚੋ — ਪਹਿਲਾਂ ਸ਼ਾਂਤੀ ਨਾਲ ਲੱਛਣ ਬਿਆਨ ਕਰੋ।" },
+    { title: "ਹੋਰ ਭਾਸ਼ਾ ਵਿੱਚ ਜ਼ਿਆਦਾ ਅਰਾਮਦਾਇਕ ਮਰੀਜ਼", body: "ਲਾਈਵ ਅਨੁਵਾਦ ਦੇ ਦਬਾਅ ਤੋਂ ਬਚੋ, ਪਹਿਲਾਂ ਸ਼ਾਂਤੀ ਨਾਲ ਲੱਛਣ ਬਿਆਨ ਕਰੋ।" },
     { title: "ਜੋ ਡਾਕਟਰ ਕੋਲ ਜਾ ਕੇ ਭੁੱਲ ਜਾਂਦੇ ਹਨ", body: "ਖਾਲੀ ਮਨ ਨਾਲ ਨਹੀਂ, ਲਿਖਤੀ ਸਾਰ ਨਾਲ ਜਾਓ।" },
   ],
   safety: [
@@ -263,9 +263,9 @@ const PA: LandingContent = {
     { q: "ਜੇ ਐਮਰਜੈਂਸੀ ਹੋਵੇ ਤਾਂ?", a: "AEDNAV ਐਮਰਜੈਂਸੀ ਲਈ ਨਹੀਂ ਹੈ। ਛਾਤੀ ਵਿੱਚ ਦਰਦ, ਸਾਹ ਲੈਣ ਵਿੱਚ ਮੁਸ਼ਕਲ ਆਦਿ ਲਈ 911 ਤੇ ਕਾਲ ਕਰੋ।" },
   ],
   features: [
-    { title: "ਬਹੁ-ਭਾਸ਼ੀ ਜਾਣਕਾਰੀ", body: "ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਲੱਛਣ ਬਿਆਨ ਕਰੋ — ਮਨ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤੇ ਬਿਨਾਂ।" },
+    { title: "ਬਹੁ-ਭਾਸ਼ੀ ਜਾਣਕਾਰੀ", body: "ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਲੱਛਣ ਬਿਆਨ ਕਰੋ, ਮਨ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤੇ ਬਿਨਾਂ।" },
     { title: "ਦੋ-ਭਾਸ਼ੀ ਮੁਲਾਕਾਤ ਸਾਰ", body: "ਦੋ ਸਾਰ: ਇੱਕ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ, ਇੱਕ ਡਾਕਟਰ ਲਈ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ।" },
-    { title: "ਡਾਕਟਰ ਲਈ ਤਿਆਰ ਅੰਗਰੇਜ਼ੀ ਸਾਰ", body: "ਚਿੰਤਾਵਾਂ, ਸਮਾਂ, ਦਵਾਈਆਂ, ਅਲਰਜੀਆਂ ਅਤੇ ਸਵਾਲ — ਕਲੀਨੀਕਲ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ।" },
+    { title: "ਡਾਕਟਰ ਲਈ ਤਿਆਰ ਅੰਗਰੇਜ਼ੀ ਸਾਰ", body: "ਚਿੰਤਾਵਾਂ, ਸਮਾਂ, ਦਵਾਈਆਂ, ਅਲਰਜੀਆਂ ਅਤੇ ਸਵਾਲ, ਕਲੀਨੀਕਲ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ।" },
     { title: "ਮੁਲਾਕਾਤ ਦੀ ਤਿਆਰੀ", body: "ਜਾਣ ਕੇ ਜਾਓ ਕਿ ਕੀ ਪੁੱਛਣਾ ਹੈ ਅਤੇ ਕੀ ਲੈ ਕੇ ਜਾਣਾ ਹੈ।" },
   ],
   dual: {
@@ -299,7 +299,7 @@ const UR: LandingContent = {
     { title: "کینیڈا میں نئے آنے والے", body: "اپنی مضبوط زبان میں تیاری کریں اور انگریزی خلاصہ ساتھ لے جائیں۔" },
     { title: "رشتہ داروں کی مدد کرنے والے خاندان", body: "والدین، دادا/دادی یا ساتھی کو ملاقات کے لیے تیار کریں۔" },
     { title: "ملاقات سے پہلے طلباء", body: "کلینک جانے سے پہلے واضح کریں کہ کیا کہنا ہے۔" },
-    { title: "دوسری زبان میں زیادہ آرام دہ مریض", body: "لائیو ترجمے کا دباؤ چھوڑیں — پہلے سکون سے علامات بیان کریں۔" },
+    { title: "دوسری زبان میں زیادہ آرام دہ مریض", body: "لائیو ترجمے کا دباؤ چھوڑیں, پہلے سکون سے علامات بیان کریں۔" },
     { title: "جو ڈاکٹر کے سامنے بھول جاتے ہیں", body: "خالی ذہن کے بجائے تحریری خلاصے کے ساتھ جائیں۔" },
   ],
   safety: [
@@ -315,9 +315,9 @@ const UR: LandingContent = {
     { q: "ایمرجنسی کی صورت میں؟", a: "AEDNAV ایمرجنسی کے لیے نہیں۔ سینے میں درد، سانس کی دشواری وغیرہ پر فوراً 911 پر کال کریں۔" },
   ],
   features: [
-    { title: "کثیر لسانی معلومات", body: "اپنی زبان میں علامات بیان کریں — ذہن میں ترجمہ کیے بغیر۔" },
+    { title: "کثیر لسانی معلومات", body: "اپنی زبان میں علامات بیان کریں, ذہن میں ترجمہ کیے بغیر۔" },
     { title: "دو لسانی ملاقات خلاصہ", body: "دو خلاصے: ایک آپ کی زبان میں، ایک ڈاکٹر کے لیے انگریزی میں۔" },
-    { title: "ڈاکٹر کے لیے انگریزی خلاصہ", body: "پریشانیاں، وقت، ادویات، الرجی اور سوالات — کلینیکل انگریزی میں۔" },
+    { title: "ڈاکٹر کے لیے انگریزی خلاصہ", body: "پریشانیاں، وقت، ادویات، الرجی اور سوالات, کلینیکل انگریزی میں۔" },
     { title: "ملاقات کی تیاری", body: "جانیں کہ کیا پوچھنا ہے، پہلے کیا بتانا ہے، کیا لانا ہے۔" },
   ],
   dual: {
@@ -351,7 +351,7 @@ const AR: LandingContent = {
     { title: "القادمون الجدد إلى كندا", body: "حضّر للموعد بلغتك الأقوى وأحضر ملخصًا إنجليزيًا." },
     { title: "العائلات التي تدعم أقاربها", body: "ساعد أحد الوالدين أو الجدّين أو الشريك على تنظيم ما يحضره للموعد." },
     { title: "الطلاب قبل المواعيد", body: "اعرف بوضوح ما تريد قوله قبل زيارة العيادة." },
-    { title: "المرضى الأكثر راحة بلغة أخرى", body: "تجنّب ضغط الترجمة الفورية — صف الأعراض بهدوء أولًا." },
+    { title: "المرضى الأكثر راحة بلغة أخرى", body: "تجنّب ضغط الترجمة الفورية, صف الأعراض بهدوء أولًا." },
     { title: "كل من ينسى ما يقول في العيادة", body: "ادخل بملخص مكتوب لا بذاكرة فارغة." },
   ],
   safety: [
@@ -367,7 +367,7 @@ const AR: LandingContent = {
     { q: "ماذا لو كانت حالة طارئة؟", a: "AEDNAV ليس للطوارئ. عند ألم الصدر أو ضيق التنفس أو أعراض السكتة أو أفكار إيذاء النفس، اتصل بالطوارئ فورًا." },
   ],
   features: [
-    { title: "إدخال متعدد اللغات", body: "صف ما تشعر به بلغتك — دون ترجمة في رأسك." },
+    { title: "إدخال متعدد اللغات", body: "صف ما تشعر به بلغتك, دون ترجمة في رأسك." },
     { title: "ملخص زيارة بلغتين", body: "ملخصان متزامنان: واحد بلغتك وآخر بالإنجليزية لطبيبك." },
     { title: "ملخص إنجليزي جاهز للطبيب", body: "المخاوف، الجدول الزمني، الأدوية، الحساسية والأسئلة بإنجليزية سريرية." },
     { title: "التحضير للموعد", body: "ادخل وأنت تعرف ماذا تسأل وماذا تقول وماذا تأخذ." },

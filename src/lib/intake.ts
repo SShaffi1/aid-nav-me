@@ -1,4 +1,4 @@
-// Mock intake script — placeholder for real AI integration
+// Mock intake script, placeholder for real AI integration
 export type IntakeStep = {
   id: string;
   field: keyof IntakeAnswers;
@@ -36,7 +36,7 @@ export const intakeSteps: IntakeStep[] = [
     id: "concern",
     field: "concern",
     prompt: () =>
-      "Hi — I'm AEDNAV. I'll help you organize what you're experiencing before your appointment. To start, what's been on your mind?",
+      "Hi, I'm AEDNAV. I'll help you organize what you're experiencing before your appointment. To start, what's been on your mind?",
     placeholder: "e.g. I've had headaches for 3 days...",
   },
   {
@@ -50,7 +50,7 @@ export const intakeSteps: IntakeStep[] = [
     id: "severity",
     field: "severity",
     prompt: () =>
-      "On a scale of 1 to 10, how would you describe it at its worst — where 10 is the most intense you can imagine?",
+      "On a scale of 1 to 10, how would you describe it at its worst, where 10 is the most intense you can imagine?",
     placeholder: "e.g. About a 6",
     suggestions: ["1–3 (mild)", "4–6 (moderate)", "7–8 (severe)", "9–10 (very severe)", ...QUICK],
   },
@@ -58,7 +58,7 @@ export const intakeSteps: IntakeStep[] = [
     id: "pattern",
     field: "pattern",
     prompt: () =>
-      "Does anything make it better or worse? Any patterns you've noticed — time of day, activity, food, sleep?",
+      "Does anything make it better or worse? Any patterns you've noticed, time of day, activity, food, sleep?",
     placeholder: "e.g. Worse in the afternoon, better after rest",
     suggestions: ["No clear pattern", ...QUICK],
   },
@@ -73,7 +73,7 @@ export const intakeSteps: IntakeStep[] = [
   {
     id: "allergies",
     field: "allergies",
-    prompt: () => "Any known allergies — medications, foods, or environmental?",
+    prompt: () => "Any known allergies, medications, foods, or environmental?",
     placeholder: "e.g. Penicillin, peanuts",
     suggestions: ["None known", "Not applicable", ...QUICK],
   },
@@ -81,7 +81,7 @@ export const intakeSteps: IntakeStep[] = [
     id: "history",
     field: "history",
     prompt: () =>
-      "Anything in your medical history that feels relevant — past conditions, surgeries, or family history?",
+      "Anything in your medical history that feels relevant, past conditions, surgeries, or family history?",
     placeholder: "e.g. Migraine in family history",
     suggestions: ["Nothing relevant", "Not applicable", ...QUICK],
   },
@@ -89,7 +89,7 @@ export const intakeSteps: IntakeStep[] = [
     id: "goal",
     field: "goal",
     prompt: () =>
-      "Last one — what would make this appointment feel successful to you? What do you hope to walk away with?",
+      "Last one, what would make this appointment feel successful to you? What do you hope to walk away with?",
     placeholder: "e.g. Understand what's causing this and a plan",
     suggestions: ["A clear plan", "Better understanding", "I'm not sure", "Skip for now"],
   },
@@ -189,7 +189,7 @@ export function recommendCare(a: IntakeAnswers): CareRecommendation {
   if (red) {
     return {
       setting: "Emergency Room",
-      reason: `You mentioned something that can be a red-flag symptom (e.g. "${red}"). For severe, sudden, or worsening symptoms, emergency care is the safest place to be evaluated. Informational guidance only — AEDNAV cannot determine the right care setting for you.`,
+      reason: `You mentioned something that can be a red-flag symptom (e.g. "${red}"). For severe, sudden, or worsening symptoms, emergency care is the safest place to be evaluated. Informational guidance only, AEDNAV cannot determine the right care setting for you.`,
       isEmergency: true,
     };
   }

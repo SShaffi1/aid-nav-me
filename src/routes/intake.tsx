@@ -397,7 +397,7 @@ function ChatScreen({
                   {lang !== "en" && (
                     <p className="mt-2 text-xs leading-relaxed text-muted-foreground" dir="ltr">
                       <span className="font-medium text-foreground">English:</span>{" "}
-                      This may need urgent attention. AEDNAV is not designed for emergencies — please contact emergency services or go to your nearest emergency department.
+                      This may need urgent attention. AEDNAV is not designed for emergencies, please contact emergency services or go to your nearest emergency department.
                     </p>
                   )}
                   <div className="mt-3 flex flex-wrap gap-2" dir="ltr">
