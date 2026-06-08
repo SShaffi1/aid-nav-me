@@ -149,9 +149,8 @@ export function Logo({ className = "" }: { className?: string }) {
 export function SiteFooter() {
   const lang = useLang();
   const tr = ui(lang);
-  const dir = getLangConfig(lang).direction;
   return (
-    <footer className="mt-32 border-t border-border" dir={dir}>
+    <footer className="mt-32 border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <Wordmark className="h-6 md:h-7" />
