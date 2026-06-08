@@ -57,10 +57,8 @@ function IntakePage() {
     setPhase("intro");
   }
 
-  const dir = getLangConfig(lang).direction;
-
   return (
-    <div className="flex min-h-screen flex-col bg-background" dir={dir}>
+    <div className="flex min-h-screen flex-col bg-background">
       <AnimatePresence mode="wait">
         {phase === "language" && (
           <LanguageScreen key="lang" current={lang} onPick={chooseLang} />
@@ -197,7 +195,7 @@ function IntroScreen({
 
       <main className="flex flex-1 items-center justify-center px-5 py-10">
         <motion.div
-          dir={dir}
+          dir="auto"
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
@@ -245,7 +243,6 @@ function ChatScreen({
   lang, onComplete,
 }: { lang: LangCode; onComplete: () => void }) {
   const tr = useMemo(() => translate(lang), [lang]);
-  const dir = getLangConfig(lang).direction;
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
   const [stepIndex, setStepIndex] = useState(0);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -372,7 +369,7 @@ function ChatScreen({
           </div>
         </div>
         <div className="border-t border-border bg-warning/10">
-          <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px] text-warning-foreground" dir={dir}>
+          <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px] text-warning-foreground" dir="auto">
             {tr.emergencyBanner.disclaimer}
           </div>
         </div>
@@ -387,7 +384,7 @@ function ChatScreen({
             className="border-b border-destructive/30 bg-destructive/10"
           >
             <div className="mx-auto max-w-3xl px-5 py-4">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start" dir={dir}>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                 <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-destructive text-destructive-foreground" dir="ltr">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
                 </div>
@@ -420,17 +417,17 @@ function ChatScreen({
         )}
       </AnimatePresence>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto" dir={dir}>
+      <div ref={scrollRef} className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl space-y-5 px-5 py-8 md:py-10">
           <AnimatePresence initial={false}>
-            {messages.map((m) => (<MessageBubble key={m.id} message={m} dir={dir} />))}
+            {messages.map((m) => (<MessageBubble key={m.id} message={m} />))}
           </AnimatePresence>
           {aiThinking && <TypingIndicator />}
         </div>
       </div>
 
       <div className="border-t border-border bg-surface/90 backdrop-blur">
-        <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4" dir={dir}>
+        <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4">
           {!isLast && suggestions.length > 0 && messages.length > 0 && !aiThinking && !blocked && (
             <div className="mb-3 flex flex-wrap gap-2">
               {suggestions.map((s) => (
@@ -451,7 +448,7 @@ function ChatScreen({
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKeyDown}
               rows={1}
-              dir={dir}
+              dir="auto"
               disabled={isLast || blocked}
               placeholder={
                 blocked
@@ -480,9 +477,8 @@ function ChatScreen({
   );
 }
 
-function MessageBubble({ message, dir }: { message: Message; dir: "ltr" | "rtl" }) {
+function MessageBubble({ message }: { message: Message }) {
   const isAi = message.role === "ai";
-  // In RTL, the visual "user side" is the left; flex-row-reverse already mirrors based on dir.
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
@@ -495,7 +491,7 @@ function MessageBubble({ message, dir }: { message: Message; dir: "ltr" | "rtl" 
         </div>
       )}
       <div
-        dir={dir}
+        dir="auto"
         className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[14.5px] leading-relaxed ${
           isAi
             ? "rounded-bl-md border border-border bg-surface-elevated text-foreground"
@@ -539,7 +535,6 @@ function TypingIndicator() {
 
 function ReviewScreen({ lang }: { lang: LangCode }) {
   const tr = translate(lang);
-  const dir = getLangConfig(lang).direction;
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
   const [editing, setEditing] = useState<IntakeFieldKey | null>(null);
@@ -580,7 +575,7 @@ function ReviewScreen({ lang }: { lang: LangCode }) {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 md:py-10" dir={dir}>
+      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 md:py-10" dir="auto">
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -601,7 +596,7 @@ function ReviewScreen({ lang }: { lang: LangCode }) {
               <span className="pt-1 text-[13px] text-muted-foreground">{tr.fieldLabels[field]}</span>
               {editing === field ? (
                 <textarea
-                  dir={dir}
+                  dir="auto"
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   rows={2}

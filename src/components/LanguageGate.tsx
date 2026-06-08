@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LANGUAGES, STORAGE_LANG, getLangConfig, type LangCode } from "@/lib/i18n";
-import { ui } from "@/lib/ui-i18n";
+import { LANGUAGES, STORAGE_LANG, type LangCode } from "@/lib/i18n";
 
 const STORAGE_PICKED = "aednav.langPicked";
 
@@ -25,8 +24,6 @@ export function LanguageGate() {
   }
 
   if (!open) return null;
-  const tr = ui(selected);
-  const dir = getLangConfig(selected).direction;
 
   return (
     <AnimatePresence>
@@ -42,32 +39,30 @@ export function LanguageGate() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 8 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          dir={dir}
           className="w-full max-w-lg rounded-2xl border border-border bg-background p-6 shadow-soft md:p-8"
         >
           <h2 id="lang-gate-title" className="font-display text-2xl text-foreground md:text-3xl">
-            {tr.langGate.title}
+            Choose your language
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            {tr.langGate.subtitle}
+            AEDNAV will translate the interface and let you complete intake in the language you pick.
           </p>
 
-          <div className="mt-6 grid gap-2 sm:grid-cols-2">
+          <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
             {LANGUAGES.map((l) => {
               const active = l.code === selected;
               return (
                 <button
                   key={l.code}
                   onClick={() => setSelected(l.code)}
-                  dir={l.direction}
-                  className={`flex items-center justify-between rounded-lg border px-4 py-3 text-left transition-all duration-150 active:scale-[0.99] ${
+                  className={`flex items-center justify-between rounded-xl border px-4 py-3.5 text-left transition-all duration-150 active:scale-[0.99] ${
                     active
                       ? "border-foreground/40 bg-surface-elevated"
                       : "border-border bg-surface hover:bg-surface-elevated"
                   }`}
                 >
                   <span>
-                    <span className="block text-sm font-medium text-foreground">{l.native}</span>
+                    <span dir="auto" className="block text-base font-medium text-foreground">{l.native}</span>
                     <span className="block text-[11px] text-muted-foreground">{l.label}</span>
                   </span>
                   <span
@@ -86,10 +81,10 @@ export function LanguageGate() {
             onClick={() => confirm(selected)}
             className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
-            {tr.langGate.continue}
+            Continue
           </button>
           <p className="mt-3 text-center text-[11px] text-muted-foreground">
-            {tr.langGate.note}
+            You can change the language anytime from the top-right of the page.
           </p>
         </motion.div>
       </motion.div>

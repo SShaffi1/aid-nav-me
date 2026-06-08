@@ -14,7 +14,6 @@ export function SiteHeader() {
   const router = useRouter();
   const lang = useLang();
   const tr = ui(lang);
-  const dir = getLangConfig(lang).direction;
 
   function handleAnchor(e: React.MouseEvent, id: string) {
     e.preventDefault();
@@ -31,7 +30,7 @@ export function SiteHeader() {
   const navLinkClass = "transition-colors hover:text-foreground";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur" dir={dir}>
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-2.5 md:px-6 md:py-3">
         <Link to="/" aria-label="AEDNAV home" className="flex items-center" dir="ltr">
           <Wordmark />
@@ -150,9 +149,8 @@ export function Logo({ className = "" }: { className?: string }) {
 export function SiteFooter() {
   const lang = useLang();
   const tr = ui(lang);
-  const dir = getLangConfig(lang).direction;
   return (
-    <footer className="mt-32 border-t border-border" dir={dir}>
+    <footer className="mt-32 border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <Wordmark className="h-6 md:h-7" />
