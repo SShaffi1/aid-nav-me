@@ -57,10 +57,8 @@ function IntakePage() {
     setPhase("intro");
   }
 
-  const dir = getLangConfig(lang).direction;
-
   return (
-    <div className="flex min-h-screen flex-col bg-background" dir={dir}>
+    <div className="flex min-h-screen flex-col bg-background">
       <AnimatePresence mode="wait">
         {phase === "language" && (
           <LanguageScreen key="lang" current={lang} onPick={chooseLang} />
