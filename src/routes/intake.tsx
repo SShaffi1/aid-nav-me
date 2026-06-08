@@ -478,9 +478,8 @@ function ChatScreen({
   );
 }
 
-function MessageBubble({ message, dir }: { message: Message; dir: "ltr" | "rtl" }) {
+function MessageBubble({ message }: { message: Message }) {
   const isAi = message.role === "ai";
-  // In RTL, the visual "user side" is the left; flex-row-reverse already mirrors based on dir.
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
@@ -493,7 +492,7 @@ function MessageBubble({ message, dir }: { message: Message; dir: "ltr" | "rtl" 
         </div>
       )}
       <div
-        dir={dir}
+        dir="auto"
         className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[14.5px] leading-relaxed ${
           isAi
             ? "rounded-bl-md border border-border bg-surface-elevated text-foreground"
