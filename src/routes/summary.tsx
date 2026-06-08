@@ -75,7 +75,7 @@ function SummaryPage() {
     const text =
       which === "patient" ? patientText :
       which === "provider" ? providerText :
-      `${patientText}\n\n— — —\n\n${providerText}`;
+      `${patientText}\n\n---\n\n${providerText}`;
     navigator.clipboard?.writeText(text).then(() => {
       setCopied(which);
       setTimeout(() => setCopied(null), 1800);
