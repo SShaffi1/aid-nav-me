@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LANGUAGES, STORAGE_LANG, getLangConfig, type LangCode } from "@/lib/i18n";
-import { ui } from "@/lib/ui-i18n";
+import { LANGUAGES, STORAGE_LANG, type LangCode } from "@/lib/i18n";
 
 const STORAGE_PICKED = "aednav.langPicked";
 
