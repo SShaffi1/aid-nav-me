@@ -535,7 +535,6 @@ function TypingIndicator() {
 
 function ReviewScreen({ lang }: { lang: LangCode }) {
   const tr = translate(lang);
-  const dir = getLangConfig(lang).direction;
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
   const [editing, setEditing] = useState<IntakeFieldKey | null>(null);
