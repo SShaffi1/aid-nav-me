@@ -370,7 +370,7 @@ function ChatScreen({
           </div>
         </div>
         <div className="border-t border-border bg-warning/10">
-          <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px] text-warning-foreground" dir={dir}>
+          <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px] text-warning-foreground" dir="auto">
             {tr.emergencyBanner.disclaimer}
           </div>
         </div>
