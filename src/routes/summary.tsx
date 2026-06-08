@@ -8,9 +8,9 @@ import { getStoredLang, getLangConfig, t as translate, type LangCode } from "@/l
 export const Route = createFileRoute("/summary")({
   head: () => ({
     meta: [
-      { title: "Visit summary — AEDNAV" },
+      { title: "Visit summary | AEDNAV" },
       { name: "description", content: "A patient summary in your language and a doctor-ready English summary." },
-      { property: "og:title", content: "Visit summary — AEDNAV" },
+      { property: "og:title", content: "Visit summary | AEDNAV" },
       { property: "og:description", content: "Dual-language pre-appointment visit summary." },
     ],
   }),
