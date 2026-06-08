@@ -418,7 +418,7 @@ function ChatScreen({
         )}
       </AnimatePresence>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto" dir={dir}>
+      <div ref={scrollRef} className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl space-y-5 px-5 py-8 md:py-10">
           <AnimatePresence initial={false}>
             {messages.map((m) => (<MessageBubble key={m.id} message={m} dir={dir} />))}
