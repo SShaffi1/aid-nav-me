@@ -17,7 +17,7 @@ export const Route = createFileRoute("/intake")({
         content:
           "A guided, multilingual intake to help you organize symptoms before your appointment.",
       },
-      { property: "og:title", content: "Start intake — AEDNAV" },
+      { property: "og:title", content: "Start intake | AEDNAV" },
       {
         property: "og:description",
         content: "Multilingual pre-appointment intake. Generates a doctor-ready English summary.",
