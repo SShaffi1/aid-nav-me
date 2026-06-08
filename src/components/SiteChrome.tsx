@@ -14,7 +14,6 @@ export function SiteHeader() {
   const router = useRouter();
   const lang = useLang();
   const tr = ui(lang);
-  const dir = getLangConfig(lang).direction;
 
   function handleAnchor(e: React.MouseEvent, id: string) {
     e.preventDefault();
