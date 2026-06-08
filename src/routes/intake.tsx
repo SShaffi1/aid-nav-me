@@ -449,7 +449,7 @@ function ChatScreen({
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKeyDown}
               rows={1}
-              dir={dir}
+              dir="auto"
               disabled={isLast || blocked}
               placeholder={
                 blocked
