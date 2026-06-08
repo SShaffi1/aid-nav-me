@@ -11,7 +11,7 @@ import {
 export const Route = createFileRoute("/intake")({
   head: () => ({
     meta: [
-      { title: "Start intake — AEDNAV" },
+      { title: "Start intake | AEDNAV" },
       {
         name: "description",
         content:
