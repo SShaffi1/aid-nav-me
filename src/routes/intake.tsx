@@ -598,7 +598,7 @@ function ReviewScreen({ lang }: { lang: LangCode }) {
               <span className="pt-1 text-[13px] text-muted-foreground">{tr.fieldLabels[field]}</span>
               {editing === field ? (
                 <textarea
-                  dir={dir}
+                  dir="auto"
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   rows={2}
