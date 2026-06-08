@@ -76,8 +76,8 @@ const EN: UIStrings = {
   },
   hero: {
     eyebrow: "Pre-appointment preparation",
-    title1: "Prepare for your appointment",
-    title2: "with clarity.",
+    title1: "Prepare for your",
+    title2: "appointment.",
     sub: "AEDNAV helps patients organize their health concerns before care, with multilingual support for families who are more comfortable in another language.",
     primary: "Start intake",
     secondary: "See how it works",
