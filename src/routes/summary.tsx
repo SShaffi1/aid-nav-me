@@ -630,7 +630,7 @@ PATIENT GOAL FOR VISIT
 ${a.goal}
 
 CARE OPTION TO CONSIDER (informational guidance only)
-${rec.setting} — ${rec.reason}
+${rec.setting}: ${rec.reason}
 
-— Prepared by AEDNAV. For preparation and communication support only. Not medical advice.`;
+Prepared by AEDNAV. For preparation and communication support only. Not medical advice.`;
 }
