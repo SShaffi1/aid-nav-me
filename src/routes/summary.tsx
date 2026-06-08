@@ -584,7 +584,7 @@ function shortConcern(c: string) {
 
 function formatPatientText(a: IntakeAnswers, date: string, tr: ReturnType<typeof translate>, lang: LangCode) {
   const L = tr.patientSummary;
-  return `AEDNAV — ${L.title}
+  return `AEDNAV: ${L.title}
 ${L.generated} ${date} · ${getLangConfig(lang).native}
 
 ${L.sections.keyDetails.toUpperCase()}
