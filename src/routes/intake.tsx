@@ -195,7 +195,7 @@ function IntroScreen({
 
       <main className="flex flex-1 items-center justify-center px-5 py-10">
         <motion.div
-          dir={dir}
+          dir="auto"
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
