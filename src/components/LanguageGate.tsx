@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LANGUAGES, STORAGE_LANG, type LangCode } from "@/lib/i18n";
+import { ui } from "@/lib/ui-i18n";
 
 const STORAGE_PICKED = "aednav.langPicked";
 
@@ -42,10 +43,10 @@ export function LanguageGate() {
           className="w-full max-w-lg rounded-2xl border border-border bg-background p-6 shadow-soft md:p-8"
         >
           <h2 id="lang-gate-title" className="font-display text-2xl text-foreground md:text-3xl">
-            Choose your language
+            {ui(selected).langGate.title}
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            AEDNAV will translate the interface and let you complete intake in the language you pick.
+            {ui(selected).langGate.subtitle}
           </p>
 
           <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
@@ -81,10 +82,10 @@ export function LanguageGate() {
             onClick={() => confirm(selected)}
             className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
-            Continue
+            {ui(selected).langGate.continue}
           </button>
           <p className="mt-3 text-center text-[11px] text-muted-foreground">
-            You can change the language anytime from the top-right of the page.
+            {ui(selected).langGate.note}
           </p>
         </motion.div>
       </motion.div>
