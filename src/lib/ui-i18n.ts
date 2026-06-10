@@ -4,65 +4,55 @@ import type { LangCode } from "./i18n";
 
 export type UIStrings = {
   nav: { how: string; features: string; faq: string; startIntake: string; changeLang: string };
+  chrome: {
+    exit: string;
+    change: string;
+    stepLabel: (n: number, total: number) => string;
+    progressOf: (n: number, total: number) => string;
+  };
   langGate: {
     title: string;
     subtitle: string;
     continue: string;
     note: string;
+    intakeSubtitle: string;
+    demoNote: string;
+  };
+  dashboard: {
+    windowLabel: string;
+    chat1: string;
+    chat2: string;
+    chat3: string;
+    visitSummary: string;
+    pending: string;
+    concernValue: string;
+    durationValue: string;
+    patternValue: string;
+    careOption: string;
+    careValue: string;
+    careNote: string;
+    labels: { concern: string; duration: string; pattern: string; severity: string; medications: string };
   };
   hero: {
-    eyebrow: string;
-    title1: string;
-    title2: string;
-    sub: string;
-    primary: string;
-    secondary: string;
-    note: string;
+    eyebrow: string; title1: string; title2: string; sub: string;
+    primary: string; secondary: string; note: string;
   };
   sectionTitles: {
-    featuresEyebrow: string;
-    featuresTitle: string;
-    howEyebrow: string;
-    howTitle: string;
-    dualEyebrow: string;
-    dualTitle: string;
-    dualBody: string;
-    whoEyebrow: string;
-    whoTitle: string;
-    safetyEyebrow: string;
-    safetyTitle: string;
-    faq: string;
-    ctaTitle: string;
-    ctaBody: string;
-    ctaButton: string;
+    featuresEyebrow: string; featuresTitle: string;
+    howEyebrow: string; howTitle: string;
+    dualEyebrow: string; dualTitle: string; dualBody: string;
+    whoEyebrow: string; whoTitle: string;
+    safetyEyebrow: string; safetyTitle: string;
+    faq: string; ctaTitle: string; ctaBody: string; ctaButton: string;
   };
-  footer: {
-    disclaimerLabel: string;
-    disclaimer: string;
-    rights: string;
-    tagline: string;
-  };
+  footer: { disclaimerLabel: string; disclaimer: string; rights: string; tagline: string };
   summary: {
-    backToIntake: string;
-    edit: string;
-    cancel: string;
-    save: string;
-    copyPatient: string;
-    copyProvider: string;
-    copyBoth: string;
-    copySummary: string;
-    copied: string;
-    printSummary: string;
-    printPatient: string;
-    printProvider: string;
-    printBoth: string;
-    patientTab: string;
-    providerTab: string;
-    preparing: string;
-    translationDisclaimer: string;
-    summaryDisclaimer: string;
-    generalDisclaimer: string;
-    emergencyDisclaimer: string;
+    backToIntake: string; edit: string; cancel: string; save: string;
+    copyPatient: string; copyProvider: string; copyBoth: string; copySummary: string;
+    copied: string; printSummary: string; printPatient: string; printProvider: string; printBoth: string;
+    patientTab: string; providerTab: string; preparing: string;
+    translationDisclaimer: string; summaryDisclaimer: string;
+    generalDisclaimer: string; emergencyDisclaimer: string;
   };
 };
 
