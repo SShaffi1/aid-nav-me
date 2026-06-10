@@ -58,11 +58,34 @@ export type UIStrings = {
 
 const EN: UIStrings = {
   nav: { how: "How it works", features: "Features", faq: "FAQ", startIntake: "Start intake", changeLang: "Language" },
+  chrome: {
+    exit: "Exit",
+    change: "Change",
+    stepLabel: (n, total) => `Step ${n} of ${total}`,
+    progressOf: (n, total) => `${n} of ${total}`,
+  },
+  dashboard: {
+    windowLabel: "AEDNAV / Intake",
+    chat1: "Hi, I'm here to help you get ready for your appointment. What's been on your mind?",
+    chat2: "I've had a dull headache for three days, mostly in the afternoon.",
+    chat3: "Thanks for sharing. On a scale of 1 to 10, how would you describe the intensity at its worst?",
+    visitSummary: "Visit summary",
+    pending: "Pending",
+    concernValue: "Recurring headache",
+    durationValue: "3 days",
+    patternValue: "Afternoons",
+    careOption: "Care option to consider",
+    careValue: "Family doctor",
+    careNote: "Informational guidance only. AEDNAV cannot determine the right care setting for you.",
+    labels: { concern: "Concern", duration: "Duration", pattern: "Pattern", severity: "Severity", medications: "Medications" },
+  },
   langGate: {
     title: "Choose your language",
     subtitle: "Pick the language you're most comfortable with. You can change it anytime.",
     continue: "Continue",
     note: "Used across the site. Stored only in this browser session.",
+    intakeSubtitle: "Complete the intake in the language you're most comfortable with. AEDNAV will also generate an English summary you can show your healthcare provider.",
+    demoNote: "Demo translations only. AEDNAV is not a substitute for a professional medical interpreter.",
   },
   hero: {
     eyebrow: "Pre-appointment preparation",
@@ -122,11 +145,34 @@ const EN: UIStrings = {
 
 const FR: UIStrings = {
   nav: { how: "Comment ça marche", features: "Fonctionnalités", faq: "FAQ", startIntake: "Commencer", changeLang: "Langue" },
+  chrome: {
+    exit: "Quitter",
+    change: "Changer",
+    stepLabel: (n, total) => `Étape ${n} sur ${total}`,
+    progressOf: (n, total) => `${n} sur ${total}`,
+  },
+  dashboard: {
+    windowLabel: "AEDNAV / Intake",
+    chat1: "Bonjour, je suis là pour vous aider à préparer votre rendez-vous. Qu'est-ce qui vous préoccupe ?",
+    chat2: "J'ai mal à la tête depuis trois jours, surtout l'après-midi.",
+    chat3: "Merci. Sur une échelle de 1 à 10, comment décririez-vous l'intensité au pire ?",
+    visitSummary: "Résumé de visite",
+    pending: "En attente",
+    concernValue: "Maux de tête récurrents",
+    durationValue: "3 jours",
+    patternValue: "Après-midi",
+    careOption: "Option de soins à considérer",
+    careValue: "Médecin de famille",
+    careNote: "Information à titre indicatif seulement. AEDNAV ne peut pas déterminer le bon cadre de soins pour vous.",
+    labels: { concern: "Préoccupation", duration: "Durée", pattern: "Schéma", severity: "Intensité", medications: "Médicaments" },
+  },
   langGate: {
     title: "Choisissez votre langue",
     subtitle: "Sélectionnez la langue qui vous convient le mieux. Vous pouvez la changer à tout moment.",
     continue: "Continuer",
     note: "Utilisée sur tout le site. Conservée uniquement dans cette session.",
+    intakeSubtitle: "Complétez l'intake dans la langue qui vous convient le mieux. AEDNAV générera aussi un résumé en anglais à montrer à votre soignant.",
+    demoNote: "Traductions de démonstration uniquement. AEDNAV ne remplace pas un interprète médical professionnel.",
   },
   hero: {
     eyebrow: "Préparation avant rendez-vous",
@@ -186,11 +232,34 @@ const FR: UIStrings = {
 
 const ES: UIStrings = {
   nav: { how: "Cómo funciona", features: "Funciones", faq: "Preguntas", startIntake: "Comenzar", changeLang: "Idioma" },
+  chrome: {
+    exit: "Salir",
+    change: "Cambiar",
+    stepLabel: (n, total) => `Paso ${n} de ${total}`,
+    progressOf: (n, total) => `${n} de ${total}`,
+  },
+  dashboard: {
+    windowLabel: "AEDNAV / Intake",
+    chat1: "Hola, estoy aquí para ayudarte a prepararte para tu cita. ¿Qué te ha estado preocupando?",
+    chat2: "He tenido dolor de cabeza leve por tres días, sobre todo por la tarde.",
+    chat3: "Gracias por compartir. En una escala del 1 al 10, ¿cómo describirías la intensidad en lo peor?",
+    visitSummary: "Resumen de la visita",
+    pending: "Pendiente",
+    concernValue: "Dolor de cabeza recurrente",
+    durationValue: "3 días",
+    patternValue: "Por las tardes",
+    careOption: "Opción de atención a considerar",
+    careValue: "Médico de familia",
+    careNote: "Información a título orientativo. AEDNAV no puede determinar el entorno de atención adecuado para ti.",
+    labels: { concern: "Motivo", duration: "Duración", pattern: "Patrón", severity: "Intensidad", medications: "Medicamentos" },
+  },
   langGate: {
     title: "Elige tu idioma",
     subtitle: "Selecciona el idioma con el que te sientes más cómodo/a. Puedes cambiarlo en cualquier momento.",
     continue: "Continuar",
     note: "Se usa en todo el sitio. Guardado solo en esta sesión del navegador.",
+    intakeSubtitle: "Completa el intake en el idioma con el que te sientes más cómodo/a. AEDNAV también generará un resumen en inglés para mostrar a tu profesional de salud.",
+    demoNote: "Traducciones de demostración únicamente. AEDNAV no reemplaza a un intérprete médico profesional.",
   },
   hero: {
     eyebrow: "Preparación previa a la cita",
@@ -250,11 +319,34 @@ const ES: UIStrings = {
 
 const ZH: UIStrings = {
   nav: { how: "如何使用", features: "功能", faq: "常见问题", startIntake: "开始", changeLang: "语言" },
+  chrome: {
+    exit: "退出",
+    change: "更改",
+    stepLabel: (n, total) => `第 ${n} 步 / 共 ${total} 步`,
+    progressOf: (n, total) => `${n} / ${total}`,
+  },
+  dashboard: {
+    windowLabel: "AEDNAV / Intake",
+    chat1: "您好,我来帮您为就诊做准备。最近有什么让您担心的事情吗?",
+    chat2: "我头隐隐作痛已经三天了,主要在下午。",
+    chat3: "感谢分享。从 1 到 10,您怎样描述最严重时的强度?",
+    visitSummary: "就诊摘要",
+    pending: "待填写",
+    concernValue: "反复头痛",
+    durationValue: "3 天",
+    patternValue: "下午",
+    careOption: "建议考虑的就诊方式",
+    careValue: "家庭医生",
+    careNote: "仅供参考。AEDNAV 无法为您决定合适的就诊场所。",
+    labels: { concern: "症状", duration: "持续时间", pattern: "规律", severity: "强度", medications: "药物" },
+  },
   langGate: {
     title: "选择您的语言",
     subtitle: "选择您最熟悉的语言。您可以随时更改。",
     continue: "继续",
     note: "在整个网站使用。仅保存在此浏览器会话中。",
+    intakeSubtitle: "用您最熟悉的语言完成信息收集。AEDNAV 还会生成一份英文摘要供您出示给医生。",
+    demoNote: "仅为演示翻译。AEDNAV 不能替代专业医疗翻译。",
   },
   hero: {
     eyebrow: "就诊前准备",
@@ -314,11 +406,34 @@ const ZH: UIStrings = {
 
 const PA: UIStrings = {
   nav: { how: "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ", features: "ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ", faq: "ਸਵਾਲ", startIntake: "ਸ਼ੁਰੂ ਕਰੋ", changeLang: "ਭਾਸ਼ਾ" },
+  chrome: {
+    exit: "ਬਾਹਰ ਜਾਓ",
+    change: "ਬਦਲੋ",
+    stepLabel: (n, total) => `ਕਦਮ ${n} / ${total}`,
+    progressOf: (n, total) => `${n} / ${total}`,
+  },
+  dashboard: {
+    windowLabel: "AEDNAV / Intake",
+    chat1: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ, ਮੈਂ ਤੁਹਾਡੀ ਮੁਲਾਕਾਤ ਦੀ ਤਿਆਰੀ ਵਿੱਚ ਮਦਦ ਲਈ ਹਾਂ। ਕੀ ਗੱਲ ਤੁਹਾਡੇ ਮਨ ਵਿੱਚ ਹੈ?",
+    chat2: "ਮੈਨੂੰ ਤਿੰਨ ਦਿਨਾਂ ਤੋਂ ਹਲਕਾ ਸਿਰ ਦਰਦ ਹੈ, ਜ਼ਿਆਦਾਤਰ ਦੁਪਹਿਰ ਨੂੰ।",
+    chat3: "ਸਾਂਝਾ ਕਰਨ ਲਈ ਧੰਨਵਾਦ। 1 ਤੋਂ 10 ਦੇ ਪੈਮਾਨੇ ਉੱਤੇ, ਸਭ ਤੋਂ ਮਾੜੇ ਵੇਲੇ ਦੀ ਤੀਬਰਤਾ ਕਿੰਨੀ ਸੀ?",
+    visitSummary: "ਮੁਲਾਕਾਤ ਦਾ ਸਾਰ",
+    pending: "ਬਾਕੀ",
+    concernValue: "ਵਾਰ-ਵਾਰ ਸਿਰ ਦਰਦ",
+    durationValue: "3 ਦਿਨ",
+    patternValue: "ਦੁਪਹਿਰ",
+    careOption: "ਵਿਚਾਰਨ ਲਈ ਦੇਖਭਾਲ ਦਾ ਵਿਕਲਪ",
+    careValue: "ਫੈਮਿਲੀ ਡਾਕਟਰ",
+    careNote: "ਸਿਰਫ਼ ਜਾਣਕਾਰੀ ਲਈ। AEDNAV ਤੁਹਾਡੇ ਲਈ ਸਹੀ ਦੇਖਭਾਲ ਥਾਂ ਦਾ ਫੈਸਲਾ ਨਹੀਂ ਕਰ ਸਕਦਾ।",
+    labels: { concern: "ਚਿੰਤਾ", duration: "ਮਿਆਦ", pattern: "ਸ਼ੈਲੀ", severity: "ਤੀਬਰਤਾ", medications: "ਦਵਾਈਆਂ" },
+  },
   langGate: {
     title: "ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ",
     subtitle: "ਉਹ ਭਾਸ਼ਾ ਚੁਣੋ ਜਿਸ ਵਿੱਚ ਤੁਸੀਂ ਸਭ ਤੋਂ ਅਰਾਮਦਾਇਕ ਹੋ। ਤੁਸੀਂ ਇਸਨੂੰ ਕਿਸੇ ਵੀ ਸਮੇਂ ਬਦਲ ਸਕਦੇ ਹੋ।",
     continue: "ਜਾਰੀ ਰੱਖੋ",
     note: "ਪੂਰੀ ਸਾਈਟ 'ਤੇ ਵਰਤੀ ਜਾਂਦੀ ਹੈ। ਸਿਰਫ਼ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਸੈਸ਼ਨ ਵਿੱਚ ਸਟੋਰ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।",
+    intakeSubtitle: "ਉਸ ਭਾਸ਼ਾ ਵਿੱਚ ਜਾਣਕਾਰੀ ਪੂਰੀ ਕਰੋ ਜਿਸ ਵਿੱਚ ਤੁਸੀਂ ਅਰਾਮਦਾਇਕ ਹੋ। AEDNAV ਡਾਕਟਰ ਨੂੰ ਦਿਖਾਉਣ ਲਈ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਸਾਰ ਵੀ ਬਣਾਏਗਾ।",
+    demoNote: "ਸਿਰਫ਼ ਡੈਮੋ ਅਨੁਵਾਦ। AEDNAV ਪੇਸ਼ੇਵਰ ਡਾਕਟਰੀ ਅਨੁਵਾਦਕ ਦੀ ਥਾਂ ਨਹੀਂ ਲੈਂਦਾ।",
   },
   hero: {
     eyebrow: "ਮੁਲਾਕਾਤ ਤੋਂ ਪਹਿਲਾਂ ਦੀ ਤਿਆਰੀ",
@@ -378,11 +493,34 @@ const PA: UIStrings = {
 
 const UR: UIStrings = {
   nav: { how: "یہ کیسے کام کرتا ہے", features: "خصوصیات", faq: "سوالات", startIntake: "شروع کریں", changeLang: "زبان" },
+  chrome: {
+    exit: "باہر نکلیں",
+    change: "تبدیل کریں",
+    stepLabel: (n, total) => `قدم ${n} / ${total}`,
+    progressOf: (n, total) => `${n} / ${total}`,
+  },
+  dashboard: {
+    windowLabel: "AEDNAV / Intake",
+    chat1: "السلام علیکم، میں آپ کی ملاقات کی تیاری میں مدد کے لیے یہاں ہوں۔ کیا بات ذہن میں ہے؟",
+    chat2: "مجھے تین دن سے ہلکا سر درد ہے، زیادہ تر دوپہر میں۔",
+    chat3: "بتانے کا شکریہ۔ 1 سے 10 تک، بدترین وقت میں شدت کیسی تھی؟",
+    visitSummary: "ملاقات کا خلاصہ",
+    pending: "زیر التواء",
+    concernValue: "بار بار سر درد",
+    durationValue: "3 دن",
+    patternValue: "دوپہر",
+    careOption: "غور کرنے کے لیے دیکھ بھال کا آپشن",
+    careValue: "فیملی ڈاکٹر",
+    careNote: "صرف معلوماتی رہنمائی۔ AEDNAV آپ کے لیے درست دیکھ بھال کا مقام طے نہیں کر سکتا۔",
+    labels: { concern: "پریشانی", duration: "مدت", pattern: "نمونہ", severity: "شدت", medications: "ادویات" },
+  },
   langGate: {
     title: "اپنی زبان منتخب کریں",
     subtitle: "وہ زبان منتخب کریں جس میں آپ سب سے زیادہ آرام دہ ہیں۔ آپ اسے کسی بھی وقت تبدیل کر سکتے ہیں۔",
     continue: "جاری رکھیں",
     note: "پوری سائٹ پر استعمال ہوتی ہے۔ صرف اس براؤزر سیشن میں محفوظ ہوتی ہے۔",
+    intakeSubtitle: "اس زبان میں معلومات مکمل کریں جس میں آپ آرام دہ ہیں۔ AEDNAV آپ کے ڈاکٹر کو دکھانے کے لیے انگریزی میں خلاصہ بھی بنائے گا۔",
+    demoNote: "صرف ڈیمو ترجمہ۔ AEDNAV پیشہ ور طبی ترجمان کا متبادل نہیں ہے۔",
   },
   hero: {
     eyebrow: "ملاقات سے پہلے کی تیاری",
@@ -442,11 +580,34 @@ const UR: UIStrings = {
 
 const AR: UIStrings = {
   nav: { how: "كيف يعمل", features: "الميزات", faq: "الأسئلة", startIntake: "ابدأ", changeLang: "اللغة" },
+  chrome: {
+    exit: "خروج",
+    change: "تغيير",
+    stepLabel: (n, total) => `الخطوة ${n} من ${total}`,
+    progressOf: (n, total) => `${n} من ${total}`,
+  },
+  dashboard: {
+    windowLabel: "AEDNAV / Intake",
+    chat1: "مرحبًا، أنا هنا لمساعدتك في الاستعداد لموعدك. ما الذي يشغل بالك؟",
+    chat2: "أعاني من صداع خفيف منذ ثلاثة أيام، غالبًا بعد الظهر.",
+    chat3: "شكرًا لمشاركتك. على مقياس من 1 إلى 10، كيف تصف شدته في أسوأ حالاته؟",
+    visitSummary: "ملخص الزيارة",
+    pending: "قيد الانتظار",
+    concernValue: "صداع متكرر",
+    durationValue: "3 أيام",
+    patternValue: "بعد الظهر",
+    careOption: "خيار رعاية يستحق التفكير",
+    careValue: "طبيب الأسرة",
+    careNote: "إرشاد معلوماتي فقط. لا يستطيع AEDNAV تحديد مكان الرعاية المناسب لك.",
+    labels: { concern: "الشكوى", duration: "المدة", pattern: "النمط", severity: "الشدة", medications: "الأدوية" },
+  },
   langGate: {
     title: "اختر لغتك",
     subtitle: "اختر اللغة التي تشعر بالراحة معها أكثر. يمكنك تغييرها في أي وقت.",
     continue: "متابعة",
     note: "تُستخدم في جميع أنحاء الموقع. مخزّنة في جلسة المتصفح فقط.",
+    intakeSubtitle: "أكمل المعلومات باللغة التي تشعر بالراحة معها. سيُنشئ AEDNAV أيضًا ملخصًا بالإنجليزية لتظهره لطبيبك.",
+    demoNote: "ترجمات توضيحية فقط. AEDNAV ليس بديلًا عن مترجم طبي محترف.",
   },
   hero: {
     eyebrow: "التحضير قبل الموعد",
