@@ -7,6 +7,7 @@ import {
   LANGUAGES, STORAGE_LANG, getStoredLang, getLangConfig,
   t as translate, type LangCode, type IntakeFieldKey,
 } from "@/lib/i18n";
+import { ui } from "@/lib/ui-i18n";
 
 export const Route = createFileRoute("/intake")({
   head: () => ({
@@ -89,20 +90,20 @@ function IntakePage() {
 function LanguageScreen({
   current, onPick,
 }: { current: LangCode; onPick: (c: LangCode) => void }) {
+  const u = ui(current);
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
-      dir="ltr"
     >
       <header className="border-b border-border bg-surface/80 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5" dir="ltr">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
           </Link>
           <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-            Exit
+            {u.chrome.exit}
           </Link>
         </div>
       </header>
@@ -114,14 +115,13 @@ function LanguageScreen({
           className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
         >
           <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
-            Step 1 of 3
+            {u.chrome.stepLabel(1, 3)}
           </p>
-          <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">
-            Choose your language
+          <h1 dir="auto" className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">
+            {u.langGate.title}
           </h1>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Complete the intake in the language you're most comfortable with. AEDNAV will also
-            generate an English summary you can show your healthcare provider.
+          <p dir="auto" className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            {u.langGate.intakeSubtitle}
           </p>
 
           <div className="mt-7 grid gap-2 sm:grid-cols-2">
@@ -131,13 +131,12 @@ function LanguageScreen({
                 <button
                   key={l.code}
                   onClick={() => onPick(l.code)}
-                  dir={l.direction}
                   className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-all duration-150 hover:bg-surface-elevated active:scale-[0.99] ${
                     active ? "border-primary/50 bg-primary-soft" : "border-border bg-surface"
                   }`}
                 >
                   <span>
-                    <span className="block text-sm font-medium text-foreground">{l.native}</span>
+                    <span dir="auto" className="block text-sm font-medium text-foreground">{l.native}</span>
                     <span className="block text-[11px] text-muted-foreground">{l.label}</span>
                   </span>
                   <svg
@@ -152,8 +151,8 @@ function LanguageScreen({
             })}
           </div>
 
-          <p className="mt-6 text-[11px] leading-relaxed text-muted-foreground">
-            Demo translations only. AEDNAV is not a substitute for a professional medical interpreter.
+          <p dir="auto" className="mt-6 text-[11px] leading-relaxed text-muted-foreground">
+            {u.langGate.demoNote}
           </p>
         </motion.div>
       </main>
@@ -167,6 +166,7 @@ function IntroScreen({
   lang, onStart, onChangeLang,
 }: { lang: LangCode; onStart: () => void; onChangeLang: () => void }) {
   const tr = translate(lang);
+  const u = ui(lang);
   const dir = getLangConfig(lang).direction;
   return (
     <motion.div
@@ -184,10 +184,10 @@ function IntroScreen({
               onClick={onChangeLang}
               className="text-xs text-muted-foreground hover:text-foreground"
             >
-              {getLangConfig(lang).native} · Change
+              {getLangConfig(lang).native} · {u.chrome.change}
             </button>
             <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-              Exit
+              {u.chrome.exit}
             </Link>
           </div>
         </div>
@@ -243,6 +243,7 @@ function ChatScreen({
   lang, onComplete,
 }: { lang: LangCode; onComplete: () => void }) {
   const tr = useMemo(() => translate(lang), [lang]);
+  const u = useMemo(() => ui(lang), [lang]);
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
   const [stepIndex, setStepIndex] = useState(0);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -352,12 +353,12 @@ function ChatScreen({
               <Logo className="h-6 md:h-7" />
             </Link>
             <span className="text-xs text-muted-foreground">
-              {Math.min(stepIndex, FIELD_ORDER.length)} of {FIELD_ORDER.length}
+              {u.chrome.progressOf(Math.min(stepIndex, FIELD_ORDER.length), FIELD_ORDER.length)}
               {" · "}
               {getLangConfig(lang).native}
             </span>
             <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-              Exit
+              {u.chrome.exit}
             </Link>
           </div>
           <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
@@ -571,7 +572,7 @@ function ReviewScreen({ lang }: { lang: LangCode }) {
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
           </Link>
-          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">Exit</Link>
+          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">{ui(lang).chrome.exit}</Link>
         </div>
       </header>
 
