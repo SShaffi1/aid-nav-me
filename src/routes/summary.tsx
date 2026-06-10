@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Logo } from "@/components/SiteChrome";
 import { initialAnswers, recommendCare, type CareSetting, type IntakeAnswers } from "@/lib/intake";
 import { getStoredLang, getLangConfig, t as translate, type LangCode } from "@/lib/i18n";
+import { ui } from "@/lib/ui-i18n";
 
 export const Route = createFileRoute("/summary")({
   head: () => ({
@@ -59,6 +60,7 @@ function SummaryPage() {
   }, []);
 
   const tr = useMemo(() => translate(lang), [lang]);
+  const u = useMemo(() => ui(lang), [lang]);
   const dir = getLangConfig(lang).direction;
   const generatedAt = new Date().toLocaleDateString(undefined, {
     weekday: "long", year: "numeric", month: "long", day: "numeric",
@@ -107,35 +109,35 @@ function SummaryPage() {
             </span>
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-2">
-            <ActionButton onClick={startEdit} hidden={editing} icon="edit">Edit summary</ActionButton>
+            <ActionButton onClick={startEdit} hidden={editing} icon="edit">{u.summary.edit}</ActionButton>
             {editing && (
               <>
-                <ActionButton onClick={cancelEdit}>Cancel</ActionButton>
-                <ActionButton primary onClick={saveEdit}>Save changes</ActionButton>
+                <ActionButton onClick={cancelEdit}>{u.summary.cancel}</ActionButton>
+                <ActionButton primary onClick={saveEdit}>{u.summary.save}</ActionButton>
               </>
             )}
             {isEnglish ? (
               <>
                 <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
-                  {copied === "provider" ? "Copied" : "Copy summary"}
+                  {copied === "provider" ? u.summary.copied : u.summary.copySummary}
                 </ActionButton>
                 <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
-                  Print / Save as PDF
+                  {u.summary.printSummary}
                 </ActionButton>
               </>
             ) : (
               <>
                 <ActionButton disabled={editing} onClick={() => copyOne("patient")} icon="copy">
-                  {copied === "patient" ? "Copied" : "Copy patient"}
+                  {copied === "patient" ? u.summary.copied : u.summary.copyPatient}
                 </ActionButton>
                 <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
-                  {copied === "provider" ? "Copied" : "Copy provider"}
+                  {copied === "provider" ? u.summary.copied : u.summary.copyProvider}
                 </ActionButton>
                 <ActionButton disabled={editing} onClick={() => copyOne("both")} icon="copy">
-                  {copied === "both" ? "Copied" : "Copy both"}
+                  {copied === "both" ? u.summary.copied : u.summary.copyBoth}
                 </ActionButton>
                 <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
-                  Print / Save as PDF
+                  {u.summary.printSummary}
                 </ActionButton>
               </>
             )}
@@ -160,7 +162,7 @@ function SummaryPage() {
                       className="h-1.5 w-1.5 rounded-full bg-primary" />
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground">Preparing your summaries…</p>
+                <p className="text-sm text-muted-foreground">{u.summary.preparing}</p>
               </div>
               <div className="mt-8 space-y-4">
                 <div className="h-3 w-1/3 animate-pulse rounded bg-muted" />
@@ -178,10 +180,10 @@ function SummaryPage() {
               {!isEnglish && (
                 <div className="print:hidden flex w-full items-center gap-1 rounded-full border border-border bg-surface p-1 sm:w-fit">
                   <TabButton active={tab === "patient"} onClick={() => setTab("patient")}>
-                    Patient summary
+                    {u.summary.patientTab}
                   </TabButton>
                   <TabButton active={tab === "provider"} onClick={() => setTab("provider")}>
-                    Provider summary
+                    {u.summary.providerTab}
                   </TabButton>
                 </div>
               )}
@@ -231,7 +233,7 @@ function SummaryPage() {
 
         <div className="mt-8 flex justify-center print:hidden">
           <Link to="/intake" className="text-sm text-muted-foreground hover:text-foreground">
-            ← Start a new intake
+            {u.summary.backToIntake}
           </Link>
         </div>
       </main>
