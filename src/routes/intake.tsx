@@ -371,12 +371,18 @@ function ChatScreen({
             </Link>
             <span className="text-xs text-muted-foreground">
               {u.chrome.progressOf(Math.min(stepIndex, FIELD_ORDER.length), FIELD_ORDER.length)}
-              {" · "}
-              {getLangConfig(lang).native}
             </span>
-            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-              {u.chrome.exit}
-            </Link>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={onChangeLang}
+                className="text-xs text-muted-foreground hover:text-foreground"
+              >
+                {getLangConfig(lang).native} · {u.chrome.change}
+              </button>
+              <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
+                {u.chrome.exit}
+              </Link>
+            </div>
           </div>
           <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
             <motion.div
