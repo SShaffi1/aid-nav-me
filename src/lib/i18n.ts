@@ -47,6 +47,7 @@ export type IntakePromptSet = {
   prompts: Record<IntakeFieldKey, string>;
   placeholders: Record<IntakeFieldKey, string>;
   suggestions: Record<IntakeFieldKey, string[]>;
+  quickOptions: string[];
   composer: {
     placeholderFallback: string;
     sendAria: string;
