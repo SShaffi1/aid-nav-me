@@ -41,21 +41,37 @@ type Message =
 
 function IntakePage() {
   const [phase, setPhase] = useState<Phase>("intro");
+  const [prevPhase, setPrevPhase] = useState<Phase>("intro");
   const [lang, setLang] = useState<LangCode>("en");
 
-  // If a language was already selected via the homepage gate, go straight to intro.
+  // Always use the language already selected from the homepage gate or top-right
+  // switcher. Never re-prompt for language at the start of intake.
   useEffect(() => {
-    const stored = getStoredLang();
-    setLang(stored);
-    const picked = sessionStorage.getItem("aednav.langPicked");
-    setPhase(picked ? "intro" : "language");
+    setLang(getStoredLang());
+    setPhase("intro");
   }, []);
+
+  // React to language changes made elsewhere (e.g. top-right switcher in another tab).
+  useEffect(() => {
+    function sync() { setLang(getStoredLang()); }
+    window.addEventListener("storage", sync);
+    window.addEventListener("focus", sync);
+    return () => {
+      window.removeEventListener("storage", sync);
+      window.removeEventListener("focus", sync);
+    };
+  }, []);
+
+  function openLangPicker() {
+    setPrevPhase(phase === "language" ? prevPhase : phase);
+    setPhase("language");
+  }
 
   function chooseLang(code: LangCode) {
     setLang(code);
     sessionStorage.setItem(STORAGE_LANG, code);
     sessionStorage.setItem("aednav.langPicked", "1");
-    setPhase("intro");
+    setPhase(prevPhase);
   }
 
   return (
@@ -68,7 +84,7 @@ function IntakePage() {
           <IntroScreen
             key="intro"
             lang={lang}
-            onChangeLang={() => setPhase("language")}
+            onChangeLang={openLangPicker}
             onStart={() => setPhase("chat")}
           />
         )}
@@ -76,10 +92,11 @@ function IntakePage() {
           <ChatScreen
             key="chat"
             lang={lang}
+            onChangeLang={openLangPicker}
             onComplete={() => setPhase("review")}
           />
         )}
-        {phase === "review" && <ReviewScreen key="review" lang={lang} />}
+        {phase === "review" && <ReviewScreen key="review" lang={lang} onChangeLang={openLangPicker} />}
       </AnimatePresence>
     </div>
   );
