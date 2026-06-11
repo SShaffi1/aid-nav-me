@@ -41,21 +41,37 @@ type Message =
 
 function IntakePage() {
   const [phase, setPhase] = useState<Phase>("intro");
+  const [prevPhase, setPrevPhase] = useState<Phase>("intro");
   const [lang, setLang] = useState<LangCode>("en");
 
-  // If a language was already selected via the homepage gate, go straight to intro.
+  // Always use the language already selected from the homepage gate or top-right
+  // switcher. Never re-prompt for language at the start of intake.
   useEffect(() => {
-    const stored = getStoredLang();
-    setLang(stored);
-    const picked = sessionStorage.getItem("aednav.langPicked");
-    setPhase(picked ? "intro" : "language");
+    setLang(getStoredLang());
+    setPhase("intro");
   }, []);
+
+  // React to language changes made elsewhere (e.g. top-right switcher in another tab).
+  useEffect(() => {
+    function sync() { setLang(getStoredLang()); }
+    window.addEventListener("storage", sync);
+    window.addEventListener("focus", sync);
+    return () => {
+      window.removeEventListener("storage", sync);
+      window.removeEventListener("focus", sync);
+    };
+  }, []);
+
+  function openLangPicker() {
+    setPrevPhase(phase === "language" ? prevPhase : phase);
+    setPhase("language");
+  }
 
   function chooseLang(code: LangCode) {
     setLang(code);
     sessionStorage.setItem(STORAGE_LANG, code);
     sessionStorage.setItem("aednav.langPicked", "1");
-    setPhase("intro");
+    setPhase(prevPhase);
   }
 
   return (
@@ -68,7 +84,7 @@ function IntakePage() {
           <IntroScreen
             key="intro"
             lang={lang}
-            onChangeLang={() => setPhase("language")}
+            onChangeLang={openLangPicker}
             onStart={() => setPhase("chat")}
           />
         )}
@@ -76,10 +92,11 @@ function IntakePage() {
           <ChatScreen
             key="chat"
             lang={lang}
+            onChangeLang={openLangPicker}
             onComplete={() => setPhase("review")}
           />
         )}
-        {phase === "review" && <ReviewScreen key="review" lang={lang} />}
+        {phase === "review" && <ReviewScreen key="review" lang={lang} onChangeLang={openLangPicker} />}
       </AnimatePresence>
     </div>
   );
@@ -240,8 +257,8 @@ function IntroScreen({
 /* ---------------- Chat screen ---------------- */
 
 function ChatScreen({
-  lang, onComplete,
-}: { lang: LangCode; onComplete: () => void }) {
+  lang, onComplete, onChangeLang,
+}: { lang: LangCode; onComplete: () => void; onChangeLang: () => void }) {
   const tr = useMemo(() => translate(lang), [lang]);
   const u = useMemo(() => ui(lang), [lang]);
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
@@ -338,7 +355,12 @@ function ChatScreen({
     }
   }
 
-  const suggestions = !isLast ? tr.suggestions[currentField] ?? [] : [];
+  const suggestions = !isLast
+    ? Array.from(new Set([
+        ...(tr.suggestions[currentField] ?? []),
+        ...(currentField === "concern" ? [] : tr.quickOptions ?? []),
+      ]))
+    : [];
 
   return (
     <motion.div
@@ -354,12 +376,18 @@ function ChatScreen({
             </Link>
             <span className="text-xs text-muted-foreground">
               {u.chrome.progressOf(Math.min(stepIndex, FIELD_ORDER.length), FIELD_ORDER.length)}
-              {" · "}
-              {getLangConfig(lang).native}
             </span>
-            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-              {u.chrome.exit}
-            </Link>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={onChangeLang}
+                className="text-xs text-muted-foreground hover:text-foreground"
+              >
+                {getLangConfig(lang).native} · {u.chrome.change}
+              </button>
+              <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
+                {u.chrome.exit}
+              </Link>
+            </div>
           </div>
           <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
             <motion.div
@@ -534,7 +562,7 @@ function TypingIndicator() {
 
 /* ---------------- Review screen ---------------- */
 
-function ReviewScreen({ lang }: { lang: LangCode }) {
+function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: () => void }) {
   const tr = translate(lang);
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
@@ -572,7 +600,12 @@ function ReviewScreen({ lang }: { lang: LangCode }) {
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
           </Link>
-          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">{ui(lang).chrome.exit}</Link>
+          <div className="flex items-center gap-3">
+            <button onClick={onChangeLang} className="text-xs text-muted-foreground hover:text-foreground">
+              {getLangConfig(lang).native} · {ui(lang).chrome.change}
+            </button>
+            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">{ui(lang).chrome.exit}</Link>
+          </div>
         </div>
       </header>
 

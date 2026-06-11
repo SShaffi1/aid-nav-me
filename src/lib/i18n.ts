@@ -47,6 +47,7 @@ export type IntakePromptSet = {
   prompts: Record<IntakeFieldKey, string>;
   placeholders: Record<IntakeFieldKey, string>;
   suggestions: Record<IntakeFieldKey, string[]>;
+  quickOptions: string[];
   composer: {
     placeholderFallback: string;
     sendAria: string;
@@ -94,7 +95,6 @@ export type IntakePromptSet = {
   };
 };
 
-const QUICK_EN = ["I'm not sure", "Skip for now"];
 
 const EN: IntakePromptSet = {
   intro: {
@@ -103,7 +103,7 @@ const EN: IntakePromptSet = {
     bullets: [
       "AEDNAV helps organize your concerns before a healthcare visit.",
       "AEDNAV does not diagnose, treat, or replace a healthcare professional.",
-      "AEDNAV is not for emergencies. If this may be urgent, call 911 or seek immediate help.",
+      "If this is urgent or you may be in danger, call 911.",
     ],
     cta: "I understand, start intake",
     note: "Takes about 3 minutes. Your responses stay in this browser session.",
@@ -130,14 +130,15 @@ const EN: IntakePromptSet = {
   },
   suggestions: {
     concern: [],
-    duration: ["A few hours", "1–3 days", "About a week", "Several weeks", "Months", ...QUICK_EN],
-    severity: ["1–3 (mild)", "4–6 (moderate)", "7–8 (severe)", "9–10 (very severe)", ...QUICK_EN],
-    pattern: ["No clear pattern", ...QUICK_EN],
-    medications: ["None", "Over-the-counter only", "Prescription medication", ...QUICK_EN],
-    allergies: ["None known", "Not applicable", ...QUICK_EN],
-    history: ["Nothing relevant", "Not applicable", ...QUICK_EN],
-    goal: ["A clear plan", "Better understanding", ...QUICK_EN],
+    duration: ["A few hours", "1 to 3 days", "About a week", "Several weeks", "Months"],
+    severity: ["1 to 3 (mild)", "4 to 6 (moderate)", "7 to 8 (severe)", "9 to 10 (very severe)"],
+    pattern: ["No clear pattern"],
+    medications: ["Over-the-counter only", "Prescription medication"],
+    allergies: ["None known"],
+    history: ["Nothing relevant"],
+    goal: ["A clear plan", "Better understanding"],
   },
+  quickOptions: ["I am not sure", "None", "Not applicable", "Skip for now"],
   composer: {
     placeholderFallback: "Type a message...",
     sendAria: "Send",
@@ -214,8 +215,8 @@ const FR: IntakePromptSet = {
     title: "Quelques points importants",
     bullets: [
       "AEDNAV aide à organiser vos préoccupations avant une consultation médicale.",
-      "AEDNAV ne pose pas de diagnostic et ne remplace pas un professionnel de santé.",
-      "AEDNAV n'est pas conçu pour les urgences. En cas d'urgence, appelez le 911.",
+      "AEDNAV ne diagnostique pas, ne traite pas et ne remplace pas un professionnel de santé.",
+      "Si la situation est urgente ou si vous êtes en danger, appelez le 911.",
     ],
     cta: "J'ai compris, commencer",
     note: "Environ 3 minutes. Vos réponses restent dans cette session.",
@@ -242,14 +243,15 @@ const FR: IntakePromptSet = {
   },
   suggestions: {
     concern: [],
-    duration: ["Quelques heures", "1–3 jours", "Environ une semaine", "Plusieurs semaines", "Des mois", "Je ne suis pas sûr·e", "Passer"],
-    severity: ["1–3 (léger)", "4–6 (modéré)", "7–8 (sévère)", "9–10 (très sévère)", "Je ne suis pas sûr·e", "Passer"],
-    pattern: ["Pas de schéma clair", "Je ne suis pas sûr·e", "Passer"],
-    medications: ["Aucun", "En vente libre seulement", "Médicaments prescrits", "Passer"],
-    allergies: ["Aucune connue", "Non applicable", "Passer"],
-    history: ["Rien de pertinent", "Non applicable", "Passer"],
-    goal: ["Un plan clair", "Mieux comprendre", "Je ne suis pas sûr·e", "Passer"],
+    duration: ["Quelques heures", "1 à 3 jours", "Environ une semaine", "Plusieurs semaines", "Des mois"],
+    severity: ["1 à 3 (léger)", "4 à 6 (modéré)", "7 à 8 (sévère)", "9 à 10 (très sévère)"],
+    pattern: ["Pas de schéma clair"],
+    medications: ["En vente libre seulement", "Médicaments prescrits"],
+    allergies: ["Aucune connue"],
+    history: ["Rien de pertinent"],
+    goal: ["Un plan clair", "Mieux comprendre"],
   },
+  quickOptions: ["Je ne suis pas sûr·e", "Aucun(e)", "Non applicable", "Passer"],
   composer: {
     placeholderFallback: "Tapez un message...",
     sendAria: "Envoyer",
@@ -326,8 +328,8 @@ const ES: IntakePromptSet = {
     title: "Algunas cosas importantes",
     bullets: [
       "AEDNAV ayuda a organizar tus inquietudes antes de una consulta médica.",
-      "AEDNAV no diagnostica ni reemplaza a un profesional de salud.",
-      "AEDNAV no es para emergencias. Si es urgente, llama al 911.",
+      "AEDNAV no diagnostica, no trata, ni reemplaza a un profesional de salud.",
+      "Si es urgente o puedes estar en peligro, llama al 911.",
     ],
     cta: "Entiendo, comenzar",
     note: "Toma unos 3 minutos. Tus respuestas quedan en esta sesión del navegador.",
@@ -354,14 +356,15 @@ const ES: IntakePromptSet = {
   },
   suggestions: {
     concern: [],
-    duration: ["Unas horas", "1–3 días", "Una semana", "Varias semanas", "Meses", "No estoy seguro/a", "Saltar"],
-    severity: ["1–3 (leve)", "4–6 (moderado)", "7–8 (severo)", "9–10 (muy severo)", "No estoy seguro/a", "Saltar"],
-    pattern: ["Sin patrón claro", "No estoy seguro/a", "Saltar"],
-    medications: ["Ninguno", "Solo de venta libre", "Medicamentos recetados", "Saltar"],
-    allergies: ["Ninguna conocida", "No aplica", "Saltar"],
-    history: ["Nada relevante", "No aplica", "Saltar"],
-    goal: ["Un plan claro", "Mejor comprensión", "No estoy seguro/a", "Saltar"],
+    duration: ["Unas horas", "1 a 3 días", "Una semana", "Varias semanas", "Meses"],
+    severity: ["1 a 3 (leve)", "4 a 6 (moderado)", "7 a 8 (severo)", "9 a 10 (muy severo)"],
+    pattern: ["Sin patrón claro"],
+    medications: ["Solo de venta libre", "Medicamentos recetados"],
+    allergies: ["Ninguna conocida"],
+    history: ["Nada relevante"],
+    goal: ["Un plan claro", "Mejor comprensión"],
   },
+  quickOptions: ["No estoy seguro/a", "Ninguno", "No aplica", "Saltar"],
   composer: {
     placeholderFallback: "Escribe un mensaje...",
     sendAria: "Enviar",
@@ -438,8 +441,8 @@ const ZH: IntakePromptSet = {
     title: "请先了解几点",
     bullets: [
       "AEDNAV 帮助您在就医前整理健康问题。",
-      "AEDNAV 不进行诊断,也不能替代医疗专业人员。",
-      "AEDNAV 不适用于紧急情况。如有紧急情况,请拨打 911。",
+      "AEDNAV 不进行诊断或治疗,也不能替代医疗专业人员。",
+      "如果情况紧急或您可能处于危险中,请拨打 911。",
     ],
     cta: "我已了解, 开始",
     note: "大约 3 分钟。您的回答仅保存在此浏览器会话中。",
@@ -466,14 +469,15 @@ const ZH: IntakePromptSet = {
   },
   suggestions: {
     concern: [],
-    duration: ["几小时", "1–3 天", "约一周", "几周", "几个月", "我不确定", "跳过"],
-    severity: ["1–3(轻)", "4–6(中)", "7–8(重)", "9–10(非常严重)", "我不确定", "跳过"],
-    pattern: ["没有明显规律", "我不确定", "跳过"],
-    medications: ["无", "仅非处方药", "处方药", "跳过"],
-    allergies: ["无已知过敏", "不适用", "跳过"],
-    history: ["无相关情况", "不适用", "跳过"],
-    goal: ["明确的方案", "更好的理解", "我不确定", "跳过"],
+    duration: ["几小时", "1 到 3 天", "约一周", "几周", "几个月"],
+    severity: ["1 到 3(轻)", "4 到 6(中)", "7 到 8(重)", "9 到 10(非常严重)"],
+    pattern: ["没有明显规律"],
+    medications: ["仅非处方药", "处方药"],
+    allergies: ["无已知过敏"],
+    history: ["无相关情况"],
+    goal: ["明确的方案", "更好的理解"],
   },
+  quickOptions: ["我不确定", "无", "不适用", "跳过"],
   composer: {
     placeholderFallback: "输入消息...",
     sendAria: "发送",
@@ -549,8 +553,8 @@ const PA: IntakePromptSet = {
     title: "ਕੁਝ ਜਾਣਨ ਵਾਲੀਆਂ ਗੱਲਾਂ",
     bullets: [
       "AEDNAV ਡਾਕਟਰ ਕੋਲ ਜਾਣ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਡੀਆਂ ਚਿੰਤਾਵਾਂ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ।",
-      "AEDNAV ਜਾਂਚ ਨਹੀਂ ਕਰਦਾ ਅਤੇ ਡਾਕਟਰੀ ਮਾਹਰ ਦੀ ਥਾਂ ਨਹੀਂ ਲੈਂਦਾ।",
-      "AEDNAV ਐਮਰਜੈਂਸੀ ਲਈ ਨਹੀਂ ਹੈ। ਜੇ ਜ਼ਰੂਰੀ ਹੈ, 911 ਤੇ ਕਾਲ ਕਰੋ।",
+      "AEDNAV ਜਾਂਚ ਜਾਂ ਇਲਾਜ ਨਹੀਂ ਕਰਦਾ ਅਤੇ ਡਾਕਟਰੀ ਮਾਹਰ ਦੀ ਥਾਂ ਨਹੀਂ ਲੈਂਦਾ।",
+      "ਜੇ ਇਹ ਜ਼ਰੂਰੀ ਹੈ ਜਾਂ ਤੁਸੀਂ ਖ਼ਤਰੇ ਵਿੱਚ ਹੋ ਸਕਦੇ ਹੋ, 911 ਤੇ ਕਾਲ ਕਰੋ।",
     ],
     cta: "ਮੈਂ ਸਮਝ ਲਿਆ, ਸ਼ੁਰੂ ਕਰੋ",
     note: "ਲਗਭਗ 3 ਮਿੰਟ। ਤੁਹਾਡੇ ਜਵਾਬ ਇਸੇ ਸੈਸ਼ਨ ਵਿੱਚ ਰਹਿੰਦੇ ਹਨ।",
@@ -577,14 +581,15 @@ const PA: IntakePromptSet = {
   },
   suggestions: {
     concern: [],
-    duration: ["ਕੁਝ ਘੰਟੇ", "1–3 ਦਿਨ", "ਲਗਭਗ ਇੱਕ ਹਫ਼ਤਾ", "ਕਈ ਹਫ਼ਤੇ", "ਮਹੀਨੇ", "ਮੈਨੂੰ ਪਤਾ ਨਹੀਂ", "ਛੱਡੋ"],
-    severity: ["1–3 (ਹਲਕਾ)", "4–6 (ਮੱਧਮ)", "7–8 (ਗੰਭੀਰ)", "9–10 (ਬਹੁਤ ਗੰਭੀਰ)", "ਮੈਨੂੰ ਪਤਾ ਨਹੀਂ", "ਛੱਡੋ"],
-    pattern: ["ਕੋਈ ਸਪਸ਼ਟ ਨਮੂਨਾ ਨਹੀਂ", "ਮੈਨੂੰ ਪਤਾ ਨਹੀਂ", "ਛੱਡੋ"],
-    medications: ["ਕੋਈ ਨਹੀਂ", "ਸਿਰਫ਼ ਓਟੀਸੀ", "ਡਾਕਟਰੀ ਨੁਸਖ਼ਾ", "ਛੱਡੋ"],
-    allergies: ["ਕੋਈ ਜਾਣੀ ਨਹੀਂ", "ਲਾਗੂ ਨਹੀਂ", "ਛੱਡੋ"],
-    history: ["ਕੁਝ ਸਬੰਧਿਤ ਨਹੀਂ", "ਲਾਗੂ ਨਹੀਂ", "ਛੱਡੋ"],
-    goal: ["ਸਪੱਸ਼ਟ ਯੋਜਨਾ", "ਬਿਹਤਰ ਸਮਝ", "ਮੈਨੂੰ ਪਤਾ ਨਹੀਂ", "ਛੱਡੋ"],
+    duration: ["ਕੁਝ ਘੰਟੇ", "1 ਤੋਂ 3 ਦਿਨ", "ਲਗਭਗ ਇੱਕ ਹਫ਼ਤਾ", "ਕਈ ਹਫ਼ਤੇ", "ਮਹੀਨੇ"],
+    severity: ["1 ਤੋਂ 3 (ਹਲਕਾ)", "4 ਤੋਂ 6 (ਮੱਧਮ)", "7 ਤੋਂ 8 (ਗੰਭੀਰ)", "9 ਤੋਂ 10 (ਬਹੁਤ ਗੰਭੀਰ)"],
+    pattern: ["ਕੋਈ ਸਪਸ਼ਟ ਨਮੂਨਾ ਨਹੀਂ"],
+    medications: ["ਸਿਰਫ਼ ਓਟੀਸੀ", "ਡਾਕਟਰੀ ਨੁਸਖ਼ਾ"],
+    allergies: ["ਕੋਈ ਜਾਣੀ ਨਹੀਂ"],
+    history: ["ਕੁਝ ਸਬੰਧਿਤ ਨਹੀਂ"],
+    goal: ["ਸਪੱਸ਼ਟ ਯੋਜਨਾ", "ਬਿਹਤਰ ਸਮਝ"],
   },
+  quickOptions: ["ਮੈਨੂੰ ਪਤਾ ਨਹੀਂ", "ਕੋਈ ਨਹੀਂ", "ਲਾਗੂ ਨਹੀਂ", "ਛੱਡੋ"],
   composer: {
     placeholderFallback: "ਸੁਨੇਹਾ ਲਿਖੋ...",
     sendAria: "ਭੇਜੋ",
@@ -660,8 +665,8 @@ const AR: IntakePromptSet = {
     title: "بضعة أمور يجب معرفتها",
     bullets: [
       "يساعدك AEDNAV على تنظيم مخاوفك الصحية قبل زيارة الطبيب.",
-      "AEDNAV لا يُشخّص ولا يحل محل المختصين الصحيين.",
-      "AEDNAV ليس للحالات الطارئة. إن كان الأمر عاجلاً، اتصل بـ 911.",
+      "AEDNAV لا يُشخّص ولا يُعالج ولا يحل محل المختصين الصحيين.",
+      "إذا كان الأمر عاجلاً أو كنت في خطر، اتصل بـ 911.",
     ],
     cta: "فهمت, ابدأ",
     note: "حوالي 3 دقائق. تبقى إجاباتك في هذه الجلسة فقط.",
@@ -688,14 +693,15 @@ const AR: IntakePromptSet = {
   },
   suggestions: {
     concern: [],
-    duration: ["بضع ساعات", "1–3 أيام", "حوالي أسبوع", "عدة أسابيع", "أشهر", "لست متأكداً", "تخطي"],
-    severity: ["1–3 (خفيف)", "4–6 (متوسط)", "7–8 (شديد)", "9–10 (شديد جداً)", "لست متأكداً", "تخطي"],
-    pattern: ["لا يوجد نمط واضح", "لست متأكداً", "تخطي"],
-    medications: ["لا شيء", "بدون وصفة فقط", "أدوية موصوفة", "تخطي"],
-    allergies: ["لا توجد", "غير منطبق", "تخطي"],
-    history: ["لا شيء ذو صلة", "غير منطبق", "تخطي"],
-    goal: ["خطة واضحة", "فهم أفضل", "لست متأكداً", "تخطي"],
+    duration: ["بضع ساعات", "1 إلى 3 أيام", "حوالي أسبوع", "عدة أسابيع", "أشهر"],
+    severity: ["1 إلى 3 (خفيف)", "4 إلى 6 (متوسط)", "7 إلى 8 (شديد)", "9 إلى 10 (شديد جداً)"],
+    pattern: ["لا يوجد نمط واضح"],
+    medications: ["بدون وصفة فقط", "أدوية موصوفة"],
+    allergies: ["لا توجد"],
+    history: ["لا شيء ذو صلة"],
+    goal: ["خطة واضحة", "فهم أفضل"],
   },
+  quickOptions: ["لست متأكداً", "لا شيء", "غير منطبق", "تخطي"],
   composer: {
     placeholderFallback: "اكتب رسالة...",
     sendAria: "إرسال",
@@ -771,8 +777,8 @@ const UR: IntakePromptSet = {
     title: "چند اہم باتیں",
     bullets: [
       "AEDNAV آپ کو صحت کی ملاقات سے پہلے اپنی پریشانیوں کو منظم کرنے میں مدد کرتا ہے۔",
-      "AEDNAV تشخیص نہیں کرتا اور صحت کے پیشہ ور افراد کا متبادل نہیں ہے۔",
-      "AEDNAV ایمرجنسی کے لیے نہیں ہے۔ اگر یہ ضروری ہو تو 911 پر کال کریں۔",
+      "AEDNAV تشخیص یا علاج نہیں کرتا اور صحت کے پیشہ ور افراد کا متبادل نہیں ہے۔",
+      "اگر یہ ضروری ہے یا آپ خطرے میں ہو سکتے ہیں، 911 پر کال کریں۔",
     ],
     cta: "میں سمجھ گیا, شروع کریں",
     note: "تقریباً 3 منٹ۔ آپ کے جوابات صرف اس سیشن میں محفوظ ہیں۔",
@@ -799,14 +805,15 @@ const UR: IntakePromptSet = {
   },
   suggestions: {
     concern: [],
-    duration: ["چند گھنٹے", "1–3 دن", "تقریباً ایک ہفتہ", "کئی ہفتے", "مہینے", "مجھے یقین نہیں", "چھوڑ دیں"],
-    severity: ["1–3 (ہلکا)", "4–6 (درمیانہ)", "7–8 (شدید)", "9–10 (بہت شدید)", "مجھے یقین نہیں", "چھوڑ دیں"],
-    pattern: ["کوئی واضح پیٹرن نہیں", "مجھے یقین نہیں", "چھوڑ دیں"],
-    medications: ["کوئی نہیں", "صرف OTC", "نسخہ شدہ دوا", "چھوڑ دیں"],
-    allergies: ["کوئی معلوم نہیں", "لاگو نہیں", "چھوڑ دیں"],
-    history: ["کوئی متعلقہ نہیں", "لاگو نہیں", "چھوڑ دیں"],
-    goal: ["واضح منصوبہ", "بہتر سمجھ", "مجھے یقین نہیں", "چھوڑ دیں"],
+    duration: ["چند گھنٹے", "1 سے 3 دن", "تقریباً ایک ہفتہ", "کئی ہفتے", "مہینے"],
+    severity: ["1 سے 3 (ہلکا)", "4 سے 6 (درمیانہ)", "7 سے 8 (شدید)", "9 سے 10 (بہت شدید)"],
+    pattern: ["کوئی واضح پیٹرن نہیں"],
+    medications: ["صرف OTC", "نسخہ شدہ دوا"],
+    allergies: ["کوئی معلوم نہیں"],
+    history: ["کوئی متعلقہ نہیں"],
+    goal: ["واضح منصوبہ", "بہتر سمجھ"],
   },
+  quickOptions: ["مجھے یقین نہیں", "کوئی نہیں", "لاگو نہیں", "چھوڑ دیں"],
   composer: {
     placeholderFallback: "پیغام لکھیں...",
     sendAria: "بھیجیں",
