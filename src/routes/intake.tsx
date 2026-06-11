@@ -551,7 +551,7 @@ function TypingIndicator() {
 
 /* ---------------- Review screen ---------------- */
 
-function ReviewScreen({ lang }: { lang: LangCode }) {
+function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: () => void }) {
   const tr = translate(lang);
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
