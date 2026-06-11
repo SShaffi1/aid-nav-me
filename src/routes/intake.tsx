@@ -595,7 +595,12 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
           </Link>
-          <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">{ui(lang).chrome.exit}</Link>
+          <div className="flex items-center gap-3">
+            <button onClick={onChangeLang} className="text-xs text-muted-foreground hover:text-foreground">
+              {getLangConfig(lang).native} · {ui(lang).chrome.change}
+            </button>
+            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">{ui(lang).chrome.exit}</Link>
+          </div>
         </div>
       </header>
 
