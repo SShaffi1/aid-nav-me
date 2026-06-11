@@ -355,7 +355,12 @@ function ChatScreen({
     }
   }
 
-  const suggestions = !isLast ? tr.suggestions[currentField] ?? [] : [];
+  const suggestions = !isLast
+    ? Array.from(new Set([
+        ...(tr.suggestions[currentField] ?? []),
+        ...(currentField === "concern" ? [] : tr.quickOptions ?? []),
+      ]))
+    : [];
 
   return (
     <motion.div
