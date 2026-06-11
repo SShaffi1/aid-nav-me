@@ -95,7 +95,6 @@ export type IntakePromptSet = {
   };
 };
 
-const QUICK_EN = ["I'm not sure", "Skip for now"];
 
 const EN: IntakePromptSet = {
   intro: {
