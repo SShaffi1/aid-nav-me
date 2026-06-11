@@ -33,7 +33,7 @@ const EN: LandingContent = {
     { n: "02", title: "Describe your concern", body: "Share what's been on your mind in your own words. No forms, no jargon." },
     { n: "03", title: "Answer guided questions", body: "Short follow-ups about timing, severity, medications, allergies, and history." },
     { n: "04", title: "Review your answers", body: "See everything in one place and edit anything before generating the summary." },
-    { n: "05", title: "Get both summaries", body: "A patient summary in your language and an English summary for your provider." },
+    { n: "05", title: "Create a summary for your appointment", body: "A patient summary in your language and an English summary for your provider, ready to share." },
   ],
   audiences: [
     { title: "Newcomers to Canada", body: "Prepare for an appointment in your strongest language and bring an English summary." },

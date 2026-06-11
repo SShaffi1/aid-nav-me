@@ -90,10 +90,10 @@ const EN: UIStrings = {
   hero: {
     eyebrow: "Pre-appointment preparation",
     title1: "Prepare for your",
-    title2: "appointment.",
-    sub: "AEDNAV helps patients organize their health concerns before care, with multilingual support for families who are more comfortable in another language.",
-    primary: "Start intake",
-    secondary: "See how it works",
+    title2: "appointment",
+    sub: "AEDNAV helps patients organize health concerns before care, with multilingual support for families who are more comfortable in another language.",
+    primary: "Start Intake",
+    secondary: "See How It Works",
     note: "Built for clear communication in any language.",
   },
   sectionTitles: {
@@ -111,7 +111,7 @@ const EN: UIStrings = {
     faq: "Frequently asked",
     ctaTitle: "Ready for your next visit?",
     ctaBody: "About three minutes in your language. A clearer conversation in English.",
-    ctaButton: "Start intake",
+    ctaButton: "Start Intake",
   },
   footer: {
     disclaimerLabel: "Medical disclaimer.",
