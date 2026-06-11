@@ -257,8 +257,8 @@ function IntroScreen({
 /* ---------------- Chat screen ---------------- */
 
 function ChatScreen({
-  lang, onComplete,
-}: { lang: LangCode; onComplete: () => void }) {
+  lang, onComplete, onChangeLang,
+}: { lang: LangCode; onComplete: () => void; onChangeLang: () => void }) {
   const tr = useMemo(() => translate(lang), [lang]);
   const u = useMemo(() => ui(lang), [lang]);
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
