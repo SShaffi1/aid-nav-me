@@ -110,7 +110,6 @@ function IntakePage() {
         )}
         {phase === "chat" && (
           <ChatScreen
-            key="chat"
             lang={lang}
             onChangeLang={openLangPicker}
             onComplete={() => setPhase("review")}
