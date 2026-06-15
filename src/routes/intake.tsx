@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/SiteChrome";
 import { initialAnswers, detectEmergency, type IntakeAnswers } from "@/lib/intake";
 import {
@@ -110,7 +110,6 @@ function IntakePage() {
         )}
         {phase === "chat" && (
           <ChatScreen
-            key="chat"
             lang={lang}
             onChangeLang={openLangPicker}
             onComplete={() => setPhase("review")}
@@ -278,8 +277,14 @@ function IntroScreen({
 function ChatScreen({
   lang, onComplete, onChangeLang,
 }: { lang: LangCode; onComplete: () => void; onChangeLang: () => void }) {
-  const tr = useMemo(() => translate(lang), [lang]);
-  const u = useMemo(() => ui(lang), [lang]);
+  const [tr, setTr] = useState(() => translate(lang));
+  const [u, setU] = useState(() => ui(lang));
+
+  useEffect(() => {
+    setTr(translate(lang));
+    setU(ui(lang));
+  }, [lang]);
+
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
   const [stepIndex, setStepIndex] = useState(0);
   const [messages, setMessages] = useState<Message[]>([]);
