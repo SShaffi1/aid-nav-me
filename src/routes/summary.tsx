@@ -295,11 +295,10 @@ function PatientCard({
   tr: ReturnType<typeof translate>; dir: "ltr" | "rtl";
   generatedAt: string; lang: LangCode;
 }) {
+  void dir;
   return (
-    <div
-      dir={dir}
-      className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none"
-    >
+    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none">
+
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
           <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
@@ -391,10 +390,8 @@ function ProviderCard({
   recommendation: { setting: CareSetting; reason: string; isEmergency: boolean };
 }) {
   return (
-    <div
-      dir="ltr"
-      className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none"
-    >
+    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none">
+
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
           <p className="text-[11px] font-medium uppercase tracking-wider text-primary">

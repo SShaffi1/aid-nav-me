@@ -16,7 +16,7 @@ export function DashboardPreview() {
       <div className="absolute -inset-x-20 -top-10 -bottom-10 -z-10 bg-radial-fade" />
 
       <div className="relative rounded-2xl border border-border bg-surface shadow-soft">
-        <div className="flex items-center gap-1.5 border-b border-border px-4 py-3" dir="ltr">
+        <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.05_30)]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.88_0.07_85)]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.08_150)]" />
@@ -24,7 +24,7 @@ export function DashboardPreview() {
         </div>
 
         <div className="grid gap-0 md:grid-cols-[1fr_320px]">
-          <div className="space-y-4 p-6 md:p-8" dir="auto">
+          <div className="space-y-4 p-6 md:p-8">
             <ChatBubble role="ai">{d.chat1}</ChatBubble>
             <ChatBubble role="user">{d.chat2}</ChatBubble>
             <ChatBubble role="ai">{d.chat3}</ChatBubble>
@@ -40,7 +40,7 @@ export function DashboardPreview() {
             </motion.div>
           </div>
 
-          <div className="border-t border-border bg-surface-elevated p-6 md:border-l md:border-t-0" dir="auto">
+          <div className="border-t border-border bg-surface-elevated p-6 md:border-l md:border-t-0">
             <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
               {d.visitSummary}
             </p>
@@ -78,6 +78,7 @@ function ChatBubble({ role, children }: { role: "ai" | "user"; children: React.R
       className={`flex ${isAi ? "justify-start" : "justify-end"}`}
     >
       <div
+        dir="auto"
         className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[13.5px] leading-relaxed ${
           isAi
             ? "bg-surface-elevated text-foreground border border-border"

@@ -192,7 +192,7 @@ function IntroScreen({
       className="flex min-h-screen flex-col"
     >
       <header className="border-b border-border bg-surface/80 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5" dir="ltr">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
           </Link>
@@ -212,7 +212,6 @@ function IntroScreen({
 
       <main className="flex flex-1 items-center justify-center px-5 py-10">
         <motion.div
-          dir="auto"
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
@@ -369,7 +368,7 @@ function ChatScreen({
       className="flex min-h-screen flex-col"
     >
       <header className="border-b border-border bg-surface/80 backdrop-blur">
-        <div className="mx-auto max-w-3xl px-5 py-2.5" dir="ltr">
+        <div className="mx-auto max-w-3xl px-5 py-2.5">
           <div className="flex items-center justify-between gap-3">
             <Link to="/" aria-label="AEDNAV home" className="flex items-center">
               <Logo className="h-6 md:h-7" />
@@ -414,7 +413,7 @@ function ChatScreen({
           >
             <div className="mx-auto max-w-3xl px-5 py-4">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
-                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-destructive text-destructive-foreground" dir="ltr">
+                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-destructive text-destructive-foreground">
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
                 </div>
                 <div className="min-w-0 flex-1">
@@ -426,7 +425,7 @@ function ChatScreen({
                       This may need urgent attention. AEDNAV is not designed for emergencies, please contact emergency services or go to your nearest emergency department.
                     </p>
                   )}
-                  <div className="mt-3 flex flex-wrap gap-2" dir="ltr">
+                  <div className="mt-3 flex flex-wrap gap-2">
                     <a href="tel:911" className="rounded-md bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground">Call 911</a>
                     <a href="tel:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Call 988</a>
                     <a href="sms:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Text 988</a>
@@ -596,7 +595,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
       className="flex min-h-screen flex-col"
     >
       <header className="border-b border-border bg-surface/80 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5" dir="ltr">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
           </Link>
@@ -609,7 +608,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 md:py-10" dir="auto">
+      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 md:py-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}

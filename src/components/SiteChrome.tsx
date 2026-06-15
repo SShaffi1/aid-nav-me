@@ -32,7 +32,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-2.5 md:px-6 md:py-3">
-        <Link to="/" aria-label="AEDNAV home" className="flex items-center" dir="ltr">
+        <Link to="/" aria-label="AEDNAV home" className="flex items-center">
           <Wordmark />
         </Link>
         <nav className="hidden items-center gap-7 text-[13px] text-muted-foreground md:flex">
@@ -40,7 +40,7 @@ export function SiteHeader() {
           <a href="/#features" onClick={(e) => handleAnchor(e, "features")} className={navLinkClass}>{tr.nav.features}</a>
           <a href="/#faq" onClick={(e) => handleAnchor(e, "faq")} className={navLinkClass}>{tr.nav.faq}</a>
         </nav>
-        <div className="flex items-center gap-2" dir="ltr">
+        <div className="flex items-center gap-2">
           <LanguageSwitcher current={lang} />
           <Link
             to="/intake"

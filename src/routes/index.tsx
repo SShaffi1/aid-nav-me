@@ -180,8 +180,8 @@ function LandingPage() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {/* Patient (selected language) */}
-          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8" dir="auto">
-            <div className="flex items-center justify-between" dir="ltr">
+          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8">
+            <div className="flex items-center justify-between">
               <p className="text-[11px] font-medium uppercase tracking-wider text-primary">{lc.dual.patientLabel}</p>
               <span className="text-[11px] text-muted-foreground">{getLangConfig(lang).native}</span>
             </div>
@@ -206,7 +206,7 @@ function LandingPage() {
           </div>
 
           {/* Provider (always English) */}
-          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8" dir="ltr">
+          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8">
             <div className="flex items-center justify-between">
               <p className="text-[11px] font-medium uppercase tracking-wider text-primary">Provider summary</p>
               <span className="text-[11px] text-muted-foreground">English</span>
