@@ -35,9 +35,29 @@ const FIELD_ORDER: IntakeFieldKey[] = [
 
 type Phase = "language" | "intro" | "chat" | "review";
 
+type AiMessageKind =
+  | { kind: "prompt"; field: IntakeFieldKey }
+  | { kind: "thankYou" }
+  | { kind: "emergency" };
+
 type Message =
-  | { id: string; role: "ai"; text: string }
+  | ({ id: string; role: "ai" } & AiMessageKind)
   | { id: string; role: "user"; text: string };
+
+function resolveAiText(
+  msg: Extract<Message, { role: "ai" }>,
+  tr: ReturnType<typeof translate>,
+): string {
+  switch (msg.kind) {
+    case "prompt":
+      return tr.prompts[msg.field];
+    case "thankYou":
+      return tr.thankYou;
+    case "emergency":
+      return tr.emergencyBanner.body;
+  }
+}
+
 
 function IntakePage() {
   const [phase, setPhase] = useState<Phase>("intro");
@@ -274,10 +294,11 @@ function ChatScreen({
     setAiThinking(true);
     const timer = setTimeout(() => {
       setAiThinking(false);
-      setMessages([{ id: "ai-0", role: "ai", text: tr.prompts[FIELD_ORDER[0]] }]);
+      setMessages([{ id: "ai-0", role: "ai", kind: "prompt", field: FIELD_ORDER[0] }]);
     }, 700);
     return () => clearTimeout(timer);
-  }, [tr]);
+  }, []);
+
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -308,11 +329,13 @@ function ChatScreen({
         setAiThinking(false);
         setMessages((m) => [
           ...m,
-          { id: `ai-em-${Date.now()}`, role: "ai", text: tr.emergencyBanner.body },
+          { id: `ai-em-${Date.now()}`, role: "ai", kind: "emergency" },
         ]);
       }, 600);
       return;
     }
+
+
 
     advance(updated, stepIndex + 1);
   }
@@ -325,7 +348,7 @@ function ChatScreen({
         setAiThinking(false);
         setMessages((m) => [
           ...m,
-          { id: `ai-${next}`, role: "ai", text: tr.prompts[FIELD_ORDER[next]] },
+          { id: `ai-${next}`, role: "ai", kind: "prompt", field: FIELD_ORDER[next] },
         ]);
       }, 800 + Math.random() * 350);
     } else {
@@ -334,13 +357,14 @@ function ChatScreen({
         setAiThinking(false);
         setMessages((m) => [
           ...m,
-          { id: "ai-final", role: "ai", text: tr.thankYou },
+          { id: "ai-final", role: "ai", kind: "thankYou" },
         ]);
         sessionStorage.setItem("aednav.answers", JSON.stringify(updated));
         setTimeout(() => onComplete(), 1100);
       }, 800);
     }
   }
+
 
   function acknowledgeAndContinue() {
     setEmergencyAcknowledged(true);
@@ -448,7 +472,7 @@ function ChatScreen({
       <div ref={scrollRef} className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl space-y-5 px-5 py-8 md:py-10">
           <AnimatePresence initial={false}>
-            {messages.map((m) => (<MessageBubble key={m.id} message={m} />))}
+            {messages.map((m) => (<MessageBubble key={m.id} message={m} tr={tr} />))}
           </AnimatePresence>
           {aiThinking && <TypingIndicator />}
         </div>
@@ -505,8 +529,15 @@ function ChatScreen({
   );
 }
 
-function MessageBubble({ message }: { message: Message }) {
+function MessageBubble({
+  message,
+  tr,
+}: {
+  message: Message;
+  tr: ReturnType<typeof translate>;
+}) {
   const isAi = message.role === "ai";
+  const text = isAi ? resolveAiText(message, tr) : message.text;
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
@@ -526,11 +557,12 @@ function MessageBubble({ message }: { message: Message }) {
             : "rounded-br-md bg-primary text-primary-foreground"
         }`}
       >
-        {message.text}
+        {text}
       </div>
     </motion.div>
   );
 }
+
 
 function TypingIndicator() {
   return (
