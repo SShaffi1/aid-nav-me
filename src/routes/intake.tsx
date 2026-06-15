@@ -277,8 +277,14 @@ function IntroScreen({
 function ChatScreen({
   lang, onComplete, onChangeLang,
 }: { lang: LangCode; onComplete: () => void; onChangeLang: () => void }) {
-  const tr = useMemo(() => translate(lang), [lang]);
-  const u = useMemo(() => ui(lang), [lang]);
+  const [tr, setTr] = useState(() => translate(lang));
+  const [u, setU] = useState(() => ui(lang));
+
+  useEffect(() => {
+    setTr(translate(lang));
+    setU(ui(lang));
+  }, [lang]);
+
   const [answers, setAnswers] = useState<IntakeAnswers>(initialAnswers);
   const [stepIndex, setStepIndex] = useState(0);
   const [messages, setMessages] = useState<Message[]>([]);
