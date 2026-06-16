@@ -763,3 +763,37 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
     </motion.div>
   );
 }
+
+/* ---------------- Exit confirmation ---------------- */
+
+function ExitButton({ lang }: { lang: LangCode }) {
+  const navigate = useNavigate();
+  const u = ui(lang);
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="text-xs text-muted-foreground hover:text-foreground"
+      >
+        {u.chrome.exit}
+      </button>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle dir="auto">{u.chrome.exitConfirm.title}</AlertDialogTitle>
+            <AlertDialogDescription dir="auto">
+              {u.chrome.exitConfirm.body}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{u.chrome.exitConfirm.stay}</AlertDialogCancel>
+            <AlertDialogAction onClick={() => navigate({ to: "/" })}>
+              {u.chrome.exitConfirm.leave}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
+  );
+}
