@@ -11,6 +11,10 @@ import { ui } from "@/lib/ui-i18n";
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/intake")({
   head: () => ({
@@ -277,9 +281,7 @@ function IntroScreen({
             >
               {getLangConfig(lang).native} · {u.chrome.change}
             </button>
-            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-              {u.chrome.exit}
-            </Link>
+            <ExitButton lang={lang} />
           </div>
         </div>
       </header>
@@ -467,9 +469,7 @@ function ChatScreen({
               >
                 {getLangConfig(lang).native} · {u.chrome.change}
               </button>
-              <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-                {u.chrome.exit}
-              </Link>
+              <ExitButton lang={lang} />
             </div>
           </div>
           <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
@@ -695,7 +695,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
             <button onClick={onChangeLang} className="text-xs text-muted-foreground hover:text-foreground">
               {getLangConfig(lang).native} · {ui(lang).chrome.change}
             </button>
-            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">{ui(lang).chrome.exit}</Link>
+            <ExitButton lang={lang} />
           </div>
         </div>
       </header>
@@ -761,5 +761,39 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
         </div>
       </main>
     </motion.div>
+  );
+}
+
+/* ---------------- Exit confirmation ---------------- */
+
+function ExitButton({ lang }: { lang: LangCode }) {
+  const navigate = useNavigate();
+  const u = ui(lang);
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="text-xs text-muted-foreground hover:text-foreground"
+      >
+        {u.chrome.exit}
+      </button>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle dir="auto">{u.chrome.exitConfirm.title}</AlertDialogTitle>
+            <AlertDialogDescription dir="auto">
+              {u.chrome.exitConfirm.body}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{u.chrome.exitConfirm.stay}</AlertDialogCancel>
+            <AlertDialogAction onClick={() => navigate({ to: "/" })}>
+              {u.chrome.exitConfirm.leave}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
