@@ -64,8 +64,8 @@ function resolveAiText(
 
 function IntakePage() {
   const [phase, setPhase] = useState<Phase>("intro");
-  const [prevPhase, setPrevPhase] = useState<Phase>("intro");
   const [lang, setLang] = useState<LangCode>("en");
+  const [langDialogOpen, setLangDialogOpen] = useState(false);
 
   // Always use the language already selected from the homepage gate or top-right
   // switcher. Never re-prompt for language at the start of intake.
@@ -86,23 +86,20 @@ function IntakePage() {
   }, []);
 
   function openLangPicker() {
-    setPrevPhase(phase === "language" ? prevPhase : phase);
-    setPhase("language");
+    setLangDialogOpen(true);
   }
 
   function chooseLang(code: LangCode) {
     setLang(code);
     sessionStorage.setItem(STORAGE_LANG, code);
     sessionStorage.setItem("aednav.langPicked", "1");
-    setPhase(prevPhase);
+    window.dispatchEvent(new CustomEvent("aednav:lang-change", { detail: code }));
+    setLangDialogOpen(false);
   }
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <AnimatePresence mode="wait">
-        {phase === "language" && (
-          <LanguageScreen key="lang" current={lang} onPick={chooseLang} />
-        )}
         {phase === "intro" && (
           <IntroScreen
             key="intro"
@@ -120,7 +117,62 @@ function IntakePage() {
         )}
         {phase === "review" && <ReviewScreen key="review" lang={lang} onChangeLang={openLangPicker} />}
       </AnimatePresence>
+
+      <LanguageDialog
+        open={langDialogOpen}
+        current={lang}
+        onPick={chooseLang}
+        onOpenChange={setLangDialogOpen}
+      />
     </div>
+  );
+}
+
+/* ---------------- Language dialog ---------------- */
+
+function LanguageDialog({
+  open, current, onPick, onOpenChange,
+}: {
+  open: boolean;
+  current: LangCode;
+  onPick: (c: LangCode) => void;
+  onOpenChange: (v: boolean) => void;
+}) {
+  const u = ui(current);
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-lg">
+        <DialogHeader>
+          <DialogTitle dir="auto">{u.langGate.title}</DialogTitle>
+          <DialogDescription dir="auto">{u.langGate.intakeSubtitle}</DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {LANGUAGES.map((l) => {
+            const active = l.code === current;
+            return (
+              <button
+                key={l.code}
+                onClick={() => onPick(l.code)}
+                className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-all duration-150 hover:bg-surface-elevated active:scale-[0.99] ${
+                  active ? "border-primary/50 bg-primary-soft" : "border-border bg-surface"
+                }`}
+              >
+                <span>
+                  <span dir="auto" className="block text-sm font-medium text-foreground">{l.native}</span>
+                  <span className="block text-[11px] text-muted-foreground">{l.label}</span>
+                </span>
+                {active && (
+                  <svg className="h-4 w-4 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                )}
+              </button>
+            );
+          })}
+        </div>
+        <p dir="auto" className="text-[11px] leading-relaxed text-muted-foreground">
+          {u.langGate.demoNote}
+        </p>
+      </DialogContent>
+    </Dialog>
   );
 }
 
