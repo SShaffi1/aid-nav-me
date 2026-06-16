@@ -8,6 +8,9 @@ import {
   t as translate, type LangCode, type IntakeFieldKey,
 } from "@/lib/i18n";
 import { ui } from "@/lib/ui-i18n";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/intake")({
   head: () => ({
