@@ -366,6 +366,15 @@ function ChatScreen({
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, aiThinking]);
 
+  // Auto-resize textarea as user types, capped at 160px
+  useEffect(() => {
+    const el = inputRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    const next = Math.min(el.scrollHeight, 160);
+    el.style.height = `${next}px`;
+  }, [input]);
+
   const currentField = FIELD_ORDER[stepIndex];
   const progress = Math.round((stepIndex / FIELD_ORDER.length) * 100);
   const isLast = stepIndex >= FIELD_ORDER.length;
@@ -569,7 +578,7 @@ function ChatScreen({
                   ? tr.composer.generating
                   : tr.placeholders[currentField] ?? tr.composer.placeholderFallback
               }
-              className="max-h-40 min-h-[2.5rem] flex-1 resize-none bg-transparent px-3 py-2 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus:outline-none disabled:opacity-50"
+              className="max-h-[160px] min-h-[2.5rem] flex-1 resize-none overflow-y-auto bg-transparent px-3 py-2 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus:outline-none disabled:opacity-50"
             />
             <button
               onClick={() => submit()}
