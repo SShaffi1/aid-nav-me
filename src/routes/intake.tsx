@@ -281,9 +281,7 @@ function IntroScreen({
             >
               {getLangConfig(lang).native} · {u.chrome.change}
             </button>
-            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-              {u.chrome.exit}
-            </Link>
+            <ExitButton lang={lang} />
           </div>
         </div>
       </header>
@@ -471,9 +469,7 @@ function ChatScreen({
               >
                 {getLangConfig(lang).native} · {u.chrome.change}
               </button>
-              <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
-                {u.chrome.exit}
-              </Link>
+              <ExitButton lang={lang} />
             </div>
           </div>
           <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
@@ -699,7 +695,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
             <button onClick={onChangeLang} className="text-xs text-muted-foreground hover:text-foreground">
               {getLangConfig(lang).native} · {ui(lang).chrome.change}
             </button>
-            <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">{ui(lang).chrome.exit}</Link>
+            <ExitButton lang={lang} />
           </div>
         </div>
       </header>
