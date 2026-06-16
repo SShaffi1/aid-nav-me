@@ -9,6 +9,7 @@ export type UIStrings = {
     change: string;
     stepLabel: (n: number, total: number) => string;
     progressOf: (n: number, total: number) => string;
+    exitConfirm: { title: string; body: string; stay: string; leave: string };
   };
   langGate: {
     title: string;
@@ -63,6 +64,12 @@ const EN: UIStrings = {
     change: "Change",
     stepLabel: (n, total) => `Step ${n} of ${total}`,
     progressOf: (n, total) => `${n} of ${total}`,
+    exitConfirm: {
+      title: "Leave intake?",
+      body: "Your answers won't be saved if you leave now.",
+      stay: "Stay",
+      leave: "Leave",
+    },
   },
   dashboard: {
     windowLabel: "AEDNAV / Intake",
@@ -150,6 +157,12 @@ const FR: UIStrings = {
     change: "Changer",
     stepLabel: (n, total) => `Étape ${n} sur ${total}`,
     progressOf: (n, total) => `${n} sur ${total}`,
+    exitConfirm: {
+      title: "Quitter l'intake ?",
+      body: "Vos réponses ne seront pas enregistrées si vous quittez maintenant.",
+      stay: "Rester",
+      leave: "Quitter",
+    },
   },
   dashboard: {
     windowLabel: "AEDNAV / Intake",
@@ -237,6 +250,12 @@ const ES: UIStrings = {
     change: "Cambiar",
     stepLabel: (n, total) => `Paso ${n} de ${total}`,
     progressOf: (n, total) => `${n} de ${total}`,
+    exitConfirm: {
+      title: "¿Salir del intake?",
+      body: "Tus respuestas no se guardarán si sales ahora.",
+      stay: "Quedarme",
+      leave: "Salir",
+    },
   },
   dashboard: {
     windowLabel: "AEDNAV / Intake",
@@ -324,6 +343,12 @@ const ZH: UIStrings = {
     change: "更改",
     stepLabel: (n, total) => `第 ${n} 步 / 共 ${total} 步`,
     progressOf: (n, total) => `${n} / ${total}`,
+    exitConfirm: {
+      title: "要退出吗?",
+      body: "如果现在退出,您的答案将不会被保存。",
+      stay: "继续填写",
+      leave: "退出",
+    },
   },
   dashboard: {
     windowLabel: "AEDNAV / Intake",
@@ -411,6 +436,12 @@ const PA: UIStrings = {
     change: "ਬਦਲੋ",
     stepLabel: (n, total) => `ਕਦਮ ${n} / ${total}`,
     progressOf: (n, total) => `${n} / ${total}`,
+    exitConfirm: {
+      title: "ਇੰਟੇਕ ਛੱਡਣਾ ਹੈ?",
+      body: "ਜੇ ਤੁਸੀਂ ਹੁਣ ਛੱਡਦੇ ਹੋ ਤਾਂ ਤੁਹਾਡੇ ਜਵਾਬ ਸੰਭਾਲੇ ਨਹੀਂ ਜਾਣਗੇ।",
+      stay: "ਰਹੋ",
+      leave: "ਛੱਡੋ",
+    },
   },
   dashboard: {
     windowLabel: "AEDNAV / Intake",
@@ -498,6 +529,12 @@ const UR: UIStrings = {
     change: "تبدیل کریں",
     stepLabel: (n, total) => `قدم ${n} / ${total}`,
     progressOf: (n, total) => `${n} / ${total}`,
+    exitConfirm: {
+      title: "کیا انٹیک چھوڑنا ہے؟",
+      body: "اگر آپ ابھی نکلتے ہیں تو آپ کے جوابات محفوظ نہیں ہوں گے۔",
+      stay: "رکیں",
+      leave: "نکلیں",
+    },
   },
   dashboard: {
     windowLabel: "AEDNAV / Intake",
@@ -585,6 +622,12 @@ const AR: UIStrings = {
     change: "تغيير",
     stepLabel: (n, total) => `الخطوة ${n} من ${total}`,
     progressOf: (n, total) => `${n} من ${total}`,
+    exitConfirm: {
+      title: "هل تريد مغادرة الاستبيان؟",
+      body: "لن يتم حفظ إجاباتك إذا غادرت الآن.",
+      stay: "البقاء",
+      leave: "مغادرة",
+    },
   },
   dashboard: {
     windowLabel: "AEDNAV / Intake",
