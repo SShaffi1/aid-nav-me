@@ -440,6 +440,7 @@ function ChatScreen({
   function acknowledgeAndContinue() {
     setEmergencyAcknowledged(true);
     advance(answers, stepIndex + 1);
+    setTimeout(() => setEmergency(null), 3000);
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -519,9 +520,9 @@ function ChatScreen({
                     </p>
                   )}
                   <div className="mt-3 flex flex-wrap gap-2">
-                    <a href="tel:911" className="rounded-md bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground">Call 911</a>
-                    <a href="tel:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Call 988</a>
-                    <a href="sms:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">Text 988</a>
+                    <a href="tel:911" className="rounded-md bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground">{tr.emergencyBanner.call} 911</a>
+                    <a href="tel:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">{tr.emergencyBanner.call} 988</a>
+                    <a href="sms:988" className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">{tr.emergencyBanner.text} 988</a>
                     {!emergencyAcknowledged && (
                       <button
                         onClick={acknowledgeAndContinue}
