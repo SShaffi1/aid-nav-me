@@ -154,6 +154,8 @@ const EN: IntakePromptSet = {
     body: "AEDNAV is not designed for emergencies. Please contact emergency services or go to your nearest emergency department right away.",
     safe: "I'm safe, continue intake",
     disclaimer: "AEDNAV is not for emergencies. If this may be urgent, call 911 or seek immediate help.",
+    call: "Call",
+    text: "Text",
   },
   review: {
     eyebrow: "Review your answers",
