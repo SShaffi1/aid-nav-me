@@ -443,6 +443,27 @@ function ChatScreen({
     setTimeout(() => setEmergency(null), 3000);
   }
 
+  function goBack() {
+    if (stepIndex <= 0 || aiThinking || isLast) return;
+    const prevIndex = stepIndex - 1;
+    const prevField = FIELD_ORDER[prevIndex];
+    const prevAnswer = answers[prevField] ?? "";
+    setMessages((m) => {
+      // Remove trailing AI prompt for current step and the user's last answer.
+      const copy = [...m];
+      // Drop from the end any trailing AI messages (e.g. latest prompt), then one user message.
+      while (copy.length && copy[copy.length - 1].role === "ai") copy.pop();
+      if (copy.length && copy[copy.length - 1].role === "user") copy.pop();
+      return copy;
+    });
+    setAnswers((a) => ({ ...a, [prevField]: "" }));
+    setStepIndex(prevIndex);
+    setInput(prevAnswer);
+    setEmergency(null);
+    setEmergencyAcknowledged(false);
+    setTimeout(() => inputRef.current?.focus(), 0);
+  }
+
   function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
