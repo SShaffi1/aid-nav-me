@@ -431,7 +431,7 @@ function ChatScreen({
           { id: "ai-final", role: "ai", kind: "thankYou" },
         ]);
         sessionStorage.setItem("aednav.answers", JSON.stringify(updated));
-        setTimeout(() => onComplete(), 1100);
+        setTimeout(() => onComplete(), 2600);
       }, 800);
     }
   }
