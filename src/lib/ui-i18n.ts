@@ -63,6 +63,7 @@ const EN: UIStrings = {
   chrome: {
     exit: "Exit",
     change: "Change",
+    back: "Back",
     stepLabel: (n, total) => `Step ${n} of ${total}`,
     progressOf: (n, total) => `${n} of ${total}`,
     exitConfirm: {
@@ -156,6 +157,7 @@ const FR: UIStrings = {
   chrome: {
     exit: "Quitter",
     change: "Changer",
+    back: "Retour",
     stepLabel: (n, total) => `Étape ${n} sur ${total}`,
     progressOf: (n, total) => `${n} sur ${total}`,
     exitConfirm: {
@@ -249,6 +251,7 @@ const ES: UIStrings = {
   chrome: {
     exit: "Salir",
     change: "Cambiar",
+    back: "Atrás",
     stepLabel: (n, total) => `Paso ${n} de ${total}`,
     progressOf: (n, total) => `${n} de ${total}`,
     exitConfirm: {
@@ -342,6 +345,7 @@ const ZH: UIStrings = {
   chrome: {
     exit: "退出",
     change: "更改",
+    back: "返回",
     stepLabel: (n, total) => `第 ${n} 步 / 共 ${total} 步`,
     progressOf: (n, total) => `${n} / ${total}`,
     exitConfirm: {
@@ -435,6 +439,7 @@ const PA: UIStrings = {
   chrome: {
     exit: "ਬਾਹਰ ਜਾਓ",
     change: "ਬਦਲੋ",
+    back: "ਪਿੱਛੇ",
     stepLabel: (n, total) => `ਕਦਮ ${n} / ${total}`,
     progressOf: (n, total) => `${n} / ${total}`,
     exitConfirm: {
@@ -528,6 +533,7 @@ const UR: UIStrings = {
   chrome: {
     exit: "باہر نکلیں",
     change: "تبدیل کریں",
+    back: "واپس",
     stepLabel: (n, total) => `قدم ${n} / ${total}`,
     progressOf: (n, total) => `${n} / ${total}`,
     exitConfirm: {
@@ -621,6 +627,7 @@ const AR: UIStrings = {
   chrome: {
     exit: "خروج",
     change: "تغيير",
+    back: "رجوع",
     stepLabel: (n, total) => `الخطوة ${n} من ${total}`,
     progressOf: (n, total) => `${n} من ${total}`,
     exitConfirm: {
