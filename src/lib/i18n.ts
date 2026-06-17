@@ -384,6 +384,8 @@ const ES: IntakePromptSet = {
     body: "AEDNAV no está diseñado para emergencias. Por favor contacta servicios de emergencia o ve al departamento de emergencias más cercano.",
     safe: "Estoy a salvo, continuar",
     disclaimer: "AEDNAV no es para emergencias. Si es urgente, llama al 911.",
+    call: "Llamar",
+    text: "Enviar SMS",
   },
   review: {
     eyebrow: "Revisa tus respuestas",
@@ -497,6 +499,8 @@ const ZH: IntakePromptSet = {
     body: "AEDNAV 不适用于紧急情况。请联系紧急服务或立即前往最近的急诊。",
     safe: "我很安全, 继续",
     disclaimer: "AEDNAV 不适用于紧急情况。如有紧急情况,请拨打 911。",
+    call: "拨打",
+    text: "发短信",
   },
   review: {
     eyebrow: "核对您的回答",
@@ -609,6 +613,8 @@ const PA: IntakePromptSet = {
     body: "AEDNAV ਐਮਰਜੈਂਸੀ ਲਈ ਨਹੀਂ ਬਣਾਇਆ ਗਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਐਮਰਜੈਂਸੀ ਸੇਵਾਵਾਂ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
     safe: "ਮੈਂ ਠੀਕ ਹਾਂ, ਜਾਰੀ ਰੱਖੋ",
     disclaimer: "AEDNAV ਐਮਰਜੈਂਸੀ ਲਈ ਨਹੀਂ ਹੈ। ਜੇ ਜ਼ਰੂਰੀ ਹੋਵੇ, 911 ਤੇ ਕਾਲ ਕਰੋ।",
+    call: "ਕਾਲ ਕਰੋ",
+    text: "ਟੈਕਸਟ ਕਰੋ",
   },
   review: {
     eyebrow: "ਆਪਣੇ ਜਵਾਬਾਂ ਦੀ ਸਮੀਖਿਆ ਕਰੋ",
@@ -721,6 +727,8 @@ const AR: IntakePromptSet = {
     body: "AEDNAV غير مصمم للحالات الطارئة. يرجى الاتصال بخدمات الطوارئ أو الذهاب فوراً إلى أقرب قسم طوارئ.",
     safe: "أنا بأمان, تابع",
     disclaimer: "AEDNAV ليس للحالات الطارئة. إن كان الأمر عاجلاً، اتصل بـ 911.",
+    call: "اتصل",
+    text: "أرسل رسالة",
   },
   review: {
     eyebrow: "راجع إجاباتك",
@@ -833,6 +841,8 @@ const UR: IntakePromptSet = {
     body: "AEDNAV ایمرجنسی کے لیے نہیں بنایا گیا۔ براہ کرم ایمرجنسی خدمات سے رابطہ کریں یا قریبی ایمرجنسی روم میں جائیں۔",
     safe: "میں محفوظ ہوں, جاری رکھیں",
     disclaimer: "AEDNAV ایمرجنسی کے لیے نہیں ہے۔ اگر یہ ضروری ہو تو 911 پر کال کریں۔",
+    call: "کال کریں",
+    text: "ٹیکسٹ کریں",
   },
   review: {
     eyebrow: "اپنے جوابات کا جائزہ لیں",
