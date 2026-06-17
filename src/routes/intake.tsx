@@ -584,6 +584,18 @@ function ChatScreen({
               ))}
             </div>
           )}
+          {stepIndex > 0 && !aiThinking && !isLast && (
+            <div className="mb-2 flex">
+              <button
+                type="button"
+                onClick={goBack}
+                className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground"
+              >
+                <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                {u.chrome.back}
+              </button>
+            </div>
+          )}
           <div className="flex items-end gap-2 rounded-2xl border border-border bg-surface p-2 shadow-soft transition-all duration-200 focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15">
             <textarea
               ref={inputRef}
