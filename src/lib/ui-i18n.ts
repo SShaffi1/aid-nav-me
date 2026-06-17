@@ -7,6 +7,7 @@ export type UIStrings = {
   chrome: {
     exit: string;
     change: string;
+    back: string;
     stepLabel: (n: number, total: number) => string;
     progressOf: (n: number, total: number) => string;
     exitConfirm: { title: string; body: string; stay: string; leave: string };
