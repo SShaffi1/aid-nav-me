@@ -61,6 +61,8 @@ export type IntakePromptSet = {
     body: string;
     safe: string;
     disclaimer: string;
+    call: string;
+    text: string;
   };
   review: {
     eyebrow: string;
