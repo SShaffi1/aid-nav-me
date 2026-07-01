@@ -71,7 +71,7 @@ function SummaryPage() {
 
   const recommendation = recommendCare(answers);
   const patientText = formatPatientText(answers, generatedAt, tr, lang);
-  const providerText = formatProviderText(answers, generatedAtEn, recommendation);
+  const providerText = formatProviderText(answers, generatedAtEn);
 
   function copyOne(which: "patient" | "provider" | "both") {
     const text =
@@ -213,6 +213,7 @@ function SummaryPage() {
                         dir={dir}
                         generatedAt={generatedAt}
                         lang={lang}
+                        recommendation={recommendation}
                       />
                     </div>
                     <div className={tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"}>
@@ -288,12 +289,13 @@ function Icon({ path }: { path: string }) {
 /* ---------- Patient card (selected language) ---------- */
 
 function PatientCard({
-  answers, editing, onChange, tr, dir, generatedAt, lang,
+  answers, editing, onChange, tr, dir, generatedAt, lang, recommendation,
 }: {
   answers: IntakeAnswers; editing: boolean;
   onChange: (f: keyof IntakeAnswers, v: string) => void;
   tr: ReturnType<typeof translate>; dir: "ltr" | "rtl";
   generatedAt: string; lang: LangCode;
+  recommendation: { setting: CareSetting; reason: string; isEmergency: boolean };
 }) {
   void dir;
   return (
@@ -313,6 +315,29 @@ function PatientCard({
       </div>
 
       <div className="space-y-8 px-6 py-7 md:space-y-9 md:px-10 md:py-9">
+        <Section title={tr.patientSummary.sections.careOption}>
+          <p className="-mt-1 mb-3 text-xs leading-relaxed text-muted-foreground">
+            {tr.patientSummary.careInfoOnly}
+          </p>
+          <div
+            className={`rounded-2xl border p-4 ${
+              recommendation.isEmergency
+                ? "border-destructive/40 bg-destructive/5"
+                : "border-border bg-surface-elevated"
+            }`}
+          >
+            <p className="mt-1.5 text-sm font-semibold text-foreground">
+              {recommendation.setting === "Family Doctor" ? tr.careSettings.familyDoctor :
+               recommendation.setting === "Walk-in Clinic" ? tr.careSettings.walkInClinic :
+               recommendation.setting === "Urgent Care" ? tr.careSettings.urgentCare :
+               tr.careSettings.emergencyRoom}
+            </p>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+              {recommendation.reason}
+            </p>
+          </div>
+        </Section>
+
         <Section title={tr.patientSummary.sections.keyDetails}>
           <div className="overflow-hidden rounded-xl border border-border bg-surface-elevated">
             <KeyRow label={tr.patientSummary.keyDetailLabels.concern} value={answers.concern} />
@@ -374,20 +399,13 @@ function PatientCard({
 
 /* ---------- Provider card (English, structured) ---------- */
 
-const CARE_OPTIONS: { setting: CareSetting; description: string }[] = [
-  { setting: "Family Doctor",   description: "Non-urgent or ongoing concerns" },
-  { setting: "Walk-in Clinic",  description: "Minor issues, no family doctor available soon" },
-  { setting: "Urgent Care",     description: "Time-sensitive, not life-threatening" },
-  { setting: "Emergency Room",  description: "Severe, sudden, or red-flag symptoms" },
-];
 
 function ProviderCard({
-  answers, editing, onChange, generatedAt, recommendation,
+  answers, editing, onChange, generatedAt,
 }: {
   answers: IntakeAnswers; editing: boolean;
   onChange: (f: keyof IntakeAnswers, v: string) => void;
   generatedAt: string;
-  recommendation: { setting: CareSetting; reason: string; isEmergency: boolean };
 }) {
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none">
@@ -447,59 +465,6 @@ function ProviderCard({
           <Editable editing={editing} value={answers.goal} onChange={(v) => onChange("goal", v)} multiline />
         </Section>
 
-        <Section title="Care option to consider">
-          <p className="-mt-1 mb-4 text-xs leading-relaxed text-muted-foreground">
-            Informational guidance only. AEDNAV cannot determine the right care setting for the patient.
-          </p>
-          <div className="space-y-4">
-            <div
-              className={`rounded-2xl border p-4 ${
-                recommendation.isEmergency
-                  ? "border-destructive/40 bg-destructive/5"
-                  : "border-border bg-surface-elevated"
-              }`}
-            >
-              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Why this option?</p>
-              <p className="mt-1.5 text-sm font-semibold text-foreground">
-                Based on the answers, this may be a care option to consider: {recommendation.setting}.
-              </p>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                {recommendation.reason}
-              </p>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {CARE_OPTIONS.map((opt) => {
-                const active = opt.setting === recommendation.setting;
-                return (
-                  <div
-                    key={opt.setting}
-                    className={`rounded-lg border px-3.5 py-3 transition-colors duration-200 ${
-                      active
-                        ? recommendation.isEmergency
-                          ? "border-destructive/50 bg-destructive/10"
-                          : "border-foreground/30 bg-surface"
-                        : "border-border bg-surface"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-medium text-foreground">{opt.setting}</span>
-                      {active && (
-                        <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
-                          recommendation.isEmergency
-                            ? "bg-destructive text-destructive-foreground"
-                            : "bg-foreground text-background"
-                        }`}>
-                          Highlighted
-                        </span>
-                      )}
-                    </div>
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{opt.description}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </Section>
       </div>
 
       <div className="border-t border-border px-6 py-5 md:px-10">
