@@ -566,10 +566,7 @@ ${a.goal}
 ${L.disclaimer}`;
 }
 
-function formatProviderText(
-  a: IntakeAnswers, date: string,
-  rec: { setting: CareSetting; reason: string; isEmergency: boolean },
-) {
+function formatProviderText(a: IntakeAnswers, date: string) {
   return `AEDNAV: Provider Summary (English)
 Generated ${date}
 
@@ -590,9 +587,6 @@ ${a.history}
 
 PATIENT GOAL FOR VISIT
 ${a.goal}
-
-CARE OPTION TO CONSIDER (informational guidance only)
-${rec.setting}: ${rec.reason}
 
 Prepared by AEDNAV. For preparation and communication support only. Not medical advice.`;
 }
