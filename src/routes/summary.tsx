@@ -200,7 +200,6 @@ function SummaryPage() {
                     editing={editing}
                     onChange={updateField}
                     generatedAt={generatedAtEn}
-                    recommendation={recommendation}
                   />
                 ) : (
                   <>
@@ -222,7 +221,6 @@ function SummaryPage() {
                         editing={editing}
                         onChange={updateField}
                         generatedAt={generatedAtEn}
-                        recommendation={recommendation}
                       />
                     </div>
                   </>
