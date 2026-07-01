@@ -95,6 +95,12 @@ export type IntakePromptSet = {
     disclaimer: string;
     careInfoOnly: string;
   };
+  careSettings: {
+    familyDoctor: string;
+    walkInClinic: string;
+    urgentCare: string;
+    emergencyRoom: string;
+  };
 };
 
 
@@ -211,6 +217,12 @@ const EN: IntakePromptSet = {
     careInfoOnly:
       "Informational guidance only. AEDNAV cannot determine the right care setting for you.",
   },
+  careSettings: {
+    familyDoctor: "Family Doctor",
+    walkInClinic: "Walk-in Clinic",
+    urgentCare: "Urgent Care",
+    emergencyRoom: "Emergency Room",
+  },
 };
 
 const FR: IntakePromptSet = {
@@ -325,6 +337,12 @@ const FR: IntakePromptSet = {
       "Ce résumé sert uniquement à la préparation et à la communication. Il peut contenir des erreurs et ne remplace pas l'interprétation médicale professionnelle, un avis médical, un diagnostic ou un traitement.",
     careInfoOnly:
       "Information à titre indicatif seulement. AEDNAV ne peut pas déterminer le bon cadre de soins pour vous.",
+  },
+  careSettings: {
+    familyDoctor: "Médecin de famille",
+    walkInClinic: "Clinique sans rendez-vous",
+    urgentCare: "Soins urgents",
+    emergencyRoom: "Urgences",
   },
 };
 
@@ -441,6 +459,12 @@ const ES: IntakePromptSet = {
     careInfoOnly:
       "Información orientativa solamente. AEDNAV no puede determinar el entorno de atención adecuado para ti.",
   },
+  careSettings: {
+    familyDoctor: "Médico de familia",
+    walkInClinic: "Clínica de atención inmediata",
+    urgentCare: "Atención urgente",
+    emergencyRoom: "Sala de emergencias",
+  },
 };
 
 const ZH: IntakePromptSet = {
@@ -554,6 +578,12 @@ const ZH: IntakePromptSet = {
     disclaimer:
       "此摘要仅用于准备和沟通支持。可能包含错误,不能替代专业医疗翻译、医疗建议、诊断或治疗。",
     careInfoOnly: "仅供参考。AEDNAV 无法为您确定合适的就医方式。",
+  },
+  careSettings: {
+    familyDoctor: "家庭医生",
+    walkInClinic: "便民诊所",
+    urgentCare: "紧急护理",
+    emergencyRoom: "急诊室",
   },
 };
 
@@ -669,6 +699,12 @@ const PA: IntakePromptSet = {
       "ਇਹ ਸਾਰ ਸਿਰਫ਼ ਤਿਆਰੀ ਅਤੇ ਸੰਚਾਰ ਲਈ ਹੈ। ਇਸ ਵਿੱਚ ਗਲਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ ਅਤੇ ਇਹ ਪੇਸ਼ੇਵਰ ਡਾਕਟਰੀ ਅਨੁਵਾਦ, ਸਲਾਹ, ਜਾਂਚ ਜਾਂ ਇਲਾਜ ਦੀ ਥਾਂ ਨਹੀਂ ਲੈਂਦਾ।",
     careInfoOnly: "ਸਿਰਫ਼ ਜਾਣਕਾਰੀ ਲਈ। AEDNAV ਤੁਹਾਡੇ ਲਈ ਸਹੀ ਦੇਖਭਾਲ ਸੈਟਿੰਗ ਨਿਰਧਾਰਤ ਨਹੀਂ ਕਰ ਸਕਦਾ।",
   },
+  careSettings: {
+    familyDoctor: "ਪਰਿਵਾਰਕ ਡਾਕਟਰ",
+    walkInClinic: "ਵਾਕ-ਇਨ ਕਲੀਨਿਕ",
+    urgentCare: "ਤੁਰੰਤ ਦੇਖਭਾਲ",
+    emergencyRoom: "ਐਮਰਜੈਂਸੀ ਵਾਰਡ",
+  },
 };
 
 const AR: IntakePromptSet = {
@@ -783,6 +819,12 @@ const AR: IntakePromptSet = {
       "هذا الملخص لأغراض التحضير ودعم التواصل فقط. قد يحتوي على أخطاء ولا يحل محل الترجمة الطبية المتخصصة أو المشورة أو التشخيص أو العلاج.",
     careInfoOnly: "إرشادات معلوماتية فقط. لا يستطيع AEDNAV تحديد إعداد الرعاية المناسب لك.",
   },
+  careSettings: {
+    familyDoctor: "طبيب العائلة",
+    walkInClinic: "عيادة بدون موعد",
+    urgentCare: "الرعاية العاجلة",
+    emergencyRoom: "قسم الطوارئ",
+  },
 };
 
 const UR: IntakePromptSet = {
@@ -896,6 +938,12 @@ const UR: IntakePromptSet = {
     disclaimer:
       "یہ خلاصہ صرف تیاری اور رابطے کی مدد کے لیے ہے۔ اس میں غلطیاں ہو سکتی ہیں اور یہ پیشہ ورانہ طبی ترجمانی، طبی مشورے، تشخیص یا علاج کا متبادل نہیں ہے۔",
     careInfoOnly: "صرف معلوماتی رہنمائی۔ AEDNAV آپ کے لیے صحیح دیکھ بھال کی ترتیب کا تعین نہیں کر سکتا۔",
+  },
+  careSettings: {
+    familyDoctor: "خاندانی ڈاکٹر",
+    walkInClinic: "واک-ان کلینک",
+    urgentCare: "فوری دیکھ بھال",
+    emergencyRoom: "ایمرجنسی روم",
   },
 };
 
