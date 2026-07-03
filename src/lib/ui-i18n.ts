@@ -55,6 +55,7 @@ export type UIStrings = {
     patientTab: string; providerTab: string; preparing: string;
     translationDisclaimer: string; summaryDisclaimer: string;
     generalDisclaimer: string; emergencyDisclaimer: string;
+    providerBanner: (lang: string) => string;
   };
 };
 
@@ -149,6 +150,7 @@ const EN: UIStrings = {
     summaryDisclaimer: "This summary is for preparation and communication support only. It may contain errors and does not replace medical advice, diagnosis, or treatment.",
     generalDisclaimer: "AEDNAV helps organize information before care. It does not diagnose, treat, or replace healthcare professionals.",
     emergencyDisclaimer: "AEDNAV is not for emergencies. If this may be urgent, call 911 or seek immediate help.",
+    providerBanner: (lang) => `Patient responses were entered in ${lang}. In the full version, all responses are automatically translated to English.`,
   },
 };
 
@@ -243,6 +245,7 @@ const FR: UIStrings = {
     summaryDisclaimer: "Ce résumé sert uniquement à la préparation et à la communication. Il peut contenir des erreurs et ne remplace pas un avis médical, un diagnostic ou un traitement.",
     generalDisclaimer: "AEDNAV aide à organiser l'information avant les soins. Il ne diagnostique pas et ne remplace pas un professionnel de santé.",
     emergencyDisclaimer: "AEDNAV n'est pas conçu pour les urgences. En cas d'urgence, appelez le 911.",
+    providerBanner: (lang) => `Patient responses were entered in ${lang}. In the full version, all responses are automatically translated to English.`,
   },
 };
 
@@ -337,6 +340,7 @@ const ES: UIStrings = {
     summaryDisclaimer: "Este resumen es solo para preparación y apoyo a la comunicación. Puede contener errores y no reemplaza el consejo, diagnóstico ni tratamiento médico.",
     generalDisclaimer: "AEDNAV ayuda a organizar información antes de la atención. No diagnostica ni reemplaza a profesionales de salud.",
     emergencyDisclaimer: "AEDNAV no es para emergencias. Si es urgente, llama al 911.",
+    providerBanner: (lang) => `Patient responses were entered in ${lang}. In the full version, all responses are automatically translated to English.`,
   },
 };
 
@@ -431,6 +435,7 @@ const ZH: UIStrings = {
     summaryDisclaimer: "本摘要仅用于准备和沟通支持。可能存在错误,不能替代医疗建议、诊断或治疗。",
     generalDisclaimer: "AEDNAV 帮助在就医前整理信息。不进行诊断,也不能替代医疗专业人员。",
     emergencyDisclaimer: "AEDNAV 不适用于紧急情况。如有紧急情况,请拨打 911。",
+    providerBanner: (lang) => `Patient responses were entered in ${lang}. In the full version, all responses are automatically translated to English.`,
   },
 };
 
@@ -525,6 +530,7 @@ const PA: UIStrings = {
     summaryDisclaimer: "ਇਹ ਸਾਰ ਸਿਰਫ਼ ਤਿਆਰੀ ਅਤੇ ਸੰਚਾਰ ਲਈ ਹੈ। ਇਸ ਵਿੱਚ ਗਲਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ ਅਤੇ ਇਹ ਡਾਕਟਰੀ ਸਲਾਹ, ਜਾਂਚ ਜਾਂ ਇਲਾਜ ਦੀ ਥਾਂ ਨਹੀਂ ਲੈਂਦਾ।",
     generalDisclaimer: "AEDNAV ਦੇਖਭਾਲ ਤੋਂ ਪਹਿਲਾਂ ਜਾਣਕਾਰੀ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ। ਇਹ ਜਾਂਚ ਨਹੀਂ ਕਰਦਾ ਅਤੇ ਡਾਕਟਰੀ ਮਾਹਰ ਦੀ ਥਾਂ ਨਹੀਂ ਲੈਂਦਾ।",
     emergencyDisclaimer: "AEDNAV ਐਮਰਜੈਂਸੀ ਲਈ ਨਹੀਂ ਹੈ। ਜੇ ਜ਼ਰੂਰੀ ਹੋਵੇ, 911 ਤੇ ਕਾਲ ਕਰੋ।",
+    providerBanner: (lang) => `Patient responses were entered in ${lang}. In the full version, all responses are automatically translated to English.`,
   },
 };
 
@@ -619,6 +625,7 @@ const UR: UIStrings = {
     summaryDisclaimer: "یہ خلاصہ صرف تیاری اور رابطے کی مدد کے لیے ہے۔ اس میں غلطیاں ہو سکتی ہیں اور یہ طبی مشورے، تشخیص، یا علاج کا متبادل نہیں ہے۔",
     generalDisclaimer: "AEDNAV دیکھ بھال سے پہلے معلومات کو منظم کرنے میں مدد کرتا ہے۔ یہ تشخیص نہیں کرتا اور صحت کے پیشہ ور افراد کا متبادل نہیں ہے۔",
     emergencyDisclaimer: "AEDNAV ایمرجنسی کے لیے نہیں ہے۔ اگر یہ ضروری ہو تو 911 پر کال کریں۔",
+    providerBanner: (lang) => `Patient responses were entered in ${lang}. In the full version, all responses are automatically translated to English.`,
   },
 };
 
@@ -713,6 +720,7 @@ const AR: UIStrings = {
     summaryDisclaimer: "هذا الملخص لأغراض التحضير والتواصل فقط. قد يحتوي على أخطاء ولا يحل محل المشورة أو التشخيص أو العلاج الطبي.",
     generalDisclaimer: "يساعد AEDNAV على تنظيم المعلومات قبل الرعاية. لا يُشخّص ولا يحل محل المختصين الصحيين.",
     emergencyDisclaimer: "AEDNAV ليس للحالات الطارئة. إن كان الأمر عاجلاً، اتصل بـ 911.",
+    providerBanner: (lang) => `Patient responses were entered in ${lang}. In the full version, all responses are automatically translated to English.`,
   },
 };
 
