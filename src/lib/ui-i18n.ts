@@ -150,6 +150,7 @@ const EN: UIStrings = {
     summaryDisclaimer: "This summary is for preparation and communication support only. It may contain errors and does not replace medical advice, diagnosis, or treatment.",
     generalDisclaimer: "AEDNAV helps organize information before care. It does not diagnose, treat, or replace healthcare professionals.",
     emergencyDisclaimer: "AEDNAV is not for emergencies. If this may be urgent, call 911 or seek immediate help.",
+    providerBanner: (lang) => `Patient responses were entered in ${lang}. In the full version, all responses are automatically translated to English.`,
   },
 };
 
