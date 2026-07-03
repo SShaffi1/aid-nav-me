@@ -423,14 +423,23 @@ function PatientCard({
 
 
 function ProviderCard({
-  answers, editing, onChange, generatedAt,
+  answers, editing, onChange, generatedAt, bannerText,
 }: {
   answers: IntakeAnswers; editing: boolean;
   onChange: (f: keyof IntakeAnswers, v: string) => void;
   generatedAt: string;
+  bannerText?: string;
 }) {
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none">
+      {bannerText && (
+        <div className="rounded-t-2xl border-b border-primary/15 bg-primary-soft px-6 py-3 md:px-10">
+          <p className="flex items-center gap-2 text-sm text-primary">
+            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            {bannerText}
+          </p>
+        </div>
+      )}
 
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
