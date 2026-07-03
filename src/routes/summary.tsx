@@ -195,12 +195,36 @@ function SummaryPage() {
               {/* Cards */}
               <div className="mt-5 print:mt-0">
                 {isEnglish ? (
-                  <ProviderCard
-                    answers={editing ? draft : answers}
-                    editing={editing}
-                    onChange={updateField}
-                    generatedAt={generatedAtEn}
-                  />
+                  <>
+                    <div className="mb-5 print:hidden">
+                      <div
+                        className={`rounded-2xl border p-4 ${
+                          recommendation.isEmergency
+                            ? "border-destructive/40 bg-destructive/5"
+                            : "border-border bg-surface-elevated"
+                        }`}
+                      >
+                        <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
+                          {tr.patientSummary.sections.careOption}
+                        </p>
+                        <p className="mt-1.5 text-sm font-semibold text-foreground">
+                          {recommendation.setting}
+                        </p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                          {recommendation.reason}
+                        </p>
+                        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                          {tr.patientSummary.careInfoOnly}
+                        </p>
+                      </div>
+                    </div>
+                    <ProviderCard
+                      answers={editing ? draft : answers}
+                      editing={editing}
+                      onChange={updateField}
+                      generatedAt={generatedAtEn}
+                    />
+                  </>
                 ) : (
                   <>
                     <div className={tab === "patient" ? "" : "hidden print:block"}>
