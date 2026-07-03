@@ -55,6 +55,7 @@ export type UIStrings = {
     patientTab: string; providerTab: string; preparing: string;
     translationDisclaimer: string; summaryDisclaimer: string;
     generalDisclaimer: string; emergencyDisclaimer: string;
+    providerBanner: (lang: string) => string;
   };
 };
 
