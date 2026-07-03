@@ -240,12 +240,13 @@ function SummaryPage() {
                       />
                     </div>
                     <div className={tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"}>
-                      <ProviderCard
-                        answers={editing ? draft : answers}
-                        editing={editing}
-                        onChange={updateField}
-                        generatedAt={generatedAtEn}
-                      />
+                    <ProviderCard
+                      answers={editing ? draft : answers}
+                      editing={editing}
+                      onChange={updateField}
+                      generatedAt={generatedAtEn}
+                      bannerText={u.summary.providerBanner(getLangConfig(lang).label)}
+                    />
                     </div>
                   </>
                 )}
