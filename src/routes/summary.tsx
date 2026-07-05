@@ -38,7 +38,7 @@ function SummaryPage() {
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>("patient");
-  const [copied, setCopied] = useState<string | null>(null);
+  
   const isEnglish = lang === "en";
 
   useEffect(() => {
