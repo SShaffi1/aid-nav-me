@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "aednav-mcp",
+      "version": "0.1.0",
+      "title": "AEDNAV MCP"
+    },
+    "tools": [
+      {
+        "name": "list_supported_languages",
+        "title": "List supported languages",
+        "description": "List every language AEDNAV's patient intake supports, with ISO code, English label, native label, and text direction.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_intake_questions",
+        "title": "List intake questions",
+        "description": "Return the ordered list of questions AEDNAV asks a patient during pre-appointment intake, including field id, English prompt text, placeholder, and any quick-reply suggestions.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
