@@ -230,6 +230,24 @@ function SummaryPage() {
                   </>
                 )}
               </div>
+
+              {/* Print buttons */}
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row print:hidden">
+                <button
+                  onClick={printPatient}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-surface-elevated active:scale-[0.98] disabled:opacity-40"
+                >
+                  <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
+                  {u.summary.printPatient}
+                </button>
+                <button
+                  onClick={printProvider}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-40"
+                >
+                  <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
+                  {u.summary.printProvider}
+                </button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -300,7 +318,7 @@ function PatientCard({
 }) {
   void dir;
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none">
+    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none patient-print-target">
 
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
@@ -410,7 +428,7 @@ function ProviderCard({
   bannerText?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none">
+    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none provider-print-target">
       {bannerText && (
         <div className="rounded-t-2xl border-b border-primary/15 bg-primary-soft px-6 py-3 md:px-10">
           <p className="flex items-center gap-2 text-sm text-primary">
@@ -554,51 +572,3 @@ function shortConcern(c: string) {
   return c.toLowerCase().replace(/^i('| ha)?ve had?\s+/, "").split(/[,.]/)[0].slice(0, 50) || "symptoms";
 }
 
-/* ---------- Plain text formatters ---------- */
-
-function formatPatientText(a: IntakeAnswers, date: string, tr: ReturnType<typeof translate>, lang: LangCode) {
-  const L = tr.patientSummary;
-  return `AEDNAV: ${L.title}
-${L.generated} ${date} · ${getLangConfig(lang).native}
-
-${L.sections.keyDetails.toUpperCase()}
-${L.keyDetailLabels.concern}: ${a.concern}
-${L.keyDetailLabels.duration}: ${a.duration}
-${L.keyDetailLabels.severity}: ${a.severity}
-${L.keyDetailLabels.pattern}: ${a.pattern}
-${L.keyDetailLabels.medications}: ${a.medications}
-${L.keyDetailLabels.allergies}: ${a.allergies}
-
-${L.sections.history.toUpperCase()}
-${a.history}
-
-${L.sections.goal.toUpperCase()}
-${a.goal}
-
-${L.disclaimer}`;
-}
-
-function formatProviderText(a: IntakeAnswers, date: string) {
-  return `AEDNAV: Provider Summary (English)
-Generated ${date}
-
-MAIN CONCERN
-${a.concern}
-
-TIMELINE & SEVERITY
-Duration: ${a.duration}
-Severity (self-reported): ${a.severity}
-Pattern & triggers: ${a.pattern}
-
-MEDICATIONS & ALLERGIES
-Current medications: ${a.medications}
-Known allergies: ${a.allergies}
-
-RELEVANT HISTORY
-${a.history}
-
-PATIENT GOAL FOR VISIT
-${a.goal}
-
-Prepared by AEDNAV. For preparation and communication support only. Not medical advice.`;
-}
