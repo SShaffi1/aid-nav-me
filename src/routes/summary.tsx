@@ -206,7 +206,7 @@ function SummaryPage() {
                   </>
                 ) : (
                   <>
-                    <div className={tab === "patient" ? "" : "hidden print:block"}>
+                    <div className={`${tab === "patient" ? "" : "hidden print:block"} patient-print-target`}>
                       <PatientCard
                         answers={editing ? draft : answers}
                         editing={editing}
@@ -218,14 +218,14 @@ function SummaryPage() {
                         recommendation={recommendation}
                       />
                     </div>
-                    <div className={tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"}>
-                    <ProviderCard
-                      answers={editing ? draft : answers}
-                      editing={editing}
-                      onChange={updateField}
-                      generatedAt={generatedAtEn}
-                      bannerText={u.summary.providerBanner(getLangConfig(lang).label)}
-                    />
+                    <div className={`${tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"} provider-print-target`}>
+                      <ProviderCard
+                        answers={editing ? draft : answers}
+                        editing={editing}
+                        onChange={updateField}
+                        generatedAt={generatedAtEn}
+                        bannerText={u.summary.providerBanner(getLangConfig(lang).label)}
+                      />
                     </div>
                   </>
                 )}
