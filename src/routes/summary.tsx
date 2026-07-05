@@ -70,20 +70,24 @@ function SummaryPage() {
   });
 
   const recommendation = recommendCare(answers);
-  const patientText = formatPatientText(answers, generatedAt, tr, lang);
-  const providerText = formatProviderText(answers, generatedAtEn);
-
-  function copyOne(which: "patient" | "provider" | "both") {
-    const text =
-      which === "patient" ? patientText :
-      which === "provider" ? providerText :
-      `${patientText}\n\n---\n\n${providerText}`;
-    navigator.clipboard?.writeText(text).then(() => {
-      setCopied(which);
-      setTimeout(() => setCopied(null), 1800);
-    });
+  function printPatient() {
+    document.body.classList.add("printing-patient");
+    const cleanup = () => {
+      document.body.classList.remove("printing-patient");
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+    window.print();
   }
-  function downloadPdf() { window.print(); }
+  function printProvider() {
+    document.body.classList.add("printing-provider");
+    const cleanup = () => {
+      document.body.classList.remove("printing-provider");
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+    window.print();
+  }
   function startEdit() { setDraft(answers); setEditing(true); }
   function cancelEdit() { setDraft(answers); setEditing(false); }
   function saveEdit() {
@@ -114,31 +118,6 @@ function SummaryPage() {
               <>
                 <ActionButton onClick={cancelEdit}>{u.summary.cancel}</ActionButton>
                 <ActionButton primary onClick={saveEdit}>{u.summary.save}</ActionButton>
-              </>
-            )}
-            {isEnglish ? (
-              <>
-                <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
-                  {copied === "provider" ? u.summary.copied : u.summary.copySummary}
-                </ActionButton>
-                <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
-                  {u.summary.printSummary}
-                </ActionButton>
-              </>
-            ) : (
-              <>
-                <ActionButton disabled={editing} onClick={() => copyOne("patient")} icon="copy">
-                  {copied === "patient" ? u.summary.copied : u.summary.copyPatient}
-                </ActionButton>
-                <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
-                  {copied === "provider" ? u.summary.copied : u.summary.copyProvider}
-                </ActionButton>
-                <ActionButton disabled={editing} onClick={() => copyOne("both")} icon="copy">
-                  {copied === "both" ? u.summary.copied : u.summary.copyBoth}
-                </ActionButton>
-                <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
-                  {u.summary.printSummary}
-                </ActionButton>
               </>
             )}
           </div>
@@ -285,7 +264,7 @@ function ActionButton({
 }: {
   children: React.ReactNode; onClick?: () => void;
   primary?: boolean; disabled?: boolean; hidden?: boolean;
-  icon?: "edit" | "copy" | "print";
+  icon?: "edit" | "print";
 }) {
   if (hidden) return null;
   const cls = primary
@@ -294,7 +273,6 @@ function ActionButton({
   return (
     <button onClick={onClick} disabled={disabled} className={cls}>
       {icon === "edit" && <Icon path="M12 20h9 M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4Z" />}
-      {icon === "copy" && <Icon path="M9 9h13v13H9z M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />}
       {icon === "print" && <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />}
       {children}
     </button>
