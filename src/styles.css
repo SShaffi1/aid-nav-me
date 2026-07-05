@@ -225,3 +225,12 @@
     scroll-behavior: auto !important;
   }
 }
+
+@media print {
+  body.printing-patient .provider-print-target {
+    display: none !important;
+  }
+  body.printing-provider .patient-print-target {
+    display: none !important;
+  }
+}

@@ -38,7 +38,7 @@ function SummaryPage() {
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>("patient");
-  const [copied, setCopied] = useState<string | null>(null);
+  
   const isEnglish = lang === "en";
 
   useEffect(() => {
@@ -70,20 +70,24 @@ function SummaryPage() {
   });
 
   const recommendation = recommendCare(answers);
-  const patientText = formatPatientText(answers, generatedAt, tr, lang);
-  const providerText = formatProviderText(answers, generatedAtEn);
-
-  function copyOne(which: "patient" | "provider" | "both") {
-    const text =
-      which === "patient" ? patientText :
-      which === "provider" ? providerText :
-      `${patientText}\n\n---\n\n${providerText}`;
-    navigator.clipboard?.writeText(text).then(() => {
-      setCopied(which);
-      setTimeout(() => setCopied(null), 1800);
-    });
+  function printPatient() {
+    document.body.classList.add("printing-patient");
+    const cleanup = () => {
+      document.body.classList.remove("printing-patient");
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+    window.print();
   }
-  function downloadPdf() { window.print(); }
+  function printProvider() {
+    document.body.classList.add("printing-provider");
+    const cleanup = () => {
+      document.body.classList.remove("printing-provider");
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+    window.print();
+  }
   function startEdit() { setDraft(answers); setEditing(true); }
   function cancelEdit() { setDraft(answers); setEditing(false); }
   function saveEdit() {
@@ -114,31 +118,6 @@ function SummaryPage() {
               <>
                 <ActionButton onClick={cancelEdit}>{u.summary.cancel}</ActionButton>
                 <ActionButton primary onClick={saveEdit}>{u.summary.save}</ActionButton>
-              </>
-            )}
-            {isEnglish ? (
-              <>
-                <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
-                  {copied === "provider" ? u.summary.copied : u.summary.copySummary}
-                </ActionButton>
-                <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
-                  {u.summary.printSummary}
-                </ActionButton>
-              </>
-            ) : (
-              <>
-                <ActionButton disabled={editing} onClick={() => copyOne("patient")} icon="copy">
-                  {copied === "patient" ? u.summary.copied : u.summary.copyPatient}
-                </ActionButton>
-                <ActionButton disabled={editing} onClick={() => copyOne("provider")} icon="copy">
-                  {copied === "provider" ? u.summary.copied : u.summary.copyProvider}
-                </ActionButton>
-                <ActionButton disabled={editing} onClick={() => copyOne("both")} icon="copy">
-                  {copied === "both" ? u.summary.copied : u.summary.copyBoth}
-                </ActionButton>
-                <ActionButton primary disabled={editing} onClick={downloadPdf} icon="print">
-                  {u.summary.printSummary}
-                </ActionButton>
               </>
             )}
           </div>
@@ -227,7 +206,7 @@ function SummaryPage() {
                   </>
                 ) : (
                   <>
-                    <div className={tab === "patient" ? "" : "hidden print:block"}>
+                    <div className={`${tab === "patient" ? "" : "hidden print:block"} patient-print-target`}>
                       <PatientCard
                         answers={editing ? draft : answers}
                         editing={editing}
@@ -239,17 +218,35 @@ function SummaryPage() {
                         recommendation={recommendation}
                       />
                     </div>
-                    <div className={tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"}>
-                    <ProviderCard
-                      answers={editing ? draft : answers}
-                      editing={editing}
-                      onChange={updateField}
-                      generatedAt={generatedAtEn}
-                      bannerText={u.summary.providerBanner(getLangConfig(lang).label)}
-                    />
+                    <div className={`${tab === "provider" ? "mt-0" : "hidden print:block print:mt-8"} provider-print-target`}>
+                      <ProviderCard
+                        answers={editing ? draft : answers}
+                        editing={editing}
+                        onChange={updateField}
+                        generatedAt={generatedAtEn}
+                        bannerText={u.summary.providerBanner(getLangConfig(lang).label)}
+                      />
                     </div>
                   </>
                 )}
+              </div>
+
+              {/* Print buttons */}
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row print:hidden">
+                <button
+                  onClick={printPatient}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-surface-elevated active:scale-[0.98] disabled:opacity-40"
+                >
+                  <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
+                  {u.summary.printPatient}
+                </button>
+                <button
+                  onClick={printProvider}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-40"
+                >
+                  <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
+                  {u.summary.printProvider}
+                </button>
               </div>
             </motion.div>
           )}
@@ -285,7 +282,7 @@ function ActionButton({
 }: {
   children: React.ReactNode; onClick?: () => void;
   primary?: boolean; disabled?: boolean; hidden?: boolean;
-  icon?: "edit" | "copy" | "print";
+  icon?: "edit" | "print";
 }) {
   if (hidden) return null;
   const cls = primary
@@ -294,7 +291,6 @@ function ActionButton({
   return (
     <button onClick={onClick} disabled={disabled} className={cls}>
       {icon === "edit" && <Icon path="M12 20h9 M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4Z" />}
-      {icon === "copy" && <Icon path="M9 9h13v13H9z M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />}
       {icon === "print" && <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />}
       {children}
     </button>
@@ -322,7 +318,7 @@ function PatientCard({
 }) {
   void dir;
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none">
+    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none patient-print-target">
 
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
@@ -432,7 +428,7 @@ function ProviderCard({
   bannerText?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none">
+    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none provider-print-target">
       {bannerText && (
         <div className="rounded-t-2xl border-b border-primary/15 bg-primary-soft px-6 py-3 md:px-10">
           <p className="flex items-center gap-2 text-sm text-primary">
@@ -576,51 +572,3 @@ function shortConcern(c: string) {
   return c.toLowerCase().replace(/^i('| ha)?ve had?\s+/, "").split(/[,.]/)[0].slice(0, 50) || "symptoms";
 }
 
-/* ---------- Plain text formatters ---------- */
-
-function formatPatientText(a: IntakeAnswers, date: string, tr: ReturnType<typeof translate>, lang: LangCode) {
-  const L = tr.patientSummary;
-  return `AEDNAV: ${L.title}
-${L.generated} ${date} · ${getLangConfig(lang).native}
-
-${L.sections.keyDetails.toUpperCase()}
-${L.keyDetailLabels.concern}: ${a.concern}
-${L.keyDetailLabels.duration}: ${a.duration}
-${L.keyDetailLabels.severity}: ${a.severity}
-${L.keyDetailLabels.pattern}: ${a.pattern}
-${L.keyDetailLabels.medications}: ${a.medications}
-${L.keyDetailLabels.allergies}: ${a.allergies}
-
-${L.sections.history.toUpperCase()}
-${a.history}
-
-${L.sections.goal.toUpperCase()}
-${a.goal}
-
-${L.disclaimer}`;
-}
-
-function formatProviderText(a: IntakeAnswers, date: string) {
-  return `AEDNAV: Provider Summary (English)
-Generated ${date}
-
-MAIN CONCERN
-${a.concern}
-
-TIMELINE & SEVERITY
-Duration: ${a.duration}
-Severity (self-reported): ${a.severity}
-Pattern & triggers: ${a.pattern}
-
-MEDICATIONS & ALLERGIES
-Current medications: ${a.medications}
-Known allergies: ${a.allergies}
-
-RELEVANT HISTORY
-${a.history}
-
-PATIENT GOAL FOR VISIT
-${a.goal}
-
-Prepared by AEDNAV. For preparation and communication support only. Not medical advice.`;
-}
