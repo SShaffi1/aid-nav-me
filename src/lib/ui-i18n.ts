@@ -51,7 +51,7 @@ export type UIStrings = {
   summary: {
     backToIntake: string; edit: string; cancel: string; save: string;
     copyPatient: string; copyProvider: string; copyBoth: string; copySummary: string;
-    copied: string; printSummary: string; printPatient: string; printProvider: string; printBoth: string;
+    copied: string; printSummary: string; printPatient: string; printProvider: string; printBoth: string; print: string;
     patientTab: string; providerTab: string; preparing: string;
     translationDisclaimer: string; summaryDisclaimer: string;
     generalDisclaimer: string; emergencyDisclaimer: string;
