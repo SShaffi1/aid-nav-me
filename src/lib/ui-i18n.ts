@@ -143,6 +143,7 @@ const EN: UIStrings = {
     printPatient: "Print patient summary",
     printProvider: "Print provider summary",
     printBoth: "Print both",
+    print: "Print",
     patientTab: "Patient summary",
     providerTab: "Provider summary",
     preparing: "Preparing your summary…",
