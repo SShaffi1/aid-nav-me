@@ -239,6 +239,7 @@ const FR: UIStrings = {
     printPatient: "Imprimer le résumé patient",
     printProvider: "Imprimer le résumé médecin",
     printBoth: "Imprimer les deux",
+    print: "Imprimer",
     patientTab: "Résumé patient",
     providerTab: "Résumé médecin",
     preparing: "Préparation de votre résumé…",
