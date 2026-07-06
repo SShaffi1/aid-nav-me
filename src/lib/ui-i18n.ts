@@ -527,6 +527,7 @@ const PA: UIStrings = {
     printPatient: "ਮਰੀਜ਼ ਸਾਰ ਪ੍ਰਿੰਟ ਕਰੋ",
     printProvider: "ਡਾਕਟਰ ਸਾਰ ਪ੍ਰਿੰਟ ਕਰੋ",
     printBoth: "ਦੋਵੇਂ ਪ੍ਰਿੰਟ ਕਰੋ",
+    print: "ਪ੍ਰਿੰਟ ਕਰੋ",
     patientTab: "ਮਰੀਜ਼ ਸਾਰ",
     providerTab: "ਡਾਕਟਰ ਸਾਰ",
     preparing: "ਤੁਹਾਡਾ ਸਾਰ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…",
