@@ -192,7 +192,7 @@ function LanguageScreen({
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface/80 backdrop-blur">
+      <header className="border-b border-border bg-surface">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5" dir="ltr">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
@@ -209,7 +209,7 @@ function LanguageScreen({
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
         >
-          <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
+          <p className="text-[11px] font-medium text-muted-foreground">
             {u.chrome.stepLabel(1, 3)}
           </p>
           <h1 dir="auto" className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">
@@ -269,7 +269,7 @@ function IntroScreen({
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface/80 backdrop-blur">
+      <header className="border-b border-border bg-surface">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
@@ -292,7 +292,7 @@ function IntroScreen({
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
         >
-          <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
+          <p className="text-[11px] font-medium text-muted-foreground">
             {tr.intro.eyebrow}
           </p>
           <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">
@@ -484,7 +484,7 @@ function ChatScreen({
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface/80 backdrop-blur">
+      <header className="border-b border-border bg-surface">
         <div className="mx-auto max-w-3xl px-5 py-2.5">
           <div className="flex items-center justify-between gap-3">
             <Link to="/" aria-label="AEDNAV home" className="flex items-center">
@@ -569,7 +569,7 @@ function ChatScreen({
         </div>
       </div>
 
-      <div className="border-t border-border bg-surface/90 backdrop-blur">
+      <div className="border-t border-border bg-surface">
         <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4">
           {!isLast && suggestions.length > 0 && messages.length > 0 && !aiThinking && !blocked && (
             <div className="mb-3 flex flex-wrap gap-2">
@@ -729,7 +729,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface/80 backdrop-blur">
+      <header className="border-b border-border bg-surface">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
@@ -748,7 +748,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-[11px] font-medium uppercase tracking-wider text-primary">{tr.review.eyebrow}</p>
+          <p className="text-[11px] font-medium text-muted-foreground">{tr.review.eyebrow}</p>
           <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">{tr.review.title}</h1>
           <p className="mt-3 text-sm text-muted-foreground">{tr.review.body}</p>
         </motion.div>

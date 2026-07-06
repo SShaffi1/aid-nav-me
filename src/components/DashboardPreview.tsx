@@ -41,7 +41,7 @@ export function DashboardPreview() {
           </div>
 
           <div className="border-t border-border bg-surface-elevated p-6 md:border-l md:border-t-0">
-            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+            <p className="text-[11px] font-medium text-muted-foreground">
               {d.visitSummary}
             </p>
             <div className="mt-4 space-y-3">
@@ -53,7 +53,7 @@ export function DashboardPreview() {
             </div>
 
             <div className="mt-6 rounded-xl border border-border bg-surface p-4">
-              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+              <p className="text-[11px] font-medium text-muted-foreground">
                 {d.careOption}
               </p>
               <p className="mt-2 text-sm font-medium text-foreground">{d.careValue}</p>

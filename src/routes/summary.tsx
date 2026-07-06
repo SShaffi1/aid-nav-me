@@ -183,7 +183,7 @@ function SummaryPage() {
                             : "border-border bg-surface-elevated"
                         }`}
                       >
-                        <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
+                        <p className="text-[11px] font-medium text-muted-foreground">
                           {tr.patientSummary.sections.careOption}
                         </p>
                         <p className="mt-1.5 text-sm font-semibold text-foreground">
@@ -334,7 +334,7 @@ function PatientCard({
 
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
-          <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
+          <p className="text-[11px] font-medium text-muted-foreground">
             {tr.patientSummary.eyebrow}
           </p>
           <h2 className="font-display mt-2 text-2xl text-foreground md:text-3xl">{tr.patientSummary.title}</h2>
@@ -452,7 +452,7 @@ function ProviderCard({
 
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
-          <p className="text-[11px] font-medium uppercase tracking-wider text-primary">
+          <p className="text-[11px] font-medium text-muted-foreground">
             Provider summary · English
           </p>
           <h2 className="font-display mt-2 text-2xl text-foreground md:text-3xl">Pre-appointment briefing</h2>
@@ -523,7 +523,7 @@ function ProviderCard({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h3 className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{title}</h3>
+      <h3 className="text-[11px] font-medium text-muted-foreground">{title}</h3>
       <div className="mt-3">{children}</div>
     </section>
   );
@@ -532,7 +532,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function KeyRow({ label, value, last }: { label: string; value: string; last?: boolean }) {
   return (
     <div className={`grid gap-1 px-4 py-3 sm:grid-cols-[200px_1fr] sm:items-baseline ${last ? "" : "border-b border-border"}`}>
-      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</span>
+      <span className="text-xs font-medium text-muted-foreground">{label}</span>
       <span className="text-[14.5px] leading-relaxed text-foreground">{value}</span>
     </div>
   );
