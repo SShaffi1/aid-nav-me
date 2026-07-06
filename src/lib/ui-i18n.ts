@@ -623,6 +623,7 @@ const UR: UIStrings = {
     printPatient: "مریض کا خلاصہ پرنٹ کریں",
     printProvider: "ڈاکٹر کا خلاصہ پرنٹ کریں",
     printBoth: "دونوں پرنٹ کریں",
+    print: "پرنٹ کریں",
     patientTab: "مریض کا خلاصہ",
     providerTab: "ڈاکٹر کا خلاصہ",
     preparing: "آپ کا خلاصہ تیار کیا جا رہا ہے…",
