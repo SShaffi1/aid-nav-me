@@ -719,6 +719,7 @@ const AR: UIStrings = {
     printPatient: "طباعة ملخص المريض",
     printProvider: "طباعة ملخص الطبيب",
     printBoth: "طباعة كليهما",
+    print: "طباعة",
     patientTab: "ملخص المريض",
     providerTab: "ملخص الطبيب",
     preparing: "جارٍ تحضير ملخصك…",
