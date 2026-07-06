@@ -431,6 +431,7 @@ const ZH: UIStrings = {
     printPatient: "打印患者摘要",
     printProvider: "打印医生摘要",
     printBoth: "全部打印",
+    print: "打印",
     patientTab: "患者摘要",
     providerTab: "医生摘要",
     preparing: "正在准备您的摘要…",
