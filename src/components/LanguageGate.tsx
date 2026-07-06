@@ -32,7 +32,7 @@ export function LanguageGate() {
         key="overlay"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-[100] grid place-items-center bg-foreground/30 px-4 backdrop-blur-sm"
+        className="fixed inset-0 z-[100] grid place-items-center bg-foreground/30 px-4"
         role="dialog" aria-modal="true" aria-labelledby="lang-gate-title"
       >
         <motion.div

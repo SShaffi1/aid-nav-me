@@ -55,7 +55,7 @@ function LandingPage() {
           <motion.p
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-xs font-medium uppercase tracking-wider text-primary"
+            className="text-xs font-medium text-muted-foreground"
           >
             {tr.hero.eyebrow}
           </motion.p>
@@ -113,7 +113,7 @@ function LandingPage() {
       {/* Features */}
       <section id="features" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.featuresEyebrow}</p>
+          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.featuresEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
             {tr.sectionTitles.featuresTitle}
           </h2>
@@ -143,7 +143,7 @@ function LandingPage() {
       {/* How it works */}
       <section id="how" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.howEyebrow}</p>
+          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.howEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
             {tr.sectionTitles.howTitle}
           </h2>
@@ -158,7 +158,7 @@ function LandingPage() {
               transition={{ duration: 0.5, delay: i * 0.06 }}
               className="border-t border-border pt-5"
             >
-              <span className="text-[11px] font-medium tracking-wider text-muted-foreground">{s.n}</span>
+              <span className="text-[11px] font-medium text-muted-foreground">{s.n}</span>
               <h3 className="mt-2 text-base font-semibold text-foreground">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
             </motion.div>
@@ -169,7 +169,7 @@ function LandingPage() {
       {/* Dual-language summary preview */}
       <section id="dual" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.dualEyebrow}</p>
+          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.dualEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
             {tr.sectionTitles.dualTitle}
           </h2>
@@ -182,22 +182,22 @@ function LandingPage() {
           {/* Patient (selected language) */}
           <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8">
             <div className="flex items-center justify-between">
-              <p className="text-[11px] font-medium uppercase tracking-wider text-primary">{lc.dual.patientLabel}</p>
+              <p className="text-[11px] font-medium text-muted-foreground">{lc.dual.patientLabel}</p>
               <span className="text-[11px] text-muted-foreground">{getLangConfig(lang).native}</span>
             </div>
             <h3 className="font-display mt-2 text-xl text-foreground">{lc.dual.patientTitle}</h3>
 
             <div className="mt-6 space-y-4 text-[14.5px] leading-relaxed text-foreground">
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{lc.dual.patientFields.concern}</p>
+                <p className="text-[11px] font-medium text-muted-foreground">{lc.dual.patientFields.concern}</p>
                 <p className="mt-1">{lc.dual.patientConcern}</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{lc.dual.patientFields.timeline}</p>
+                <p className="text-[11px] font-medium text-muted-foreground">{lc.dual.patientFields.timeline}</p>
                 <p className="mt-1">{lc.dual.patientTimeline}</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{lc.dual.patientFields.questions}</p>
+                <p className="text-[11px] font-medium text-muted-foreground">{lc.dual.patientFields.questions}</p>
                 <ul className="mt-1.5 space-y-1.5">
                   {lc.dual.patientQuestions.map((q) => <li key={q}>{q}</li>)}
                 </ul>
@@ -208,22 +208,22 @@ function LandingPage() {
           {/* Provider (always English) */}
           <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8">
             <div className="flex items-center justify-between">
-              <p className="text-[11px] font-medium uppercase tracking-wider text-primary">Provider summary</p>
+              <p className="text-[11px] font-medium text-muted-foreground">Provider summary</p>
               <span className="text-[11px] text-muted-foreground">English</span>
             </div>
             <h3 className="font-display mt-2 text-xl text-foreground">Doctor-ready English</h3>
 
             <div className="mt-6 space-y-4 text-[14.5px] leading-relaxed text-foreground">
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Main concern</p>
+                <p className="text-[11px] font-medium text-muted-foreground">Main concern</p>
                 <p className="mt-1">Recurring headaches for 3 days, worse in the afternoon.</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Timeline & severity</p>
+                <p className="text-[11px] font-medium text-muted-foreground">Timeline & severity</p>
                 <p className="mt-1">Duration ~3 days · 6/10 at worst (self-reported).</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Patient questions</p>
+                <p className="text-[11px] font-medium text-muted-foreground">Patient questions</p>
                 <ul className="mt-1.5 space-y-1.5">
                   <li>What might be causing the headaches?</li>
                   <li>Are there tests that would help clarify this?</li>
@@ -241,7 +241,7 @@ function LandingPage() {
       {/* Who it helps */}
       <section id="who" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.whoEyebrow}</p>
+          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.whoEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
             {tr.sectionTitles.whoTitle}
           </h2>
@@ -266,7 +266,7 @@ function LandingPage() {
       {/* Safety / trust */}
       <section className="mx-auto mt-32 max-w-4xl px-6">
         <div className="rounded-2xl border border-border bg-surface p-10 shadow-soft md:p-12">
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">{tr.sectionTitles.safetyEyebrow}</p>
+          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.safetyEyebrow}</p>
           <h2 className="font-display mt-3 text-2xl leading-snug text-foreground md:text-3xl">
             {tr.sectionTitles.safetyTitle}
           </h2>
