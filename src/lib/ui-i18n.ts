@@ -51,7 +51,7 @@ export type UIStrings = {
   summary: {
     backToIntake: string; edit: string; cancel: string; save: string;
     copyPatient: string; copyProvider: string; copyBoth: string; copySummary: string;
-    copied: string; printSummary: string; printPatient: string; printProvider: string; printBoth: string;
+    copied: string; printSummary: string; printPatient: string; printProvider: string; printBoth: string; print: string;
     patientTab: string; providerTab: string; preparing: string;
     translationDisclaimer: string; summaryDisclaimer: string;
     generalDisclaimer: string; emergencyDisclaimer: string;
@@ -143,6 +143,7 @@ const EN: UIStrings = {
     printPatient: "Print patient summary",
     printProvider: "Print provider summary",
     printBoth: "Print both",
+    print: "Print",
     patientTab: "Patient summary",
     providerTab: "Provider summary",
     preparing: "Preparing your summary…",
@@ -238,6 +239,7 @@ const FR: UIStrings = {
     printPatient: "Imprimer le résumé patient",
     printProvider: "Imprimer le résumé médecin",
     printBoth: "Imprimer les deux",
+    print: "Imprimer",
     patientTab: "Résumé patient",
     providerTab: "Résumé médecin",
     preparing: "Préparation de votre résumé…",
@@ -333,6 +335,7 @@ const ES: UIStrings = {
     printPatient: "Imprimir resumen del paciente",
     printProvider: "Imprimir resumen del médico",
     printBoth: "Imprimir ambos",
+    print: "Imprimir",
     patientTab: "Resumen del paciente",
     providerTab: "Resumen del médico",
     preparing: "Preparando tu resumen…",
@@ -428,6 +431,7 @@ const ZH: UIStrings = {
     printPatient: "打印患者摘要",
     printProvider: "打印医生摘要",
     printBoth: "全部打印",
+    print: "打印",
     patientTab: "患者摘要",
     providerTab: "医生摘要",
     preparing: "正在准备您的摘要…",
@@ -523,6 +527,7 @@ const PA: UIStrings = {
     printPatient: "ਮਰੀਜ਼ ਸਾਰ ਪ੍ਰਿੰਟ ਕਰੋ",
     printProvider: "ਡਾਕਟਰ ਸਾਰ ਪ੍ਰਿੰਟ ਕਰੋ",
     printBoth: "ਦੋਵੇਂ ਪ੍ਰਿੰਟ ਕਰੋ",
+    print: "ਪ੍ਰਿੰਟ ਕਰੋ",
     patientTab: "ਮਰੀਜ਼ ਸਾਰ",
     providerTab: "ਡਾਕਟਰ ਸਾਰ",
     preparing: "ਤੁਹਾਡਾ ਸਾਰ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…",
@@ -618,6 +623,7 @@ const UR: UIStrings = {
     printPatient: "مریض کا خلاصہ پرنٹ کریں",
     printProvider: "ڈاکٹر کا خلاصہ پرنٹ کریں",
     printBoth: "دونوں پرنٹ کریں",
+    print: "پرنٹ کریں",
     patientTab: "مریض کا خلاصہ",
     providerTab: "ڈاکٹر کا خلاصہ",
     preparing: "آپ کا خلاصہ تیار کیا جا رہا ہے…",
@@ -713,6 +719,7 @@ const AR: UIStrings = {
     printPatient: "طباعة ملخص المريض",
     printProvider: "طباعة ملخص الطبيب",
     printBoth: "طباعة كليهما",
+    print: "طباعة",
     patientTab: "ملخص المريض",
     providerTab: "ملخص الطبيب",
     preparing: "جارٍ تحضير ملخصك…",

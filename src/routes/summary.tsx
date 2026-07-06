@@ -233,20 +233,32 @@ function SummaryPage() {
 
               {/* Print buttons */}
               <div className="mt-6 flex flex-col gap-3 sm:flex-row print:hidden">
-                <button
-                  onClick={printPatient}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-surface-elevated active:scale-[0.98] disabled:opacity-40"
-                >
-                  <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
-                  {u.summary.printPatient}
-                </button>
-                <button
-                  onClick={printProvider}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-40"
-                >
-                  <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
-                  {u.summary.printProvider}
-                </button>
+                {isEnglish ? (
+                  <button
+                    onClick={() => window.print()}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-40"
+                  >
+                    <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
+                    {u.summary.print}
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={printPatient}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-surface-elevated active:scale-[0.98] disabled:opacity-40"
+                    >
+                      <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
+                      {u.summary.printPatient}
+                    </button>
+                    <button
+                      onClick={printProvider}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-40"
+                    >
+                      <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
+                      {u.summary.printProvider}
+                    </button>
+                  </>
+                )}
               </div>
             </motion.div>
           )}
