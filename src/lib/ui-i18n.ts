@@ -335,6 +335,7 @@ const ES: UIStrings = {
     printPatient: "Imprimir resumen del paciente",
     printProvider: "Imprimir resumen del médico",
     printBoth: "Imprimir ambos",
+    print: "Imprimir",
     patientTab: "Resumen del paciente",
     providerTab: "Resumen del médico",
     preparing: "Preparando tu resumen…",
