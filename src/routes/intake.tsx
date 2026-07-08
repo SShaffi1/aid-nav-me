@@ -291,9 +291,10 @@ function IntroScreen({
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
+          className="w-full max-w-xl rounded-2xl border bg-white p-7 md:p-10"
+          style={{ borderColor: "#E5E5EA", borderRadius: "16px" }}
         >
-          <p className="text-[11px] font-medium text-muted-foreground">
+          <p className="text-sm font-medium text-primary">
             {tr.intro.eyebrow}
           </p>
           <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">
@@ -317,7 +318,7 @@ function IntroScreen({
 
           <button
             onClick={onStart}
-            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.99]"
+            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.99]"
           >
             {tr.intro.cta}
           </button>
@@ -326,6 +327,7 @@ function IntroScreen({
           </p>
         </motion.div>
       </main>
+
     </motion.div>
   );
 }
