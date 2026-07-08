@@ -799,12 +799,13 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-[11px] font-medium text-muted-foreground">{tr.review.eyebrow}</p>
+          <p className="text-sm font-medium text-primary">{tr.review.eyebrow}</p>
           <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">{tr.review.title}</h1>
           <p className="mt-3 text-sm text-muted-foreground">{tr.review.body}</p>
         </motion.div>
 
-        <div className="mt-8 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
+        <div className="mt-8 divide-y divide-border overflow-hidden border bg-white" style={{ borderColor: "#E5E5EA", borderRadius: "16px" }}>
+
           {FIELD_ORDER.map((field, i) => (
             <motion.div
               key={field}
