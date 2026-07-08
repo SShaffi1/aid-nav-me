@@ -667,18 +667,25 @@ function MessageBubble({
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className={`flex items-end gap-2.5 ${isAi ? "" : "flex-row-reverse"}`}
     >
-      {isAi && (
-        <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary">
-          <svg className="h-3.5 w-3.5 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18"/></svg>
-        </div>
-      )}
+      {isAi && <AiAvatar />}
       <div
         dir="auto"
-        className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[14.5px] leading-relaxed ${
-          isAi
-            ? "rounded-bl-md border border-border bg-surface-elevated text-foreground"
-            : "rounded-br-md bg-primary text-primary-foreground"
+        className={`max-w-[85%] px-4 py-3 text-[14.5px] leading-relaxed ${
+          isAi ? "text-foreground" : "text-white"
         }`}
+        style={
+          isAi
+            ? {
+                backgroundColor: "#F2F2F7",
+                borderRadius: "18px",
+                borderBottomLeftRadius: "4px",
+              }
+            : {
+                backgroundColor: "#0A84FF",
+                borderRadius: "18px",
+                borderBottomRightRadius: "4px",
+              }
+        }
       >
         {text}
       </div>
@@ -686,6 +693,23 @@ function MessageBubble({
   );
 }
 
+function AiAvatar() {
+  return (
+    <div
+      className="grid h-8 w-8 shrink-0 place-items-center"
+      style={{ backgroundColor: "#0A84FF", borderRadius: "10px" }}
+    >
+      <svg
+        className="h-4 w-4 text-white"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M12 2l1.7 5.3L19 9l-5.3 1.7L12 16l-1.7-5.3L5 9l5.3-1.7L12 2zm7 11l.9 2.6L22.5 16l-2.6.9L19 19.5l-.9-2.6L15.5 16l2.6-.9L19 13z" />
+      </svg>
+    </div>
+  );
+}
 
 function TypingIndicator() {
   return (
@@ -695,10 +719,15 @@ function TypingIndicator() {
       className="flex items-end gap-2.5"
       aria-label="AEDNAV is typing"
     >
-      <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary">
-        <svg className="h-3.5 w-3.5 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18"/></svg>
-      </div>
-      <div className="rounded-2xl rounded-bl-md border border-border bg-surface-elevated px-4 py-3">
+      <AiAvatar />
+      <div
+        className="px-4 py-3"
+        style={{
+          backgroundColor: "#F2F2F7",
+          borderRadius: "18px",
+          borderBottomLeftRadius: "4px",
+        }}
+      >
         <div className="flex items-center gap-1">
           {[0, 0.15, 0.3].map((d) => (
             <motion.span
@@ -713,6 +742,7 @@ function TypingIndicator() {
     </motion.div>
   );
 }
+
 
 /* ---------------- Review screen ---------------- */
 
