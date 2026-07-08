@@ -269,7 +269,7 @@ function IntroScreen({
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface">
+      <header className="border-b bg-white" style={{ borderColor: "#E5E5EA" }}>
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
@@ -285,6 +285,7 @@ function IntroScreen({
           </div>
         </div>
       </header>
+
 
       <main className="flex flex-1 items-center justify-center px-5 py-10">
         <motion.div
