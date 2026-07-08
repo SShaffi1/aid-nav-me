@@ -487,7 +487,7 @@ function ChatScreen({
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface">
+      <header className="border-b bg-white" style={{ borderColor: "#E5E5EA" }}>
         <div className="mx-auto max-w-3xl px-5 py-2.5">
           <div className="flex items-center justify-between gap-3">
             <Link to="/" aria-label="AEDNAV home" className="flex items-center">
@@ -506,20 +506,22 @@ function ChatScreen({
               <ExitButton lang={lang} />
             </div>
           </div>
-          <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
+          <div className="mt-2 h-0.5 overflow-hidden" style={{ backgroundColor: "#E5E5EA" }}>
             <motion.div
-              className="h-full rounded-full bg-primary"
+              className="h-full"
+              style={{ backgroundColor: "#0A84FF" }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             />
           </div>
         </div>
-        <div className="border-t border-border bg-warning/10">
-          <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px] text-warning-foreground" dir="auto">
+        <div style={{ backgroundColor: "#FFF8E7" }}>
+          <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px]" style={{ color: "#7A5B00" }} dir="auto">
             {tr.emergencyBanner.disclaimer}
           </div>
         </div>
       </header>
+
 
       <AnimatePresence>
         {emergency && (
