@@ -40,6 +40,8 @@ const featureIcons = [
   <><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></>,
 ];
 
+const eyebrowClass = "text-sm font-medium text-primary";
+
 function LandingPage() {
   const lang = useLang();
   const tr = ui(lang);
@@ -50,12 +52,12 @@ function LandingPage() {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative pt-20 md:pt-28">
-        <div className="relative mx-auto max-w-3xl px-6 text-center">
+      <section className="relative pt-28 pb-24 md:pt-40 md:pb-32">
+        <div className="relative mx-auto max-w-4xl px-6 text-center">
           <motion.p
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-xs font-medium text-muted-foreground"
+            className={eyebrowClass}
           >
             {tr.hero.eyebrow}
           </motion.p>
@@ -63,17 +65,17 @@ function LandingPage() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-balance mt-4 text-5xl leading-[1.05] text-foreground md:text-6xl"
+            className="font-display text-balance mt-6 text-6xl leading-[1.02] tracking-tight text-foreground md:text-8xl"
           >
             {tr.hero.title1}<br />
-            <span className="text-primary">{tr.hero.title2}</span>
+            <span style={{ color: "#0A84FF" }}>{tr.hero.title2}</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-balance mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground"
+            className="text-balance mx-auto mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground"
           >
             {tr.hero.sub}
           </motion.p>
@@ -82,11 +84,12 @@ function LandingPage() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-9 flex flex-wrap items-center justify-center gap-3"
+            className="mt-12 flex flex-wrap items-center justify-center gap-3"
           >
             <Link
               to="/intake"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              className="group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: "#0A84FF" }}
             >
               {tr.hero.primary}
               <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -96,13 +99,14 @@ function LandingPage() {
             <a
               href="#how"
               onClick={(e) => { e.preventDefault(); smoothScrollTo("how"); }}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-elevated"
+              className="inline-flex items-center gap-2 rounded-full border bg-white px-6 py-3.5 text-base font-semibold text-foreground transition-colors hover:bg-surface"
+              style={{ borderColor: "#E5E5EA" }}
             >
               {tr.hero.secondary}
             </a>
           </motion.div>
 
-          <p className="mt-6 text-xs text-muted-foreground">
+          <p className="mt-8 text-xs text-muted-foreground">
             {tr.hero.note}
           </p>
         </div>
@@ -113,12 +117,12 @@ function LandingPage() {
       {/* Features */}
       <section id="features" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.featuresEyebrow}</p>
+          <p className={eyebrowClass}>{tr.sectionTitles.featuresEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
             {tr.sectionTitles.featuresTitle}
           </h2>
         </div>
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
+        <div className="mt-14 grid gap-5 md:grid-cols-2">
           {lc.features.map((f, i) => (
             <motion.div
               key={f.title}
@@ -126,14 +130,18 @@ function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-surface p-7 transition-colors duration-200 hover:bg-surface-elevated"
+              className="rounded-2xl p-10"
+              style={{ backgroundColor: "#F2F2F7" }}
             >
-              <div className="grid h-10 w-10 place-items-center rounded-md bg-primary-soft text-primary">
+              <div
+                className="grid h-11 w-11 place-items-center rounded-xl text-white"
+                style={{ backgroundColor: "#0A84FF" }}
+              >
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   {featureIcons[i]}
                 </svg>
               </div>
-              <h3 className="mt-5 text-base font-semibold text-foreground">{f.title}</h3>
+              <h3 className="mt-6 text-lg font-semibold text-foreground">{f.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
             </motion.div>
           ))}
@@ -143,7 +151,7 @@ function LandingPage() {
       {/* How it works */}
       <section id="how" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.howEyebrow}</p>
+          <p className={eyebrowClass}>{tr.sectionTitles.howEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
             {tr.sectionTitles.howTitle}
           </h2>
@@ -156,10 +164,10 @@ function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="border-t border-border pt-5"
+              className="border-t pt-5"
+              style={{ borderColor: "#E5E5EA" }}
             >
-              <span className="text-[11px] font-medium text-muted-foreground">{s.n}</span>
-              <h3 className="mt-2 text-base font-semibold text-foreground">{s.title}</h3>
+              <h3 className="text-base font-semibold text-foreground">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
             </motion.div>
           ))}
@@ -169,7 +177,7 @@ function LandingPage() {
       {/* Dual-language summary preview */}
       <section id="dual" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.dualEyebrow}</p>
+          <p className={eyebrowClass}>{tr.sectionTitles.dualEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
             {tr.sectionTitles.dualTitle}
           </h2>
@@ -179,25 +187,25 @@ function LandingPage() {
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {/* Patient (selected language) */}
-          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8">
+          {/* Patient (selected language) — white with border */}
+          <div className="rounded-2xl bg-white p-8 md:p-10 border" style={{ borderColor: "#E5E5EA" }}>
             <div className="flex items-center justify-between">
-              <p className="text-[11px] font-medium text-muted-foreground">{lc.dual.patientLabel}</p>
-              <span className="text-[11px] text-muted-foreground">{getLangConfig(lang).native}</span>
+              <p className="text-sm font-medium text-muted-foreground">{lc.dual.patientLabel}</p>
+              <span className="text-xs text-muted-foreground">{getLangConfig(lang).native}</span>
             </div>
             <h3 className="font-display mt-2 text-xl text-foreground">{lc.dual.patientTitle}</h3>
 
             <div className="mt-6 space-y-4 text-[14.5px] leading-relaxed text-foreground">
               <div>
-                <p className="text-[11px] font-medium text-muted-foreground">{lc.dual.patientFields.concern}</p>
+                <p className="text-xs font-medium text-muted-foreground">{lc.dual.patientFields.concern}</p>
                 <p className="mt-1">{lc.dual.patientConcern}</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium text-muted-foreground">{lc.dual.patientFields.timeline}</p>
+                <p className="text-xs font-medium text-muted-foreground">{lc.dual.patientFields.timeline}</p>
                 <p className="mt-1">{lc.dual.patientTimeline}</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium text-muted-foreground">{lc.dual.patientFields.questions}</p>
+                <p className="text-xs font-medium text-muted-foreground">{lc.dual.patientFields.questions}</p>
                 <ul className="mt-1.5 space-y-1.5">
                   {lc.dual.patientQuestions.map((q) => <li key={q}>{q}</li>)}
                 </ul>
@@ -205,25 +213,25 @@ function LandingPage() {
             </div>
           </div>
 
-          {/* Provider (always English) */}
-          <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft md:p-8">
+          {/* Provider (always English) — surface */}
+          <div className="rounded-2xl p-8 md:p-10" style={{ backgroundColor: "#F2F2F7" }}>
             <div className="flex items-center justify-between">
-              <p className="text-[11px] font-medium text-muted-foreground">Provider summary</p>
-              <span className="text-[11px] text-muted-foreground">English</span>
+              <p className="text-sm font-medium text-muted-foreground">Provider summary</p>
+              <span className="text-xs text-muted-foreground">English</span>
             </div>
             <h3 className="font-display mt-2 text-xl text-foreground">Doctor-ready English</h3>
 
             <div className="mt-6 space-y-4 text-[14.5px] leading-relaxed text-foreground">
               <div>
-                <p className="text-[11px] font-medium text-muted-foreground">Main concern</p>
+                <p className="text-xs font-medium text-muted-foreground">Main concern</p>
                 <p className="mt-1">Recurring headaches for 3 days, worse in the afternoon.</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium text-muted-foreground">Timeline & severity</p>
+                <p className="text-xs font-medium text-muted-foreground">Timeline & severity</p>
                 <p className="mt-1">Duration ~3 days · 6/10 at worst (self-reported).</p>
               </div>
               <div>
-                <p className="text-[11px] font-medium text-muted-foreground">Patient questions</p>
+                <p className="text-xs font-medium text-muted-foreground">Patient questions</p>
                 <ul className="mt-1.5 space-y-1.5">
                   <li>What might be causing the headaches?</li>
                   <li>Are there tests that would help clarify this?</li>
@@ -241,12 +249,12 @@ function LandingPage() {
       {/* Who it helps */}
       <section id="who" className="mx-auto mt-32 max-w-6xl px-6 scroll-mt-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.whoEyebrow}</p>
+          <p className={eyebrowClass}>{tr.sectionTitles.whoEyebrow}</p>
           <h2 className="font-display mt-3 text-4xl leading-tight text-foreground md:text-5xl">
             {tr.sectionTitles.whoTitle}
           </h2>
         </div>
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {lc.audiences.map((a, i) => (
             <motion.div
               key={a.title}
@@ -254,7 +262,8 @@ function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="rounded-2xl border border-border bg-surface p-6"
+              className="rounded-2xl p-8"
+              style={{ backgroundColor: "#F2F2F7" }}
             >
               <h3 className="text-base font-semibold text-foreground">{a.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
@@ -265,15 +274,26 @@ function LandingPage() {
 
       {/* Safety / trust */}
       <section className="mx-auto mt-32 max-w-4xl px-6">
-        <div className="rounded-2xl border border-border bg-surface p-10 shadow-soft md:p-12">
-          <p className="text-xs font-medium text-muted-foreground">{tr.sectionTitles.safetyEyebrow}</p>
+        <div className="rounded-2xl p-10 md:p-12" style={{ backgroundColor: "#F2F2F7" }}>
+          <p className={eyebrowClass}>{tr.sectionTitles.safetyEyebrow}</p>
           <h2 className="font-display mt-3 text-2xl leading-snug text-foreground md:text-3xl">
             {tr.sectionTitles.safetyTitle}
           </h2>
           <ul className="mt-7 space-y-4">
             {lc.safety.map((p, i) => (
               <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-foreground">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                <svg
+                  className="mt-0.5 h-5 w-5 shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#30D158"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
                 {p}
               </li>
             ))}
@@ -294,17 +314,20 @@ function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto mt-32 max-w-4xl px-6">
-        <div className="relative overflow-hidden rounded-2xl border border-border bg-primary px-8 py-14 text-center shadow-soft md:px-16">
-          <h2 className="font-display relative text-4xl text-primary-foreground md:text-5xl">
+      <section className="mx-auto mt-32 mb-24 max-w-4xl px-6">
+        <div
+          className="relative overflow-hidden px-8 py-16 text-center md:px-16"
+          style={{ backgroundColor: "#0A84FF", borderRadius: "20px" }}
+        >
+          <h2 className="font-display relative text-4xl text-white md:text-5xl">
             {tr.sectionTitles.ctaTitle}
           </h2>
-          <p className="relative mx-auto mt-4 max-w-md text-sm text-primary-foreground/80">
+          <p className="relative mx-auto mt-4 max-w-md text-base text-white/85">
             {tr.sectionTitles.ctaBody}
           </p>
           <Link
             to="/intake"
-            className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground shadow-soft transition-opacity hover:opacity-90"
+            className="relative mt-9 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-base font-semibold text-foreground transition-opacity hover:opacity-90"
           >
             {tr.sectionTitles.ctaButton}
             <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
