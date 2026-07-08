@@ -574,19 +574,24 @@ function ChatScreen({
         </div>
       </div>
 
-      <div className="border-t border-border bg-surface">
+      <div className="border-t bg-white" style={{ borderColor: "#E5E5EA" }}>
         <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4">
           {!isLast && suggestions.length > 0 && messages.length > 0 && !aiThinking && !blocked && (
-            <div className="mb-3 flex flex-wrap gap-2">
-              {suggestions.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => submit(s)}
-                  className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-foreground transition-all duration-150 hover:bg-surface-elevated active:scale-[0.98]"
-                >
-                  {s}
-                </button>
-              ))}
+            <div className="mb-3 -mx-4 md:-mx-5 overflow-x-auto scrollbar-none">
+              <div className="flex flex-nowrap gap-2 px-4 md:px-5">
+                {suggestions.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => submit(s)}
+                    className="shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs text-foreground transition-colors duration-150 active:scale-[0.98]"
+                    style={{ backgroundColor: "#F2F2F7" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#E5E5EA")}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#F2F2F7")}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
           {stepIndex > 0 && !aiThinking && !isLast && (
@@ -594,14 +599,22 @@ function ChatScreen({
               <button
                 type="button"
                 onClick={goBack}
-                className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground"
+                className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
               >
                 <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                 {u.chrome.back}
               </button>
             </div>
           )}
-          <div className="flex items-end gap-2 rounded-2xl border border-border bg-surface p-2 shadow-soft transition-all duration-200 focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15">
+          <div
+            className="flex items-end gap-2 border bg-white p-2 transition-all duration-200 focus-within:ring-2"
+            style={{
+              borderColor: "#E5E5EA",
+              borderRadius: "16px",
+              // @ts-expect-error CSS custom prop
+              "--tw-ring-color": "rgba(10, 132, 255, 0.25)",
+            }}
+          >
             <textarea
               ref={inputRef}
               value={input}
@@ -622,12 +635,14 @@ function ChatScreen({
             <button
               onClick={() => submit()}
               disabled={!input.trim() || aiThinking || isLast || blocked}
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground transition-all duration-150 hover:opacity-90 active:scale-95 disabled:opacity-30"
+              className="grid h-9 w-9 shrink-0 place-items-center text-white transition-all duration-150 hover:opacity-90 active:scale-95 disabled:opacity-30"
+              style={{ backgroundColor: "#0A84FF", borderRadius: "10px" }}
               aria-label={tr.composer.sendAria}
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
             </button>
           </div>
+
           <p className="mt-2 text-center text-[11px] leading-relaxed text-muted-foreground/80">
             {tr.composer.privacyNote}
           </p>
