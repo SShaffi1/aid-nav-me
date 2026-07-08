@@ -611,10 +611,10 @@ function ChatScreen({
             style={{
               borderColor: "#E5E5EA",
               borderRadius: "16px",
-              // @ts-expect-error CSS custom prop
-              "--tw-ring-color": "rgba(10, 132, 255, 0.25)",
-            }}
+              ["--tw-ring-color" as string]: "rgba(10, 132, 255, 0.25)",
+            } as React.CSSProperties}
           >
+
             <textarea
               ref={inputRef}
               value={input}
