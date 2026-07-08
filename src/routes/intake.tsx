@@ -269,7 +269,7 @@ function IntroScreen({
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface">
+      <header className="border-b bg-white" style={{ borderColor: "#E5E5EA" }}>
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
@@ -286,13 +286,15 @@ function IntroScreen({
         </div>
       </header>
 
+
       <main className="flex flex-1 items-center justify-center px-5 py-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-xl rounded-2xl border border-border bg-surface p-7 shadow-soft md:p-10"
+          className="w-full max-w-xl rounded-2xl border bg-white p-7 md:p-10"
+          style={{ borderColor: "#E5E5EA", borderRadius: "16px" }}
         >
-          <p className="text-[11px] font-medium text-muted-foreground">
+          <p className="text-sm font-medium text-primary">
             {tr.intro.eyebrow}
           </p>
           <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">
@@ -316,7 +318,7 @@ function IntroScreen({
 
           <button
             onClick={onStart}
-            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.99]"
+            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.99]"
           >
             {tr.intro.cta}
           </button>
@@ -325,6 +327,7 @@ function IntroScreen({
           </p>
         </motion.div>
       </main>
+
     </motion.div>
   );
 }
@@ -484,7 +487,7 @@ function ChatScreen({
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface">
+      <header className="border-b bg-white" style={{ borderColor: "#E5E5EA" }}>
         <div className="mx-auto max-w-3xl px-5 py-2.5">
           <div className="flex items-center justify-between gap-3">
             <Link to="/" aria-label="AEDNAV home" className="flex items-center">
@@ -503,20 +506,22 @@ function ChatScreen({
               <ExitButton lang={lang} />
             </div>
           </div>
-          <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
+          <div className="mt-2 h-0.5 overflow-hidden" style={{ backgroundColor: "#E5E5EA" }}>
             <motion.div
-              className="h-full rounded-full bg-primary"
+              className="h-full"
+              style={{ backgroundColor: "#0A84FF" }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             />
           </div>
         </div>
-        <div className="border-t border-border bg-warning/10">
-          <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px] text-warning-foreground" dir="auto">
+        <div style={{ backgroundColor: "#FFF8E7" }}>
+          <div className="mx-auto max-w-3xl px-5 py-2 text-center text-[11.5px]" style={{ color: "#7A5B00" }} dir="auto">
             {tr.emergencyBanner.disclaimer}
           </div>
         </div>
       </header>
+
 
       <AnimatePresence>
         {emergency && (
@@ -569,19 +574,24 @@ function ChatScreen({
         </div>
       </div>
 
-      <div className="border-t border-border bg-surface">
+      <div className="border-t bg-white" style={{ borderColor: "#E5E5EA" }}>
         <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4">
           {!isLast && suggestions.length > 0 && messages.length > 0 && !aiThinking && !blocked && (
-            <div className="mb-3 flex flex-wrap gap-2">
-              {suggestions.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => submit(s)}
-                  className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-foreground transition-all duration-150 hover:bg-surface-elevated active:scale-[0.98]"
-                >
-                  {s}
-                </button>
-              ))}
+            <div className="mb-3 -mx-4 md:-mx-5 overflow-x-auto scrollbar-none">
+              <div className="flex flex-nowrap gap-2 px-4 md:px-5">
+                {suggestions.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => submit(s)}
+                    className="shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs text-foreground transition-colors duration-150 active:scale-[0.98]"
+                    style={{ backgroundColor: "#F2F2F7" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#E5E5EA")}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#F2F2F7")}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
           {stepIndex > 0 && !aiThinking && !isLast && (
@@ -589,14 +599,22 @@ function ChatScreen({
               <button
                 type="button"
                 onClick={goBack}
-                className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground"
+                className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
               >
                 <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                 {u.chrome.back}
               </button>
             </div>
           )}
-          <div className="flex items-end gap-2 rounded-2xl border border-border bg-surface p-2 shadow-soft transition-all duration-200 focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15">
+          <div
+            className="flex items-end gap-2 border bg-white p-2 transition-all duration-200 focus-within:ring-2"
+            style={{
+              borderColor: "#E5E5EA",
+              borderRadius: "16px",
+              ["--tw-ring-color" as string]: "rgba(10, 132, 255, 0.25)",
+            } as React.CSSProperties}
+          >
+
             <textarea
               ref={inputRef}
               value={input}
@@ -617,12 +635,14 @@ function ChatScreen({
             <button
               onClick={() => submit()}
               disabled={!input.trim() || aiThinking || isLast || blocked}
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground transition-all duration-150 hover:opacity-90 active:scale-95 disabled:opacity-30"
+              className="grid h-9 w-9 shrink-0 place-items-center text-white transition-all duration-150 hover:opacity-90 active:scale-95 disabled:opacity-30"
+              style={{ backgroundColor: "#0A84FF", borderRadius: "10px" }}
               aria-label={tr.composer.sendAria}
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
             </button>
           </div>
+
           <p className="mt-2 text-center text-[11px] leading-relaxed text-muted-foreground/80">
             {tr.composer.privacyNote}
           </p>
@@ -647,18 +667,25 @@ function MessageBubble({
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className={`flex items-end gap-2.5 ${isAi ? "" : "flex-row-reverse"}`}
     >
-      {isAi && (
-        <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary">
-          <svg className="h-3.5 w-3.5 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18"/></svg>
-        </div>
-      )}
+      {isAi && <AiAvatar />}
       <div
         dir="auto"
-        className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[14.5px] leading-relaxed ${
-          isAi
-            ? "rounded-bl-md border border-border bg-surface-elevated text-foreground"
-            : "rounded-br-md bg-primary text-primary-foreground"
+        className={`max-w-[85%] px-4 py-3 text-[14.5px] leading-relaxed ${
+          isAi ? "text-foreground" : "text-white"
         }`}
+        style={
+          isAi
+            ? {
+                backgroundColor: "#F2F2F7",
+                borderRadius: "18px",
+                borderBottomLeftRadius: "4px",
+              }
+            : {
+                backgroundColor: "#0A84FF",
+                borderRadius: "18px",
+                borderBottomRightRadius: "4px",
+              }
+        }
       >
         {text}
       </div>
@@ -666,6 +693,23 @@ function MessageBubble({
   );
 }
 
+function AiAvatar() {
+  return (
+    <div
+      className="grid h-8 w-8 shrink-0 place-items-center"
+      style={{ backgroundColor: "#0A84FF", borderRadius: "10px" }}
+    >
+      <svg
+        className="h-4 w-4 text-white"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M12 2l1.7 5.3L19 9l-5.3 1.7L12 16l-1.7-5.3L5 9l5.3-1.7L12 2zm7 11l.9 2.6L22.5 16l-2.6.9L19 19.5l-.9-2.6L15.5 16l2.6-.9L19 13z" />
+      </svg>
+    </div>
+  );
+}
 
 function TypingIndicator() {
   return (
@@ -675,10 +719,15 @@ function TypingIndicator() {
       className="flex items-end gap-2.5"
       aria-label="AEDNAV is typing"
     >
-      <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary">
-        <svg className="h-3.5 w-3.5 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18"/></svg>
-      </div>
-      <div className="rounded-2xl rounded-bl-md border border-border bg-surface-elevated px-4 py-3">
+      <AiAvatar />
+      <div
+        className="px-4 py-3"
+        style={{
+          backgroundColor: "#F2F2F7",
+          borderRadius: "18px",
+          borderBottomLeftRadius: "4px",
+        }}
+      >
         <div className="flex items-center gap-1">
           {[0, 0.15, 0.3].map((d) => (
             <motion.span
@@ -693,6 +742,7 @@ function TypingIndicator() {
     </motion.div>
   );
 }
+
 
 /* ---------------- Review screen ---------------- */
 
@@ -729,7 +779,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
       transition={{ duration: 0.3 }}
       className="flex min-h-screen flex-col"
     >
-      <header className="border-b border-border bg-surface">
+      <header className="border-b bg-white" style={{ borderColor: "#E5E5EA" }}>
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-2.5">
           <Link to="/" aria-label="AEDNAV home" className="flex items-center">
             <Logo className="h-6 md:h-7" />
@@ -743,17 +793,19 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
         </div>
       </header>
 
+
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-8 md:py-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-[11px] font-medium text-muted-foreground">{tr.review.eyebrow}</p>
+          <p className="text-sm font-medium text-primary">{tr.review.eyebrow}</p>
           <h1 className="font-display mt-3 text-3xl leading-tight text-foreground md:text-4xl">{tr.review.title}</h1>
           <p className="mt-3 text-sm text-muted-foreground">{tr.review.body}</p>
         </motion.div>
 
-        <div className="mt-8 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface shadow-soft">
+        <div className="mt-8 divide-y divide-border overflow-hidden border bg-white" style={{ borderColor: "#E5E5EA", borderRadius: "16px" }}>
+
           {FIELD_ORDER.map((field, i) => (
             <motion.div
               key={field}
