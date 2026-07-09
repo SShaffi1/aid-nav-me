@@ -274,7 +274,7 @@ function LandingPage() {
 
       {/* Safety / trust */}
       <section className="mx-auto mt-32 max-w-4xl px-6">
-        <div className="rounded-2xl p-10 md:p-12" style={{ backgroundColor: "#F2F2F7" }}>
+        <div className="rounded-2xl p-5 sm:p-10 md:p-12" style={{ backgroundColor: "#F2F2F7" }}>
           <p className={eyebrowClass}>{tr.sectionTitles.safetyEyebrow}</p>
           <h2 className="font-display mt-3 text-2xl leading-snug text-foreground md:text-3xl">
             {tr.sectionTitles.safetyTitle}
