@@ -785,8 +785,8 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
             <Logo className="h-6 md:h-7" />
           </Link>
           <div className="flex items-center gap-3">
-            <button onClick={onChangeLang} className="text-xs text-muted-foreground hover:text-foreground">
-              {getLangConfig(lang).native} · {ui(lang).chrome.change}
+            <button onClick={onChangeLang} className="inline-flex min-h-[44px] items-center text-xs text-muted-foreground hover:text-foreground">
+              {getLangConfig(lang).native}<span className="hidden sm:inline"> · {ui(lang).chrome.change}</span>
             </button>
             <ExitButton lang={lang} />
           </div>
