@@ -130,24 +130,20 @@ function SummaryPage() {
             <motion.div
               key="loading"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="rounded-2xl border border-border bg-surface p-10 shadow-soft"
+              className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-10"
             >
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1">
-                  {[0, 0.15, 0.3].map((d) => (
-                    <motion.span key={d}
-                      animate={{ opacity: [0.2, 1, 0.2], y: [0, -2, 0] }}
-                      transition={{ duration: 1.1, repeat: Infinity, delay: d }}
-                      className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground">{u.summary.preparing}</p>
+              <div className="space-y-4">
+                <div className="h-4 w-1/3 animate-pulse rounded-md bg-muted" />
+                <div className="h-3 w-1/4 animate-pulse rounded-md bg-muted" />
+                <div className="my-6 h-px w-full bg-muted" />
+                {[0, 1, 2, 3].map((i) => (
+                  <div key={i} className="space-y-2 py-1">
+                    <div className="h-3 w-1/5 animate-pulse rounded-md bg-muted" />
+                    <div className={`h-3 animate-pulse rounded-md bg-muted ${i % 2 ? "w-3/5" : "w-4/5"}`} />
+                  </div>
+                ))}
               </div>
-              <div className="mt-8 space-y-4">
-                <div className="h-3 w-1/3 animate-pulse rounded bg-muted" />
-                <div className="h-3 w-2/3 animate-pulse rounded bg-muted" />
-                <div className="h-3 w-1/2 animate-pulse rounded bg-muted" />
-              </div>
+              <p className="sr-only">{u.summary.preparing}</p>
             </motion.div>
           ) : (
             <motion.div
@@ -157,7 +153,7 @@ function SummaryPage() {
             >
               {/* Tabs (hidden for English: single unified view) */}
               {!isEnglish && (
-                <div className="print:hidden flex w-full items-center gap-1 rounded-full border border-border bg-surface p-1 sm:w-fit">
+                <div className="print:hidden relative flex w-full items-center rounded-full bg-surface p-1 sm:w-fit">
                   <TabButton active={tab === "patient"} onClick={() => setTab("patient")}>
                     {u.summary.patientTab}
                   </TabButton>
@@ -177,22 +173,23 @@ function SummaryPage() {
                   <>
                     <div className="mb-5 print:hidden">
                       <div
-                        className={`rounded-2xl border p-4 ${
+                        className="rounded-2xl border p-5 md:p-6"
+                        style={
                           recommendation.isEmergency
-                            ? "border-destructive/40 bg-destructive/5"
-                            : "border-border bg-surface-elevated"
-                        }`}
+                            ? { backgroundColor: "rgba(255,59,48,0.08)", borderColor: "rgba(255,59,48,0.35)" }
+                            : { backgroundColor: "rgba(10,132,255,0.08)", borderColor: "rgba(10,132,255,0.30)" }
+                        }
                       >
-                        <p className="text-[11px] font-medium text-muted-foreground">
+                        <p className="text-xs font-medium text-muted-foreground">
                           {tr.patientSummary.sections.careOption}
                         </p>
-                        <p className="mt-1.5 text-sm font-semibold text-foreground">
+                        <p className="mt-2 text-lg font-semibold text-foreground md:text-xl">
                           {recommendation.setting}
                         </p>
                         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                           {recommendation.reason}
                         </p>
-                        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                           {tr.patientSummary.careInfoOnly}
                         </p>
                       </div>
@@ -236,7 +233,7 @@ function SummaryPage() {
                 {isEnglish ? (
                   <button
                     onClick={() => window.print()}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-40"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] sm:w-auto"
                   >
                     <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
                     {u.summary.print}
@@ -245,14 +242,14 @@ function SummaryPage() {
                   <>
                     <button
                       onClick={printPatient}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-surface-elevated active:scale-[0.98] disabled:opacity-40"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] sm:w-auto"
                     >
                       <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
                       {u.summary.printPatient}
                     </button>
                     <button
                       onClick={printProvider}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-40"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-surface active:scale-[0.98] sm:w-auto"
                     >
                       <Icon path="M6 9V2h12v7 M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2 M6 14h12v8H6z" />
                       {u.summary.printProvider}
@@ -280,11 +277,19 @@ function TabButton({ active, onClick, children }: { active: boolean; onClick: ()
   return (
     <button
       onClick={onClick}
-      className={`flex-1 rounded-full px-4 py-2 text-xs font-medium transition-colors duration-150 sm:flex-none ${
-        active ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
+      className={`relative flex-1 rounded-full px-5 py-1.5 text-[13px] font-medium transition-colors duration-200 sm:flex-none ${
+        active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
       }`}
     >
-      {children}
+      {active && (
+        <motion.span
+          layoutId="summary-tab-pill"
+          transition={{ type: "spring", stiffness: 400, damping: 34 }}
+          className="absolute inset-0 rounded-full bg-card shadow-soft"
+          style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}
+        />
+      )}
+      <span className="relative">{children}</span>
     </button>
   );
 }
@@ -330,7 +335,7 @@ function PatientCard({
 }) {
   void dir;
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none patient-print-target">
+    <div className="rounded-2xl border border-border bg-card shadow-soft print:rounded-none print:border-0 print:shadow-none patient-print-target">
 
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
@@ -351,13 +356,14 @@ function PatientCard({
             {tr.patientSummary.careInfoOnly}
           </p>
           <div
-            className={`rounded-2xl border p-4 ${
+            className="rounded-2xl border p-5 md:p-6"
+            style={
               recommendation.isEmergency
-                ? "border-destructive/40 bg-destructive/5"
-                : "border-border bg-surface-elevated"
-            }`}
+                ? { backgroundColor: "rgba(255,59,48,0.08)", borderColor: "rgba(255,59,48,0.35)" }
+                : { backgroundColor: "rgba(10,132,255,0.08)", borderColor: "rgba(10,132,255,0.30)" }
+            }
           >
-            <p className="mt-1.5 text-sm font-semibold text-foreground">
+            <p className="text-lg font-semibold text-foreground md:text-xl">
               {recommendation.setting === "Family Doctor" ? tr.careSettings.familyDoctor :
                recommendation.setting === "Walk-in Clinic" ? tr.careSettings.walkInClinic :
                recommendation.setting === "Urgent Care" ? tr.careSettings.urgentCare :
@@ -440,7 +446,7 @@ function ProviderCard({
   bannerText?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none provider-print-target">
+    <div className="rounded-2xl border border-border bg-card shadow-soft print:rounded-none print:border-0 print:shadow-none provider-print-target">
       {bannerText && (
         <div className="rounded-t-2xl border-b border-primary/15 bg-primary-soft px-6 py-3 md:px-10">
           <p className="flex items-center gap-2 text-sm text-primary">
@@ -523,7 +529,7 @@ function ProviderCard({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h3 className="text-[11px] font-medium text-muted-foreground">{title}</h3>
+      <h3 className="text-xs font-medium text-muted-foreground">{title}</h3>
       <div className="mt-3">{children}</div>
     </section>
   );
@@ -531,9 +537,9 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function KeyRow({ label, value, last }: { label: string; value: string; last?: boolean }) {
   return (
-    <div className={`grid gap-1 px-4 py-3 sm:grid-cols-[200px_1fr] sm:items-baseline ${last ? "" : "border-b border-border"}`}>
+    <div className={`grid gap-1 px-4 py-3 sm:grid-cols-[200px_1fr] sm:items-baseline ${last ? "" : "border-b border-muted"}`}>
       <span className="text-xs font-medium text-muted-foreground">{label}</span>
-      <span className="text-[14.5px] leading-relaxed text-foreground">{value}</span>
+      <span className="text-[15px] leading-relaxed text-foreground">{value}</span>
     </div>
   );
 }
@@ -542,8 +548,8 @@ function Field({
   label, value, editing, onChange,
 }: { label: string; value: string; editing?: boolean; onChange?: (v: string) => void; }) {
   return (
-    <div className="grid gap-1 sm:grid-cols-[200px_1fr] sm:items-start">
-      <span className="pt-1.5 text-sm text-muted-foreground">{label}</span>
+    <div className="grid gap-1 border-b border-muted py-3 last:border-b-0 sm:grid-cols-[200px_1fr] sm:items-start">
+      <span className="pt-1.5 text-xs font-medium text-muted-foreground">{label}</span>
       {editing ? (
         <input
           value={value}
