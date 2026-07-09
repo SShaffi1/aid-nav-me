@@ -153,7 +153,7 @@ function SummaryPage() {
             >
               {/* Tabs (hidden for English: single unified view) */}
               {!isEnglish && (
-                <div className="print:hidden flex w-full items-center gap-1 rounded-full border border-border bg-surface p-1 sm:w-fit">
+                <div className="print:hidden relative flex w-full items-center rounded-full bg-surface p-1 sm:w-fit">
                   <TabButton active={tab === "patient"} onClick={() => setTab("patient")}>
                     {u.summary.patientTab}
                   </TabButton>
