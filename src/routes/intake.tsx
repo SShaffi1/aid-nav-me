@@ -827,14 +827,14 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
                   {answers[field] || <span className="italic text-muted-foreground">{tr.review.notProvided}</span>}
                 </p>
               )}
-              <div className="flex gap-2 sm:justify-end">
+              <div className="flex flex-wrap gap-2 sm:justify-end">
                 {editing === field ? (
                   <>
-                    <button onClick={() => setEditing(null)} className="rounded-md border border-border bg-surface px-2.5 py-1 text-xs text-foreground hover:bg-surface-elevated">{tr.review.cancelEdit}</button>
-                    <button onClick={saveEdit} className="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground hover:opacity-90">{tr.review.save}</button>
+                    <button onClick={() => setEditing(null)} className="inline-flex min-h-[36px] items-center rounded-md border border-border bg-surface px-3 py-1 text-xs text-foreground hover:bg-surface-elevated">{tr.review.cancelEdit}</button>
+                    <button onClick={saveEdit} className="inline-flex min-h-[36px] items-center rounded-md bg-primary px-3 py-1 text-xs font-medium text-primary-foreground hover:opacity-90">{tr.review.save}</button>
                   </>
                 ) : (
-                  <button onClick={() => startEdit(field)} className="rounded-md border border-border bg-surface px-2.5 py-1 text-xs text-foreground hover:bg-surface-elevated">{tr.review.edit}</button>
+                  <button onClick={() => startEdit(field)} className="inline-flex min-h-[36px] items-center rounded-md border border-border bg-surface px-3 py-1 text-xs text-foreground hover:bg-surface-elevated">{tr.review.edit}</button>
                 )}
               </div>
             </motion.div>
