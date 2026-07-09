@@ -214,7 +214,7 @@ function LandingPage() {
           </div>
 
           {/* Provider (always English) — surface */}
-          <div className="rounded-2xl p-8 md:p-10" style={{ backgroundColor: "#F2F2F7" }}>
+          <div className="rounded-2xl p-5 sm:p-8 md:p-10" style={{ backgroundColor: "#F2F2F7" }}>
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-muted-foreground">Provider summary</p>
               <span className="text-xs text-muted-foreground">English</span>
