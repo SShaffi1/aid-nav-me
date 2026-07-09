@@ -276,11 +276,19 @@ function TabButton({ active, onClick, children }: { active: boolean; onClick: ()
   return (
     <button
       onClick={onClick}
-      className={`flex-1 rounded-full px-4 py-2 text-xs font-medium transition-colors duration-150 sm:flex-none ${
-        active ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
+      className={`relative flex-1 rounded-full px-5 py-1.5 text-[13px] font-medium transition-colors duration-200 sm:flex-none ${
+        active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
       }`}
     >
-      {children}
+      {active && (
+        <motion.span
+          layoutId="summary-tab-pill"
+          transition={{ type: "spring", stiffness: 400, damping: 34 }}
+          className="absolute inset-0 rounded-full bg-card shadow-soft"
+          style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}
+        />
+      )}
+      <span className="relative">{children}</span>
     </button>
   );
 }
