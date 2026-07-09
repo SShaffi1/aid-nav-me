@@ -52,7 +52,7 @@ function LandingPage() {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative pt-28 pb-24 md:pt-40 md:pb-32">
+      <section className="relative pt-20 pb-16 md:pt-40 md:pb-32">
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           <motion.p
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
