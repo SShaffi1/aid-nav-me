@@ -635,7 +635,7 @@ function ChatScreen({
             <button
               onClick={() => submit()}
               disabled={!input.trim() || aiThinking || isLast || blocked}
-              className="grid h-9 w-9 shrink-0 place-items-center text-white transition-all duration-150 hover:opacity-90 active:scale-95 disabled:opacity-30"
+              className="grid h-11 w-11 shrink-0 place-items-center text-white transition-all duration-150 hover:opacity-90 active:scale-95 disabled:opacity-30 sm:h-9 sm:w-9"
               style={{ backgroundColor: "#0A84FF", borderRadius: "10px" }}
               aria-label={tr.composer.sendAria}
             >
