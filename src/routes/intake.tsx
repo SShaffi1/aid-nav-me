@@ -291,7 +291,7 @@ function IntroScreen({
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-xl rounded-2xl border bg-white p-7 md:p-10"
+          className="w-full max-w-xl rounded-2xl border bg-white p-5 sm:p-8 md:p-10"
           style={{ borderColor: "#E5E5EA", borderRadius: "16px" }}
         >
           <p className="text-sm font-medium text-primary">
