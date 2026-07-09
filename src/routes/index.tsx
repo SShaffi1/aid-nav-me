@@ -262,7 +262,7 @@ function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="rounded-2xl p-8"
+              className="rounded-2xl p-5 sm:p-8"
               style={{ backgroundColor: "#F2F2F7" }}
             >
               <h3 className="text-base font-semibold text-foreground">{a.title}</h3>
