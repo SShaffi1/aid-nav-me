@@ -607,7 +607,7 @@ function ChatScreen({
             </div>
           )}
           <div
-            className="flex items-end gap-2 border bg-white p-2 transition-all duration-200 focus-within:ring-2"
+            className="flex items-end gap-2 border bg-white p-1.5 transition-all duration-200 focus-within:ring-2 md:p-2"
             style={{
               borderColor: "#E5E5EA",
               borderRadius: "16px",
