@@ -575,7 +575,7 @@ function ChatScreen({
       </div>
 
       <div className="border-t bg-white" style={{ borderColor: "#E5E5EA" }}>
-        <div className="mx-auto max-w-3xl px-4 py-3 md:px-5 md:py-4">
+        <div className="mx-auto max-w-3xl px-4 py-2.5 md:px-5 md:py-4">
           {!isLast && suggestions.length > 0 && messages.length > 0 && !aiThinking && !blocked && (
             <div className="mb-3 -mx-4 md:-mx-5 overflow-x-auto scrollbar-none">
               <div className="flex flex-nowrap gap-2 px-4 md:px-5">
