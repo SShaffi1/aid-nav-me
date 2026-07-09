@@ -356,13 +356,14 @@ function PatientCard({
             {tr.patientSummary.careInfoOnly}
           </p>
           <div
-            className={`rounded-2xl border p-4 ${
+            className="rounded-2xl border p-5 md:p-6"
+            style={
               recommendation.isEmergency
-                ? "border-destructive/40 bg-destructive/5"
-                : "border-border bg-surface-elevated"
-            }`}
+                ? { backgroundColor: "rgba(255,59,48,0.08)", borderColor: "rgba(255,59,48,0.35)" }
+                : { backgroundColor: "rgba(10,132,255,0.08)", borderColor: "rgba(10,132,255,0.30)" }
+            }
           >
-            <p className="mt-1.5 text-sm font-semibold text-foreground">
+            <p className="text-lg font-semibold text-foreground md:text-xl">
               {recommendation.setting === "Family Doctor" ? tr.careSettings.familyDoctor :
                recommendation.setting === "Walk-in Clinic" ? tr.careSettings.walkInClinic :
                recommendation.setting === "Urgent Care" ? tr.careSettings.urgentCare :
