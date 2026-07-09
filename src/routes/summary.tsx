@@ -529,7 +529,7 @@ function ProviderCard({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h3 className="text-[11px] font-medium text-muted-foreground">{title}</h3>
+      <h3 className="text-xs font-medium text-muted-foreground">{title}</h3>
       <div className="mt-3">{children}</div>
     </section>
   );
@@ -537,9 +537,9 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function KeyRow({ label, value, last }: { label: string; value: string; last?: boolean }) {
   return (
-    <div className={`grid gap-1 px-4 py-3 sm:grid-cols-[200px_1fr] sm:items-baseline ${last ? "" : "border-b border-border"}`}>
+    <div className={`grid gap-1 px-4 py-3 sm:grid-cols-[200px_1fr] sm:items-baseline ${last ? "" : "border-b border-muted"}`}>
       <span className="text-xs font-medium text-muted-foreground">{label}</span>
-      <span className="text-[14.5px] leading-relaxed text-foreground">{value}</span>
+      <span className="text-[15px] leading-relaxed text-foreground">{value}</span>
     </div>
   );
 }
@@ -548,8 +548,8 @@ function Field({
   label, value, editing, onChange,
 }: { label: string; value: string; editing?: boolean; onChange?: (v: string) => void; }) {
   return (
-    <div className="grid gap-1 sm:grid-cols-[200px_1fr] sm:items-start">
-      <span className="pt-1.5 text-sm text-muted-foreground">{label}</span>
+    <div className="grid gap-1 border-b border-muted py-3 last:border-b-0 sm:grid-cols-[200px_1fr] sm:items-start">
+      <span className="pt-1.5 text-xs font-medium text-muted-foreground">{label}</span>
       {editing ? (
         <input
           value={value}
