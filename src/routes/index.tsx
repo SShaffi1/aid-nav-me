@@ -130,7 +130,7 @@ function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-2xl p-10"
+              className="rounded-2xl p-5 sm:p-8 md:p-10"
               style={{ backgroundColor: "#F2F2F7" }}
             >
               <div
