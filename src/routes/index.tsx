@@ -65,7 +65,7 @@ function LandingPage() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-balance mt-6 text-6xl leading-[1.02] tracking-tight text-foreground md:text-8xl"
+            className="font-display text-balance mt-5 text-4xl leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-8xl md:leading-[1.02]"
           >
             {tr.hero.title1}<br />
             <span style={{ color: "#0A84FF" }}>{tr.hero.title2}</span>
