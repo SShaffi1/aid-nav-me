@@ -335,7 +335,7 @@ function PatientCard({
 }) {
   void dir;
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none patient-print-target">
+    <div className="rounded-2xl border border-border bg-card shadow-soft print:rounded-none print:border-0 print:shadow-none patient-print-target">
 
       <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-6 md:px-10 md:py-8">
         <div>
