@@ -211,6 +211,14 @@
   }
 }
 
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media print {
   body.printing-patient .provider-print-target {
     display: none !important;
