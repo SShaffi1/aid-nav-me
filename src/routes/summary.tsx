@@ -173,22 +173,23 @@ function SummaryPage() {
                   <>
                     <div className="mb-5 print:hidden">
                       <div
-                        className={`rounded-2xl border p-4 ${
+                        className="rounded-2xl border p-5 md:p-6"
+                        style={
                           recommendation.isEmergency
-                            ? "border-destructive/40 bg-destructive/5"
-                            : "border-border bg-surface-elevated"
-                        }`}
+                            ? { backgroundColor: "rgba(255,59,48,0.08)", borderColor: "rgba(255,59,48,0.35)" }
+                            : { backgroundColor: "rgba(10,132,255,0.08)", borderColor: "rgba(10,132,255,0.30)" }
+                        }
                       >
-                        <p className="text-[11px] font-medium text-muted-foreground">
+                        <p className="text-xs font-medium text-muted-foreground">
                           {tr.patientSummary.sections.careOption}
                         </p>
-                        <p className="mt-1.5 text-sm font-semibold text-foreground">
+                        <p className="mt-2 text-lg font-semibold text-foreground md:text-xl">
                           {recommendation.setting}
                         </p>
                         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                           {recommendation.reason}
                         </p>
-                        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                           {tr.patientSummary.careInfoOnly}
                         </p>
                       </div>
