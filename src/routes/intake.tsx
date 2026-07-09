@@ -813,7 +813,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
               transition={{ duration: 0.35, delay: 0.05 + i * 0.04 }}
               className="grid gap-2 px-5 py-4 sm:grid-cols-[200px_1fr_auto] sm:items-start"
             >
-              <span className="pt-1 text-[13px] text-muted-foreground">{tr.fieldLabels[field]}</span>
+              <span className="text-[13px] font-medium text-muted-foreground sm:pt-1">{tr.fieldLabels[field]}</span>
               {editing === field ? (
                 <textarea
                   dir="auto"
