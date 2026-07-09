@@ -130,24 +130,20 @@ function SummaryPage() {
             <motion.div
               key="loading"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="rounded-2xl border border-border bg-surface p-10 shadow-soft"
+              className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-10"
             >
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1">
-                  {[0, 0.15, 0.3].map((d) => (
-                    <motion.span key={d}
-                      animate={{ opacity: [0.2, 1, 0.2], y: [0, -2, 0] }}
-                      transition={{ duration: 1.1, repeat: Infinity, delay: d }}
-                      className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground">{u.summary.preparing}</p>
+              <div className="space-y-4">
+                <div className="h-4 w-1/3 animate-pulse rounded-md bg-muted" />
+                <div className="h-3 w-1/4 animate-pulse rounded-md bg-muted" />
+                <div className="my-6 h-px w-full bg-muted" />
+                {[0, 1, 2, 3].map((i) => (
+                  <div key={i} className="space-y-2 py-1">
+                    <div className="h-3 w-1/5 animate-pulse rounded-md bg-muted" />
+                    <div className={`h-3 animate-pulse rounded-md bg-muted ${i % 2 ? "w-3/5" : "w-4/5"}`} />
+                  </div>
+                ))}
               </div>
-              <div className="mt-8 space-y-4">
-                <div className="h-3 w-1/3 animate-pulse rounded bg-muted" />
-                <div className="h-3 w-2/3 animate-pulse rounded bg-muted" />
-                <div className="h-3 w-1/2 animate-pulse rounded bg-muted" />
-              </div>
+              <p className="sr-only">{u.summary.preparing}</p>
             </motion.div>
           ) : (
             <motion.div
