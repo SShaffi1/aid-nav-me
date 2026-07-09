@@ -446,7 +446,7 @@ function ProviderCard({
   bannerText?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft print:rounded-none print:border-0 print:shadow-none provider-print-target">
+    <div className="rounded-2xl border border-border bg-card shadow-soft print:rounded-none print:border-0 print:shadow-none provider-print-target">
       {bannerText && (
         <div className="rounded-t-2xl border-b border-primary/15 bg-primary-soft px-6 py-3 md:px-10">
           <p className="flex items-center gap-2 text-sm text-primary">
