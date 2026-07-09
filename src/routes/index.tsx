@@ -188,7 +188,7 @@ function LandingPage() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {/* Patient (selected language) — white with border */}
-          <div className="rounded-2xl bg-white p-8 md:p-10 border" style={{ borderColor: "#E5E5EA" }}>
+          <div className="rounded-2xl bg-white p-5 sm:p-8 md:p-10 border" style={{ borderColor: "#E5E5EA" }}>
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-muted-foreground">{lc.dual.patientLabel}</p>
               <span className="text-xs text-muted-foreground">{getLangConfig(lang).native}</span>
