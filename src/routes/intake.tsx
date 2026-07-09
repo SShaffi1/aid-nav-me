@@ -277,9 +277,9 @@ function IntroScreen({
           <div className="flex items-center gap-3">
             <button
               onClick={onChangeLang}
-              className="text-xs text-muted-foreground hover:text-foreground"
+              className="inline-flex min-h-[44px] items-center text-xs text-muted-foreground hover:text-foreground"
             >
-              {getLangConfig(lang).native} · {u.chrome.change}
+              {getLangConfig(lang).native}<span className="hidden sm:inline"> · {u.chrome.change}</span>
             </button>
             <ExitButton lang={lang} />
           </div>
