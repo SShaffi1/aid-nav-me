@@ -84,12 +84,12 @@ function LandingPage() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-3"
+            className="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center"
           >
             <Link
               to="/intake"
-              className="group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#0A84FF" }}
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90 sm:w-auto"
+              style={{ backgroundColor: "#0A84FF", minHeight: "44px" }}
             >
               {tr.hero.primary}
               <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -99,8 +99,8 @@ function LandingPage() {
             <a
               href="#how"
               onClick={(e) => { e.preventDefault(); smoothScrollTo("how"); }}
-              className="inline-flex items-center gap-2 rounded-full border bg-white px-6 py-3.5 text-base font-semibold text-foreground transition-colors hover:bg-surface"
-              style={{ borderColor: "#E5E5EA" }}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border bg-white px-6 py-3.5 text-base font-semibold text-foreground transition-colors hover:bg-surface sm:w-auto"
+              style={{ borderColor: "#E5E5EA", minHeight: "44px" }}
             >
               {tr.hero.secondary}
             </a>
