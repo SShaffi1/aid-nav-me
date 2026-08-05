@@ -176,8 +176,8 @@ function SummaryPage() {
                         className="rounded-2xl border p-5 md:p-6"
                         style={
                           recommendation.isEmergency
-                            ? { backgroundColor: "rgba(255,59,48,0.08)", borderColor: "rgba(255,59,48,0.35)" }
-                            : { backgroundColor: "rgba(10,132,255,0.08)", borderColor: "rgba(10,132,255,0.30)" }
+                            ? { backgroundColor: "color-mix(in oklab, var(--destructive) 10%, transparent)", borderColor: "color-mix(in oklab, var(--destructive) 35%, transparent)" }
+                            : { backgroundColor: "color-mix(in oklab, var(--primary) 10%, transparent)", borderColor: "color-mix(in oklab, var(--primary) 35%, transparent)" }
                         }
                       >
                         <p className="text-xs font-medium text-muted-foreground">
@@ -359,8 +359,8 @@ function PatientCard({
             className="rounded-2xl border p-5 md:p-6"
             style={
               recommendation.isEmergency
-                ? { backgroundColor: "rgba(255,59,48,0.08)", borderColor: "rgba(255,59,48,0.35)" }
-                : { backgroundColor: "rgba(10,132,255,0.08)", borderColor: "rgba(10,132,255,0.30)" }
+                ? { backgroundColor: "color-mix(in oklab, var(--destructive) 10%, transparent)", borderColor: "color-mix(in oklab, var(--destructive) 35%, transparent)" }
+                : { backgroundColor: "color-mix(in oklab, var(--primary) 10%, transparent)", borderColor: "color-mix(in oklab, var(--primary) 35%, transparent)" }
             }
           >
             <p className="text-lg font-semibold text-foreground md:text-xl">
