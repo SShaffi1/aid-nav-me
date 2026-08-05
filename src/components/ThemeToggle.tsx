@@ -51,7 +51,7 @@ export function useTheme() {
   function toggle() {
     const next: Theme = theme === "dark" ? "light" : "dark";
     localStorage.setItem(STORAGE_THEME, next);
-    applyTheme(next);
+    applyThemeAnimated(next);
     setTheme(next);
     window.dispatchEvent(new CustomEvent("aednav:theme-change", { detail: next }));
   }
