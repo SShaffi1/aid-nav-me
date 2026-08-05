@@ -4,6 +4,8 @@ import logoUrl from "@/assets/aednav-logo.svg";
 import { LANGUAGES, STORAGE_LANG, getLangConfig, type LangCode } from "@/lib/i18n";
 import { ui } from "@/lib/ui-i18n";
 import { useLang } from "@/components/LanguageGate";
+import { ThemeToggle } from "@/components/ThemeToggle";
+
 
 function smoothScrollTo(id: string) {
   const el = document.getElementById(id);
