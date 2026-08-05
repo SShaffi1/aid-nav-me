@@ -4,6 +4,8 @@ import logoUrl from "@/assets/aednav-logo.svg";
 import { LANGUAGES, STORAGE_LANG, getLangConfig, type LangCode } from "@/lib/i18n";
 import { ui } from "@/lib/ui-i18n";
 import { useLang } from "@/components/LanguageGate";
+import { ThemeToggle } from "@/components/ThemeToggle";
+
 
 function smoothScrollTo(id: string) {
   const el = document.getElementById(id);
@@ -41,7 +43,9 @@ export function SiteHeader() {
           <a href="/#faq" onClick={(e) => handleAnchor(e, "faq")} className={navLinkClass}>{tr.nav.faq}</a>
         </nav>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <LanguageSwitcher current={lang} />
+
           <Link
             to="/intake"
             className="rounded-full bg-foreground px-4 py-2 text-[13px] font-medium text-background transition-all duration-200 hover:opacity-90 active:scale-[0.98]"

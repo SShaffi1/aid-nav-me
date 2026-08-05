@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { Logo } from "@/components/SiteChrome";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { initialAnswers, recommendCare, type CareSetting, type IntakeAnswers } from "@/lib/intake";
 import { getStoredLang, getLangConfig, t as translate, type LangCode } from "@/lib/i18n";
 import { ui } from "@/lib/ui-i18n";
@@ -108,9 +109,12 @@ function SummaryPage() {
             <Link to="/" aria-label="AEDNAV home" className="flex items-center">
               <Logo className="h-6 md:h-7" />
             </Link>
-            <span className="hidden text-xs text-muted-foreground sm:inline">
-              {getLangConfig(lang).native} → English
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="hidden text-xs text-muted-foreground sm:inline">
+                {getLangConfig(lang).native} → English
+              </span>
+              <ThemeToggle />
+            </div>
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <ActionButton onClick={startEdit} hidden={editing} icon="edit">{u.summary.edit}</ActionButton>
@@ -176,8 +180,8 @@ function SummaryPage() {
                         className="rounded-2xl border p-5 md:p-6"
                         style={
                           recommendation.isEmergency
-                            ? { backgroundColor: "rgba(255,59,48,0.08)", borderColor: "rgba(255,59,48,0.35)" }
-                            : { backgroundColor: "rgba(10,132,255,0.08)", borderColor: "rgba(10,132,255,0.30)" }
+                            ? { backgroundColor: "color-mix(in oklab, var(--destructive) 10%, transparent)", borderColor: "color-mix(in oklab, var(--destructive) 35%, transparent)" }
+                            : { backgroundColor: "color-mix(in oklab, var(--primary) 10%, transparent)", borderColor: "color-mix(in oklab, var(--primary) 35%, transparent)" }
                         }
                       >
                         <p className="text-xs font-medium text-muted-foreground">
@@ -359,8 +363,8 @@ function PatientCard({
             className="rounded-2xl border p-5 md:p-6"
             style={
               recommendation.isEmergency
-                ? { backgroundColor: "rgba(255,59,48,0.08)", borderColor: "rgba(255,59,48,0.35)" }
-                : { backgroundColor: "rgba(10,132,255,0.08)", borderColor: "rgba(10,132,255,0.30)" }
+                ? { backgroundColor: "color-mix(in oklab, var(--destructive) 10%, transparent)", borderColor: "color-mix(in oklab, var(--destructive) 35%, transparent)" }
+                : { backgroundColor: "color-mix(in oklab, var(--primary) 10%, transparent)", borderColor: "color-mix(in oklab, var(--primary) 35%, transparent)" }
             }
           >
             <p className="text-lg font-semibold text-foreground md:text-xl">
