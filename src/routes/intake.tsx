@@ -611,7 +611,7 @@ function ChatScreen({
             style={{
               borderColor: "var(--border)",
               borderRadius: "16px",
-              ["--tw-ring-color" as string]: "rgba(10, 132, 255, 0.25)",
+              ["--tw-ring-color" as string]: "color-mix(in oklab, var(--primary) 30%, transparent)",
             } as React.CSSProperties}
           >
 
