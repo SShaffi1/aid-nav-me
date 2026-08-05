@@ -14,6 +14,21 @@ export function applyTheme(theme: Theme) {
   root.style.colorScheme = theme;
 }
 
+let transitionTimer: ReturnType<typeof setTimeout> | undefined;
+
+/** Applies the theme with a brief cross-fade of colors. */
+export function applyThemeAnimated(theme: Theme) {
+  const root = document.documentElement;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduced) {
+    root.classList.add("theme-transition");
+    if (transitionTimer) clearTimeout(transitionTimer);
+    transitionTimer = setTimeout(() => root.classList.remove("theme-transition"), 380);
+  }
+  applyTheme(theme);
+}
+
+
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>("light");
   const [ready, setReady] = useState(false);
@@ -36,7 +51,7 @@ export function useTheme() {
   function toggle() {
     const next: Theme = theme === "dark" ? "light" : "dark";
     localStorage.setItem(STORAGE_THEME, next);
-    applyTheme(next);
+    applyThemeAnimated(next);
     setTheme(next);
     window.dispatchEvent(new CustomEvent("aednav:theme-change", { detail: next }));
   }

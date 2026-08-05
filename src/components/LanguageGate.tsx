@@ -62,10 +62,11 @@ export function LanguageGate() {
                       : "border-border bg-surface hover:bg-surface-elevated"
                   }`}
                 >
-                  <span>
-                    <span dir="auto" className="block text-base font-medium text-foreground">{l.native}</span>
-                    <span className="block text-[11px] text-muted-foreground">{l.label}</span>
+                  <span className="text-left">
+                    <span dir="auto" className="block text-left text-base font-medium text-foreground">{l.native}</span>
+                    <span className="block text-left text-[11px] text-muted-foreground">{l.label}</span>
                   </span>
+
                   <span
                     className={`grid h-4 w-4 place-items-center rounded-full border ${
                       active ? "border-foreground bg-foreground" : "border-border"

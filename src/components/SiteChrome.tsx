@@ -96,7 +96,7 @@ export function LanguageSwitcher({ current }: { current: LangCode }) {
         <svg className="h-3.5 w-3.5 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
         </svg>
-        <span className="max-w-[6rem] truncate">{cfg.native}</span>
+        <span dir="auto" className="max-w-[6rem] truncate text-left">{cfg.native}</span>
         <svg className="h-3 w-3 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
       </button>
       {open && (
@@ -112,15 +112,15 @@ export function LanguageSwitcher({ current }: { current: LangCode }) {
                 role="option"
                 aria-selected={active}
                 onClick={() => pick(l.code)}
-                dir={l.direction}
                 className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm transition-colors ${
                   active ? "bg-surface-elevated text-foreground" : "text-foreground hover:bg-surface-elevated"
                 }`}
               >
-                <span>
-                  <span className="block text-sm">{l.native}</span>
-                  <span className="block text-[11px] text-muted-foreground">{l.label}</span>
+                <span className="text-left">
+                  <span dir="auto" className="block text-left text-sm">{l.native}</span>
+                  <span className="block text-left text-[11px] text-muted-foreground">{l.label}</span>
                 </span>
+
                 {active && (
                   <svg className="h-3.5 w-3.5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 )}
