@@ -162,10 +162,11 @@ function LanguageDialog({
                   active ? "border-primary/50 bg-primary-soft" : "border-border bg-surface"
                 }`}
               >
-                <span>
-                  <span dir="auto" className="block text-sm font-medium text-foreground">{l.native}</span>
-                  <span className="block text-[11px] text-muted-foreground">{l.label}</span>
+                <span className="text-left">
+                  <span dir="auto" className="block text-left text-sm font-medium text-foreground">{l.native}</span>
+                  <span className="block text-left text-[11px] text-muted-foreground">{l.label}</span>
                 </span>
+
                 {active && (
                   <svg className="h-4 w-4 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 )}
