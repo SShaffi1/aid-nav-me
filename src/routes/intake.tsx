@@ -281,6 +281,7 @@ function IntroScreen({
             >
               {getLangConfig(lang).native}<span className="hidden sm:inline"> · {u.chrome.change}</span>
             </button>
+            <ThemeToggle />
             <ExitButton lang={lang} />
           </div>
         </div>
@@ -503,7 +504,8 @@ function ChatScreen({
               >
                 {getLangConfig(lang).native}<span className="hidden sm:inline"> · {u.chrome.change}</span>
               </button>
-              <ExitButton lang={lang} />
+              <ThemeToggle />
+            <ExitButton lang={lang} />
             </div>
           </div>
           <div className="mt-2 h-0.5 overflow-hidden" style={{ backgroundColor: "var(--border)" }}>
@@ -788,6 +790,7 @@ function ReviewScreen({ lang, onChangeLang }: { lang: LangCode; onChangeLang: ()
             <button onClick={onChangeLang} className="inline-flex min-h-[44px] items-center text-xs text-muted-foreground hover:text-foreground">
               {getLangConfig(lang).native}<span className="hidden sm:inline"> · {ui(lang).chrome.change}</span>
             </button>
+            <ThemeToggle />
             <ExitButton lang={lang} />
           </div>
         </div>
