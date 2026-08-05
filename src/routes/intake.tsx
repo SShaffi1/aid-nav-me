@@ -232,10 +232,11 @@ function LanguageScreen({
                     active ? "border-primary/50 bg-primary-soft" : "border-border bg-surface"
                   }`}
                 >
-                  <span>
-                    <span dir="auto" className="block text-sm font-medium text-foreground">{l.native}</span>
-                    <span className="block text-[11px] text-muted-foreground">{l.label}</span>
+                  <span className="text-left">
+                    <span dir="auto" className="block text-left text-sm font-medium text-foreground">{l.native}</span>
+                    <span className="block text-left text-[11px] text-muted-foreground">{l.label}</span>
                   </span>
+
                   <svg
                     className="h-4 w-4 text-muted-foreground"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
