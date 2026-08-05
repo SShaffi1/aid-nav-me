@@ -187,31 +187,32 @@ function LandingPage() {
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {/* Patient (selected language) — white with border */}
+          {/* Patient (selected language; English users see an Urdu example) */}
           <div className="rounded-2xl bg-card p-5 sm:p-8 md:p-10 border">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-muted-foreground">{lc.dual.patientLabel}</p>
-              <span className="text-xs text-muted-foreground">{getLangConfig(lang).native}</span>
+              <p className="text-sm font-medium text-muted-foreground">{demo.dual.patientLabel}</p>
+              <span dir="auto" className="text-left text-xs text-muted-foreground">{getLangConfig(demoLang).native}</span>
             </div>
-            <h3 className="font-display mt-2 text-xl text-foreground">{lc.dual.patientTitle}</h3>
+            <h3 dir="auto" className="font-display mt-2 text-left text-xl text-foreground">{demo.dual.patientTitle}</h3>
 
             <div className="mt-6 space-y-4 text-[14.5px] leading-relaxed text-foreground">
               <div>
-                <p className="text-xs font-medium text-muted-foreground">{lc.dual.patientFields.concern}</p>
-                <p className="mt-1">{lc.dual.patientConcern}</p>
+                <p dir="auto" className="text-left text-xs font-medium text-muted-foreground">{demo.dual.patientFields.concern}</p>
+                <p dir="auto" className="mt-1 text-left">{demo.dual.patientConcern}</p>
               </div>
               <div>
-                <p className="text-xs font-medium text-muted-foreground">{lc.dual.patientFields.timeline}</p>
-                <p className="mt-1">{lc.dual.patientTimeline}</p>
+                <p dir="auto" className="text-left text-xs font-medium text-muted-foreground">{demo.dual.patientFields.timeline}</p>
+                <p dir="auto" className="mt-1 text-left">{demo.dual.patientTimeline}</p>
               </div>
               <div>
-                <p className="text-xs font-medium text-muted-foreground">{lc.dual.patientFields.questions}</p>
+                <p dir="auto" className="text-left text-xs font-medium text-muted-foreground">{demo.dual.patientFields.questions}</p>
                 <ul className="mt-1.5 space-y-1.5">
-                  {lc.dual.patientQuestions.map((q) => <li key={q}>{q}</li>)}
+                  {demo.dual.patientQuestions.map((q) => <li dir="auto" className="text-left" key={q}>{q}</li>)}
                 </ul>
               </div>
             </div>
           </div>
+
 
           {/* Provider (always English) — surface */}
           <div className="rounded-2xl p-5 sm:p-8 md:p-10" style={{ backgroundColor: "var(--surface)" }}>
