@@ -108,9 +108,12 @@ function SummaryPage() {
             <Link to="/" aria-label="AEDNAV home" className="flex items-center">
               <Logo className="h-6 md:h-7" />
             </Link>
-            <span className="hidden text-xs text-muted-foreground sm:inline">
-              {getLangConfig(lang).native} → English
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="hidden text-xs text-muted-foreground sm:inline">
+                {getLangConfig(lang).native} → English
+              </span>
+              <ThemeToggle />
+            </div>
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <ActionButton onClick={startEdit} hidden={editing} icon="edit">{u.summary.edit}</ActionButton>

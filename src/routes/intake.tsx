@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/SiteChrome";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { initialAnswers, detectEmergency, type IntakeAnswers } from "@/lib/intake";
 import {
   LANGUAGES, STORAGE_LANG, getStoredLang, getLangConfig,
