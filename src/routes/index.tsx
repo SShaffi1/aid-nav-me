@@ -46,6 +46,11 @@ function LandingPage() {
   const lang = useLang();
   const tr = ui(lang);
   const lc = landing(lang);
+  // The dual-language preview needs two different languages to be meaningful.
+  // English users see an Urdu patient summary next to the English provider summary.
+  const demoLang = lang === "en" ? ("ur" as const) : lang;
+  const demo = landing(demoLang);
+
   return (
     <div className="min-h-screen bg-background">
       <LanguageGate />
