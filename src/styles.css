@@ -98,9 +98,13 @@
 
   --success: #30D158;
 
+  --warning-soft: #FFF8E7;
+  --warning-strong: #7A5B00;
+
   --border: #E5E5EA;
   --input: #E5E5EA;
   --ring: #0A84FF;
+
 }
 
 .dark {
