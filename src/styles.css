@@ -108,9 +108,12 @@
 }
 
 .dark {
-  --background: #000000;
+  --background: #090909;
   --foreground: #F2F2F7;
-  --surface: #1C1C1E;
+  --surface: #141414;
+  --warning-soft: #2A2008;
+  --warning-strong: #FFCF5C;
+
   --surface-elevated: #2C2C2E;
   --card: #1C1C1E;
   --card-foreground: #F2F2F7;
