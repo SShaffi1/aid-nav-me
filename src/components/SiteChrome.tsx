@@ -112,15 +112,15 @@ export function LanguageSwitcher({ current }: { current: LangCode }) {
                 role="option"
                 aria-selected={active}
                 onClick={() => pick(l.code)}
-                dir={l.direction}
                 className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm transition-colors ${
                   active ? "bg-surface-elevated text-foreground" : "text-foreground hover:bg-surface-elevated"
                 }`}
               >
-                <span>
-                  <span className="block text-sm">{l.native}</span>
-                  <span className="block text-[11px] text-muted-foreground">{l.label}</span>
+                <span className="text-left">
+                  <span dir="auto" className="block text-left text-sm">{l.native}</span>
+                  <span className="block text-left text-[11px] text-muted-foreground">{l.label}</span>
                 </span>
+
                 {active && (
                   <svg className="h-3.5 w-3.5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 )}
