@@ -157,18 +157,14 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Smooth light/dark theme cross-fade */
+  /* Lightweight light/dark cross-fade: only the page canvas animates */
   html.theme-transition,
-  html.theme-transition body,
-  html.theme-transition *:not(svg):not(path) {
+  html.theme-transition body {
     transition:
-      background-color 320ms var(--ease-standard),
-      border-color 320ms var(--ease-standard),
-      color 320ms var(--ease-standard),
-      fill 320ms var(--ease-standard),
-      stroke 320ms var(--ease-standard),
-      box-shadow 320ms var(--ease-standard) !important;
+      background-color 260ms var(--ease-standard),
+      color 260ms var(--ease-standard);
   }
+
 
 
   ::selection {
@@ -247,4 +243,24 @@
   body.printing-provider .patient-print-target {
     display: none !important;
   }
+}
+
+/* Theme change cross-fade via View Transitions (GPU-composited, no layout work) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--ease-standard);
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  animation-name: theme-fade-out;
+}
+::view-transition-new(root) {
+  animation-name: theme-fade-in;
+}
+@keyframes theme-fade-out {
+  to { opacity: 0; }
+}
+@keyframes theme-fade-in {
+  from { opacity: 0; }
 }
