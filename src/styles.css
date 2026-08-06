@@ -244,3 +244,23 @@
     display: none !important;
   }
 }
+
+/* Theme change cross-fade via View Transitions (GPU-composited, no layout work) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--ease-standard);
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  animation-name: theme-fade-out;
+}
+::view-transition-new(root) {
+  animation-name: theme-fade-in;
+}
+@keyframes theme-fade-out {
+  to { opacity: 0; }
+}
+@keyframes theme-fade-in {
+  from { opacity: 0; }
+}
