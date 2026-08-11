@@ -150,6 +150,13 @@
     text-rendering: optimizeLegibility;
   }
 
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
