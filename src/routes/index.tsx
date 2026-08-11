@@ -69,30 +69,31 @@ function Scene({
 }: {
   refEl: React.RefObject<HTMLDivElement | null>;
   height: string;
-  bg?: string;
+  bg?: string | MotionValue<string>;
   children: ReactNode;
   reduced: boolean;
 }) {
   if (reduced) {
     return (
-      <section className="px-6 py-24" style={{ backgroundColor: bg }}>
+      <section className="px-6 py-24" style={{ backgroundColor: (bg as string) ?? "var(--background)" }}>
         <div className="mx-auto max-w-5xl">{children}</div>
       </section>
     );
   }
   return (
-    <section ref={refEl} className="relative" style={{ height }}>
-      <div
+    <section ref={refEl} className="relative m-0 p-0" style={{ height }}>
+      <motion.div
         className="sticky top-0 h-screen overflow-hidden"
-        style={{ backgroundColor: bg }}
+        style={{ backgroundColor: bg ?? "var(--background)" }}
       >
         <div className="flex h-full items-center justify-center px-6">
           <div className="w-full max-w-5xl">{children}</div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
+
 
 /* ------------------------------------------------------------------ page */
 
