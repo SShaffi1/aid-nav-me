@@ -118,7 +118,7 @@ function LandingPage() {
       <SceneTrust reduced={reduced} mobile={mobile} />
       <SceneCta reduced={reduced} mobile={mobile} />
 
-      <section id="faq" className="mx-auto mt-24 max-w-3xl px-6 scroll-mt-24">
+      <section id="faq" className="mx-auto pt-24 max-w-3xl px-6 scroll-mt-24">
         <h2 className="font-display text-center text-4xl leading-tight text-foreground md:text-5xl">
           Common questions
         </h2>
@@ -259,7 +259,7 @@ function SceneProblem({ reduced, mobile }: { reduced: boolean; mobile: boolean }
   }
 
   return (
-    <section ref={ref} className="relative" style={{ height: h(400, mobile) }}>
+    <section ref={ref} className="relative m-0 p-0" style={{ height: h(400, mobile) }}>
       <motion.div className="sticky top-0 h-screen overflow-hidden" style={{ backgroundColor: bg }}>
         <div className="relative flex h-full items-center justify-center px-6 text-center">
           <motion.div style={{ opacity: aOpacity, y: aY }} className="absolute max-w-3xl">
@@ -888,7 +888,7 @@ function SceneCta({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
   }
 
   return (
-    <section ref={ref} className="relative" style={{ height: h(200, mobile) }}>
+    <section ref={ref} className="relative m-0 p-0" style={{ height: h(200, mobile) }}>
       <motion.div className="sticky top-0 h-screen overflow-hidden" style={{ backgroundColor: bg }}>
         <div className="flex h-full items-center justify-center px-6">
           <motion.div style={{ opacity, scale }} className="w-full">
