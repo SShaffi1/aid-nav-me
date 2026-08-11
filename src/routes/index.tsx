@@ -666,9 +666,11 @@ function SceneFeatures({ reduced, mobile }: { reduced: boolean; mobile: boolean 
 
   const ops = [f0, f1, f2, f3];
   const ys = [f0y, f1y, f2y, f3y];
+  const sceneBg = useTransform(scrollYProgress, [0.85, 1], ["#F2F2F7", "#FFFFFF"]);
 
   return (
-    <Scene refEl={ref} height={h(350, mobile)} bg="var(--surface)" reduced={reduced}>
+    <Scene refEl={ref} height={h(350, mobile)} bg={reduced ? "var(--surface)" : sceneBg} reduced={reduced}>
+
       <div className="text-center">
         <motion.h2
           style={{ opacity: headOpacity, scale: headScale }}
