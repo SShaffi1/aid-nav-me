@@ -69,30 +69,31 @@ function Scene({
 }: {
   refEl: React.RefObject<HTMLDivElement | null>;
   height: string;
-  bg?: string;
+  bg?: string | MotionValue<string>;
   children: ReactNode;
   reduced: boolean;
 }) {
   if (reduced) {
     return (
-      <section className="px-6 py-24" style={{ backgroundColor: bg }}>
+      <section className="px-6 py-24" style={{ backgroundColor: (bg as string) ?? "var(--background)" }}>
         <div className="mx-auto max-w-5xl">{children}</div>
       </section>
     );
   }
   return (
-    <section ref={refEl} className="relative" style={{ height }}>
-      <div
+    <section ref={refEl} className="relative m-0 p-0" style={{ height }}>
+      <motion.div
         className="sticky top-0 h-screen overflow-hidden"
-        style={{ backgroundColor: bg }}
+        style={{ backgroundColor: bg ?? "var(--background)" }}
       >
         <div className="flex h-full items-center justify-center px-6">
           <div className="w-full max-w-5xl">{children}</div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
+
 
 /* ------------------------------------------------------------------ page */
 
@@ -117,7 +118,7 @@ function LandingPage() {
       <SceneTrust reduced={reduced} mobile={mobile} />
       <SceneCta reduced={reduced} mobile={mobile} />
 
-      <section id="faq" className="mx-auto mt-24 max-w-3xl px-6 scroll-mt-24">
+      <section id="faq" className="mx-auto pt-24 max-w-3xl px-6 scroll-mt-24">
         <h2 className="font-display text-center text-4xl leading-tight text-foreground md:text-5xl">
           Common questions
         </h2>
@@ -258,7 +259,7 @@ function SceneProblem({ reduced, mobile }: { reduced: boolean; mobile: boolean }
   }
 
   return (
-    <section ref={ref} className="relative" style={{ height: h(400, mobile) }}>
+    <section ref={ref} className="relative m-0 p-0" style={{ height: h(400, mobile) }}>
       <motion.div className="sticky top-0 h-screen overflow-hidden" style={{ backgroundColor: bg }}>
         <div className="relative flex h-full items-center justify-center px-6 text-center">
           <motion.div style={{ opacity: aOpacity, y: aY }} className="absolute max-w-3xl">
@@ -665,9 +666,11 @@ function SceneFeatures({ reduced, mobile }: { reduced: boolean; mobile: boolean 
 
   const ops = [f0, f1, f2, f3];
   const ys = [f0y, f1y, f2y, f3y];
+  const sceneBg = useTransform(scrollYProgress, [0.85, 1], ["#F2F2F7", "#FFFFFF"]);
 
   return (
-    <Scene refEl={ref} height={h(350, mobile)} bg="var(--surface)" reduced={reduced}>
+    <Scene refEl={ref} height={h(350, mobile)} bg={reduced ? "var(--surface)" : sceneBg} reduced={reduced}>
+
       <div className="text-center">
         <motion.h2
           style={{ opacity: headOpacity, scale: headScale }}
@@ -885,7 +888,7 @@ function SceneCta({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
   }
 
   return (
-    <section ref={ref} className="relative" style={{ height: h(200, mobile) }}>
+    <section ref={ref} className="relative m-0 p-0" style={{ height: h(200, mobile) }}>
       <motion.div className="sticky top-0 h-screen overflow-hidden" style={{ backgroundColor: bg }}>
         <div className="flex h-full items-center justify-center px-6">
           <motion.div style={{ opacity, scale }} className="w-full">
