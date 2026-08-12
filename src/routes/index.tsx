@@ -68,6 +68,13 @@ function useV(
   return reduced ? flat : smooth;
 }
 
+/** Linear (no spring) background cross-fade over the last 15% of a scene. */
+function useBg(p: MotionValue<number>, reduced: boolean) {
+  const raw = useTransform(p, [0.85, 1], [0, 1]);
+  const flat = useMotionValue(0);
+  return reduced ? flat : raw;
+}
+
 function useProgress(ref: RefObject<HTMLElement | null>) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   return scrollYProgress;
