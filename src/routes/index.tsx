@@ -255,7 +255,7 @@ function SceneProblem({ reduced, mobile }: { reduced: boolean; mobile: boolean }
   const bOp = useV(p, [0.38, 0.48, 0.56, 0.66], [0, 1, 1, 0], 1, reduced);
   const cOp = useV(p, [0.62, 0.72, 0.82, 0.95], [0, 1, 1, 0], 1, reduced);
   const cScale = useV(p, [0.62, 0.74], [0.82, 1], 1, reduced, POP);
-  const toWhite = useV(p, [0.88, 1], [0, 1], 0, reduced);
+  const toWhite = useBg(p, reduced);
 
   const lines = [
     "You forget half of what you wanted to say.",
