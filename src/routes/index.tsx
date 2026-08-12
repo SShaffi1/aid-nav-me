@@ -713,7 +713,7 @@ function SceneFeatures({ reduced, mobile }: { reduced: boolean; mobile: boolean 
   const headScale = useV(p, [0.02, 0.16], [0.82, 1], 1, reduced, POP);
   const headOp = useV(p, [0.02, 0.14, 0.8, 0.95], [0, 1, 1, 0], 1, reduced);
   const subOp = useV(p, [0.06, 0.2, 0.8, 0.95], [0, 1, 1, 0], 1, reduced);
-  const toPage = useV(p, [0.8, 1], [0, 1], 0, reduced);
+  const toPage = useBg(p, reduced);
 
   return (
     <Scene
@@ -970,7 +970,7 @@ function SceneMission({ reduced, mobile }: { reduced: boolean; mobile: boolean }
   const qOp = useV(p, [0.02, 0.16, 0.8, 0.95], [0, 1, 1, 0], 1, reduced);
   const qY = useV(p, [0.02, 0.18], [30, 0], 0, reduced);
   const bOp = useV(p, [0.08, 0.22, 0.8, 0.95], [0, 1, 1, 0], 1, reduced);
-  const toBlue = useV(p, [0.8, 1], [0, 1], 0, reduced);
+  const toBlue = useBg(p, reduced);
 
   return (
     <Scene
