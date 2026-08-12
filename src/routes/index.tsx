@@ -68,6 +68,13 @@ function useV(
   return reduced ? flat : smooth;
 }
 
+/** Linear (no spring) background cross-fade over the last 15% of a scene. */
+function useBg(p: MotionValue<number>, reduced: boolean) {
+  const raw = useTransform(p, [0.85, 1], [0, 1]);
+  const flat = useMotionValue(0);
+  return reduced ? flat : raw;
+}
+
 function useProgress(ref: RefObject<HTMLElement | null>) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   return scrollYProgress;
@@ -255,7 +262,7 @@ function SceneProblem({ reduced, mobile }: { reduced: boolean; mobile: boolean }
   const bOp = useV(p, [0.38, 0.48, 0.56, 0.66], [0, 1, 1, 0], 1, reduced);
   const cOp = useV(p, [0.62, 0.72, 0.82, 0.95], [0, 1, 1, 0], 1, reduced);
   const cScale = useV(p, [0.62, 0.74], [0.82, 1], 1, reduced, POP);
-  const toWhite = useV(p, [0.88, 1], [0, 1], 0, reduced);
+  const toWhite = useBg(p, reduced);
 
   const lines = [
     "You forget half of what you wanted to say.",
@@ -706,7 +713,7 @@ function SceneFeatures({ reduced, mobile }: { reduced: boolean; mobile: boolean 
   const headScale = useV(p, [0.02, 0.16], [0.82, 1], 1, reduced, POP);
   const headOp = useV(p, [0.02, 0.14, 0.8, 0.95], [0, 1, 1, 0], 1, reduced);
   const subOp = useV(p, [0.06, 0.2, 0.8, 0.95], [0, 1, 1, 0], 1, reduced);
-  const toPage = useV(p, [0.8, 1], [0, 1], 0, reduced);
+  const toPage = useBg(p, reduced);
 
   return (
     <Scene
@@ -963,7 +970,7 @@ function SceneMission({ reduced, mobile }: { reduced: boolean; mobile: boolean }
   const qOp = useV(p, [0.02, 0.16, 0.8, 0.95], [0, 1, 1, 0], 1, reduced);
   const qY = useV(p, [0.02, 0.18], [30, 0], 0, reduced);
   const bOp = useV(p, [0.08, 0.22, 0.8, 0.95], [0, 1, 1, 0], 1, reduced);
-  const toBlue = useV(p, [0.8, 1], [0, 1], 0, reduced);
+  const toBlue = useBg(p, reduced);
 
   return (
     <Scene
