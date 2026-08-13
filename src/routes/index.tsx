@@ -14,6 +14,7 @@ import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { LanguageGate, useLang } from "@/components/LanguageGate";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { landing } from "@/lib/landing-i18n";
+import { story, type StoryContent } from "@/lib/story-i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -144,6 +145,7 @@ function Scene({
 function LandingPage() {
   const lang = useLang();
   const lc = landing(lang);
+  const st = story(lang);
   const mobile = useIsMobile();
   const reduced = !!useReducedMotion();
 
@@ -152,22 +154,22 @@ function LandingPage() {
       <LanguageGate />
       <SiteHeader />
 
-      <div style={{ display: "flex", flexDirection: "column", margin: 0, padding: 0 }}>
-        <SceneHero reduced={reduced} mobile={mobile} />
-        <SceneProblem reduced={reduced} mobile={mobile} />
-        <SceneConversation reduced={reduced} mobile={mobile} />
-        <SceneLanguages reduced={reduced} mobile={mobile} />
-        <SceneSummaries reduced={reduced} mobile={mobile} />
-        <SceneFeatures reduced={reduced} mobile={mobile} />
-        <SceneAudience reduced={reduced} mobile={mobile} />
-        <SceneRoadmap reduced={reduced} mobile={mobile} />
-        <SceneMission reduced={reduced} mobile={mobile} />
-        <SceneCta reduced={reduced} mobile={mobile} />
+      <div key={lang} style={{ display: "flex", flexDirection: "column", margin: 0, padding: 0 }}>
+        <SceneHero st={st} reduced={reduced} mobile={mobile} />
+        <SceneProblem st={st} reduced={reduced} mobile={mobile} />
+        <SceneConversation st={st} reduced={reduced} mobile={mobile} />
+        <SceneLanguages st={st} reduced={reduced} mobile={mobile} />
+        <SceneSummaries st={st} reduced={reduced} mobile={mobile} />
+        <SceneFeatures st={st} reduced={reduced} mobile={mobile} />
+        <SceneAudience st={st} reduced={reduced} mobile={mobile} />
+        <SceneRoadmap st={st} reduced={reduced} mobile={mobile} />
+        <SceneMission st={st} reduced={reduced} mobile={mobile} />
+        <SceneCta st={st} reduced={reduced} mobile={mobile} />
       </div>
 
       <section id="faq" className="mx-auto pt-24 max-w-3xl px-6 scroll-mt-24">
         <h2 className="font-display text-center text-4xl leading-tight text-foreground md:text-5xl">
-          Common questions
+          {st.faqTitle}
         </h2>
         <div className="mt-12 divide-y divide-border border-y border-border">
           {lc.faqs.map((f) => (
@@ -185,7 +187,7 @@ function LandingPage() {
 
 /* ------------------------------------------------------------- scene 1 */
 
-function SceneHero({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneHero({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
   const scale = useV(p, [0.55, 0.9], [1, 1.04], 1, reduced);
@@ -205,7 +207,7 @@ function SceneHero({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
           className="inline-block rounded-full px-4 py-1.5 text-xs font-medium text-muted-foreground"
           style={{ backgroundColor: SURFACE }}
         >
-          Pre-appointment intake · 3 minutes · 7 languages
+          {st.hero.eyebrow}
         </motion.span>
 
         <motion.h1
@@ -213,9 +215,9 @@ function SceneHero({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
           dir="auto"
           className="mt-7 font-display text-5xl leading-[1.05] text-foreground md:text-7xl"
         >
-          Walk into your appointment
+          {st.hero.title1}
           <br />
-          <span style={{ color: BLUE }}>ready for anything.</span>
+          <span style={{ color: BLUE }}>{st.hero.title2}</span>
         </motion.h1>
 
         <motion.p
@@ -223,8 +225,7 @@ function SceneHero({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
           dir="auto"
           className="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground"
         >
-          AEDNAV guides you through your symptoms before you see a doctor, so you remember what to
-          say, nothing gets missed, and your doctor gets a clear picture from the moment you walk in.
+          {st.hero.sub}
         </motion.p>
 
         <motion.div {...item(0.34)} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -233,18 +234,18 @@ function SceneHero({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
             className="inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium text-white transition-opacity hover:opacity-90 sm:w-auto"
             style={{ backgroundColor: BLUE }}
           >
-            Prepare for my appointment
+            {st.hero.primary}
           </Link>
           <a
             href="#faq"
             className="inline-flex w-full items-center justify-center rounded-full border border-border bg-surface-elevated px-6 py-3.5 text-sm font-medium text-foreground transition-colors hover:bg-surface sm:w-auto"
           >
-            See how it works
+            {st.hero.secondary}
           </a>
         </motion.div>
 
         <motion.p {...item(0.44)} className="mt-6 text-xs text-muted-foreground">
-          Not a diagnostic tool. Always consult a healthcare professional.
+          {st.hero.note}
         </motion.p>
       </motion.div>
     </Scene>
@@ -253,7 +254,7 @@ function SceneHero({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
 
 /* ------------------------------------------------------------- scene 2 */
 
-function SceneProblem({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneProblem({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -264,25 +265,21 @@ function SceneProblem({ reduced, mobile }: { reduced: boolean; mobile: boolean }
   const cScale = useV(p, [0.62, 0.74], [0.82, 1], 1, reduced, POP);
   const toWhite = useBg(p, reduced);
 
-  const lines = [
-    "You forget half of what you wanted to say.",
-    "You leave out details that mattered.",
-    "You walk out wondering if they got the full picture.",
-  ];
+  const lines = st.problem.lines;
 
   if (reduced) {
     return (
       <Scene sceneRef={ref} height={h(600, mobile)} bg={DARK} reduced>
         <div className="mx-auto max-w-2xl space-y-8 text-center">
-          <h2 className="font-display text-4xl text-white md:text-5xl">You know something is wrong.</h2>
-          <p className="text-xl text-[#8E8E93]">But when the doctor asks, the words don't come out right.</p>
+          <h2 className="font-display text-4xl text-white md:text-5xl">{st.problem.title}</h2>
+          <p className="text-xl text-[#8E8E93]">{st.problem.sub}</p>
           <div className="space-y-3 text-left">
             {lines.map((l) => (
               <p key={l} className="text-2xl font-medium text-white">{l}</p>
             ))}
           </div>
-          <h3 className="font-display text-4xl text-white md:text-5xl">Most appointments start underprepared.</h3>
-          <p className="text-xl" style={{ color: BLUE }}>AEDNAV changes that, for everyone.</p>
+          <h3 className="font-display text-4xl text-white md:text-5xl">{st.problem.closeTitle}</h3>
+          <p className="text-xl" style={{ color: BLUE }}>{st.problem.closeSub}</p>
         </div>
       </Scene>
     );
@@ -303,10 +300,10 @@ function SceneProblem({ reduced, mobile }: { reduced: boolean; mobile: boolean }
           className="absolute inset-0 flex flex-col items-center justify-center text-center"
         >
           <h2 className="font-display text-5xl leading-tight text-white md:text-6xl">
-            You know something is wrong.
+            {st.problem.title}
           </h2>
           <p className="mt-6 max-w-md text-xl leading-relaxed text-[#8E8E93]">
-            But when the doctor asks, the words don't come out right.
+            {st.problem.sub}
           </p>
         </motion.div>
 
@@ -325,10 +322,10 @@ function SceneProblem({ reduced, mobile }: { reduced: boolean; mobile: boolean }
           className="absolute inset-0 flex flex-col items-center justify-center text-center"
         >
           <h3 className="font-display text-5xl leading-tight text-white md:text-6xl">
-            Most appointments start underprepared.
+            {st.problem.closeTitle}
           </h3>
           <p className="mt-6 text-xl" style={{ color: BLUE }}>
-            AEDNAV changes that, for everyone.
+            {st.problem.closeSub}
           </p>
         </motion.div>
       </div>
@@ -359,7 +356,7 @@ function ActLine({
 
 /* ------------------------------------------------------------- scene 3 */
 
-function SceneConversation({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneConversation({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -380,10 +377,10 @@ function SceneConversation({ reduced, mobile }: { reduced: boolean; mobile: bool
           style={{ opacity: headOp, y: headY }}
           className="font-display text-4xl leading-tight text-foreground md:text-6xl"
         >
-          It starts with a conversation.
+          {st.conversation.title}
         </motion.h2>
         <motion.p style={{ opacity: subOp }} className="mt-4 max-w-md text-base text-muted-foreground">
-          8 guided questions. Plain language. No medical jargon. Takes about 3 minutes.
+          {st.conversation.sub}
         </motion.p>
 
         <motion.div
@@ -399,7 +396,7 @@ function SceneConversation({ reduced, mobile }: { reduced: boolean; mobile: bool
           }}
           className="mt-8 flex flex-col gap-3 overflow-hidden p-4 text-left"
         >
-          <Bubble p={p} at={0.28} side="ai" reduced={reduced} text="What's been on your mind before this appointment?" />
+          <Bubble p={p} at={0.28} side="ai" reduced={reduced} text={st.conversation.q1} />
           <motion.div style={{ opacity: dotsOp }} className="flex w-fit items-center gap-1 rounded-full px-3 py-2" >
             {[0, 1, 2].map((i) => (
               <motion.span
@@ -415,10 +412,10 @@ function SceneConversation({ reduced, mobile }: { reduced: boolean; mobile: bool
             at={0.42}
             side="user"
             reduced={reduced}
-            text="I've had really bad headaches for 3 days now. Way worse in the afternoons."
+            text={st.conversation.a1}
           />
-          <Bubble p={p} at={0.54} side="ai" reduced={reduced} text="How would you rate the pain from 1 to 10?" />
-          <Bubble p={p} at={0.66} side="user" reduced={reduced} text="Probably a 6. Painkillers aren't touching it." />
+          <Bubble p={p} at={0.54} side="ai" reduced={reduced} text={st.conversation.q2} />
+          <Bubble p={p} at={0.66} side="user" reduced={reduced} text={st.conversation.a2} />
         </motion.div>
       </div>
     </Scene>
@@ -468,7 +465,7 @@ const PILLS = [
   { t: "Mal de tête", fx: 65, fy: 60, lx: 26, ly: 6, rtl: false, m: false },
 ];
 
-function SceneLanguages({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneLanguages({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -488,11 +485,10 @@ function SceneLanguages({ reduced, mobile }: { reduced: boolean; mobile: boolean
           style={{ opacity: headOp, y: headY }}
           className="font-display text-4xl leading-tight text-foreground md:text-6xl"
         >
-          And you can answer in any language.
+          {st.languages.title}
         </motion.h2>
         <motion.p style={{ opacity: subOp }} className="mt-4 max-w-lg text-base text-muted-foreground">
-          Because struggling with English shouldn't mean struggling to explain your health. AEDNAV
-          supports 7 languages.
+          {st.languages.sub}
         </motion.p>
 
         <div className="relative mt-10 h-[42vh] w-full">
@@ -505,10 +501,10 @@ function SceneLanguages({ reduced, mobile }: { reduced: boolean; mobile: boolean
             className="absolute left-1/2 top-1/2 w-[min(90%,540px)] -translate-x-1/2 -translate-y-1/2"
           >
             <span className="inline-block rounded-full border border-border bg-surface-elevated px-6 py-3 text-base font-medium text-foreground md:text-lg">
-              I've had a headache for 3 days, worse in the afternoon.
+              {st.languages.finalPill}
             </span>
             <motion.p style={{ opacity: noteOp }} className="mt-5 text-sm text-muted-foreground">
-              AEDNAV understands every language. Your doctor only sees English.
+              {st.languages.note}
             </motion.p>
           </motion.div>
         </div>
@@ -547,7 +543,7 @@ function LangPill({
 
 /* ------------------------------------------------------------- scene 5 */
 
-function SceneSummaries({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneSummaries({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -567,10 +563,10 @@ function SceneSummaries({ reduced, mobile }: { reduced: boolean; mobile: boolean
           style={{ opacity: headOp, y: headY }}
           className="font-display text-4xl leading-tight text-foreground md:text-6xl"
         >
-          Then you both get exactly what you need.
+          {st.summaries.title}
         </motion.h2>
         <motion.p style={{ opacity: subOp }} className="mx-auto mt-4 max-w-md text-base text-muted-foreground">
-          One intake session. Two tailored summaries. Zero confusion.
+          {st.summaries.sub}
         </motion.p>
 
         <div className="mt-10 grid gap-5 text-left md:grid-cols-2">
@@ -578,18 +574,17 @@ function SceneSummaries({ reduced, mobile }: { reduced: boolean; mobile: boolean
             style={{ x: lx, opacity: cardOp }}
             className="rounded-2xl border border-border bg-surface-elevated p-6 md:p-8"
           >
-            <p className="text-xs font-medium text-muted-foreground">Your summary</p>
-            <h3 className="mt-1 text-xl font-semibold text-foreground">Ready for your appointment</h3>
+            <p className="text-xs font-medium text-muted-foreground">{st.summaries.patientLabel}</p>
+            <h3 className="mt-1 text-xl font-semibold text-foreground">{st.summaries.patientTitle}</h3>
             <div className="my-4 h-px" style={{ backgroundColor: SURFACE }} />
-            <Field label="Main concern" value="Recurring headaches, 3 days" />
-            <Field label="Severity" value="6 out of 10" />
-            <Field label="Medications tried" value="OTC painkillers (not effective)" />
-            <Field label="Your question" value="Could this be stress related?" />
+            {st.summaries.patient.map((f) => (
+              <Field key={f.label} label={f.label} value={f.value} />
+            ))}
             <span
               className="mt-5 inline-block rounded-full px-3.5 py-1.5 text-xs font-medium text-white"
               style={{ backgroundColor: "#30D158" }}
             >
-              Suggested: Family doctor visit
+              {st.summaries.suggested}
             </span>
           </motion.div>
 
@@ -597,16 +592,14 @@ function SceneSummaries({ reduced, mobile }: { reduced: boolean; mobile: boolean
             style={{ x: rx, opacity: cardOp, backgroundColor: SURFACE }}
             className="rounded-2xl p-6 md:p-8"
           >
-            <p className="text-xs font-medium text-muted-foreground">Provider summary</p>
-            <h3 className="mt-1 text-xl font-semibold text-foreground">Doctor-ready English</h3>
+            <p className="text-xs font-medium text-muted-foreground">{st.summaries.providerLabel}</p>
+            <h3 className="mt-1 text-xl font-semibold text-foreground">{st.summaries.providerTitle}</h3>
             <div className="my-4 h-px bg-border" />
-            <Field label="Chief complaint" value="Recurring headaches × 3 days, afternoon onset" />
-            <Field label="Severity" value="6/10 (self-reported)" />
-            <Field label="Current medications" value="OTC analgesics (ineffective)" />
-            <Field label="Patient goal" value="Understand potential cause" />
-            <Field label="Allergies" value="None reported" />
+            {st.summaries.provider.map((f) => (
+              <Field key={f.label} label={f.label} value={f.value} />
+            ))}
             <p className="mt-5 text-xs text-muted-foreground">
-              Generated in English regardless of the patient's selected language.
+              {st.summaries.providerNote}
             </p>
           </motion.div>
         </div>
@@ -625,7 +618,7 @@ function SceneSummaries({ reduced, mobile }: { reduced: boolean; mobile: boolean
             <path d="M8 7h13M8 7l3-3M8 7l3 3M16 17H3m13 0l-3-3m3 3l-3 3" />
           </motion.svg>
           <p className="text-sm text-muted-foreground">
-            Your summary in your language. Their summary in theirs.
+            {st.summaries.foot}
           </p>
         </motion.div>
       </div>
@@ -706,7 +699,7 @@ function FeatureIcon({ name }: { name: string }) {
   );
 }
 
-function SceneFeatures({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneFeatures({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -728,15 +721,15 @@ function SceneFeatures({ reduced, mobile }: { reduced: boolean; mobile: boolean 
           style={{ opacity: headOp, scale: headScale }}
           className="font-display text-4xl leading-tight text-foreground md:text-6xl"
         >
-          Everything you need. Nothing you don't.
+          {st.features.title}
         </motion.h2>
         <motion.p style={{ opacity: subOp }} className="mx-auto mt-4 max-w-lg text-base text-muted-foreground">
-          AEDNAV is built around one goal: getting you prepared before you walk through that door.
+          {st.features.sub}
         </motion.p>
 
         <div className="mt-10 grid gap-5 text-left md:grid-cols-2">
           {FEATURES.map((f, i) => (
-            <PopCard key={f.title} p={p} start={0.18 + i * 0.1} reduced={reduced}>
+            <PopCard key={f.icon} p={p} start={0.18 + i * 0.1} reduced={reduced}>
               <div className="h-full rounded-2xl border border-border bg-surface-elevated p-6 md:p-7">
                 <span
                   className="grid h-11 w-11 place-items-center rounded-xl"
@@ -744,8 +737,8 @@ function SceneFeatures({ reduced, mobile }: { reduced: boolean; mobile: boolean 
                 >
                   <FeatureIcon name={f.icon} />
                 </span>
-                <h3 className="mt-4 text-lg font-semibold text-foreground">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+                <h3 className="mt-4 text-lg font-semibold text-foreground">{st.features.items[i]?.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{st.features.items[i]?.body}</p>
               </div>
             </PopCard>
           ))}
@@ -798,7 +791,7 @@ const AUDIENCE = [
   },
 ] as const;
 
-function SceneAudience({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneAudience({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -813,19 +806,19 @@ function SceneAudience({ reduced, mobile }: { reduced: boolean; mobile: boolean 
           style={{ opacity: headOp, y: headY }}
           className="font-display text-4xl leading-tight text-foreground md:text-6xl"
         >
-          For anyone heading into a healthcare appointment.
+          {st.audience.title}
         </motion.h2>
         <motion.p style={{ opacity: subOp }} className="mx-auto mt-4 max-w-lg text-base text-muted-foreground">
-          Not just for people with language barriers. For anyone who wants to walk in prepared.
+          {st.audience.sub}
         </motion.p>
 
         <div className="mt-10 grid gap-5 text-left md:grid-cols-2">
           {AUDIENCE.map((a, i) => (
-            <SlideCard key={a.t} p={p} start={0.2 + i * 0.1} from={i % 2 === 0 ? -110 : 110} reduced={reduced}>
+            <SlideCard key={a.e} p={p} start={0.2 + i * 0.1} from={i % 2 === 0 ? -110 : 110} reduced={reduced}>
               <div className="h-full rounded-2xl p-6" style={{ backgroundColor: SURFACE }}>
                 <span className="text-2xl">{a.e}</span>
-                <h3 className="mt-3 text-base font-semibold text-foreground">{a.t}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.b}</p>
+                <h3 className="mt-3 text-base font-semibold text-foreground">{st.audience.items[i]?.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{st.audience.items[i]?.b}</p>
               </div>
             </SlideCard>
           ))}
@@ -867,7 +860,7 @@ const SOON = [
   { t: "Appointment booking", b: "Book follow-ups and referrals right from your summary screen." },
 ] as const;
 
-function SceneRoadmap({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneRoadmap({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -883,16 +876,16 @@ function SceneRoadmap({ reduced, mobile }: { reduced: boolean; mobile: boolean }
             style={{ opacity: headOp, y: headY }}
             className="font-display text-4xl leading-tight text-foreground md:text-6xl"
           >
-            Built to grow with you.
+            {st.roadmap.title}
           </motion.h2>
           <motion.p style={{ opacity: subOp }} className="mx-auto mt-4 max-w-md text-base text-muted-foreground">
-            AEDNAV today is a working demo. Here is where it is going.
+            {st.roadmap.sub}
           </motion.p>
         </div>
 
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <div className="space-y-5">
-            {TRUST.map((t, i) => (
+            {st.roadmap.trust.map((t, i) => (
               <SlideCard key={t.t} p={p} start={0.18 + i * 0.1} from={-110} reduced={reduced}>
                 <div className="flex gap-3">
                   <svg
@@ -917,14 +910,14 @@ function SceneRoadmap({ reduced, mobile }: { reduced: boolean; mobile: boolean }
           </div>
 
           <div className="space-y-4">
-            {SOON.map((s, i) => (
+            {st.roadmap.soon.map((s, i) => (
               <SlideCard key={s.t} p={p} start={0.18 + i * 0.1} from={110} reduced={reduced}>
                 <div className="relative rounded-xl p-5" style={{ backgroundColor: SURFACE }}>
                   <span
                     className="absolute right-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-medium"
                     style={{ backgroundColor: "#EBF4FF", color: BLUE }}
                   >
-                    Coming soon
+                    {st.roadmap.comingSoon}
                   </span>
                   <div className="flex gap-3">
                     <svg
@@ -963,7 +956,7 @@ const STATS = [
   { n: "2", l: "Summaries generated per intake" },
 ] as const;
 
-function SceneMission({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneMission({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -985,14 +978,14 @@ function SceneMission({ reduced, mobile }: { reduced: boolean; mobile: boolean }
           style={{ opacity: qOp, y: qY }}
           className="font-display text-3xl italic leading-snug text-foreground md:text-4xl"
         >
-          "Healthcare is stressful enough. Walking in unprepared shouldn't be part of the experience."
+          {st.mission.quote}
         </motion.p>
         <motion.p style={{ opacity: bOp }} className="mt-4 text-sm text-muted-foreground">
-          The belief behind AEDNAV
+          {st.mission.attribution}
         </motion.p>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {STATS.map((s, i) => (
+          {st.mission.stats.map((s, i) => (
             <StatPill key={s.n} p={p} start={0.3 + i * 0.12} reduced={reduced} n={s.n} l={s.l} />
           ))}
         </div>
@@ -1029,7 +1022,7 @@ function StatPill({
 
 /* ------------------------------------------------------------ scene 10 */
 
-function SceneCta({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
+function SceneCta({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
 
@@ -1041,10 +1034,10 @@ function SceneCta({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
     <Scene sceneRef={ref} height={h(300, mobile)} bg={BLUE} reduced={reduced}>
       <motion.div style={{ opacity: o, scale: s }} className="mx-auto max-w-2xl px-6 text-center">
         <h2 className="font-display text-4xl leading-tight text-white md:text-6xl">
-          Ready to prepare for your next appointment?
+          {st.cta.title}
         </h2>
         <p className="mx-auto mt-5 max-w-md text-base text-white/80">
-          Takes 3 minutes. Works in 7 languages. No sign-up needed.
+          {st.cta.sub}
         </p>
         <motion.div style={{ scale: btn }} className="mt-8">
           <Link
@@ -1052,11 +1045,11 @@ function SceneCta({ reduced, mobile }: { reduced: boolean; mobile: boolean }) {
             className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-medium transition-opacity hover:opacity-90"
             style={{ color: BLUE }}
           >
-            Prepare for my appointment →
+            {st.cta.button}
           </Link>
         </motion.div>
         <p className="mt-6 text-xs text-white/60">
-          Not a diagnostic tool. Always consult a healthcare professional.
+          {st.cta.note}
         </p>
       </motion.div>
     </Scene>
