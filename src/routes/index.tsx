@@ -848,18 +848,6 @@ function SlideCard({
 
 /* ------------------------------------------------------------- scene 8 */
 
-const TRUST = [
-  { t: "Private by design.", b: "No data sold. No ads. Your health information is yours, always." },
-  { t: "No account required for the demo.", b: "Try the full intake experience right now, no sign-up, no commitment." },
-  { t: "Built for Canadian healthcare.", b: "Designed with Canadian patients and healthcare privacy principles in mind." },
-] as const;
-
-const SOON = [
-  { t: "Patient accounts", b: "Save your intake history, track symptoms over time, and bring context to every appointment." },
-  { t: "Clinic integration", b: "Link directly with your clinic so your provider receives your summary before you arrive." },
-  { t: "Appointment booking", b: "Book follow-ups and referrals right from your summary screen." },
-] as const;
-
 function SceneRoadmap({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const p = useProgress(ref);
@@ -949,12 +937,6 @@ function SceneRoadmap({ st, reduced, mobile }: { st: StoryContent; reduced: bool
 }
 
 /* ------------------------------------------------------------- scene 9 */
-
-const STATS = [
-  { n: "3 min", l: "Average intake time" },
-  { n: "7", l: "Languages supported" },
-  { n: "2", l: "Summaries generated per intake" },
-] as const;
 
 function SceneMission({ st, reduced, mobile }: { st: StoryContent; reduced: boolean; mobile: boolean }) {
   const ref = useRef<HTMLElement>(null);
