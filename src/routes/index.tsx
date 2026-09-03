@@ -17,6 +17,8 @@ import { PhotoStory } from "@/components/PhotoStory";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { landing } from "@/lib/landing-i18n";
 import { story, type StoryContent } from "@/lib/story-i18n";
+import { VideoStory } from "@/components/VideoStory";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -158,8 +160,10 @@ function LandingPage() {
 
       <div key={lang} style={{ display: "flex", flexDirection: "column", margin: 0, padding: 0 }}>
         <SceneHero st={st} reduced={reduced} mobile={mobile} />
+        <VideoStory reduced={reduced} mobile={mobile} />
         <PhotoStory reduced={reduced} mobile={mobile} />
         <SceneProblem st={st} reduced={reduced} mobile={mobile} />
+
 
         <SceneConversation st={st} reduced={reduced} mobile={mobile} />
         <SceneLanguages st={st} reduced={reduced} mobile={mobile} />
