@@ -12,6 +12,8 @@ import {
 import { useRef, useState, type ReactNode, type RefObject } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { LanguageGate, useLang } from "@/components/LanguageGate";
+import { PhotoStory } from "@/components/PhotoStory";
+
 import { useIsMobile } from "@/hooks/use-mobile";
 import { landing } from "@/lib/landing-i18n";
 import { story, type StoryContent } from "@/lib/story-i18n";
@@ -156,7 +158,9 @@ function LandingPage() {
 
       <div key={lang} style={{ display: "flex", flexDirection: "column", margin: 0, padding: 0 }}>
         <SceneHero st={st} reduced={reduced} mobile={mobile} />
+        <PhotoStory reduced={reduced} mobile={mobile} />
         <SceneProblem st={st} reduced={reduced} mobile={mobile} />
+
         <SceneConversation st={st} reduced={reduced} mobile={mobile} />
         <SceneLanguages st={st} reduced={reduced} mobile={mobile} />
         <SceneSummaries st={st} reduced={reduced} mobile={mobile} />
