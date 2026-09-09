@@ -127,7 +127,15 @@ function TextBlock({
 function Overlay({ opacity, children }: { opacity?: MotionValue<number>; children: ReactNode }) {
   return (
     <motion.div
-      style={{ position: "absolute", bottom: "10%", left: "8%", right: "8%", maxWidth: 640, opacity }}
+      style={{
+        position: "absolute",
+        bottom: "10%",
+        left: "8%",
+        right: "8%",
+        maxWidth: 640,
+        opacity,
+        textShadow: "0 2px 4px rgba(0,0,0,0.55), 0 8px 32px rgba(0,0,0,0.65)",
+      }}
     >
       {children}
     </motion.div>
@@ -167,7 +175,7 @@ const COPY = {
 function SceneCorridor({ mobile }: { mobile: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const p = useP(ref);
-  const text = useTransform(p, [0.08, 0.22, 0.7, 0.88], [0, 1, 1, 0]);
+  const text = useTransform(p, [0.08, 0.16, 0.74, 0.88], [0, 1, 1, 0]);
 
   return (
     <section
@@ -203,8 +211,8 @@ function SceneCorridor({ mobile }: { mobile: boolean }) {
 function SceneConsultation({ mobile }: { mobile: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const p = useP(ref);
-  const one = useTransform(p, [0.08, 0.22, 0.4, 0.52], [0, 1, 1, 0]);
-  const two = useTransform(p, [0.52, 0.64, 0.78, 0.9], [0, 1, 1, 0]);
+  const one = useTransform(p, [0.08, 0.16, 0.44, 0.52], [0, 1, 1, 0]);
+  const two = useTransform(p, [0.52, 0.6, 0.82, 0.9], [0, 1, 1, 0]);
 
   return (
     <section
@@ -266,7 +274,7 @@ function CtaCard({ mobile }: { mobile: boolean }) {
 function SceneRealization({ mobile }: { mobile: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const p = useP(ref);
-  const text = useTransform(p, [0.08, 0.22, 0.55, 0.7], [0, 1, 1, 0]);
+  const text = useTransform(p, [0.08, 0.16, 0.42, 0.5], [0, 1, 1, 0]);
   const cardOpacity = useTransform(p, [0.56, 0.68], [0, 1]);
   const cardY = useTransform(p, [0.56, 0.68], [40, 0]);
   const white = useTransform(p, [0.82, 1], [0, 1]);
