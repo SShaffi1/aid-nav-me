@@ -1,7 +1,7 @@
-// Scroll-scrubbed video sequence for the landing page.
-// The videos are never played: scroll position seeks currentTime frame by frame.
+// Scroll-led video sequence for the landing page.
+// Each visible scene plays normally so the browser can decode frames continuously.
 import { Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform, useMotionValueEvent, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 
 const GRADIENT =
@@ -22,42 +22,35 @@ function useP(ref: RefObject<HTMLElement | null>) {
   return scrollYProgress;
 }
 
-function ScrubVideo({
+function SceneVideo({
   src,
   poster,
   preload,
-  progress,
   alt,
 }: {
   src: string;
   poster: string;
   preload: "auto" | "metadata";
-  progress: MotionValue<number>;
   alt: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const target = useRef(0);
-  const applied = useRef(-1);
 
-  useMotionValueEvent(progress, "change", (v) => {
-    target.current = Math.min(Math.max(v, 0), 1);
-  });
-
-  // Seek at most once per animation frame, and never while a seek is pending.
   useEffect(() => {
-    let raf = 0;
-    const tick = () => {
-      raf = requestAnimationFrame(tick);
-      const video = ref.current;
-      if (!video || !video.duration || video.seeking) return;
-      const t = target.current * video.duration;
-      if (Math.abs(t - applied.current) < 1 / 48) return;
-      applied.current = t;
-      if (typeof video.fastSeek === "function") video.fastSeek(t);
-      else video.currentTime = t;
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    const video = ref.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          void video.play().catch(() => undefined);
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -65,8 +58,10 @@ function ScrubVideo({
       ref={ref}
       src={src}
       poster={poster}
+      autoPlay
       muted
       playsInline
+      loop
       preload={preload}
       aria-label={alt}
       style={{
@@ -209,11 +204,10 @@ function SceneCorridor({ mobile }: { mobile: boolean }) {
           backgroundColor: "#000000",
         }}
       >
-        <ScrubVideo
+        <SceneVideo
           src="/videos/hospital-corridor.mp4"
           poster="/videos/hospital-corridor-poster.jpg"
           preload="auto"
-          progress={p}
           alt="Walking down a hospital corridor"
         />
         <Gradient />
@@ -246,11 +240,10 @@ function SceneConsultation({ mobile }: { mobile: boolean }) {
           backgroundColor: "#000000",
         }}
       >
-        <ScrubVideo
+        <SceneVideo
           src="/videos/doctor-consultation.mp4"
           poster="/videos/doctor-consultation-poster.jpg"
           preload="metadata"
-          progress={p}
           alt="Doctor speaking with a patient during a consultation"
         />
         <Gradient />
@@ -311,11 +304,10 @@ function SceneRealization({ mobile }: { mobile: boolean }) {
           backgroundColor: "#000000",
         }}
       >
-        <ScrubVideo
+        <SceneVideo
           src="/videos/patient-alone.mp4"
           poster="/videos/patient-alone-poster.jpg"
           preload="metadata"
-          progress={p}
           alt="Healthcare workers walking through a hospital hallway"
         />
         <Gradient />
