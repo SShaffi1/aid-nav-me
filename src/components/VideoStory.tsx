@@ -1,7 +1,7 @@
-// Scroll-led video sequence for the landing page.
-// Each visible scene plays normally so the browser can decode frames continuously.
+// Scroll-scrubbed video sequence for the landing page.
+// The playhead follows scroll through one decoded frame at a time.
 import { Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 
 const GRADIENT =
@@ -22,35 +22,65 @@ function useP(ref: RefObject<HTMLElement | null>) {
   return scrollYProgress;
 }
 
-function SceneVideo({
+function ScrubVideo({
   src,
   poster,
   preload,
+  progress,
   alt,
 }: {
   src: string;
   poster: string;
   preload: "auto" | "metadata";
+  progress: MotionValue<number>;
   alt: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const target = useRef(0);
+  const framePending = useRef(false);
+
+  const presentNextFrame = () => {
+    const video = ref.current;
+    if (!video || !Number.isFinite(video.duration) || framePending.current) return;
+
+    const destination = target.current * video.duration;
+    const distance = destination - video.currentTime;
+    if (Math.abs(distance) < 1 / 48) return;
+
+    // Move through nearby frames instead of dropping straight to a distant one.
+    const step = Math.sign(distance) * Math.min(Math.abs(distance), Math.max(1 / 24, Math.abs(distance) * 0.22));
+    framePending.current = true;
+    video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + step));
+
+    if (typeof video.requestVideoFrameCallback === "function") {
+      video.requestVideoFrameCallback(() => {
+        framePending.current = false;
+        presentNextFrame();
+      });
+    }
+  };
+
+  useMotionValueEvent(progress, "change", (value) => {
+    target.current = Math.min(Math.max(value, 0), 1);
+    presentNextFrame();
+  });
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          void video.play().catch(() => undefined);
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    observer.observe(video);
-    return () => observer.disconnect();
+    const onReady = () => presentNextFrame();
+    const onSeeked = () => {
+      if (typeof video.requestVideoFrameCallback !== "function") {
+        framePending.current = false;
+        presentNextFrame();
+      }
+    };
+    video.addEventListener("loadedmetadata", onReady);
+    video.addEventListener("seeked", onSeeked);
+    return () => {
+      video.removeEventListener("loadedmetadata", onReady);
+      video.removeEventListener("seeked", onSeeked);
+    };
   }, []);
 
   return (
@@ -58,10 +88,8 @@ function SceneVideo({
       ref={ref}
       src={src}
       poster={poster}
-      autoPlay
       muted
       playsInline
-      loop
       preload={preload}
       aria-label={alt}
       style={{
@@ -204,10 +232,11 @@ function SceneCorridor({ mobile }: { mobile: boolean }) {
           backgroundColor: "#000000",
         }}
       >
-        <SceneVideo
+        <ScrubVideo
           src="/videos/hospital-corridor.mp4"
           poster="/videos/hospital-corridor-poster.jpg"
           preload="auto"
+          progress={p}
           alt="Walking down a hospital corridor"
         />
         <Gradient />
@@ -240,10 +269,11 @@ function SceneConsultation({ mobile }: { mobile: boolean }) {
           backgroundColor: "#000000",
         }}
       >
-        <SceneVideo
+        <ScrubVideo
           src="/videos/doctor-consultation.mp4"
           poster="/videos/doctor-consultation-poster.jpg"
           preload="metadata"
+          progress={p}
           alt="Doctor speaking with a patient during a consultation"
         />
         <Gradient />
@@ -304,10 +334,11 @@ function SceneRealization({ mobile }: { mobile: boolean }) {
           backgroundColor: "#000000",
         }}
       >
-        <SceneVideo
+        <ScrubVideo
           src="/videos/patient-alone.mp4"
           poster="/videos/patient-alone-poster.jpg"
           preload="metadata"
+          progress={p}
           alt="Healthcare workers walking through a hospital hallway"
         />
         <Gradient />
