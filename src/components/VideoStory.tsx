@@ -36,12 +36,29 @@ function ScrubVideo({
   alt: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const target = useRef(0);
+  const applied = useRef(-1);
 
   useMotionValueEvent(progress, "change", (v) => {
-    const video = ref.current;
-    if (!video || !video.duration) return;
-    video.currentTime = Math.min(Math.max(v, 0), 1) * video.duration;
+    target.current = Math.min(Math.max(v, 0), 1);
   });
+
+  // Seek at most once per animation frame, and never while a seek is pending.
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      const video = ref.current;
+      if (!video || !video.duration || video.seeking) return;
+      const t = target.current * video.duration;
+      if (Math.abs(t - applied.current) < 1 / 48) return;
+      applied.current = t;
+      if (typeof video.fastSeek === "function") video.fastSeek(t);
+      else video.currentTime = t;
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   return (
     <video
